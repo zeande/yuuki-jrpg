@@ -5,6 +5,16 @@
 package yuuki;
 
 public class Character {
+
+	/**
+	 * The multiplier used in calculating required experience.
+	 */
+	protected static final int XP_MULTIPLIER = 50;
+	
+	/**
+	 * The base used in calculating required experience.
+	 */
+	protected static final double XP_BASE = 2.0;
 	
 	/**
 	 * The experience of this Character.
@@ -110,10 +120,190 @@ public class Character {
 	 * The amount of luck gained per level.
 	 */
 	private int luckGain;
+	
+	/**
+	 * Allocates a new Character. Most stats are set manually, but experience
+	 * is automatically calculated from the starting level. All stats are the
+	 * base stats; all actual stats are calculated by multiplying the stat gain
+	 * by the level and adding the base stat.
+	 *
+	 * @param level The level of the new Character. XP is set to match this.
+	 * @param hp The hit points of the new Character.
+	 * @param hpGain The number of hit points gained per level.
+	 * @param mp The mana points of the new Character.
+	 * @param mpGain The number of mana points gained per level.
+	 * @param strength The physical strength of the Character.
+	 * @param strengthGain The amount of strength gained per level.
+	 * @param defense The Character's resistance to damage.
+	 * @param defenseGain The amount of defense gained per level.
+	 * @param agility The Character's avoidance to hits.
+	 * @param agilityGain The amount of agility gained per level.
+	 * @param accuracy The Character's ability to hit.
+	 * @param accuracyGain The amount of accuracy gained per level.
+	 * @param magic The magical ability of the Character.
+	 * @param magicGain The amount of magic gained per level.
+	 * @param luck The ability of the Character to get a critical hit.
+	 * @param luckGain The amount of luck gained per level.
+	 */
+	public Character(int level, int hp, int hpGain, int mp, int mpGain,
+					 int strength, int strengthGain, int defense,
+					 int defenseGain, int agility, int agilityGain,
+					 int accuracy, int accuracyGain, int magic, int magicGain,
+					 int luck, int luckGain) {
+		if (level < 1) {
+			throw new IllegalArgumentException("Character level too low.");
+		}
+		this.level = level;
+		this.hpMax = this.hp = hp;
+		this.hpGain = hpGain;
+		this.mpMax = this.mp = mp;
+		this.mpGain = mpGain;
+		this.strength = strength;
+		this.strengthGain = strengthGain;
+		this.defense = defense;
+		this.defenseGain = defenseGain;
+		this.accuracy = accuracy;
+		this.accuracyGain = accuracyGain;
+		this.agility = agility;
+		this.agilityGain = agilityGain;
+		this.magic = magic;
+		this.magicGain = magicGain;
+		this.luck = luck;
+		this.luckGain = luckGain;
+		this.xp = getRequiredXP(level);
+	}
+	
+	/**
+	 * Adds experience points to this Character. Adding enough XP to level up
+	 * this Character will not make it level up, but it will make the
+	 * canLevelUp method return true. That method should be checked after
+	 * adding experience to determine whether levelUp should then be called.
+	 *
+	 * @param amount
+	 * The amount of XP to add.
+	 */
+	public void addXP(int amount) {
+		xp += amount;
+	}
+	
+	/**
+	 * Checks whether this Character has enough experience points to advance to
+	 * the next level.
+	 *
+	 * @return True if the Character has enough XP to level up; otherwise
+	 * false.
+	 */
+	public boolean canLevelUp() {
+		int required = getRequiredXP(level + 1);
+		return (xp >= required);
+	}
+	
+	/**
+	 * Levels up this Character. The level is increased by one and base stats
+	 * are increased by the given amounts. The current HP and MP are reset to
+	 * their maximum value.
+	 *
+	 * @param hp The amount to increase base HP by.
+	 * @param mp The amount to increase base MP by.
+	 * @param str The amount to increase base strength by.
+	 * @param def The amount to increase base defense by.
+	 * @param agt The amount to increase base agility by.
+	 * @param acc The amount to increase base accuracy by.
+	 * @param mag The amount to increase base magic by.
+	 * @param luck The amount to increase base luck by.
+	 */
+	public void levelUp(int hp, int mp, int str, int def, int agt, int acc,
+						 int mag, int luck) {
+		level++;
+		this.hpMax += hp;
+		this.mpMax += mp;
+		this.strength += str;
+		this.defense += def;
+		this.agility += agt;
+		this.accuracy += acc;
+		this.magic += mag;
+		this.luck += luck;
+		restoreHP();
+		restoreMP();
+	}
+	
+	/**
+	 * Checks whether this Character is alive.
+	 *
+	 * @return True if this Character is alive; otherwise, false.
+	 */
+	public boolean isAlive() {
+		return hp >= 1;
+	}
+	
+	/**
+	 * Decreases this Character's health.
+	 *
+	 * @param amount The amount of damage to take.
+	 */
+	public void loseHP(int amount) {
+		hp -= amount;
+	}
+	
+	/**
+	 * Increases this Character's health.
+	 *
+	 * @param amount The amount to heal by.
+	 */
+	public void gainHP(int amount) {
+		hp += amount;
+	}
+	
+	/**
+	 * Decreases this Character's current mana points.
+	 *
+	 * @param amount The amount of MP to decrease.
+	 */
+	public void loseMP(int amount) {
+		mp -= amount;
+	}
+	
+	/**
+	 * Increases this Character's current mana points.
+	 *
+	 * @param amount The amount of MP to increase.
+	 */
+	public void gainMP(int amount) {
+		mp += amount;
+	}
+	
+	/**
+	 * Restores this Character's health completely.
+	 */
+	public void restoreHP() {
+		hp = hpMax;
+	}
+	
+	/**
+	 * Restores this Character's mana completely.
+	 */
+	public void restoreMP() {
+		mp = mpMax;
+	}
+	
+	/**
+	 * Calculates the experience required to be at a level.
+	 *
+	 * @param level The level to get the required experience for.
+	 *
+	 * @return The experience required to be the given level.
+	 */
+	public int getRequiredXP(int level) {
+		if (level == 1) {
+			return 0;
+		} else {
+			double power = Math.pow(XP_BASE, level - 2);
+			return (int) Math.floor(XP_MULTIPLIER * power);
+		}
+	}
 
 	/**
-	 * Gets the level of this Character. This is calculated directly from
-	 * experience points.
+	 * Gets the level of this Character.
 	 *
 	 * @return The level of this Character.
 	 */
@@ -155,6 +345,15 @@ public class Character {
 	 */
 	public int getMP() {
 		return mp;
+	}
+	
+	/**
+	 * Gets this Character's experience points.
+	 *
+	 * @return The number of experience points of this Character.
+	 */
+	public int getXP() {
+		return xp;
 	}
 
 	/**
