@@ -19,12 +19,12 @@ public class Character {
 	/**
 	 * The experience of this Character.
 	 */
-	private int xp;
+	protected int xp;
 
 	/**
 	 * The level of this Character.
 	 */
-	private int level;
+	protected int level;
 
 	/**
 	 * The maximum possible hit points.
@@ -293,7 +293,7 @@ public class Character {
 	 *
 	 * @return The experience required to be the given level.
 	 */
-	public int getRequiredXP(int level) {
+	public final int getRequiredXP(int level) {
 		if (level == 1) {
 			return 0;
 		} else {

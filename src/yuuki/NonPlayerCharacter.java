@@ -41,7 +41,7 @@ public class NonPlayerCharacter extends Character {
 	 * @param luckGain The amount of luck gained per level.
 	 * @param xpBase Used for calculating given XP on death.
 	 */
-	public Character(int level, int hp, int hpGain, int mp, int mpGain,
+	public NonPlayerCharacter(int level, int hp, int hpGain, int mp, int mpGain,
 					 int strength, int strengthGain, int defense,
 					 int defenseGain, int agility, int agilityGain,
 					 int accuracy, int accuracyGain, int magic, int magicGain,
@@ -67,7 +67,6 @@ public class NonPlayerCharacter extends Character {
 	 *
 	 * @param points The number of stat points that can be allocated.
 	 */
-	@Override
 	public void levelUp(int points) {
 		int hp, mp, str, def, agt, acc, mag, luck;
 		hp = mp = str = def = agt = acc = mag = luck = 0;
