@@ -1,8 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * The Main Menu Gui.
+ * All other Game components will be launced from this GUI.
  */
 package jrpg.gui;
+
 
 
 /**
@@ -27,12 +28,12 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        lblUnderscore = new javax.swing.JLabel();
+        lblNewGame = new javax.swing.JLabel();
+        lblLoadGame = new javax.swing.JLabel();
+        lblOptions = new javax.swing.JLabel();
+        lblExit = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,58 +46,81 @@ public class GUI extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jLabel3.setFont(new java.awt.Font("MV Boli", 1, 48)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Yuuki");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(560, 20, 210, 60);
+        lblTitle.setFont(new java.awt.Font("MV Boli", 1, 48)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Yuuki");
+        getContentPane().add(lblTitle);
+        lblTitle.setBounds(560, 20, 210, 60);
 
-        jLabel1.setText("__________________________");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(590, 71, 180, 14);
+        lblUnderscore.setText("__________________________");
+        getContentPane().add(lblUnderscore);
+        lblUnderscore.setBounds(590, 71, 180, 14);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/New Game.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/New Game.png"))); // NOI18N
+        lblNewGame.setText("jLabel2");
+        lblNewGame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                NewGameUnpressed(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 NewChangeIcon(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 NewResetIcon(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                NewGamePressed(evt);
+            }
         });
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(570, 90, 180, 60);
+        getContentPane().add(lblNewGame);
+        lblNewGame.setBounds(570, 90, 180, 60);
+        lblNewGame.getAccessibleContext().setAccessibleName("btnNewGame");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Caleb\\Documents\\NDSU\\2012 Semester 1\\CSCI 161\\Projects\\Group Project\\Gui\\Load Game.png")); // NOI18N
-        jLabel4.setText("jLabel4");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblLoadGame.setIcon(new javax.swing.ImageIcon("C:\\Users\\Caleb\\Documents\\NDSU\\2012 Semester 1\\CSCI 161\\Projects\\Group Project\\Gui\\Load Game.png")); // NOI18N
+        lblLoadGame.setText("jLabel4");
+        lblLoadGame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                LoadUnpressed(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LoadChangeIcon(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 LoadResetIcon(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                LoadPressed(evt);
+            }
         });
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(570, 140, 190, 60);
+        getContentPane().add(lblLoadGame);
+        lblLoadGame.setBounds(570, 140, 190, 60);
+        lblLoadGame.getAccessibleContext().setAccessibleName("btnLoadGame");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Options.png"))); // NOI18N
-        jLabel5.setText("jLabel5");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblOptions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Options.png"))); // NOI18N
+        lblOptions.setText("jLabel5");
+        lblOptions.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                OptionsReleased(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 OptionsChangeIcon(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 OptionsResetIcon(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                OptionsPressed(evt);
+            }
         });
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(590, 190, 140, 60);
+        getContentPane().add(lblOptions);
+        lblOptions.setBounds(590, 190, 140, 60);
+        lblOptions.getAccessibleContext().setAccessibleName("btnOptions");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Exit.png"))); // NOI18N
-        jLabel6.setText("jLabel6");
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Exit.png"))); // NOI18N
+        lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ExitUnpressed(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ExitClicked(evt);
             }
@@ -106,9 +130,13 @@ public class GUI extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 ExitResetIcon(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ExitPressed(evt);
+            }
         });
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(620, 240, 80, 60);
+        getContentPane().add(lblExit);
+        lblExit.setBounds(620, 240, 80, 60);
+        lblExit.getAccessibleContext().setAccessibleName("btnExit");
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/titleBackground.jpg"))); // NOI18N
         getContentPane().add(lblBackground);
@@ -118,53 +146,94 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NewChangeIcon(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewChangeIcon
-        // TODO add your handling code here:
-        jLabel2.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/New Game Hi.png")));     
+        // Changes New Game Icon when mouse is hovering over it.
+        lblNewGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/New Game Hi.png")));     
     }//GEN-LAST:event_NewChangeIcon
 
     private void NewResetIcon(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewResetIcon
-        // TODO add your handling code here:
-        jLabel2.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/New Game.png")));
+        // Changes the New Game Icon back to it's original state when mouse stops hovering.
+        lblNewGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/New Game.png")));
     }//GEN-LAST:event_NewResetIcon
 
     private void LoadChangeIcon(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadChangeIcon
-        // TODO add your handling code here:
-        jLabel4.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Load Game Hi.png")));
+        // Changes Load Game Icon when mouse is hovering over it.
+        lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Load Game Hi.png")));
     }//GEN-LAST:event_LoadChangeIcon
 
     private void LoadResetIcon(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadResetIcon
-        // TODO add your handling code here:
-        jLabel4.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Load Game.png")));
+        // Changes the Load Game Icon back to it's original state when mouse stops hovering.
+        lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Load Game.png")));
     }//GEN-LAST:event_LoadResetIcon
 
     private void OptionsChangeIcon(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsChangeIcon
-        // TODO add your handling code here:
-        jLabel5.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Options Hi.png")));
+        // Changes Options Icon when mouse is hovering over it.
+        lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Options Hi.png")));
     }//GEN-LAST:event_OptionsChangeIcon
 
     private void OptionsResetIcon(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsResetIcon
-        // TODO add your handling code here:
-        jLabel5.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Options.png")));
+        // Changes the Options Icon back to it's original state when mouse stops hovering.
+        lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Options.png")));
     }//GEN-LAST:event_OptionsResetIcon
 
     private void ExitChangeIcon(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitChangeIcon
-        // TODO add your handling code here:
-        jLabel6.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Exit Hi.png")));
+        // Changes Exit Icon when mouse is hovering over it.
+        lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Exit Hi.png")));
     }//GEN-LAST:event_ExitChangeIcon
 
     private void ExitResetIcon(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitResetIcon
-        // TODO add your handling code here:
-        jLabel6.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Exit.png")));
+        // Changes the Exit Icon back to it's original state when mouse stops hovering.
+        lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("/jrpg/gui/Exit.png")));
     }//GEN-LAST:event_ExitResetIcon
 
     private void ExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitClicked
-        // TODO add your handling code here:
-        System.exit(0);
+        // Exits the Game when the Exit label is clicked.
+              
+       System.exit(0);
     }//GEN-LAST:event_ExitClicked
 
     private void WindowPlaySound(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowPlaySound
         // TODO add your handling code here:
     }//GEN-LAST:event_WindowPlaySound
+
+    private void ExitPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitPressed
+        // Moves lblExit down when label is pressed.
+        lblExit.setBounds(622, 242, 80, 60);
+    }//GEN-LAST:event_ExitPressed
+
+    private void ExitUnpressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitUnpressed
+        // Moves lblExit up when label is unpressed.
+        lblExit.setBounds(620, 240, 80, 60);
+    }//GEN-LAST:event_ExitUnpressed
+
+    private void OptionsPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsPressed
+        // Moves lblOptions down when label is pressed.
+        lblOptions.setBounds(592, 192, 140, 60);
+    }//GEN-LAST:event_OptionsPressed
+
+    private void OptionsReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsReleased
+        // Moves lblOptions up when label is unpressed.
+        lblOptions.setBounds(590, 190, 140, 60);
+    }//GEN-LAST:event_OptionsReleased
+
+    private void LoadPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadPressed
+        // Moves lblLoadGame down when label is pressed.
+        lblLoadGame.setBounds(572, 142, 190, 60);
+    }//GEN-LAST:event_LoadPressed
+
+    private void LoadUnpressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadUnpressed
+        // Moves lblLoadGame up when label is unpressed.
+        lblLoadGame.setBounds(570, 140, 190, 60);
+    }//GEN-LAST:event_LoadUnpressed
+
+    private void NewGamePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGamePressed
+        // Moves lblNewGame down when label is pressed. 
+        lblNewGame.setBounds(572, 92, 180, 60);
+    }//GEN-LAST:event_NewGamePressed
+
+    private void NewGameUnpressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameUnpressed
+        // Moves lblNewGame up when label is unpressed.
+        lblNewGame.setBounds(570, 90, 180, 60);
+    }//GEN-LAST:event_NewGameUnpressed
 
     /**
      * @param args the command line arguments
@@ -201,12 +270,12 @@ public class GUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblExit;
+    private javax.swing.JLabel lblLoadGame;
+    private javax.swing.JLabel lblNewGame;
+    private javax.swing.JLabel lblOptions;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblUnderscore;
     // End of variables declaration//GEN-END:variables
 }
