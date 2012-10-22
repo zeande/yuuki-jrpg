@@ -13,15 +13,6 @@ import java.util.ArrayList;
 public class Battle {
 
 	/**
-	 * Struct for keeping track of fighter teams and buffs.
-	 */
-	private static class Contestant {
-		public Character character;
-		public ArrayList<Buff> buffs = new ArrayList<Buff>();
-		public int team;
-	}
-
-	/**
 	 * The potential states of a Battle.
 	 */
 	private static enum State {
