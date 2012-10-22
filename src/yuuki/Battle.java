@@ -10,7 +10,7 @@ package yuuki;
 
 import java.util.ArrayList;
 
-class Battle {
+public class Battle {
 
 	/**
 	 * Struct for keeping track of fighter teams and buffs.
@@ -65,7 +65,7 @@ class Battle {
 	/**
 	 * The Characters involved with the fight.
 	 */
-	private ArrayList<Contestant> fighters;
+	private ArrayList<Character> fighters;
 
 	/**
 	 * The player whose turn it currently is.
@@ -80,7 +80,7 @@ class Battle {
 	 * the Characters on that team.
 	 */
 	public Battle(Character[][] participants) {
-		this.fighters = new ArrayList<Contestant>();
+		this.fighters = new ArrayList<Character>();
 		this.teams = new ArrayList<Integer>();
 		assignToFighters(participants);
 		orderFighters();
@@ -94,8 +94,8 @@ class Battle {
 	 * next state is reached. In between execution states the user is free
 	 * to query this Battle for information about the fight.
 	 *
-	 * @return True if more calls to advance() are required before the
-	 * battle is over; otherwise, false.
+	 * @return True if more calls to advance() are required before the battle
+	 * is over; otherwise, false.
 	 */
 	public boolean advance() {
 		boolean complete = false;
@@ -157,7 +157,7 @@ class Battle {
 	 * Regenerates the mana of the current Character.
 	 */
 	private void regenerateMana() {
-		Character c = getCurrentFighter().character;
+		Character c = getCurrentFighter();
 		int amount = (int) Math.floor(c.getMaxMP() * MANA_GEN);
 		c.gainMP((amount > 0) ? amount : 1);
 	}
@@ -166,7 +166,7 @@ class Battle {
 	 * Gets the move that the current Character wishes to use.
 	 */
 	private void getCharacterAction() {
-		Character c = getCurrentFighter().character;
+		Character c = getCurrentFighter();
 		this.currentAction = c.?(); // TODO: get action from character
 	}
 
@@ -181,23 +181,19 @@ class Battle {
 	 * Applies over-time buffs to the current Character.
 	 */
 	private void applyBuffs() {
-		Contestant c = getCurrentFighter();
-		for (int i = 0; i < c.buffs.size(); i++) {
-			Buff buff = c.buffs.get(i);
-			if (buff.isOverTime()) {
-				buff.applyTo(c.character);
-			}
-		}
+		Character c = getCurrentFighter();
+		c.applyBattleBuffs();
 	}
 
 	/**
 	 * Removes the targeted fighter if he is now dead.
 	 */
 	private void checkDeath() {
-		int targetId = currentAction.getTarget();
-		Contestant target = fighters.get(targetId);
-		if (!target.character.isAlive()) {
-			fighters.remove(targetId);
+		Character[] targets = currentAction.getTargets();
+		for (Character c: targets) {
+			if (!c.isAlive()) {
+				removeFighter(c.getFighterId());
+			}
 		}
 	}
 
@@ -206,9 +202,11 @@ class Battle {
 	 * it.
 	 */
 	private void checkTeamStatus() {
-		int team = currentAction.getTargetTeam();
-		if (getFighterCount(team) == 0) {
-			teams.remove(new Integer(team));
+		int[] affectedTeams = currentAction.getAffectedTeams();
+		for (int t: affectedTeams) {
+			if (getFighterCount(t) == 0) {
+				teams.remove(new Integer(t));
+			}
 		}
 	}
 
@@ -221,8 +219,8 @@ class Battle {
 	 */
 	private int getFighterCount(int team) {
 		int count = 0;
-		for (Contestant c: fighters) {
-			if (c.team == team) {
+		for (Character c: fighters) {
+			if (c.getTeamId() == team) {
 				count++:
 			}
 		}
@@ -261,16 +259,8 @@ class Battle {
 	 * Removes buffs on the current Character that have expired.
 	 */
 	private void checkBuffs() {
-		Contestant c = getCurrentFighter();
-		ArrayList<Buff> buffs = c.buffs;
-		int removeCount = 0;
-		for (int i = 0; i < buffs.size(); i++) {
-			Buff b = buffs.get(i);
-			if (b.getRemainingTurns() == 0) {
-				c.buffs.remove(i - removeCount);
-				removeCount++;
-			}
-		}
+		Character c = getCurrentFighter();
+		c.removeExpiredBuffs();
 	}
 
 	/**
@@ -278,36 +268,26 @@ class Battle {
 	 *
 	 * @return The current fighter.
 	 */
-	private Contestant getCurrentFighter() {
+	private Character getCurrentFighter() {
 		return fighters.get(currentFighter);
 	}
 
 	/**
-	 * Assigns characters to the contestents list. Team number is started
-	 * at 0 and simply increments for each team.
+	 * Assigns characters to the fighters list. Each character's fighter ID and
+	 * team ID is set and they are added to the internal array. The team ID is
+	 * arbitrary; as long as Characters on the same team have the same team ID,
+	 * the actual number doesn't matter. The fighter ID is simply set in the
+	 * order that the participants are given.
 	 */
 	private void assignToFighters(Character[][] participants) {
-		int team = 0;
 		for (Character[] team: participants) {
 			for (Character c: team) {
-				Contestant fighter = new Contestant();
-				fighter.character = c;
-				fighter.team = team;
-				this.fighters.add(fighter);
+				c.setTeamId(teams.size());
+				c.setFighterId(fighters.size());
+				c.initBattleBuffs();
+				fighters.add(c);
 			}
-			team++;
-		}
-		createTeams(team);
-	}
-
-	/**
-	 * Creates the array of teams with the specified number of teams.
-	 *
-	 * @param count The highest team number to include.
-	 */
-	private void createTeams(int teams) {
-		for (int i = 0; i < teams + 1; i++) { // teams is 0-indexed
-			teams.add(i);
+			teams.add(teams.size());
 		}
 	}
 	
@@ -316,5 +296,19 @@ class Battle {
 	 */
 	private void orderFighters() {
 		// TODO: put the fighters in some play order
+	}
+	
+	/**
+	 * Removes a fighter from the field. All of the Character's battle params
+	 * are reset and it is removed from the list of fighters.
+	 *
+	 * @param id The id of the Character to remove.
+	 */
+	private void removeFighter(int id) {
+		Character f = fighters.get(id);
+		f.setTeamId(-1);
+		f.setFighterId(-1);
+		f.clearBattleBuffs();
+		fighters.remove(id);
 	}
 }
