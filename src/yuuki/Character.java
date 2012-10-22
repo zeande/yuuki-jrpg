@@ -242,42 +242,6 @@ public class Character {
 	}
 	
 	/**
-	 * Decreases this Character's health.
-	 *
-	 * @param amount The amount of damage to take.
-	 */
-	public void loseHP(int amount) {
-		hp -= amount;
-	}
-	
-	/**
-	 * Increases this Character's health.
-	 *
-	 * @param amount The amount to heal by.
-	 */
-	public void gainHP(int amount) {
-		hp += amount;
-	}
-	
-	/**
-	 * Decreases this Character's current mana points.
-	 *
-	 * @param amount The amount of MP to decrease.
-	 */
-	public void loseMP(int amount) {
-		mp -= amount;
-	}
-	
-	/**
-	 * Increases this Character's current mana points.
-	 *
-	 * @param amount The amount of MP to increase.
-	 */
-	public void gainMP(int amount) {
-		mp += amount;
-	}
-	
-	/**
 	 * Restores this Character's health completely.
 	 */
 	public void restoreHP() {
@@ -350,6 +314,24 @@ public class Character {
 	 */
 	public int getMP() {
 		return mp;
+	}
+	
+	/**
+	 * Sets the current MP of this Character.
+	 *
+	 * @param mp The amount to set the MP to.
+	 */
+	public void setMP(int mp) {
+		this.mp = mp;
+	}
+	
+	/**
+	 * Sets the current HP of this Character.
+	 *
+	 * @param hp The amount to set the HP to.
+	 */
+	public void setHP(int hp) {
+		this.hp = hp;
 	}
 	
 	/**

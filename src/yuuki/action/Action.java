@@ -3,7 +3,7 @@
  * of effect it has and who its target is.
  */
 
-package yuuki;
+package yuuki.action;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -70,7 +70,26 @@ public abstract class Action {
 	 * @return True if the effects were attempted to be put on the targets;
 	 * otherwise, false.
 	 */
-	public abstract boolean apply();
+	public boolean apply() {
+		if (applyCost()) {
+			applyEffects();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Applies the cost to the origin.
+	 *
+	 * @return True if the cost was successfully applied; otherwise, false.
+	 */
+	protected abstract boolean applyCost();
+	
+	/**
+	 * Applies the effects to the targets.
+	 */
+	protected abstract void applyEffects();
 	
 	/**
 	 * Gets the name of this Action.

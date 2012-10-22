@@ -9,6 +9,7 @@
 package yuuki;
 
 import java.util.ArrayList;
+import yuuki.action;
 
 public class Battle {
 
@@ -150,7 +151,9 @@ public class Battle {
 	private void regenerateMana() {
 		Character c = getCurrentFighter();
 		int amount = (int) Math.floor(c.getMaxMP() * MANA_GEN);
-		c.gainMP((amount > 0) ? amount : 1);
+		int totalMana = c.getMP() + (amount > 0) ? amount : 1;
+		totalMana = (c.getMaxMP() < totalMana) ? c.getMaxMP() : totalMana;
+		c.setMP(totalMana);
 	}
 
 	/**
@@ -165,7 +168,7 @@ public class Battle {
 	 * Applies the effects of the Character action to the target(s).
 	 */
 	private void applyAction() {
-		// TODO: fill-in the method
+		return currentAction.apply();
 	}
 
 	/**
