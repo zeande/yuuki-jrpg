@@ -122,6 +122,11 @@ public class Character {
 	private int luckGain;
 	
 	/**
+	 * 
+	 */
+	private 
+	
+	/**
 	 * Allocates a new Character. Most stats are set manually, but experience
 	 * is automatically calculated from the starting level. All stats are the
 	 * base stats; all actual stats are calculated by multiplying the stat gain
