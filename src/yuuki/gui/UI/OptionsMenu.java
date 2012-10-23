@@ -4,6 +4,13 @@
  */
 package gui.UI;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import sun.audio.AudioData;
+import sun.audio.AudioDataStream;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 /**
  *
  * @author Caleb
@@ -48,6 +55,9 @@ boolean effectsOffChecked = false;
 
         lblBtnApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/OptionsBtnApply.png"))); // NOI18N
         lblBtnApply.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnApplyClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblBtnApplyEntered(evt);
             }
@@ -132,13 +142,30 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblOptionsBackground);
         lblOptionsBackground.setBounds(0, 0, 800, 600);
 
+        pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-816)/2, (screenSize.height-638)/2, 816, 638);
+        java.awt.Dimension dialogSize = getSize();
+        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBtnApplyEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyEntered
         // On Mouseover changes lblBtnApply's Icon.
         lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsBtnApplyFocused.png")));
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_lblBtnApplyEntered
 
     private void lblBtnApplyExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyExited
@@ -166,6 +193,21 @@ boolean effectsOffChecked = false;
         {
             lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOffHover.png")));
         }
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_musicOnEntered
 
     private void musicOnExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOnExited
@@ -190,6 +232,21 @@ boolean effectsOffChecked = false;
         {
             lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOffHover.png")));
         }        
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_effectsOnEntered
 
     private void effectsOnExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOnExited
@@ -214,6 +271,21 @@ boolean effectsOffChecked = false;
         {
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOffHover.png")));
         }
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_musicOffEntered
 
     private void effectsOffEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffEntered
@@ -225,6 +297,21 @@ boolean effectsOffChecked = false;
         else
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOffHover.png")));
+        }
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
         }
     }//GEN-LAST:event_effectsOffEntered
 
@@ -269,6 +356,21 @@ boolean effectsOffChecked = false;
         lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
         lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
         }
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_musicOnClicked
 
     private void musicOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOffClicked
@@ -286,6 +388,21 @@ boolean effectsOffChecked = false;
         musicOffChecked = true;
         lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
         lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+        }
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
         }
     }//GEN-LAST:event_musicOffClicked
 
@@ -305,6 +422,21 @@ boolean effectsOffChecked = false;
         lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
         lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
         }
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_effectsOnClicked
 
     private void effectsOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffClicked
@@ -323,7 +455,42 @@ boolean effectsOffChecked = false;
         lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
         lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
         }
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_effectsOffClicked
+
+    private void btnApplyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApplyClicked
+        // Handles btnApply clicked event.
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
+        setVisible(false);
+    }//GEN-LAST:event_btnApplyClicked
 
     /**
      * @param args the command line arguments

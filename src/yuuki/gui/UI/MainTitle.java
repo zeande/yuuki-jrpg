@@ -3,21 +3,21 @@
  * and open the template in the editor.
  */
 package gui.UI;
-
-
+import sun.audio.*;
+import java.io.*;
 /**
  *
  * @author Caleb
  */
 public class MainTitle extends javax.swing.JFrame {
 OptionsMenu om = new OptionsMenu();
+PlayerName pn = new PlayerName();
     
     /**
      * Creates new form MainTitle
      */
     public MainTitle() {
         initComponents();
-        
     }
 
     /**
@@ -47,8 +47,8 @@ OptionsMenu om = new OptionsMenu();
 
         lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/New Game.png"))); // NOI18N
         lblNewGame.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                NewGameReleased(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNewGameClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 NewGameEntered(evt);
@@ -59,14 +59,17 @@ OptionsMenu om = new OptionsMenu();
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 NewGamePressed(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                NewGameReleased(evt);
+            }
         });
         getContentPane().add(lblNewGame);
         lblNewGame.setBounds(590, 120, 180, 30);
 
         lblLoadGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/Load Game.png"))); // NOI18N
         lblLoadGame.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                LoadGameReleased(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLoadGameClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LoadGameEntered(evt);
@@ -76,6 +79,9 @@ OptionsMenu om = new OptionsMenu();
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 LoadGamePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                LoadGameReleased(evt);
             }
         });
         getContentPane().add(lblLoadGame);
@@ -127,13 +133,30 @@ OptionsMenu om = new OptionsMenu();
         getContentPane().add(lblBackground);
         lblBackground.setBounds(0, 0, 800, 600);
 
+        pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-816)/2, (screenSize.height-638)/2, 816, 638);
+        java.awt.Dimension dialogSize = getSize();
+        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
         // On Mouseover changes lblNewGame's Icon.
         lblNewGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("New Game Hi.png")));
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_NewGameEntered
 
     private void NewGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameExited
@@ -154,6 +177,21 @@ OptionsMenu om = new OptionsMenu();
     private void LoadGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameEntered
         // On Mouseover changes lblLoadGame's Icon.
         lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("Load Game Hi.png")));
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_LoadGameEntered
 
     private void LoadGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameExited
@@ -174,6 +212,21 @@ OptionsMenu om = new OptionsMenu();
     private void OptionsEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsEntered
         // On Mouseover change lblOptions's Icon.
         lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("Options Hi.png")));
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_OptionsEntered
 
     private void OptionsExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsExited
@@ -194,6 +247,21 @@ OptionsMenu om = new OptionsMenu();
     private void ExitEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitEntered
         // On Mouseover change lblExit's Icon.
         lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("Exit Hi.png")));
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onHover.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
     }//GEN-LAST:event_ExitEntered
 
     private void ExitExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitExited
@@ -213,17 +281,90 @@ OptionsMenu om = new OptionsMenu();
 
     private void ExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitClicked
         // Close the Program.
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
+        try
+        {
+            Thread.sleep(500);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Couldn't Sleep.");
+        }
         System.exit(0);
     }//GEN-LAST:event_ExitClicked
 
     private void OptionsClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsClicked
-        
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
       om.setVisible(true);
-       
-        
-        
-        
+     
     }//GEN-LAST:event_OptionsClicked
+
+    private void lblNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewGameClicked
+        // Handles when lblNewgame is Clicked.
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
+        pn.setVisible(true);
+    }//GEN-LAST:event_lblNewGameClicked
+
+    private void lblLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoadGameClicked
+        // Handles when lblLoadGame is clicked.
+        AudioPlayer BGMPlayer = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData BGMData;
+        try
+        {
+        BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+        BGMData = BGM.getData();
+        AudioDataStream loop = null;
+        loop = new AudioDataStream(BGMData);
+        BGMPlayer.start(loop);
+        }
+        catch(IOException error)
+        {
+            System.out.println("Audio play New Game Entered went wrong.");
+        }
+    }//GEN-LAST:event_lblLoadGameClicked
 
     /**
      * @param args the command line arguments
