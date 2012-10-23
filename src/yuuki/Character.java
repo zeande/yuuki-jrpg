@@ -15,6 +15,11 @@ public class Character {
 	 * The base used in calculating required experience.
 	 */
 	protected static final double XP_BASE = 2.0;
+        
+        /**
+         * The Name of the Character.
+         */
+        protected String name;
 	
 	/**
 	 * The experience of this Character.
@@ -132,6 +137,7 @@ public class Character {
 	 * base stats; all actual stats are calculated by multiplying the stat gain
 	 * by the level and adding the base stat.
 	 *
+         * @param name The name of the Character.
 	 * @param level The level of the new Character. XP is set to match this.
 	 * @param hp The hit points of the new Character.
 	 * @param hpGain The number of hit points gained per level.
@@ -150,7 +156,7 @@ public class Character {
 	 * @param luck The ability of the Character to get a critical hit.
 	 * @param luckGain The amount of luck gained per level.
 	 */
-	public Character(int level, int hp, int hpGain, int mp, int mpGain,
+	public Character(String name, int level, int hp, int hpGain, int mp, int mpGain,
 					 int strength, int strengthGain, int defense,
 					 int defenseGain, int agility, int agilityGain,
 					 int accuracy, int accuracyGain, int magic, int magicGain,
@@ -158,6 +164,7 @@ public class Character {
 		if (level < 1) {
 			throw new IllegalArgumentException("Character level too low.");
 		}
+                this.name = name;
 		this.level = level;
 		this.hpMax = this.hp = hp;
 		this.hpGain = hpGain;
@@ -270,7 +277,15 @@ public class Character {
 			return (int) Math.floor(XP_MULTIPLIER * power);
 		}
 	}
-
+        /**
+         * Gets the name of this Character.
+         * 
+         * @return The name of the Character.
+         */
+        public String getName() {
+                return name;
+        }
+        
 	/**
 	 * Gets the level of this Character.
 	 *
