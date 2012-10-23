@@ -4,12 +4,19 @@
  */
 package gui.UI;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import sun.audio.AudioData;
+import sun.audio.AudioDataStream;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 /**
  *
- * @author Caleb
+ * @author Caleb Smith
  */
 public class PlayerName extends javax.swing.JFrame {
-
+boolean blnSound = true;
     /**
      * Creates new form PlayerName
      */
@@ -18,8 +25,9 @@ public class PlayerName extends javax.swing.JFrame {
         txtPlayerName.setSelectionStart(0);
         txtPlayerName.setSelectionEnd(11);
         
+        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,33 +38,199 @@ public class PlayerName extends javax.swing.JFrame {
     private void initComponents() {
 
         txtPlayerName = new javax.swing.JTextField();
+        lblBtnMainMenu = new javax.swing.JLabel();
+        lblBtnBeginGame = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(16, 38, 800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
-        setResizable(false);
         getContentPane().setLayout(null);
 
         txtPlayerName.setFont(new java.awt.Font("Segoe Print", 0, 76)); // NOI18N
         txtPlayerName.setForeground(new java.awt.Color(255, 204, 0));
         txtPlayerName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPlayerName.setText("Player Name");
+        txtPlayerName.setBorder(null);
         txtPlayerName.setCaretColor(new java.awt.Color(255, 204, 0));
         txtPlayerName.setOpaque(false);
         txtPlayerName.setSelectedTextColor(new java.awt.Color(255, 204, 0));
-        txtPlayerName.setSelectionColor(new java.awt.Color(153, 153, 153));
+        txtPlayerName.setSelectionColor(new java.awt.Color(128, 126, 126));
         getContentPane().add(txtPlayerName);
         txtPlayerName.setBounds(79, 123, 648, 210);
+
+        lblBtnMainMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/PlayerNameMainMenu.png"))); // NOI18N
+        lblBtnMainMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnMainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBtnMainMenuClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBtnMainMenuEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBtnMainMenuExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBtnMainMenuPressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblBtnMainMenuReleased(evt);
+            }
+        });
+        getContentPane().add(lblBtnMainMenu);
+        lblBtnMainMenu.setBounds(10, 460, 170, 100);
+
+        lblBtnBeginGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/PlayerNameBeginGame.png"))); // NOI18N
+        lblBtnBeginGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBtnBeginGame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBtnBeginGameClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBtnBeginGame(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBtnBeginGameExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBtnBeginGamePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblBtnBeginGameReleased(evt);
+            }
+        });
+        getContentPane().add(lblBtnBeginGame);
+        lblBtnBeginGame.setBounds(620, 460, 170, 100);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/CaveWall.png"))); // NOI18N
         getContentPane().add(lblBackground);
         lblBackground.setBounds(0, 0, 800, 600);
 
-        pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        java.awt.Dimension dialogSize = getSize();
-        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
+        setBounds((screenSize.width-816)/2, (screenSize.height-638)/2, 816, 638);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblBtnMainMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuEntered
+        // Handles lblBtnMainMenu on Mouseover.
+        lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameMainMenuHi.png")));
+        if(blnSound == true)
+        {
+            AudioPlayer BGMPlayer = AudioPlayer.player;
+            AudioStream BGM;
+            AudioData BGMData;
+            try
+            {
+            BGM = new AudioStream(new FileInputStream("onHover.wav"));
+            BGMData = BGM.getData();
+            AudioDataStream loop = null;
+            loop = new AudioDataStream(BGMData);
+            BGMPlayer.start(loop);
+            }
+            catch(IOException error)
+            {
+                System.out.println("Audio play New Game Entered went wrong.");
+            }
+        }
+    }//GEN-LAST:event_lblBtnMainMenuEntered
+
+    private void lblBtnMainMenuExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuExited
+        // Handles lblBtnMainMenu on Mouseover off.
+        lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameMainMenu.png")));
+    }//GEN-LAST:event_lblBtnMainMenuExited
+
+    private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
+        // TODO add your handling code here:
+        if(blnSound == true)
+        {
+            AudioPlayer BGMPlayer = AudioPlayer.player;
+            AudioStream BGM;
+            AudioData BGMData;
+            try
+            {
+            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+            BGMData = BGM.getData();
+            AudioDataStream loop = null;
+            loop = new AudioDataStream(BGMData);
+            BGMPlayer.start(loop);
+            }
+            catch(IOException error)
+            {
+                System.out.println("Audio play New Game Entered went wrong.");
+            }
+        }
+        setVisible(false);
+    }//GEN-LAST:event_lblBtnMainMenuClicked
+
+    private void lblBtnMainMenuPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuPressed
+        // TODO add your handling code here:
+        lblBtnMainMenu.setBounds(12, 462, 170, 100);
+    }//GEN-LAST:event_lblBtnMainMenuPressed
+
+    private void lblBtnMainMenuReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuReleased
+        // TODO add your handling code here:
+        lblBtnMainMenu.setBounds(10, 460, 170, 100);
+    }//GEN-LAST:event_lblBtnMainMenuReleased
+
+    private void lblBtnBeginGame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGame
+        // Handles lblBtnMainMenu on Mouseover.
+        lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameBeginGameHi.png")));
+        if(blnSound == true)
+        {
+            AudioPlayer BGMPlayer = AudioPlayer.player;
+            AudioStream BGM;
+            AudioData BGMData;
+            try
+            {
+            BGM = new AudioStream(new FileInputStream("onHover.wav"));
+            BGMData = BGM.getData();
+            AudioDataStream loop = null;
+            loop = new AudioDataStream(BGMData);
+            BGMPlayer.start(loop);
+            }
+            catch(IOException error)
+            {
+                System.out.println("Audio play New Game Entered went wrong.");
+            }
+        }
+    }//GEN-LAST:event_lblBtnBeginGame
+
+    private void lblBtnBeginGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameExited
+        // Handles lblBtnBeginGame on Mouseover off.
+        lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameBeginGame.png")));
+    }//GEN-LAST:event_lblBtnBeginGameExited
+
+    private void lblBtnBeginGamePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGamePressed
+        // Handles lblBtnBeginGame on Press.
+        lblBtnBeginGame.setBounds(622, 462, 170, 100);
+    }//GEN-LAST:event_lblBtnBeginGamePressed
+
+    private void lblBtnBeginGameReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameReleased
+        // Handles lblBtnBeginGame on Release.
+        lblBtnBeginGame.setBounds(620, 460, 170, 100);
+    }//GEN-LAST:event_lblBtnBeginGameReleased
+
+    private void lblBtnBeginGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameClicked
+        // Handles lblBtnBeginGame on Click.
+        if(blnSound == true)
+        {
+            AudioPlayer BGMPlayer = AudioPlayer.player;
+            AudioStream BGM;
+            AudioData BGMData;
+            try
+            {
+            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+            BGMData = BGM.getData();
+            AudioDataStream loop = null;
+            loop = new AudioDataStream(BGMData);
+            BGMPlayer.start(loop);
+            }
+            catch(IOException error)
+            {
+                System.out.println("Audio play New Game Entered went wrong.");
+            }
+        }
+    }//GEN-LAST:event_lblBtnBeginGameClicked
 
     /**
      * @param args the command line arguments
@@ -94,6 +268,8 @@ public class PlayerName extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblBtnBeginGame;
+    private javax.swing.JLabel lblBtnMainMenu;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables
 }
