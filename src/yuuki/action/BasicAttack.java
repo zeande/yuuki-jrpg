@@ -13,7 +13,7 @@ public class BasicAttack extends Skill {
 	 * @param damage The base damage of the attack.
 	 */
 	public BasicAttack(double damage) {
-		super("attack", damage, 0.0);
+		super("attack", damage, 0.0, null, null);
 	}
 	
 	/**
@@ -21,9 +21,11 @@ public class BasicAttack extends Skill {
 	 */
 	protected void applyEffects() {
 		Character target = targets.get(0);
-		double mod = (origin.getStrength() / target.getDefense());
+		int oStr = origin.getStrength().getEffective();
+		int tDef = target.getDefense().getEffective();
+		double mod = (oStr / tDef);
 		int totalDamage = (int) Math.round(damage + mod);
-		target.setHP(target.getHP() - totalDamage);
+		target.loseHP(totalDamage);
 	}
 
 }

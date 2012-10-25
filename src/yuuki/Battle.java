@@ -176,7 +176,7 @@ public class Battle {
 	 */
 	private void applyBuffs() {
 		Character c = getCurrentFighter();
-		c.applyBattleBuffs();
+		c.applyBuffs();
 	}
 
 	/**
@@ -278,7 +278,6 @@ public class Battle {
 			for (Character c: team) {
 				c.setTeamId(teams.size());
 				c.setFighterId(fighters.size());
-				c.initBattleBuffs();
 				fighters.add(c);
 			}
 			teams.add(teams.size());
@@ -302,7 +301,7 @@ public class Battle {
 		Character f = fighters.get(id);
 		f.setTeamId(-1);
 		f.setFighterId(-1);
-		f.clearBattleBuffs();
+		f.clearBuffs();
 		fighters.remove(id);
 	}
 }

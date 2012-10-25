@@ -9,7 +9,19 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import yuuki.buff.Buff;
+
 public abstract class Action {
+
+	/**
+	 * The Buff that is applied to the target.
+	 */
+	protected Buff targetBuff;
+	
+	/**
+	 * The Buff that is applied to the origin.
+	 */
+	protected Buff originBuff;
 	
 	/**
 	 * Where this Action came from; who is doing the Action.
@@ -42,11 +54,16 @@ public abstract class Action {
 	 * @param name The display name of this Action.
 	 * @param effect The amount of effect that the new Action is to have.
 	 * @param cost The amount of cost that the new Action will take.
+	 * @param targetBuff The buff that is applied on application.
+	 * @param originBuff The buff that is applied to the origin.
 	 */
-	public Action(String name, double effect, double cost) {
+	public Action(String name, double effect, double cost, Buff targetBuff,
+					Buff originBuff) {
 		this.name = name;
 		this.effect = effect;
 		this.cost = cost;
+		this.targetBuff = targetBuff;
+		this.originBuff = originBuff;
 		targets = new ArrayList<Target>();
 		origin = null;
 	}
@@ -73,9 +90,24 @@ public abstract class Action {
 	public boolean apply() {
 		if (applyCost()) {
 			applyEffects();
+			applyBuffs();
 			return true;
 		} else {
 			return false;
+		}
+	}
+	
+	/**
+	 * Applies the Buffs.
+	 */
+	private void applyBuffs() {
+		if (targetBuff != null) {
+			for (Character t: targets) {
+				t.applyBuff(targetBuff);
+			}
+		}
+		if (originBuff != null) {
+			origin.applyBuff(originBuff);
 		}
 	}
 	

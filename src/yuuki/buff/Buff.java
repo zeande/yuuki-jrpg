@@ -6,6 +6,8 @@
 
 package yuuki.buff;
 
+import yuuki.entity.Character;
+
 public abstract class Buff {
 
 	/**
@@ -33,15 +35,20 @@ public abstract class Buff {
 	 * Creates a new Buff for a Character.
 	 *
 	 * @param name The display name of this Buff.
-	 * @param target The Character that the Buff is on.
 	 * @param effect The amount of effect that this Buff has.
 	 * @param turns The number of turns that this Buff lasts for.
 	 */
-	public Buff(String name, Character target, double effect, int turns) {
+	public Buff(String name, double effect, int turns) {
 		this.name = name;
-		this.target = target;
 		this.effect = effect;
 		this.turnsLeft = turns;
+	}
+	
+	/**
+	 * Sets the target.
+	 */
+	public void setTarget(Character target) {
+		this.target = target;
 	}
 	
 	/**
@@ -79,14 +86,6 @@ public abstract class Buff {
 	 */
 	public boolean hasTurns() {
 		return (getTurnsLeft() > 0);
-	}
-	
-	/**
-	 * Forces the use of one turn. There are no side effects other than the
-	 * number of turns remaining being subtracted by one.
-	 */
-	public void useTurn() {
-		turnsLeft--;
 	}
 	
 	/**

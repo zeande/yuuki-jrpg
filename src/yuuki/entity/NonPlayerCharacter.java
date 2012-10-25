@@ -3,7 +3,7 @@
  * characters, such as team mates and monsters.
  */
 
-package yuuki;
+package yuuki.entity;
 
 public class NonPlayerCharacter extends Character {
 
@@ -23,32 +23,21 @@ public class NonPlayerCharacter extends Character {
 	 * @inheritDoc
 	 *
 	 * @param level The level of the new Character. XP is set to match this.
-	 * @param hp The hit points of the new Character.
-	 * @param hpGain The number of hit points gained per level.
-	 * @param mp The mana points of the new Character.
-	 * @param mpGain The number of mana points gained per level.
+	 * @param hp The health stat of the new Character.
+	 * @param mp The mana stat of the new Character.
 	 * @param strength The physical strength of the Character.
-	 * @param strengthGain The amount of strength gained per level.
 	 * @param defense The Character's resistance to damage.
-	 * @param defenseGain The amount of defense gained per level.
 	 * @param agility The Character's avoidance to hits.
-	 * @param agilityGain The amount of agility gained per level.
 	 * @param accuracy The Character's ability to hit.
-	 * @param accuracyGain The amount of accuracy gained per level.
 	 * @param magic The magical ability of the Character.
-	 * @param magicGain The amount of magic gained per level.
 	 * @param luck The ability of the Character to get a critical hit.
-	 * @param luckGain The amount of luck gained per level.
 	 * @param xpBase Used for calculating given XP on death.
 	 */
-	public NonPlayerCharacter(int level, int hp, int hpGain, int mp, int mpGain,
-					 int strength, int strengthGain, int defense,
-					 int defenseGain, int agility, int agilityGain,
-					 int accuracy, int accuracyGain, int magic, int magicGain,
-					 int luck, int luckGain, int xpBase) {
-		super(level, hp, hpGain, mp, mpGain, strength, strengthGain, defense,
-				defenseGain, agility, agilityGain, accuracy, accuracyGain,
-				magic, magicGain, luck, luckGain);
+	public NonPlayerCharacter(int level, VariableStat hp, VariableStat mp,
+							Stat strength, Stat defense, Stat agility,
+							Stat accuracy, Stat magic, Stat luck, int xpBase) {
+		super(level, hp, mp, strength, defense, agility, accuracy, magic,
+				luck);
 		this.xpBase = xpBase;
 	}
 	

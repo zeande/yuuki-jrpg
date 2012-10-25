@@ -2,7 +2,7 @@
  * The Character class provides stats for all characters and monsters.
  */
 
-package yuuki;
+package yuuki.entity;
 
 public class Character {
 
@@ -16,10 +16,10 @@ public class Character {
 	 */
 	protected static final double XP_BASE = 2.0;
         
-        /**
-         * The Name of the Character.
-         */
-        protected String name;
+	/**
+	 * The Name of the Character.
+	 */
+	private String name;
 	
 	/**
 	 * The experience of this Character.
@@ -32,156 +32,77 @@ public class Character {
 	protected int level;
 
 	/**
-	 * The maximum possible hit points.
+	 * The hit point stat.
 	 */
-	private int hpMax;
+	private VariableStat hp;
 
 	/**
-	 * The amount of HP gained per level.
+	 * The mana points stat.
 	 */
-	private int hpGain;
+	private VariableStat mp;
 
 	/**
-	 * The current number of hit points.
+	 * The physical damage dealt by the character.
 	 */
-	private int hp;
+	private Stat strength;
 
 	/**
-	 * The maximum possible mana points.
+	 * Modifies damage taken.
 	 */
-	private int mpMax;
+	private Stat defense;
 
 	/**
-	 * The amount of MP gain per level.
+	 * The magical damage dealt by the character.
 	 */
-	private int mpGain;
+	private Stat magic;
 
 	/**
-	 * The current number of mana points.
+	 * Modifies percent chance to avoid damage.
 	 */
-	private int mp;
+	private Stat agility;
 
 	/**
-	 * The physical damage dealt by the character. This is the user-set
-	 * skill point value.
+	 * Modifies percent chance to hit.
 	 */
-	private int strength;
+	private Stat accuracy;
 
 	/**
-	 * Amount of strength gained per level.
+	 * Modifies critical strike percent.
 	 */
-	private int strengthGain;
+	private Stat luck;
 
-	/**
-	 * Modifies damage taken. This is the user-set skill point value.
-	 */
-	private int defense;
-
-	/**
-	 * Amount of defense gained per level.
-	 */
-	private int defenseGain;
-
-	/**
-	 * The magical damage dealt by the character. This is the user-set
-	 * skill point value.
-	 */
-	private int magic;
-
-	/**
-	 * The amount of magic gained per level.
-	 */
-	private int magicGain;
-
-	/**
-	 * Modifies percent chance to be hit. This is the user-set skill point
-	 * value.
-	 */
-	private int agility;
-
-	/**
-	 * The amount of agility gained per level.
-	 */
-	private int agilityGain;
-
-	/**
-	 * Modifies percent chance to hit. This is the user-set skill point
-	 * value.
-	 */
-	private int accuracy;
-
-	/**
-	 * The amount of accuracy gained per level.
-	 */
-	private int accuracyGain;
-
-	/**
-	 * Increases critical strike percent. This is the user-set skill point
-	 * value.
-	 */
-	private int luck;
-
-	/**
-	 * The amount of luck gained per level.
-	 */
-	private int luckGain;
-	
-	/**
-	 * 
-	 */
-	private 
-	
 	/**
 	 * Allocates a new Character. Most stats are set manually, but experience
 	 * is automatically calculated from the starting level. All stats are the
 	 * base stats; all actual stats are calculated by multiplying the stat gain
 	 * by the level and adding the base stat.
 	 *
-         * @param name The name of the Character.
+	 * @param name The name of the Character.
 	 * @param level The level of the new Character. XP is set to match this.
-	 * @param hp The hit points of the new Character.
-	 * @param hpGain The number of hit points gained per level.
-	 * @param mp The mana points of the new Character.
-	 * @param mpGain The number of mana points gained per level.
+	 * @param hp The health stat of the new Character.
+	 * @param mp The mana stat of the new Character.
 	 * @param strength The physical strength of the Character.
-	 * @param strengthGain The amount of strength gained per level.
 	 * @param defense The Character's resistance to damage.
-	 * @param defenseGain The amount of defense gained per level.
-	 * @param agility The Character's avoidance to hits.
-	 * @param agilityGain The amount of agility gained per level.
+	 * @param agility The Character's avoidance of hits.
 	 * @param accuracy The Character's ability to hit.
-	 * @param accuracyGain The amount of accuracy gained per level.
 	 * @param magic The magical ability of the Character.
-	 * @param magicGain The amount of magic gained per level.
 	 * @param luck The ability of the Character to get a critical hit.
-	 * @param luckGain The amount of luck gained per level.
 	 */
-	public Character(String name, int level, int hp, int hpGain, int mp, int mpGain,
-					 int strength, int strengthGain, int defense,
-					 int defenseGain, int agility, int agilityGain,
-					 int accuracy, int accuracyGain, int magic, int magicGain,
-					 int luck, int luckGain) {
+	public Character(String name, int level, VariableStat hp, VariableStat mp,
+					Stat strength, Stat defense, Stat agility, Stat accuracy,
+					Stat magic, Stat luck) {
 		if (level < 1) {
 			throw new IllegalArgumentException("Character level too low.");
 		}
-                this.name = name;
 		this.level = level;
-		this.hpMax = this.hp = hp;
-		this.hpGain = hpGain;
-		this.mpMax = this.mp = mp;
-		this.mpGain = mpGain;
+		this.hp = hp;
+		this.mp = mp;
 		this.strength = strength;
-		this.strengthGain = strengthGain;
 		this.defense = defense;
-		this.defenseGain = defenseGain;
 		this.accuracy = accuracy;
-		this.accuracyGain = accuracyGain;
 		this.agility = agility;
-		this.agilityGain = agilityGain;
 		this.magic = magic;
-		this.magicGain = magicGain;
 		this.luck = luck;
-		this.luckGain = luckGain;
 		this.xp = getRequiredXP(level);
 	}
 	
@@ -227,16 +148,16 @@ public class Character {
 	public void levelUp(int hp, int mp, int str, int def, int agt, int acc,
 						 int mag, int luck) {
 		level++;
-		this.hpMax += hp;
-		this.mpMax += mp;
-		this.strength += str;
-		this.defense += def;
-		this.agility += agt;
-		this.accuracy += acc;
-		this.magic += mag;
-		this.luck += luck;
-		restoreHP();
-		restoreMP();
+		this.hp.increaseBase(hp);
+		this.mp.increaseBase(mp);
+		strength.increaseBase(str);
+		defense.increaseBase(def);
+		agility.increaseBase(agt);
+		accuracy.increaseBase(acc);
+		magic.increaseBase(mag);
+		this.luck.increaseBase(luck);
+		hp.restore();
+		mp.restore();
 	}
 	
 	/**
@@ -245,21 +166,21 @@ public class Character {
 	 * @return True if this Character is alive; otherwise, false.
 	 */
 	public boolean isAlive() {
-		return hp >= 1;
+		return hp.getCurrent() >= 1;
 	}
 	
 	/**
 	 * Restores this Character's health completely.
 	 */
 	public void restoreHP() {
-		hp = hpMax;
+		hp.restore();
 	}
 	
 	/**
 	 * Restores this Character's mana completely.
 	 */
 	public void restoreMP() {
-		mp = mpMax;
+		mp.restore();
 	}
 	
 	/**
@@ -277,14 +198,15 @@ public class Character {
 			return (int) Math.floor(XP_MULTIPLIER * power);
 		}
 	}
-        /**
-         * Gets the name of this Character.
-         * 
-         * @return The name of the Character.
-         */
-        public String getName() {
-                return name;
-        }
+	
+	/**
+	 * Gets the name of this Character.
+	 * 
+	 * @return The name of the Character.
+	 */
+	public String getName() {
+			return name;
+	}
         
 	/**
 	 * Gets the level of this Character.
@@ -301,7 +223,7 @@ public class Character {
 	 * @return The maximum HP of this Character.
 	 */
 	public int getMaxHP() {
-		return hpMax + (hpGain * level);
+		return hp.getMax();
 	}
 
 	/**
@@ -310,7 +232,7 @@ public class Character {
 	 * @return The current HP.
 	 */
 	public int getHP() {
-		return hp;
+		return hp.getCurrent();
 	}
 
 	/**
@@ -319,7 +241,7 @@ public class Character {
 	 * @return The maximum MP of this Character.
 	 */
 	public int getMaxMP() {
-		return mpMax + (mpGain * level);
+		return mp.getMax();
 	}
 	
 	/**
@@ -328,25 +250,43 @@ public class Character {
 	 * @return The current MP of this Character.
 	 */
 	public int getMP() {
-		return mp;
+		return mp.getCurrent();
 	}
 	
 	/**
-	 * Sets the current MP of this Character.
+	 * Increases the current MP of this Character.
 	 *
-	 * @param mp The amount to set the MP to.
+	 * @param mp The amount to increase by.
 	 */
-	public void setMP(int mp) {
-		this.mp = mp;
+	public void gainMP(int mp) {
+		this.mp.gain(mp);
 	}
 	
 	/**
-	 * Sets the current HP of this Character.
+	 * Increases the current HP of this Character.
 	 *
-	 * @param hp The amount to set the HP to.
+	 * @param hp The amount to increase by.
 	 */
-	public void setHP(int hp) {
-		this.hp = hp;
+	public void gainHP(int hp) {
+		this.hp.gain(hp);
+	}
+	
+	/**
+	 * Decreases the current MP of this Character.
+	 *
+	 * @param mp The amount to decrease by.
+	 */
+	public void loseMP(int mp) {
+		this.mp.lose(mp);
+	}
+	
+	/**
+	 * Decreases the current HP of this Character.
+	 *
+	 * @param hp The amount to decrease by.
+	 */
+	public void loseHP(int hp) {
+		this.hp.lose(hp);
 	}
 	
 	/**
@@ -364,7 +304,7 @@ public class Character {
 	 * @return The total strength of this Character.
 	 */
 	public int getStrength() {
-		return strength + (strengthGain * level);
+		return strength.getEffective();
 	}
 
 	/**
@@ -373,7 +313,7 @@ public class Character {
 	 * @return The total defense of this Character.
 	 */
 	public int getDefense() {
-		return defense + (defenseGain * level);
+		return defense.getEffective();
 	}
 
 	/**
@@ -382,7 +322,7 @@ public class Character {
 	 * @return The total magic stat of this Character.
 	 */
 	public int getMagic() {
-		return magic + (magicGain * level);
+		return magic.getEffective();
 	}
 
 	/**
@@ -391,7 +331,7 @@ public class Character {
 	 * @return The total agility of this Character.
 	 */
 	public int getAgility() {
-		return agility + (agilityGain * level);
+		return agility.getEffective();
 	}
 
 	/**
@@ -400,7 +340,7 @@ public class Character {
 	 * @return The total accuracy of this Character.
 	 */
 	public int getAccuracy() {
-		return accuracy + (accuracyGain * level);
+		return accuracy.getEffective();
 	}
 
 	/**
@@ -409,6 +349,6 @@ public class Character {
 	 * @return The total luck of this Character.
 	 */
 	public int getLuck() {
-		return luck + (luckGain * level);
+		return luck.getEffective();
 	}
 }

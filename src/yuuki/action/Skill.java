@@ -4,6 +4,8 @@
 
 package yuuki.action;
 
+import yuuki.buff.Buff;
+
 public abstract class Skill extends Action {
 
 	/**
@@ -11,8 +13,9 @@ public abstract class Skill extends Action {
 	 *
 	 * @inheritDoc
 	 */
-	public Skill(String name, double effect, double manaCost) {
-		super(name, effect, manaCost);
+	public Skill(String name, double effect, double manaCost, Buff tBuff,
+					Buff oBuff) {
+		super(name, effect, manaCost, buff);
 	}
 	
 	/**
@@ -24,7 +27,7 @@ public abstract class Skill extends Action {
 		if (origin.getMP() < manaCost) {
 			return false;
 		} else {
-			origin.setMP(origin.getMP() - manaCost);
+			origin.loseMP(manaCost);
 			return true;
 		}
 	}
