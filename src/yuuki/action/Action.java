@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import yuuki.entity.Character;
 import yuuki.buff.Buff;
 
 public abstract class Action {
@@ -42,6 +43,11 @@ public abstract class Action {
 	 * The amount of cost of this Action.
 	 */
 	protected double cost;
+	
+	/**
+	 * Whether the last application of this Action was successful.
+	 */
+	protected boolean successful;
 	
 	/**
 	 * The name of this Action; used for display purposes.
@@ -88,28 +94,18 @@ public abstract class Action {
 	 * otherwise, false.
 	 */
 	public boolean apply() {
-		if (applyCost()) {
+		successful = applyCost();
+		if (successful) {
 			applyEffects();
 			applyBuffs();
-			return true;
-		} else {
-			return false;
 		}
+		return successful;
 	}
 	
 	/**
 	 * Applies the Buffs.
 	 */
-	private void applyBuffs() {
-		if (targetBuff != null) {
-			for (Character t: targets) {
-				t.applyBuff(targetBuff);
-			}
-		}
-		if (originBuff != null) {
-			origin.applyBuff(originBuff);
-		}
-	}
+	private abstract void applyBuffs();
 	
 	/**
 	 * Applies the cost to the origin.
@@ -203,7 +199,7 @@ public abstract class Action {
 	public int[] getAffectedTeams() {
 		Set<Integer> affected = new HashSet<Integer>();
 		for (Character c: targets) {
-			affected.add(c.getTeamId());
+			affected.add(c.getTeam());
 		}
 		int[] teams = new int[affected.size()];
 		int k = 0;
@@ -211,6 +207,15 @@ public abstract class Action {
 			teams[k++] = i.intValue();
 		}
 		return teams;
+	}
+	
+	/**
+	 * Checks whether the last application of this Action was successful.
+	 *
+	 * @return True if it was successful; false if it was not.
+	 */
+	public boolean wasSuccessful() {
+		return success;
 	}
 
 }
