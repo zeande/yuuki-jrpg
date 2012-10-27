@@ -194,7 +194,7 @@ public class Character {
 		if (level == 1) {
 			return 0;
 		} else {
-			double power = Math.pow(XP_BASE, level - 2);
+			double power = Math.pow(XP_BASE, level - 1);
 			return (int) Math.floor(XP_MULTIPLIER * power);
 		}
 	}
