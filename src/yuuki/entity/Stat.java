@@ -7,12 +7,6 @@ package yuuki.entity;
 public class Stat {
 
 	/**
-	 * The Character that this Stat is attached to. This is necessary due to
-	 * Stat's dependance on level.
-	 */
-	private Character character;
-	
-	/**
 	 * The base value for calculating this Stat's effective value.
 	 */
 	private int base;
@@ -34,8 +28,7 @@ public class Stat {
 	 * @param base The base value of the Stat.
 	 * @param gain The amount this Stat gains every level.
 	 */
-	public Stat(Character character, int base, int gain) {
-		this.character = character;
+	public Stat(int base, int gain) {
 		this.base = base;
 		this.gain = gain;
 		this.modifier = 0;
@@ -99,19 +92,8 @@ public class Stat {
 	 * @return The effective value of this Stat for the given level.
 	 */
 	public int getEffective(int level) {
-		int effective = base + (gain * level) * modifier;
+		int effective = base + (gain * level) * (1 + modifier);
 		return effective;
-	}
-	
-	/**
-	 * Gets the total calcluated value of this Stat given the level of the
-	 * Character it is attached to.
-	 *
-	 * @return The effective value of this Stat for the Character it is
-	 * attached to.
-	 */
-	public int getEffective() {
-		return getEffective(character.getLevel());
 	}
 	
 	/**

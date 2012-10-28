@@ -13,58 +13,42 @@ public class VariableStat extends Stat {
 	private int currentValue;
 	
 	/**
-	 * Allocates a new VariableStat. The current value is immediately set to
-	 * the effective level.
+	 * Allocates a new VariableStat. The current value is immediately set to 0.
 	 *
 	 * @param character The Character this VariableStat is attached to.
 	 * @param base The base value of this VariableStat.
 	 * @param gain The amount this VariableStat gains every level.
 	 */
-	public VariableStat(Character character, int base, int gain) {
-		super(character, base, gain);
-		restore();
+	public VariableStat(int base, int gain) {
+		super(base, gain);
+		currentValue = 0;
 	}
 	
 	/**
-	 * @inheritDoc
-	 *
-	 * When a modifier is added to a VariableStat, the current value also
-	 * changes so that it is at the same percentage of effective as it was
-	 * before the modifier was applied. It is rounded to the nearest integer,
-	 * but it will always be at least 1.
+	 * Adds a modifier and changes the current value so that it is at the same
+	 * percentage of effective as it was before the modifier was applied. It is
+	 * rounded to the nearest integer, but it will always be at least 1.
 	 *
 	 * @param mod The amount of the modifier to add.
+	 * @param level The level of the Character that the stat is on.
 	 */
-	@Override
-	public void addModifier(int mod) {
-		double percent = currentValue / getEffective();
-		super.addModifier(mod);
-		currentValue = (int) Math.round(getEffective() * percent);
+	public void addModifier(int mod, int level) {
+		double percent = currentValue / getMax(level);
+		addModifier(mod);
+		currentValue = (int) Math.round(getMax(level) * percent);
 		currentValue = (currentValue >= 1) ? currentValue : 1;
 	}
 	
 	/**
-	 * @inheritDoc
+	 * Removes a modifier and changes the current value so that it is at the
+	 * same percentage of effective as it was before the modifier was applied.
+	 * It is rounded to the nearest integer, but it will always be at least 1.
 	 *
-	 * When a modifier is removed from a VariableStat, the current value also
-	 * changes so that it is at the same percentage of effective as it was
-	 * before the modifier was removed. It is rounded to the nearest integer,
-	 * but it will always be at least 1.
+	 * @param mod The amount of the modifier to add.
+	 * @param level The level of the Character that the stat is on.
 	 */
-	@Override
-	public void removeModifier(int mod) {
-		addModifier(-mod);
-	}
-	
-	/**
-	 * Checks whether or not this Stat has a current value that varies. Derived
-	 * classes may override.
-	 *
-	 * @return true.
-	 */
-	@Override
-	public boolean hasCurrentValue() {
-		return true;
+	public void removeModifier(int mod, int level) {
+		addModifier(-mod, level);
 	}
 	
 	/**
@@ -83,12 +67,13 @@ public class VariableStat extends Stat {
 	 * current value is increased only to the effective value.
 	 *
 	 * @param amount The amount to increase the current value by.
+	 * @param level The level of the Character the stat is on.
 	 *
 	 * @return True if the current value increased by the full amount given;
 	 * otherwise, false.
 	 */
-	public boolean gain(int amount) {
-		int maxAmount = getEffective() - currentValue;
+	public boolean gain(int amount, int level) {
+		int maxAmount = getMax(level) - currentValue;
 		boolean amountInBounds = (amount <= maxAmount);
 		currentValue += (amountInBounds ? amount : maxAmount);
 		return amountInBounds;
@@ -112,9 +97,11 @@ public class VariableStat extends Stat {
 	
 	/**
 	 * Sets the current value to the effective level.
+	 *
+	 * @param level The level of the Character the stat is on.
 	 */
-	public void restore() {
-		currentValue = getEffective();
+	public void restore(int level) {
+		currentValue = getMax(level);
 	}
 	
 	/**
@@ -127,9 +114,11 @@ public class VariableStat extends Stat {
 	/**
 	 * Gets the maximum value for this VariableStat.
 	 *
+	 * @param level The level of the Character the stat is on.
+	 *
 	 * @return The effective value.
 	 */
-	public int getMax() {
-		return getEffective();
+	public int getMax(int level) {
+		return getEffective(level);
 	}
 }
