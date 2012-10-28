@@ -9,14 +9,16 @@
 package yuuki;
 
 import java.util.ArrayList;
-import yuuki.action;
+
+import yuuki.action.Action;
+import yuuki.entity.Character;
 
 public class Battle {
 
 	/**
 	 * The potential states of a Battle.
 	 */
-	private static enum State {
+	public static enum State {
 		STARTING_TURN,
 		GETTING_ACTION,
 		APPLYING_ACTION,
@@ -40,29 +42,27 @@ public class Battle {
 	private State state;
 
 	/**
-	 * Whether the last action was successful.
+	 * The last Action that a Character selected.
 	 */
-	private boolean actionSuccess;
+	private Action lastAction;
 
 	/**
-	 * The current Character's action.
+	 * The currently active fighters. The first array is the list of teams and
+	 * the second array is the fighter on that team. For example, you would use
+	 * the notation fighters.get(1).get(0) to get the first fighter of the
+	 * second team.
 	 */
-	private Action currentAction;
-
-	/**
-	 * The teams currently active.
-	 */
-	private ArrayList<Integer> teams;
-
-	/**
-	 * The Characters involved with the fight.
-	 */
-	private ArrayList<Character> fighters;
+	private ArrayList<ArrayList<Character>> fighters;
 
 	/**
 	 * The player whose turn it currently is.
 	 */
 	private int currentFighter;
+	
+	/**
+	 * The Characters arranged in the order that they take their turns.
+	 */
+	private ArrayList<Character> turnOrder;
 
 	/**
 	 * Begins a new battle with the given participants.
@@ -72,8 +72,6 @@ public class Battle {
 	 * the Characters on that team.
 	 */
 	public Battle(Character[][] participants) {
-		this.fighters = new ArrayList<Character>();
-		this.teams = new ArrayList<Integer>();
 		assignToFighters(participants);
 		orderFighters();
 		currentFighter = 0;
@@ -143,6 +141,55 @@ public class Battle {
 				break;
 		}
 		return complete;
+	}
+	
+	/**
+	 * Gets the fighters that are on a team.
+	 *
+	 * @param team The team to get the fighters for.
+	 *
+	 * @return The fighters on the given team.
+	 */
+	public ArrayList<Character> getFighters(int team) {
+		return fighters.get(team);
+	}
+	
+	/**
+	 * Gets the fighter whose turn it currently is.
+	 *
+	 * @return The current fighter.
+	 */
+	public Character getCurrentFighter() {
+		return turnOrder.get(currentFighter);
+	}
+	
+	/**
+	 * Gets the last action that a Character chose. This will be null if the
+	 * last advancement did not produce an Action.
+	 *
+	 * @return The last Action that a fighter chose, or null if the fighter did
+	 * not just choose an Action.
+	 */
+	public Action getLastAction() {
+		return lastAction;
+	}
+	
+	/**
+	 * Gets where in the battle process this Battle currently is.
+	 *
+	 * @return The state of the battle.
+	 */
+	public State getState() {
+		return state;
+	}
+	
+	/**
+	 * Gets the number of teams in this Battle.
+	 *
+	 * @return The number of teams.
+	 */
+	public int getTeamCount() {
+		return fighters.size();
 	}
 
 	/**
@@ -258,29 +305,21 @@ public class Battle {
 	}
 
 	/**
-	 * Gets the fighter whose turn it currently is.
-	 *
-	 * @return The current fighter.
-	 */
-	private Character getCurrentFighter() {
-		return fighters.get(currentFighter);
-	}
-
-	/**
 	 * Assigns characters to the fighters list. Each character's fighter ID and
 	 * team ID is set and they are added to the internal array. The team ID is
 	 * arbitrary; as long as Characters on the same team have the same team ID,
 	 * the actual number doesn't matter. The fighter ID is simply set in the
 	 * order that the participants are given.
 	 */
-	private void assignToFighters(Character[][] participants) {
-		for (Character[] team: participants) {
+	private void assignToFighters(Character[][] teams) {
+		this.fighters = new ArrayList<ArrayList<Character>>(teams.length);
+		for (Character[] t: teams) {
+			ArrayList<Character> team = new ArrayList<Character>(t.length);
 			for (Character c: team) {
-				c.setTeamId(teams.size());
-				c.setFighterId(fighters.size());
-				fighters.add(c);
+				c.initializeFighting(team.size(), fighters.size());
+				team.add(c);
 			}
-			teams.add(teams.size());
+			fighters.add(team);
 		}
 	}
 	
@@ -288,7 +327,12 @@ public class Battle {
 	 * Sets the play order for the battle.
 	 */
 	private void orderFighters() {
-		// TODO: put the fighters in some play order
+		turnOrder = new ArrayList<Character>();
+		for (ArrayList<Character> team: fighters) {
+			for (Character c: team) {
+				turnOrder.add(c);
+			}
+		}
 	}
 	
 	/**
