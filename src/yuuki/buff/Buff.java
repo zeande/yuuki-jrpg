@@ -27,6 +27,11 @@ public abstract class Buff {
 	protected int turnsLeft;
 	
 	/**
+	 * Whether or not this Buff has been activated.
+	 */
+	private boolean active;
+	
+	/**
 	 * The name of this Buff. Used for display purposes.
 	 */
 	private String name;
@@ -42,6 +47,7 @@ public abstract class Buff {
 		this.name = name;
 		this.effect = effect;
 		this.turnsLeft = turns;
+		this.active = false;
 	}
 	
 	/**
@@ -52,13 +58,32 @@ public abstract class Buff {
 	}
 	
 	/**
-	 * Applies this buff's effect to its target Character. This must not be
-	 * used for a passive buff; that must be externally obtained through
-	 * getEffect().
+	 * Applies this buff's effect to its target Character. The effects are
+	 * applied by calling applyEffects(). If this is the first time this buff
+	 * is being applied, applyActivationEffects() is also called. If this is
+	 * the last time this buff can be applied as determined by the number of
+	 * turns it lasts, applyDeactivationEffects() is also called.
 	 *
-	 * @return True if this Buff has more turns left to apply; otherwise false.
+	 * If this buff has already ended after being applied for as many times as
+	 * it was initialized with turns, this method has no effect.
+	 *
+	 * @return True if this Buff is active after being applied to the target.
 	 */
-	public abstract boolean apply();
+	public boolean apply() {
+		checkActivation();
+		checkApplication();
+		checkDeactivation();
+		return isActive();
+	}
+	
+	/**
+	 * Checks whether this buff has been activated.
+	 *
+	 * @return True if this Buff has been activated; false otherwise.
+	 */
+	public boolean isActive() {
+		return active;
+	}
 	
 	/**
 	 * Gets the amount of effect that this Buff has.
@@ -79,22 +104,78 @@ public abstract class Buff {
 	}
 	
 	/**
-	 * Checks whether there are any turns left.
-	 *
-	 * @return True if the number of turns left is greater than 0; otherwise,
-	 * false.
-	 */
-	public boolean hasTurns() {
-		return (getTurnsLeft() > 0);
-	}
-	
-	/**
 	 * Gets this Buff's name.
 	 *
 	 * @return This Buff's name.
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * Applies the per-turn effect of this Buff. Called every time this Buff is
+	 * applied to its target and has turns left.
+	 */
+	protected abstract void applyEffect();
+	
+	/**
+	 * Applies the initial effects of this Buff. Called when this Buff is
+	 * applied for the first time.
+	 */
+	protected abstract void applyActivationEffect();
+	
+	/**
+	 * Applies the final effects of this Buff. Called when this Buff is applied
+	 * for the last time.
+	 */
+	protected abstract void applyDeactivationEffect();
+	
+	/**
+	 * Called the first time this Buff is applied. Sets its state to active.
+	 */
+	private void activate() {
+		active = true;
+	}
+	
+	/**
+	 * Called the last time this Buff is applied. Sets its state to inactive.
+	 */
+	private void deactivate() {
+		active = false;
+	}
+	
+	/**
+	 * Activates this Buff and applies the activation effects. This method only
+	 * has an effect if this Buff is inactive and if it has turns left.
+	 */
+	private void checkActivation() {
+		if (!isActive() && turnsLeft > 0) {
+			activate();
+			applyActivationEffect();
+		}
+	}
+	
+	/**
+	 * Applies this Buff's per-turn effects and reduces the turn count by one.
+	 * This method only has an effect if this Buff is active.
+	 */
+	private void checkApplication() {
+		if (isActive()) {
+			applyEffect();
+			turnsLeft--;
+		}
+	}
+	
+	/**
+	 * Deactivates this Buff and applies the deactivation effects. This method
+	 * only has an effect if this Buff is active and if it has no more turns
+	 * left.
+	 */
+	private void checkDeactivation() {
+		if (isActive() && turnsLeft == 0) {
+			deactivate();
+			applyDeactivationEffect();
+		}
 	}
 
 }

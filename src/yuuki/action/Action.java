@@ -96,7 +96,7 @@ public abstract class Action {
 	public boolean apply() {
 		successful = applyCost();
 		if (successful) {
-			applyEffects();
+			applyEffect();
 			applyBuffs();
 		}
 		return successful;
@@ -117,7 +117,7 @@ public abstract class Action {
 	/**
 	 * Applies the effects to the targets.
 	 */
-	protected abstract void applyEffects();
+	protected abstract void applyEffect();
 	
 	/**
 	 * Gets the name of this Action.

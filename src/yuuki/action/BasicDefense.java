@@ -20,6 +20,6 @@ public class BasicDefense extends Action {
 		return true;
 	}
 	
-	protected void applyEffects() {}
+	protected void applyEffect() {}
 
 }

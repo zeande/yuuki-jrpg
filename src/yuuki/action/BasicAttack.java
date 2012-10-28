@@ -19,7 +19,7 @@ public class BasicAttack extends Skill {
 	/**
 	 * Applies damage to the first target.
 	 */
-	protected void applyEffects() {
+	protected void applyEffect() {
 		Character target = targets.get(0);
 		int oStr = origin.getStrength().getEffective();
 		int tDef = target.getDefense().getEffective();
