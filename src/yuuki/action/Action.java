@@ -199,7 +199,7 @@ public abstract class Action {
 	public int[] getAffectedTeams() {
 		Set<Integer> affected = new HashSet<Integer>();
 		for (Character c: targets) {
-			affected.add(c.getTeam());
+			affected.add(c.getTeamId());
 		}
 		int[] teams = new int[affected.size()];
 		int k = 0;

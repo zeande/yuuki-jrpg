@@ -91,23 +91,23 @@ public class Battle {
 		boolean complete = false;
 		switch (state) {
 			case STARTING_TURN:
-				checkBuffs();
+				getCurrentFighter().removeExpiredBuffs();
 				regenerateMana();
 				state = State.GETTING_ACTION;
 				break;
 
 			case GETTING_ACTION:
-				getCharacterAction();
+				lastAction = getCurrentFighter().getNextAction(fighters);
 				state = State.APPLYING_ACTION;
 				break;
 
 			case APPLYING_ACTION:
-				actionSuccess = applyAction();
+				lastAction.apply();
 				state = State.APPLYING_BUFFS;
 				break;
 
 			case APPLYING_BUFFS:
-				applyBuffs();
+				getCurrentFighter().applyBuffs();
 				state = State.CHECKING_DEATH;
 				break;
 
@@ -197,43 +197,20 @@ public class Battle {
 	 */
 	private void regenerateMana() {
 		Character c = getCurrentFighter();
-		int amount = (int) Math.floor(c.getMaxMP() * MANA_GEN);
-		int totalMana = c.getMP() + (amount > 0) ? amount : 1;
-		totalMana = (c.getMaxMP() < totalMana) ? c.getMaxMP() : totalMana;
-		c.setMP(totalMana);
-	}
-
-	/**
-	 * Gets the move that the current Character wishes to use.
-	 */
-	private void getCharacterAction() {
-		Character c = getCurrentFighter();
-		this.currentAction = c.?(); // TODO: get action from character
-	}
-
-	/**
-	 * Applies the effects of the Character action to the target(s).
-	 */
-	private void applyAction() {
-		return currentAction.apply();
-	}
-
-	/**
-	 * Applies over-time buffs to the current Character.
-	 */
-	private void applyBuffs() {
-		Character c = getCurrentFighter();
-		c.applyBuffs();
+		VariableStat mana = c.getMP();
+		int manaMax = mana.getMax(c.getLevel());
+		int amount = (int) Math.floor(manaMax * MANA_GEN);
+		mana.gain(amount, c.getLevel());
 	}
 
 	/**
 	 * Removes the targeted fighter if he is now dead.
 	 */
 	private void checkDeath() {
-		Character[] targets = currentAction.getTargets();
+		Character[] targets = lastAction.getTargets();
 		for (Character c: targets) {
 			if (!c.isAlive()) {
-				removeFighter(c.getFighterId());
+				removeFighter(c);
 			}
 		}
 	}
@@ -243,29 +220,12 @@ public class Battle {
 	 * it.
 	 */
 	private void checkTeamStatus() {
-		int[] affectedTeams = currentAction.getAffectedTeams();
+		int[] affectedTeams = lastAction.getAffectedTeams();
 		for (int t: affectedTeams) {
-			if (getFighterCount(t) == 0) {
-				teams.remove(new Integer(t));
+			if (fighters.get(t).size() == 0) {
+				removeTeam(t);
 			}
 		}
-	}
-
-	/**
-	 * Gets the number of fighters on the specified team.
-	 *
- 	 * @param team The team to check the fighter count for.
-	 *
-	 * @return the number of fighters on the given team.
-	 */
-	private int getFighterCount(int team) {
-		int count = 0;
-		for (Character c: fighters) {
-			if (c.getTeamId() == team) {
-				count++:
-			}
-		}
-		return count;
 	}
 
 	/**
@@ -274,16 +234,15 @@ public class Battle {
 	 * @return True if only one team remains in active play; otherwise false.
 	 */
 	private boolean battleIsOver() {
-		return (teams.size() == 1);
+		return (fighters.size() == 1);
 	}
 
 	/**
 	 * Sets the current player to the player whose turn is next.
 	 */
 	private void setNextPlayer() {
-		currentFighter++; // won't work if killed player lower on list
-		// TODO: algo that takes killed chars into account
-		if (currentFighter > fighters.size()) {
+		currentFighter++;
+		if (currentFighter > turnOrder.size()) {
 			currentFighter = 0;
 		}
 	}
@@ -294,14 +253,6 @@ public class Battle {
 	 */
 	private void calculateLoot() {
 		// TODO: loot calculation
-	}
-
-	/**
-	 * Removes buffs on the current Character that have expired.
-	 */
-	private void checkBuffs() {
-		Character c = getCurrentFighter();
-		c.removeExpiredBuffs();
 	}
 
 	/**
@@ -339,13 +290,59 @@ public class Battle {
 	 * Removes a fighter from the field. All of the Character's battle params
 	 * are reset and it is removed from the list of fighters.
 	 *
-	 * @param id The id of the Character to remove.
+	 * @param f The fighter to remove.
 	 */
-	private void removeFighter(int id) {
-		Character f = fighters.get(id);
-		f.setTeamId(-1);
-		f.setFighterId(-1);
-		f.clearBuffs();
-		fighters.remove(id);
+	private void removeFighter(Character f) {
+		int team = f.getTeamId();
+		int id = f.getFighterId();
+		int turnId = turnOrder.indexOf(f);
+		turnOrder.remove(turnId);
+		if (currentFighter > turnId) {
+			currentFighter++;
+		}
+		fighters.get(team).remove(id);
+		reassignIds(team, id);
+		f.stopFighting();
+	}
+	
+	/**
+	 * Removes a team from the field.
+	 *
+	 * @param teamId The id of the team to remove.
+	 */
+	private void removeTeam(int teamId) {
+		fighters.remove(teamId);
+		reassignTeams(teamId);
+	}
+	
+	/**
+	 * Decrements the ID of all fighters on the given team with an higher than
+	 * the given one.
+	 *
+	 * @param teamId The ID of the team whose fighters to reassign.
+	 * @param id The ID to shift all fighters left towards.
+	 */
+	private void reassignIds(int teamId, int id) {
+		ArrayList<Character> team = fighters.get(teamId);
+		for (Character c: team) {
+			if (c.getFighterId() > id) {
+				c.setFighterId(c.getFighterId - 1);
+			}
+		}
+	}
+	
+	/**
+	 * Decrements the team ID of all fighters on teams higher than the given
+	 * team.
+	 *
+	 * @param teamId The ID to shift all fighters left towards.
+	 */
+	private void reassignTeams(int teamId) {
+		for (int i = teamId; i < fighters.size(); i++) {
+			ArrayList<Character> team = fighters.get(i);
+			for (Character c: team) {
+				c.setTeamId(i);
+			}
+		}
 	}
 }

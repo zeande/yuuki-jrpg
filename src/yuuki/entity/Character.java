@@ -414,4 +414,22 @@ public class Character {
 		teamId = -1;
 		this.buffs = null;
 	}
+	
+	/**
+	 * Sets team Id.
+	 *
+	 * @param Id The new team ID.
+	 */
+	public void setTeamId(int id) {
+		teamId = id;
+	}
+	
+	/**
+	 * Sets fighter Id.
+	 *
+	 * @param Id The new fighter ID.
+	 */
+	public void setFighterId(int id) {
+		fighterId = id;
+	}
 }
