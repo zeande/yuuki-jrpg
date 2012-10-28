@@ -86,6 +86,16 @@ public abstract class Buff {
 	}
 	
 	/**
+	 * Checks whether this buff does not have any turns left.
+	 *
+	 * @return True if there are no turns left and buff is inactive; false
+	 * otherwise.
+	 */
+	public boolean isExpired() {
+		return (!isActive() && turnsLeft == 0);
+	}
+	
+	/**
 	 * Gets the amount of effect that this Buff has.
 	 *
 	 * @return The amount of effect.

@@ -4,6 +4,9 @@
 
 package yuuki.entity;
 
+import yuuki.action.Action;
+import yuuki.buff.Buff;
+
 public class Character {
 
 	/**
@@ -15,11 +18,11 @@ public class Character {
 	 * The base used in calculating required experience.
 	 */
 	protected static final double XP_BASE = 2.0;
-        
+	
 	/**
-	 * The Name of the Character.
+	 * The moves that this Character can perform.
 	 */
-	private String name;
+	protected Action[] moves;
 	
 	/**
 	 * The experience of this Character.
@@ -30,6 +33,11 @@ public class Character {
 	 * The level of this Character.
 	 */
 	protected int level;
+	
+	/**
+	 * The Name of the Character.
+	 */
+	private String name;	
 
 	/**
 	 * The hit point stat.
@@ -70,6 +78,37 @@ public class Character {
 	 * Modifies critical strike percent.
 	 */
 	private Stat luck;
+	
+	/**
+	 * The Buffs that this Character has on it.
+	 */
+	private ArrayList<Buff> buffs;
+	
+	/**
+	 * The ID of this Character within its team during a battle.
+	 */
+	private int fighterId;
+	
+	/**
+	 * The ID of this Character's team during a battle.
+	 */
+	private int teamId;
+	
+	/**
+	 * Calculates the experience required to be at a level.
+	 *
+	 * @param level The level to get the required experience for.
+	 *
+	 * @return The experience required to be the given level.
+	 */
+	public static final int getRequiredXP(int level) {
+		if (level == 1) {
+			return 0;
+		} else {
+			double power = Math.pow(XP_BASE, level - 1);
+			return (int) Math.floor(XP_MULTIPLIER * power);
+		}
+	}
 
 	/**
 	 * Allocates a new Character. Most stats are set manually, but experience
@@ -79,6 +118,7 @@ public class Character {
 	 *
 	 * @param name The name of the Character.
 	 * @param level The level of the new Character. XP is set to match this.
+	 * @param moves The moves that this Character knows.
 	 * @param hp The health stat of the new Character.
 	 * @param mp The mana stat of the new Character.
 	 * @param strength The physical strength of the Character.
@@ -88,13 +128,15 @@ public class Character {
 	 * @param magic The magical ability of the Character.
 	 * @param luck The ability of the Character to get a critical hit.
 	 */
-	public Character(String name, int level, VariableStat hp, VariableStat mp,
-					Stat strength, Stat defense, Stat agility, Stat accuracy,
-					Stat magic, Stat luck) {
+	public Character(String name, int level, Action[] moves, VariableStat hp,
+					VariableStat mp, Stat strength, Stat defense, Stat agility,
+					Stat accuracy, Stat magic, Stat luck) {
 		if (level < 1) {
 			throw new IllegalArgumentException("Character level too low.");
 		}
+		this.name = name;
 		this.level = level;
+		this.moves = moves;
 		this.hp = hp;
 		this.mp = mp;
 		this.strength = strength;
@@ -103,7 +145,9 @@ public class Character {
 		this.agility = agility;
 		this.magic = magic;
 		this.luck = luck;
-		this.xp = getRequiredXP(level);
+		this.xp = Character.getRequiredXP(level);
+		this.fighterId = -1;
+		this.teamId = -1;
 	}
 	
 	/**
@@ -127,7 +171,7 @@ public class Character {
 	 * false.
 	 */
 	public boolean canLevelUp() {
-		int required = getRequiredXP(level + 1);
+		int required = Character.getRequiredXP(level + 1);
 		return (xp >= required);
 	}
 	
@@ -166,37 +210,7 @@ public class Character {
 	 * @return True if this Character is alive; otherwise, false.
 	 */
 	public boolean isAlive() {
-		return hp.getCurrent() >= 1;
-	}
-	
-	/**
-	 * Restores this Character's health completely.
-	 */
-	public void restoreHP() {
-		hp.restore();
-	}
-	
-	/**
-	 * Restores this Character's mana completely.
-	 */
-	public void restoreMP() {
-		mp.restore();
-	}
-	
-	/**
-	 * Calculates the experience required to be at a level.
-	 *
-	 * @param level The level to get the required experience for.
-	 *
-	 * @return The experience required to be the given level.
-	 */
-	public final int getRequiredXP(int level) {
-		if (level == 1) {
-			return 0;
-		} else {
-			double power = Math.pow(XP_BASE, level - 1);
-			return (int) Math.floor(XP_MULTIPLIER * power);
-		}
+		return (hp.getCurrent() >= 1);
 	}
 	
 	/**
@@ -218,75 +232,21 @@ public class Character {
 	}
 
 	/**
-	 * Gets the max HP of this Character.
+	 * Gets the HP stat of this Character.
 	 *
-	 * @return The maximum HP of this Character.
+	 * @return The HP stat.
 	 */
-	public int getMaxHP() {
-		return hp.getMax();
+	public VariableStat getHP() {
+		return hp;
 	}
 
 	/**
-	 * Gets the current HP of this Character.
+	 * Gets the MP stat of this Character.
 	 *
-	 * @return The current HP.
+	 * @return The MP stat.
 	 */
-	public int getHP() {
-		return hp.getCurrent();
-	}
-
-	/**
-	 * Gets the max MP of this Character.
-	 *
-	 * @return The maximum MP of this Character.
-	 */
-	public int getMaxMP() {
+	public VariableStat getMP() {
 		return mp.getMax();
-	}
-	
-	/**
-	 * Gets the current MP of this Character.
-	 *
-	 * @return The current MP of this Character.
-	 */
-	public int getMP() {
-		return mp.getCurrent();
-	}
-	
-	/**
-	 * Increases the current MP of this Character.
-	 *
-	 * @param mp The amount to increase by.
-	 */
-	public void gainMP(int mp) {
-		this.mp.gain(mp);
-	}
-	
-	/**
-	 * Increases the current HP of this Character.
-	 *
-	 * @param hp The amount to increase by.
-	 */
-	public void gainHP(int hp) {
-		this.hp.gain(hp);
-	}
-	
-	/**
-	 * Decreases the current MP of this Character.
-	 *
-	 * @param mp The amount to decrease by.
-	 */
-	public void loseMP(int mp) {
-		this.mp.lose(mp);
-	}
-	
-	/**
-	 * Decreases the current HP of this Character.
-	 *
-	 * @param hp The amount to decrease by.
-	 */
-	public void loseHP(int hp) {
-		this.hp.lose(hp);
 	}
 	
 	/**
@@ -350,5 +310,108 @@ public class Character {
 	 */
 	public int getLuck() {
 		return luck.getEffective();
+	}
+	
+	/**
+	 * Gets the Buffs currently on this Character.
+	 *
+	 * @return The Buffs.
+	 */
+	public ArrayList<Buff> getBuffs() {
+		return buffs;
+	}
+	
+	/**
+	 * Gets the fighter ID of this Character.
+	 *
+	 * @return The ID if this Character is in a Battle, otherwise -1.
+	 */
+	public int getFighterId() {
+		return fighterId;
+	}
+	
+	/**
+	 * Gets the team ID of this Character.
+	 *
+	 * @return The ID if this Character is in a Battle, otherwise -1.
+	 */
+	public int getTeamId() {
+		return teamId;
+	}
+	
+	/**
+	 * Puts a buff on this Character.
+	 *
+	 * @param b The buff to add.
+	 */
+	public void addBuff(Buff b) {
+		b.setTarget(this);
+		buffs.add(b);
+	}
+	
+	/**
+	 * Removes buffs that are no longer active.
+	 */
+	public void removeExpiredBuffs() {
+		Iterator<Buff> it = buffs.iterator();
+		while (it.hasNext()) {
+			Buff b = it.next();
+			if (b.isExpired()) {
+				it.remove();
+			}
+		}
+	}
+	
+	/**
+	 * Applies all current buffs to this Character.
+	 */
+	public void applyBuffs() {
+		for (Buff b: buffs) {
+			b.apply();
+		}
+	}
+	
+	/**
+	 * Decides what move to do next based on the states of other players in the
+	 * battle.
+	 *
+	 * @param fighters The states of the other players.
+	 *
+	 * @return The move that this Character wishes to perform.
+	 */
+	public Action getNextAction(ArrayList<ArrayList<Character>> fighters) {
+		// TODO: Make intelligent choices based on the battle state
+		int choice = (int) Math.floor(Math.random() * moves.length());
+		return moves[choice];
+	}
+	
+	/**
+	 * Gets the moves that this Character knows.
+	 *
+	 * @return The moves.
+	 */
+	public Action[] getMoves() {
+		return moves;
+	}
+	
+	/**
+	 * Sets up the properties needed for fighting.
+	 *
+	 * @param id The fighter ID of this Character in the battle.
+	 * @param team The team ID of this Character in the battle.
+	 */
+	public void startFighting(int id, int team) {
+		fighterId = id;
+		teamId = team;
+		this.buffs = new ArrayList<Buff>();
+	}
+	
+	/**
+	 * Resets the propterties needed for fighting to their default values.
+	 */
+	public void stopFighting() {
+		fighterId = -1;
+		teamId = -1;
+		this.buffs = null;
 	}
 }
