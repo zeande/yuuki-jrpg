@@ -24,10 +24,10 @@ public abstract class Skill extends Action {
 	 */
 	protected boolean applyCost() {
 		int manaCost = (int) cost;
-		if (origin.getMP() < manaCost) {
+		if (origin.getMP().getCurrent() < manaCost) {
 			return false;
 		} else {
-			origin.loseMP(manaCost);
+			origin.getMP().lose(manaCost);
 			return true;
 		}
 	}
