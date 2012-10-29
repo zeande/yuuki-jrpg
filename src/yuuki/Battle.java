@@ -40,6 +40,12 @@ public class Battle {
 	 * taken the next time advance() is called.
 	 */
 	private State state;
+	
+	/**
+	 * The last state of this Battle. This is the state that it was last in.
+	 * This is useful for users to know what was last done.
+	 */
+	private State lastState;
 
 	/**
 	 * The last Action that a Character selected.
@@ -88,6 +94,7 @@ public class Battle {
 	 * is over; otherwise, false.
 	 */
 	public boolean advance() {
+		lastState = state;
 		boolean complete = false;
 		switch (state) {
 			case STARTING_TURN:
@@ -181,6 +188,15 @@ public class Battle {
 	 */
 	public State getState() {
 		return state;
+	}
+	
+	/**
+	 * Gets where in the battle process this Battle was before the current step.
+	 *
+	 * @return The state of the battle.
+	 */
+	public State getLastState() {
+		return lastState;
 	}
 	
 	/**

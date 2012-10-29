@@ -5,6 +5,8 @@
 
 package yuuki.entity;
 
+import yuuki.action.Action;
+
 public class NonPlayerCharacter extends Character {
 
 	/**
@@ -22,7 +24,9 @@ public class NonPlayerCharacter extends Character {
 	 *
 	 * @inheritDoc
 	 *
+	 * @param name The name of the Character
 	 * @param level The level of the new Character. XP is set to match this.
+	 * @param moves The moves this Character knows.
 	 * @param hp The health stat of the new Character.
 	 * @param mp The mana stat of the new Character.
 	 * @param strength The physical strength of the Character.
@@ -33,11 +37,12 @@ public class NonPlayerCharacter extends Character {
 	 * @param luck The ability of the Character to get a critical hit.
 	 * @param xpBase Used for calculating given XP on death.
 	 */
-	public NonPlayerCharacter(int level, VariableStat hp, VariableStat mp,
-							Stat strength, Stat defense, Stat agility,
-							Stat accuracy, Stat magic, Stat luck, int xpBase) {
-		super(level, hp, mp, strength, defense, agility, accuracy, magic,
-				luck);
+	public NonPlayerCharacter(String name, int level, Action[] moves,
+							VariableStat hp, VariableStat mp, Stat strength,
+							Stat defense, Stat agility, Stat accuracy,
+							Stat magic, Stat luck, int xpBase) {
+		super(name, level, moves, hp, mp, strength, defense, agility, accuracy,
+				magic, luck);
 		this.xpBase = xpBase;
 	}
 	
@@ -95,7 +100,7 @@ public class NonPlayerCharacter extends Character {
 				luck++;
 				break;
 			}
-			levelUp(hp, mp, str, def, agt, acc, mag, luck);
 		}
+		levelUp(hp, mp, str, def, agt, acc, mag, luck);
 	}
 }

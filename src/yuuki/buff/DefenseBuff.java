@@ -23,14 +23,14 @@ public class DefenseBuff extends PassiveBuff {
 	/**
 	 * @inheritDoc
 	 */
-	protected void addModifier() {
+	protected void applyActivationEffect() {
 		target.getDefense().addModifier(effect);
 	}
 	
 	/**
 	 * @inheritDoc
 	 */
-	protected void removeModifier() {
+	protected void applyDeactivationEffect() {
 		target.getDefense().removeModifier(effect));
 	}
 

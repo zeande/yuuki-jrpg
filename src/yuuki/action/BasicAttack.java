@@ -27,5 +27,7 @@ public class BasicAttack extends Skill {
 		int totalDamage = (int) Math.round(damage + mod);
 		target.loseHP(totalDamage);
 	}
+	
+	protected void applyBuffs() {}
 
 }
