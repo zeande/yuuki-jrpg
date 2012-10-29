@@ -1,6 +1,6 @@
 <project name="Yuuki" basedir="." default="all">
-	<property name="ant.build.javac.source" value="1.6" />
-	<property name="ant.build.javac.target" value="1.6" />
+	<property name="ant.build.javac.source" value="1.7" />
+	<property name="ant.build.javac.target" value="1.7" />
 	<property name="SOURCE" value="src" />
 	<property name="BUILD" value="../bin" />
 	<property name="GUI" value="/yuuki/gui" />
