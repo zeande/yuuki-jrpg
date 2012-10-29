@@ -30,7 +30,6 @@
 	<!-- PUBLIC TARGETS -->
 	
 	<target name="clean">
-		<echo message="${DIST_ROOT}" />
 		<delete dir="${DIST_ROOT}" />
 	</target>
 	
