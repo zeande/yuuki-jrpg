@@ -13,11 +13,11 @@
 	
 	<property name="BUILD_ROOT" value="${DIST_ROOT}/bin" />
 	<property name="DOC_ROOT" value="${DIST_ROOT}/doc" />
-	<property name="GUI" value="/yuuki/gui" />
-	<property name="BATTLE" value="/yuuki/battle" />
-	<property name="BUFF" value="/yuuki/buff" />
-	<property name="ACTION" value="/yuuki/action" />
-	<property name="ENTITY" value="/yuuki/entity" />
+	<property name="GUI" value="yuuki/gui" />
+	<property name="BATTLE" value="yuuki/battle" />
+	<property name="BUFF" value="yuuki/buff" />
+	<property name="ACTION" value="yuuki/action" />
+	<property name="ENTITY" value="yuuki/entity" />
 	
 	<!-- other properties -->
 	<property name="warnings" value="all" />
@@ -113,12 +113,11 @@
 	<!-- requires one param: -->
 	<!-- PACKAGE - The path of the package to build -->
 	<target name="-build">
-		<property name="SRC" value="${SOURCE_ROOT}${PACKAGE}" />
-		<property name="DEST" value="${BUILD_ROOT}${PACKAGE}" />
 		<mkdir dir="${DEST}" />
-		<javac includeantruntime="false" srcdir="${SRC}" destdir="${DEST}">
+		<javac includeantruntime="false" srcdir="${SOURCE_ROOT}" destdir="${BUILD_ROOT}">
 			<compilerarg value="-Werror" />
 			<compilerarg value="-Xlint:${warning_count}" />
+			<include name="${PACKAGE}/*.java" />
 		</javac>
 	</target>
 	
@@ -126,7 +125,7 @@
 	<!-- PACKAGE - The path of the package to document -->
 	<!-- ACCESS - The access modifier to use; defaults to protected -->
 	<target name="-doc">
-		<property name="SRC" value="${SOURCE_ROOT}${PACKAGE}" />
+		<property name="SRC" value="${SOURCE_ROOT}/${PACKAGE}" />
 		<property name="DEST" value="${DOC_ROOT}" />
 		<condition property="ACC" value="${ACCESS}" else="protected">
 			<isset property="ACCESS" />
