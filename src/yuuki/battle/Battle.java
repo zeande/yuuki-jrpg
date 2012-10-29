@@ -84,6 +84,19 @@ public class Battle {
 		currentFighter = 0;
 		state = State.STARTING_TURN;
 	}
+	
+	/**
+	 * Converts this Battle to a String.
+	 *
+	 * @return The String version.
+	 */
+	public String toString() {
+		String str = "";
+		str += state + "/" + lastState + ":" + lastAction + " - \n";
+		str += currentFighter + " - " + turnOrder + "\n";
+		str += fighters;
+		return str;
+	}
 
 	/**
 	 * Advances battle through the current execution state. Each state
@@ -96,7 +109,7 @@ public class Battle {
 	 */
 	public boolean advance() {
 		lastState = state;
-		boolean complete = false;
+		boolean moreCallsNeeded = true;
 		switch (state) {
 			case STARTING_TURN:
 				getCurrentFighter().removeExpiredBuffs();
@@ -144,10 +157,10 @@ public class Battle {
 				break;
 
 			case ENDING:
-				complete = true;
+				moreCallsNeeded = false;
 				break;
 		}
-		return complete;
+		return moreCallsNeeded;
 	}
 	
 	/**
@@ -282,7 +295,7 @@ public class Battle {
 		this.fighters = new ArrayList<ArrayList<Character>>(teams.length);
 		for (Character[] t: teams) {
 			ArrayList<Character> team = new ArrayList<Character>(t.length);
-			for (Character c: team) {
+			for (Character c: t) {
 				c.startFighting(team.size(), fighters.size());
 				team.add(c);
 			}

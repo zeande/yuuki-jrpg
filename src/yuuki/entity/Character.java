@@ -154,6 +154,15 @@ public class Character {
 	}
 	
 	/**
+	 * Gets the String version of this Character.
+	 *
+	 * @return the String version.
+	 */
+	public String toString() {
+		return getName() + " lv." + getLevel();
+	}
+	
+	/**
 	 * Adds experience points to this Character. Adding enough XP to level up
 	 * this Character will not make it level up, but it will make the
 	 * canLevelUp method return true. That method should be checked after

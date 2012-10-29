@@ -91,11 +91,9 @@ public class BattleTest {
 	
 	private void runBattle(Battle battle) {
 		pause("A battle started!");
-		pause();
 		ArrayList<Character> t1 = battle.getFighters(0);
 		ArrayList<Character> t2 = battle.getFighters(1);
 		pause(t1.get(0).getName()+" v. "+t2.get(0).getName()+"!");
-		boolean advancing = true;
 		while (battle.advance()) {
 			Action a = battle.getLastAction();
 			Character c = battle.getCurrentFighter();
