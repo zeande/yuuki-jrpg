@@ -1,12 +1,14 @@
 <project name="Yuuki" basedir="." default="all">
-	<property name="SOURCE" value="src"/>
-	<property name="BUILD" value="../bin"/>
-	<property name="warnings" value="all"/>
-	<property name="GUI" value="/yuuki/gui">
-	<property name="BATTLE" value="/yuuki/battle">
-	<property name="BUFF" value="/yuuki/buff">
-	<property name="ACTION" value="/yuuki/action">
-	<property name="ENTITY" value="/yuuki/entity">
+	<property name="ant.build.javac.source" value="1.6" />
+	<property name="ant.build.javac.target" value="1.6" />
+	<property name="SOURCE" value="src" />
+	<property name="BUILD" value="../bin" />
+	<property name="GUI" value="/yuuki/gui" />
+	<property name="BATTLE" value="/yuuki/battle" />
+	<property name="BUFF" value="/yuuki/buff" />
+	<property name="ACTION" value="/yuuki/action" />
+	<property name="ENTITY" value="/yuuki/entity" />
+	<property name="warnings" value="all" />
 	<condition property="warning_count" value="${warnings}" else="all">
 		<isset property="${warnings}"/>
 	</condition>
@@ -17,32 +19,32 @@
 	</target>
 	<target name="gui">
 		<mkdir dir="${BUILD}${GUI}" />
-		<javac includeantruntime="false" target="1.6" srcdir="${SOURCE}${GUI}" destdir="${BUILD}${GUI}">
-			<compilerarg value="Xlint:${warning_count}" />
+		<javac includeantruntime="false" srcdir="${SOURCE}${GUI}" destdir="${BUILD}${GUI}">
+			<compilerarg value="-Xlint:${warning_count}" />
 		</javac>
 	</target>
 	<target name="battle" depends="buff,action,entity">
 		<mkdir dir="${BUILD}${BATTLE}" />
-		<javac includeantruntime="false" target="1.6" srcdir="${SOURCE}${BATTLE}" destdir="${BUILD}${BATTLE}">
-			<compilerarg value="Xlint:${warning_count}" />
+		<javac includeantruntime="false" srcdir="${SOURCE}${BATTLE}" destdir="${BUILD}${BATTLE}">
+			<compilerarg value="-Xlint:${warning_count}" />
 		</javac>
 	</target>
 	<target name="entity" depends="action,buff">
 		<mkdir dir="${BUILD}${ENTITY}" />
-		<javac includeantruntime="false" target="1.6" srcdir="${SOURCE}${ENTITY}" destdir="${BUILD}${ENTITY}">
-			<compilerarg value="Xlint:${warning_count}" />
+		<javac includeantruntime="false" srcdir="${SOURCE}${ENTITY}" destdir="${BUILD}${ENTITY}">
+			<compilerarg value="-Xlint:${warning_count}" />
 		</javac>
 	</target>
 	<target name="action" depends="buff">
 		<mkdir dir="${BUILD}${ACTION}" />
-		<javac includeantruntime="false" target="1.6" srcdir="${SOURCE}${ACTION}" destdir="${BUILD}${ACTION}">
-			<compilerarg value="Xlint:${warning_count}" />
+		<javac includeantruntime="false" srcdir="${SOURCE}${ACTION}" destdir="${BUILD}${ACTION}">
+			<compilerarg value="-Xlint:${warning_count}" />
 		</javac>
 	</target>
 	<target name="buff">
 		<mkdir dir="${BUILD}${BUFF}" />
-		<javac includeantruntime="false" target="1.6" srcdir="${SOURCE}${BUFF}" destdir="${BUILD}${BUFF}">
-			<compilerarg value="Xlint:${warning_count}" />
+		<javac includeantruntime="false" srcdir="${SOURCE}${BUFF}" destdir="${BUILD}${BUFF}">
+			<compilerarg value="-Xlint:${warning_count}" />
 		</javac>
 	</target>
 </project>
