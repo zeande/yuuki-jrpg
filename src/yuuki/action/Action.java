@@ -27,7 +27,7 @@ public abstract class Action {
 	/**
 	 * Where this Action came from; who is doing the Action.
 	 */
-	protected Character performer;
+	protected Character origin;
 	
 	/**
 	 * The targets to whom the Action is to be applied.
@@ -70,7 +70,7 @@ public abstract class Action {
 		this.cost = cost;
 		this.targetBuff = targetBuff;
 		this.originBuff = originBuff;
-		targets = new ArrayList<Target>();
+		targets = new ArrayList<Character>();
 		origin = null;
 	}
 	
@@ -103,9 +103,9 @@ public abstract class Action {
 	}
 	
 	/**
-	 * Applies the Buffs.
+	 * Applies any applicable Buffs to either the targets, origin, or both.
 	 */
-	private abstract void applyBuffs();
+	protected abstract void applyBuffs();
 	
 	/**
 	 * Applies the cost to the origin.
@@ -166,16 +166,11 @@ public abstract class Action {
 	}
 	
 	/**
-	 * Sets the target and the target team.
+	 * Adds a target to the list.
 	 *
-	 * @param fighter The Character controlling the fighter.
-	 * @param fighterId The ID of the fighter to target.
-	 * @param teamId The ID of the fighter's team.
+	 * @param t The fighter to add to the target list.
 	 */
-	public void addTarget(Character character, int fighterId, int teamId) {
-		Target t = new Target();
-		t.id = fighterId;
-		t.team = teamId;
+	public void addTarget(Character t) {
 		targets.add(t);
 	}
 	
@@ -215,7 +210,7 @@ public abstract class Action {
 	 * @return True if it was successful; false if it was not.
 	 */
 	public boolean wasSuccessful() {
-		return success;
+		return successful;
 	}
 
 }

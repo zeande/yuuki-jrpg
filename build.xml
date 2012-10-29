@@ -113,7 +113,7 @@
 	<!-- requires one param: -->
 	<!-- PACKAGE - The path of the package to build -->
 	<target name="-build">
-		<mkdir dir="${DEST}" />
+		<mkdir dir="${BUILD_ROOT}" />
 		<javac includeantruntime="false" srcdir="${SOURCE_ROOT}" destdir="${BUILD_ROOT}">
 			<compilerarg value="-Werror" />
 			<compilerarg value="-Xlint:${warning_count}" />

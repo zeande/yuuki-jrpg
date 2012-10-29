@@ -4,11 +4,13 @@
 
 package yuuki.battle;
 
+import yuuki.entity.Character; // necessary to avoid java.lang.* import
 import yuuki.entity.*;
 import yuuki.action.*;
 import yuuki.buff.*;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class BattleTest {
 
@@ -34,7 +36,12 @@ public class BattleTest {
 	}
 	
 	private void pause() {
-		input.readLine();
+		try {
+			input.readLine();
+		} catch(IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
 	
 	private void pause(String s) {
@@ -83,15 +90,15 @@ public class BattleTest {
 	}
 	
 	private void runBattle(Battle battle) {
-		System.out.println("A battle started!");
+		pause("A battle started!");
 		pause();
 		ArrayList<Character> t1 = battle.getFighters(0);
 		ArrayList<Character> t2 = battle.getFighters(1);
-		System.out.println(t1.get(0).getName()+" v. "+t2.get(0).getName()+"!";
+		pause(t1.get(0).getName()+" v. "+t2.get(0).getName()+"!");
 		boolean advancing = true;
 		while (battle.advance()) {
 			Action a = battle.getLastAction();
-			Character c = b.getCurrentFighter();
+			Character c = battle.getCurrentFighter();
 			ArrayList<Buff> b = c.getBuffs();
 			showStatus(t1.get(0));
 			showStatus(t2.get(0));
@@ -150,6 +157,8 @@ public class BattleTest {
 	}
 	
 	private Character makeChar1() {
+		VariableStat hp, mp;
+		Stat str, def, agi, acc, mag, luk;
 		hp = new VariableStat(20, 2);
 		mp = new VariableStat(10, 3);
 		str = new Stat(5, 1);
@@ -163,12 +172,14 @@ public class BattleTest {
 		moves[1] = new BasicDefense(3);
 		int lvl = 5;
 		int xpb = 5;
-		Character c = new NonPlayerCharacter("Jack", lvl, moves, hp, mp, str
+		Character c = new NonPlayerCharacter("Jack", lvl, moves, hp, mp, str,
 											def, agi, acc, mag, luk, xpb);
 		return c;
 	}
 	
 	private Character makeChar2() {
+		VariableStat hp, mp;
+		Stat str, def, agi, acc, mag, luk;
 		hp = new VariableStat(20, 2);
 		mp = new VariableStat(10, 3);
 		str = new Stat(5, 1);
@@ -182,7 +193,7 @@ public class BattleTest {
 		moves[1] = new BasicDefense(3);
 		int lvl = 5;
 		int xpb = 5;
-		Character c = new NonPlayerCharacter("Jill", lvl, moves, hp, mp, str
+		Character c = new NonPlayerCharacter("Jill", lvl, moves, hp, mp, str,
 											def, agi, acc, mag, luk, xpb);
 		return c;
 	}

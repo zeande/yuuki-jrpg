@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import yuuki.action.Action;
 import yuuki.entity.Character;
+import yuuki.entity.*;
 
 public class Battle {
 
@@ -130,7 +131,6 @@ public class Battle {
 
 			case CHECKING_VICTORY:
 				if (battleIsOver()) {
-					winner = teams.get(0);
 					state = State.LOOTING;
 				} else {
 					setNextPlayer();
@@ -283,7 +283,7 @@ public class Battle {
 		for (Character[] t: teams) {
 			ArrayList<Character> team = new ArrayList<Character>(t.length);
 			for (Character c: team) {
-				c.initializeFighting(team.size(), fighters.size());
+				c.startFighting(team.size(), fighters.size());
 				team.add(c);
 			}
 			fighters.add(team);
@@ -342,7 +342,7 @@ public class Battle {
 		ArrayList<Character> team = fighters.get(teamId);
 		for (Character c: team) {
 			if (c.getFighterId() > id) {
-				c.setFighterId(c.getFighterId - 1);
+				c.setFighterId(c.getFighterId() - 1);
 			}
 		}
 	}

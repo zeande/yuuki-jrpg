@@ -15,7 +15,7 @@ public abstract class Skill extends Action {
 	 */
 	public Skill(String name, double effect, double manaCost, Buff tBuff,
 					Buff oBuff) {
-		super(name, effect, manaCost, buff);
+		super(name, effect, manaCost, tBuff, oBuff);
 	}
 	
 	/**

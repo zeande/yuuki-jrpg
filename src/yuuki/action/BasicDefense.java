@@ -4,6 +4,8 @@
 
 package yuuki.action;
 
+import yuuki.buff.DefenseBuff;
+
 public class BasicDefense extends Action {
 
 	/**
@@ -12,8 +14,8 @@ public class BasicDefense extends Action {
 	 * @param turns Number of turns it lasts.
 	 */
 	public BasicDefense(int turns) {
-		DefenseBuff db = new DefenseBuff("defending", 1.5, turns);
-		super("defend", 0.0, 0.0, null, db);
+		super("defend", 0.0, 0.0, null,
+				new DefenseBuff("defending", 1.5, turns));
 	}
 	
 	protected boolean applyCost() {

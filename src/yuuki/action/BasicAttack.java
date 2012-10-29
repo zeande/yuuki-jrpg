@@ -5,6 +5,8 @@
 
 package yuuki.action;
 
+import yuuki.entity.Character;
+
 public class BasicAttack extends Skill {
 
 	/**
@@ -21,11 +23,11 @@ public class BasicAttack extends Skill {
 	 */
 	protected void applyEffect() {
 		Character target = targets.get(0);
-		int oStr = origin.getStrength().getEffective();
-		int tDef = target.getDefense().getEffective();
+		int oStr = origin.getStrength().getEffective(origin.getLevel());
+		int tDef = target.getDefense().getEffective(target.getLevel());
 		double mod = (oStr / tDef);
-		int totalDamage = (int) Math.round(damage + mod);
-		target.loseHP(totalDamage);
+		int totalDamage = (int) Math.round(effect + mod);
+		target.getHP().lose(totalDamage);
 	}
 	
 	protected void applyBuffs() {}

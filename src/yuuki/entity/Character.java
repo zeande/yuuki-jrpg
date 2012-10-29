@@ -4,6 +4,9 @@
 
 package yuuki.entity;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import yuuki.action.Action;
 import yuuki.buff.Buff;
 
@@ -194,14 +197,14 @@ public class Character {
 		level++;
 		this.hp.increaseBase(hp);
 		this.mp.increaseBase(mp);
-		strength.increaseBase(str);
-		defense.increaseBase(def);
-		agility.increaseBase(agt);
-		accuracy.increaseBase(acc);
-		magic.increaseBase(mag);
+		this.strength.increaseBase(str);
+		this.defense.increaseBase(def);
+		this.agility.increaseBase(agt);
+		this.accuracy.increaseBase(acc);
+		this.magic.increaseBase(mag);
 		this.luck.increaseBase(luck);
-		hp.restore();
-		mp.restore();
+		this.hp.restore(level);
+		this.mp.restore(level);
 	}
 	
 	/**
@@ -246,7 +249,7 @@ public class Character {
 	 * @return The MP stat.
 	 */
 	public VariableStat getMP() {
-		return mp.getMax();
+		return mp;
 	}
 	
 	/**
@@ -259,57 +262,57 @@ public class Character {
 	}
 
 	/**
-	 * Gets the strength of this Character.
+	 * Gets the strength Stat of this Character.
 	 *
-	 * @return The total strength of this Character.
+	 * @return The strength Stat.
 	 */
-	public int getStrength() {
-		return strength.getEffective();
+	public Stat getStrength() {
+		return strength;
 	}
 
 	/**
-	 * Gets the defense of this Character.
+	 * Gets the defense Stat of this Character.
 	 *
-	 * @return The total defense of this Character.
+	 * @return The defense Stat.
 	 */
-	public int getDefense() {
-		return defense.getEffective();
+	public Stat getDefense() {
+		return defense;
 	}
 
 	/**
-	 * Gets the magic stat of this Character.
+	 * Gets the magic Stat of this Character.
 	 *
-	 * @return The total magic stat of this Character.
+	 * @return The magic Stat.
 	 */
-	public int getMagic() {
-		return magic.getEffective();
+	public Stat getMagic() {
+		return magic;
 	}
 
 	/**
-	 * Gets the agility of this Character.
+	 * Gets the agility Stat of this Character.
 	 *
-	 * @return The total agility of this Character.
+	 * @return The agility Stat.
 	 */
-	public int getAgility() {
-		return agility.getEffective();
+	public Stat getAgility() {
+		return agility;
 	}
 
 	/**
-	 * Gets the accuracy of this Character.
+	 * Gets the accuracy Stat of this Character.
 	 *
-	 * @return The total accuracy of this Character.
+	 * @return The accuracy Stat.
 	 */
-	public int getAccuracy() {
-		return accuracy.getEffective();
+	public Stat getAccuracy() {
+		return accuracy;
 	}
 
 	/**
-	 * Gets the luck of this Character.
+	 * Gets the luck Stat of this Character.
 	 *
-	 * @return The total luck of this Character.
+	 * @return The luck Stat.
 	 */
-	public int getLuck() {
-		return luck.getEffective();
+	public Stat getLuck() {
+		return luck;
 	}
 	
 	/**
@@ -381,7 +384,7 @@ public class Character {
 	 */
 	public Action getNextAction(ArrayList<ArrayList<Character>> fighters) {
 		// TODO: Make intelligent choices based on the battle state
-		int choice = (int) Math.floor(Math.random() * moves.length());
+		int choice = (int) Math.floor(Math.random() * moves.length);
 		return moves[choice];
 	}
 	
