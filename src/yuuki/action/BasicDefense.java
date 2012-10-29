@@ -24,6 +24,8 @@ public class BasicDefense extends Action {
 	
 	protected void applyEffect() {}
 	
-	protected void applyBuffs() {}
+	protected void applyBuffs() {
+		origin.addBuff(originBuff);
+	}
 
 }
