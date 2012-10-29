@@ -212,5 +212,12 @@ public abstract class Action {
 	public boolean wasSuccessful() {
 		return successful;
 	}
+	
+	/**
+	 * Removes all current targets.
+	 */
+	public void clearTargets() {
+		this.targets.clear();
+	}
 
 }

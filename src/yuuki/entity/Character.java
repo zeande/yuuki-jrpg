@@ -139,6 +139,9 @@ public class Character {
 		}
 		hp.restore(level);
 		mp.restore(level);
+		for (int i = 0; i < moves.length; i++) {
+			moves[i].setOrigin(this);
+		}
 		this.name = name;
 		this.level = level;
 		this.moves = moves;
@@ -396,7 +399,14 @@ public class Character {
 	public Action getNextAction(ArrayList<ArrayList<Character>> fighters) {
 		// TODO: Make intelligent choices based on the battle state
 		int choice = (int) Math.floor(Math.random() * moves.length);
-		return moves[choice];
+		Action m = moves[choice];
+		m.clearTargets();
+		int teamId = (int) Math.floor(Math.random() * (fighters.size() - 1));
+		teamId += (teamId >= getTeamId()) ? 1 : 0;
+		ArrayList<Character> team = fighters.get(teamId);
+		int fighterId = (int) Math.floor(Math.random() * team.size());
+		m.addTarget(team.get(fighterId));
+		return m;
 	}
 	
 	/**
