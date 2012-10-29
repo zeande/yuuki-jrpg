@@ -1,6 +1,4 @@
 <project name="Yuuki" basedir="." default="all">
-	<!-- targets that are built by target 'all' -->
-	<property name="TOP_LEVEL_BUILDS" value="gui,battle" />
 	
 	<!-- magic properties -->
 	<property name="ant.build.javac.source" value="1.7" />
@@ -32,10 +30,11 @@
 	<!-- PUBLIC TARGETS -->
 	
 	<target name="clean">
+		<echo message="${DIST_ROOT}" />
 		<delete dir="${DIST_ROOT}" />
 	</target>
 	
-	<target name="all" depends="${TOP_LEVEL_TARGETS}"></target>
+	<target name="all" depends="gui,battle"></target>
 	
 	<target name="gui">
 		<antcall target="-build">
@@ -119,8 +118,8 @@
 		<property name="DEST" value="${BUILD_ROOT}${PACKAGE}" />
 		<mkdir dir="${DEST}" />
 		<javac includeantruntime="false" srcdir="${SRC}" destdir="${DEST}">
-			<complierarg value="-Werror" />
-			<complierarg value="-Xlint:${warning_count}" />
+			<compilerarg value="-Werror" />
+			<compilerarg value="-Xlint:${warning_count}" />
 		</javac>
 	</target>
 	
