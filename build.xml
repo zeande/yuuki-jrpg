@@ -8,7 +8,11 @@
 
 	<!-- dir definitions -->
 	<property name="SOURCE_ROOT" value="src" />
-	<property name="DIST_ROOT" value="../dist" />
+	
+	<condition property="DIST_ROOT" value="${DIST_ROOT}" else="../dist">
+		<isset property="DIST_ROOT" />
+	</condition>
+	
 	<property name="BUILD_ROOT" value="${DIST_ROOT}/bin" />
 	<property name="DOC_ROOT" value="${DIST_ROOT}/doc" />
 	<property name="GUI" value="/yuuki/gui" />
