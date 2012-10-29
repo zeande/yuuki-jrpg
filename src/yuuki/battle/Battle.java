@@ -6,7 +6,7 @@
  * @version 10/20/12
  */
 
-package yuuki;
+package yuuki.battle;
 
 import java.util.ArrayList;
 

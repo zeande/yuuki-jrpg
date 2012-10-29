@@ -2,7 +2,7 @@
  * Simple Test of Battle subsystem.
  */
 
-package yuuki;
+package yuuki.battle;
 
 import yuuki.entity.*;
 import yuuki.action.*;
