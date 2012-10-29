@@ -1,50 +1,135 @@
 <project name="Yuuki" basedir="." default="all">
+	<!-- targets that are built by target 'all' -->
+	<property name="TOP_LEVEL_BUILDS" value="gui,battle" />
+	
+	<!-- magic properties -->
 	<property name="ant.build.javac.source" value="1.7" />
 	<property name="ant.build.javac.target" value="1.7" />
-	<property name="SOURCE" value="src" />
-	<property name="BUILD" value="../bin" />
+
+	<!-- dir definitions -->
+	<property name="SOURCE_ROOT" value="src" />
+	<property name="DIST_ROOT" value="../dist" />
+	<property name="BUILD_ROOT" value="${DIST_ROOT}/bin" />
+	<property name="DOC_ROOT" value="${DIST_ROOT}/doc" />
 	<property name="GUI" value="/yuuki/gui" />
 	<property name="BATTLE" value="/yuuki/battle" />
 	<property name="BUFF" value="/yuuki/buff" />
 	<property name="ACTION" value="/yuuki/action" />
 	<property name="ENTITY" value="/yuuki/entity" />
+	
+	<!-- other properties -->
 	<property name="warnings" value="all" />
+	
 	<condition property="warning_count" value="${warnings}" else="all">
-		<isset property="${warnings}"/>
+		<isset property="warnings"/>
 	</condition>
+	
+	
+	<!-- PUBLIC TARGETS -->
+	
 	<target name="clean">
-		<delete dir="${BUILD}" />
+		<delete dir="${DIST_ROOT}" />
 	</target>
-	<target name="all" depends="gui,battle">
-	</target>
+	
+	<target name="all" depends="${TOP_LEVEL_TARGETS}"></target>
+	
 	<target name="gui">
-		<mkdir dir="${BUILD}${GUI}" />
-		<javac includeantruntime="false" srcdir="${SOURCE}${GUI}" destdir="${BUILD}${GUI}">
-			<compilerarg value="-Xlint:${warning_count}" />
-		</javac>
+		<antcall target="-build">
+			<param name="PACKAGE" value="${GUI}" />
+		</antcall>
 	</target>
+	
 	<target name="battle" depends="buff,action,entity">
-		<mkdir dir="${BUILD}${BATTLE}" />
-		<javac includeantruntime="false" srcdir="${SOURCE}${BATTLE}" destdir="${BUILD}${BATTLE}">
-			<compilerarg value="-Xlint:${warning_count}" />
-		</javac>
+		<antcall target="-build">
+			<param name="PACKAGE" value="${BATTLE}" />
+		</antcall>
 	</target>
+	
 	<target name="entity" depends="action,buff">
-		<mkdir dir="${BUILD}${ENTITY}" />
-		<javac includeantruntime="false" srcdir="${SOURCE}${ENTITY}" destdir="${BUILD}${ENTITY}">
-			<compilerarg value="-Xlint:${warning_count}" />
-		</javac>
+		<antcall target="-build">
+			<param name="PACKAGE" value="${ENTITY}" />
+		</antcall>
 	</target>
+	
 	<target name="action" depends="buff">
-		<mkdir dir="${BUILD}${ACTION}" />
-		<javac includeantruntime="false" srcdir="${SOURCE}${ACTION}" destdir="${BUILD}${ACTION}">
-			<compilerarg value="-Xlint:${warning_count}" />
-		</javac>
+		<antcall target="-build">
+			<param name="PACKAGE" value="${ACTION}" />
+		</antcall>
 	</target>
+	
 	<target name="buff">
-		<mkdir dir="${BUILD}${BUFF}" />
-		<javac includeantruntime="false" srcdir="${SOURCE}${BUFF}" destdir="${BUILD}${BUFF}">
-			<compilerarg value="-Xlint:${warning_count}" />
+		<antcall target="-build">
+			<param name="PACKAGE" value="${BUFF}" />
+		</antcall>
+	</target>
+	
+	<target name="doc-all" depends="doc-battle,doc-gui"></target>
+	
+	<target name="doc-gui">
+		<antcall target="-doc">
+			<param name="PACKAGE" value="${GUI}" />
+			<param name="ACCESS" value="private" />
+		</antcall>
+	</target>
+	
+	<target name="doc-battle" depends="doc-buff,doc-action,doc-entity">
+		<antcall target="-doc">
+			<param name="PACKAGE" value="${BATTLE}" />
+			<param name="ACCESS" value="private" />
+		</antcall>
+	</target>
+	
+	<target name="doc-buff">
+		<antcall target="-doc">
+			<param name="PACKAGE" value="${BUFF}" />
+			<param name="ACCESS" value="private" />
+		</antcall>
+	</target>
+	
+	<target name="doc-action" depends="doc-buff">
+		<antcall target="-doc">
+			<param name="PACKAGE" value="${ACTION}" />
+			<param name="ACCESS" value="private" />
+		</antcall>
+	</target>
+	
+	<target name="doc-entity" depends="doc-action,doc-buff">
+		<antcall target="-doc">
+			<param name="PACKAGE" value="${ENTITY}" />
+			<param name="ACCESS" value="private" />
+		</antcall>
+	</target>
+	
+	<target name="test-battle" depends="battle">
+		<java classname="yuuki.battle.BattleTest" fork="true" classpath="${BUILD_ROOT}">	
+		</java>
+	</target>
+	
+	
+	<!-- PRIVATE TARGETS -->
+	
+	<!-- requires one param: -->
+	<!-- PACKAGE - The path of the package to build -->
+	<target name="-build">
+		<property name="SRC" value="${SOURCE_ROOT}${PACKAGE}" />
+		<property name="DEST" value="${BUILD_ROOT}${PACKAGE}" />
+		<mkdir dir="${DEST}" />
+		<javac includeantruntime="false" srcdir="${SRC}" destdir="${DEST}">
+			<complierarg value="-Werror" />
+			<complierarg value="-Xlint:${warning_count}" />
 		</javac>
 	</target>
+	
+	<!-- Requires two params: -->
+	<!-- PACKAGE - The path of the package to document -->
+	<!-- ACCESS - The access modifier to use; defaults to protected -->
+	<target name="-doc">
+		<property name="SRC" value="${SOURCE_ROOT}${PACKAGE}" />
+		<property name="DEST" value="${DOC_ROOT}" />
+		<condition property="ACC" value="${ACCESS}" else="protected">
+			<isset property="ACCESS" />
+		</condition>
+		<javadoc sourcepath="${SRC}" destdir="${DEST}" access="${ACC}" failonerror="true" />
+	</target>
+	
 </project>
