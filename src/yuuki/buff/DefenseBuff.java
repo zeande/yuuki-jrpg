@@ -31,7 +31,7 @@ public class DefenseBuff extends PassiveBuff {
 	 * @inheritDoc
 	 */
 	protected void applyDeactivationEffect() {
-		target.getDefense().removeModifier(effect));
+		target.getDefense().removeModifier(effect);
 	}
 
 }
