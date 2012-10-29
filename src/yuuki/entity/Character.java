@@ -137,6 +137,8 @@ public class Character {
 		if (level < 1) {
 			throw new IllegalArgumentException("Character level too low.");
 		}
+		hp.restore(level);
+		mp.restore(level);
 		this.name = name;
 		this.level = level;
 		this.moves = moves;
