@@ -29,6 +29,10 @@
 	
 	<!-- PUBLIC TARGETS -->
 	
+	<target name="debug">
+		<property name="DEBUG_TYPE" value="lines,vars,source" />
+	</target>
+	
 	<target name="clean">
 		<delete dir="${DIST_ROOT}" />
 	</target>
@@ -114,7 +118,13 @@
 	<!-- PACKAGE - The path of the package to build -->
 	<target name="-build">
 		<mkdir dir="${BUILD_ROOT}" />
-		<javac includeantruntime="false" srcdir="${SOURCE_ROOT}" destdir="${BUILD_ROOT}">
+		<condition property="debug.on" value="on" else="off">
+			<isset property="DEBUG_TYPE" />
+		</condition>
+		<condition property="debug.level" value="${DEBUG_TYPE}">
+			<isset property="DEBUG_TYPE" />
+		</condition>
+		<javac includeantruntime="false" srcdir="${SOURCE_ROOT}" destdir="${BUILD_ROOT}" debug="${debug.on}" debuglevel="${debug.level}">
 			<compilerarg value="-Werror" />
 			<compilerarg value="-Xlint:${warning_count}" />
 			<include name="${PACKAGE}/*.java" />
