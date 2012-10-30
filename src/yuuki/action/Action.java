@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import yuuki.entity.Character; //comment
+import yuuki.entity.Character;
 import yuuki.buff.Buff;
 
 public abstract class Action implements Cloneable {
