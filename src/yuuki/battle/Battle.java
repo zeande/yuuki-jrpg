@@ -274,7 +274,6 @@ public class Battle {
 		if (currentFighter >= turnOrder.size()) {
 			currentFighter = 0;
 		}
-		System.out.println("CURRENT FIGHTER: " + currentFighter);
 	}
 
 	/**

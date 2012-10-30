@@ -93,8 +93,12 @@ public abstract class Action implements Cloneable {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		a2.targetBuff = this.targetBuff.clone();
-		a2.originBuff = this.originBuff.clone();
+		if (this.targetBuff != null) {
+			a2.targetBuff = this.targetBuff.clone();
+		}
+		if (this.originBuff != null) {
+			a2.originBuff = this.originBuff.clone();
+		}
 		// targets contents shallow-copied
 		a2.targets = (ArrayList<Character>) this.targets.clone();
 		// origin shallow-copied

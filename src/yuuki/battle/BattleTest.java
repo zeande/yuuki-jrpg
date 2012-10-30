@@ -180,7 +180,7 @@ public class BattleTest {
 		luk = new Stat(5, 1);
 		Action[] moves = new Action[2];
 		moves[0] = new BasicAttack(1.0);
-		moves[1] = new BasicDefense(3);
+		moves[1] = new BasicDefense(10);
 		int lvl = 5;
 		int xpb = 5;
 		Character c = new NonPlayerCharacter("Jack", lvl, moves, hp, mp, str,

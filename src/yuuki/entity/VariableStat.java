@@ -48,7 +48,10 @@ public class VariableStat extends Stat {
 	 * @param level The level of the Character that the stat is on.
 	 */
 	public void removeModifier(int mod, int level) {
-		addModifier(-mod, level);
+		double percent = currentValue / getMax(level);
+		removeModifier(mod);
+		currentValue = (int) Math.round(getMax(level) * percent);
+		currentValue = (currentValue >= 1) ? currentValue : 1;
 	}
 	
 	/**

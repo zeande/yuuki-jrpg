@@ -19,7 +19,7 @@ public class Stat {
 	/**
 	 * How much to modify the effective value by.
 	 */
-	private int modifier;
+	private double modifier;
 	
 	/**
 	 * Allocates a new Stat.
@@ -31,7 +31,7 @@ public class Stat {
 	public Stat(int base, int gain) {
 		this.base = base;
 		this.gain = gain;
-		this.modifier = 0;
+		this.modifier = 1.0;
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class Stat {
 	 * @param mod The amount of the modifier to add.
 	 */
 	public void addModifier(double mod) {
-		modifier += mod;
+		modifier *= mod;
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class Stat {
 	 * @param mod The amount of the modifier to remove.
 	 */
 	public void removeModifier(double mod) {
-		addModifier(-mod);
+		modifier /= mod;
 	}
 	
 	
@@ -92,7 +92,8 @@ public class Stat {
 	 * @return The effective value of this Stat for the given level.
 	 */
 	public int getEffective(int level) {
-		int effective = base + (gain * level) * (1 + modifier);
+		int effective = (base + (gain * level));
+		effective = (int) Math.round(effective * modifier);
 		return effective;
 	}
 	

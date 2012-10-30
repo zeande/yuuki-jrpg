@@ -399,7 +399,7 @@ public class Character {
 	public Action getNextAction(ArrayList<ArrayList<Character>> fighters) {
 		// TODO: Make intelligent choices based on the battle state
 		int choice = (int) Math.floor(Math.random() * moves.length);
-		Action m = moves[choice];
+		Action m = moves[choice].clone();
 		m.clearTargets();
 		int teamId = (int) Math.floor(Math.random() * (fighters.size() - 1));
 		teamId += (teamId >= getTeamId()) ? 1 : 0;
