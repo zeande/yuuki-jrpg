@@ -29,6 +29,11 @@
 	
 	<!-- PUBLIC TARGETS -->
 	
+	<target name="test-battle" depends="debug,battle">
+		<java classname="yuuki.battle.BattleTest" classpath="${BUILD_ROOT}" fork="true" errorproperty="RUN_ERR" />
+		<echo message="${RUN_ERR}" />
+	</target>
+	
 	<target name="debug">
 		<property name="DEBUG_TYPE" value="lines,vars,source" />
 	</target>
@@ -106,11 +111,6 @@
 		</antcall>
 	</target>
 	
-	<target name="test-battle" depends="battle">
-		<java classname="yuuki.battle.BattleTest" fork="true" classpath="${BUILD_ROOT}">	
-		</java>
-	</target>
-	
 	
 	<!-- PRIVATE TARGETS -->
 	
@@ -124,6 +124,7 @@
 		<condition property="debug.level" value="${DEBUG_TYPE}">
 			<isset property="DEBUG_TYPE" />
 		</condition>
+		<echo message="${DEBUG_TYPE}" />
 		<javac includeantruntime="false" srcdir="${SOURCE_ROOT}" destdir="${BUILD_ROOT}" debug="${debug.on}" debuglevel="${debug.level}">
 			<compilerarg value="-Werror" />
 			<compilerarg value="-Xlint:${warning_count}" />

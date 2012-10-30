@@ -16,7 +16,14 @@ public class BattleTest {
 
 	private BufferedReader input;
 	
+	private static boolean usePauses = false;
+	
 	public static void main(String[] args) {
+		if (args.length > 0) {
+			if (args[0].equalsIgnoreCase("pause")) {
+				BattleTest.usePauses = true;
+			}
+		}
 		BattleTest test = new BattleTest();
 		test.run();
 	}
@@ -36,11 +43,13 @@ public class BattleTest {
 	}
 	
 	private void pause() {
-		try {
-			input.readLine();
-		} catch(IOException e) {
-			e.printStackTrace();
-			System.exit(1);
+		if (BattleTest.usePauses) {
+			try {
+				input.readLine();
+			} catch(IOException e) {
+				e.printStackTrace();
+				System.exit(1);
+			}
 		}
 	}
 	
@@ -63,7 +72,7 @@ public class BattleTest {
 	}
 	
 	private void showStatus(Character f) {
-		println(f.getName() + ":");
+		println(f.getName() + " (" + f.getTeamId() + ":" + f.getFighterId() + ")");
 		println("---------------");
 		VariableStat hp = f.getHP();
 		VariableStat mp = f.getMP();
@@ -84,7 +93,7 @@ public class BattleTest {
 		println("LUK: " + luk.getEffective(f.getLevel()));
 		println("---------------");
 		for (Buff b: f.getBuffs()) {
-			println(b.getName() + ": " + b.getEffect());
+			println(b.getName() + "("+b.getTurns()+"): " + b.getEffect());
 		}
 		println();
 	}
@@ -94,12 +103,12 @@ public class BattleTest {
 		ArrayList<Character> t1 = battle.getFighters(0);
 		ArrayList<Character> t2 = battle.getFighters(1);
 		pause(t1.get(0).getName()+" v. "+t2.get(0).getName()+"!");
+		showStatus(t1.get(0));
+		showStatus(t2.get(0));
 		while (battle.advance()) {
 			Action a = battle.getLastAction();
 			Character c = battle.getCurrentFighter();
 			ArrayList<Buff> b = c.getBuffs();
-			showStatus(t1.get(0));
-			showStatus(t2.get(0));
 			switch (battle.getLastState()) {
 				case STARTING_TURN:
 					pause(c.getName() + " is up next.");
@@ -111,10 +120,14 @@ public class BattleTest {
 					
 				case APPLYING_ACTION:
 					if (!a.wasSuccessful()) {
-						pause("And failed.");
+						println("And failed.");
 					} else {
-						pause("And pulled it off!");
+						println("And pulled it off!");
 					}
+					pause();
+					showStatus(t1.get(0));
+					showStatus(t2.get(0));
+					pause();
 					break;
 					
 				case APPLYING_BUFFS:
@@ -131,19 +144,19 @@ public class BattleTest {
 					break;
 					
 				case CHECKING_DEATH:
-					pause("Checked for deaths...");
+					println("Checked for deaths...");
 					break;
 					
 				case ENDING_TURN:
-					pause("Checked for team deaths...");
+					println("Checked for team deaths...");
 					break;
 					
 				case CHECKING_VICTORY:
-					pause("Checked for victory...");
+					println("Checked for victory...");
 					break;
 					
 				case LOOTING:
-					pause("Did loot...");
+					println("Did loot...");
 					break;
 			}
 			if (battle.getState() == Battle.State.ENDING) {
@@ -157,7 +170,7 @@ public class BattleTest {
 	private Character makeChar1() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
-		hp = new VariableStat(20, 2);
+		hp = new VariableStat(0, 1);
 		mp = new VariableStat(10, 3);
 		str = new Stat(5, 1);
 		def = new Stat(5, 1);
@@ -178,7 +191,7 @@ public class BattleTest {
 	private Character makeChar2() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
-		hp = new VariableStat(20, 2);
+		hp = new VariableStat(0, 1);
 		mp = new VariableStat(10, 3);
 		str = new Stat(5, 1);
 		def = new Stat(5, 1);
