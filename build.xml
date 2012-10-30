@@ -124,7 +124,6 @@
 		<condition property="debug.level" value="${DEBUG_TYPE}">
 			<isset property="DEBUG_TYPE" />
 		</condition>
-		<echo message="${DEBUG_TYPE}" />
 		<javac includeantruntime="false" srcdir="${SOURCE_ROOT}" destdir="${BUILD_ROOT}" debug="${debug.on}" debuglevel="${debug.level}">
 			<compilerarg value="-Werror" />
 			<compilerarg value="-Xlint:${warning_count}" />
