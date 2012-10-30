@@ -7,7 +7,7 @@ package yuuki.action;
 
 import yuuki.entity.Character;
 
-public class BasicAttack extends Skill {
+public class BasicAttack extends Skill implements Cloneable {
 
 	/**
 	 * Creates a new BasicAttack.
@@ -16,6 +16,15 @@ public class BasicAttack extends Skill {
 	 */
 	public BasicAttack(double damage) {
 		super("attack", damage, 0.0, null, null);
+	}
+	
+	/**
+	 * Creates a clone of this BasicAttack.
+	 *
+	 * @return The clone.
+	 */
+	public BasicAttack clone() {
+		return (BasicAttack) super.clone();
 	}
 	
 	/**

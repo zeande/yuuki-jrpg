@@ -12,7 +12,7 @@ import java.util.Set;
 import yuuki.entity.Character;
 import yuuki.buff.Buff;
 
-public abstract class Action {
+public abstract class Action implements Cloneable {
 
 	/**
 	 * The Buff that is applied to the target.
@@ -72,6 +72,21 @@ public abstract class Action {
 		this.originBuff = originBuff;
 		targets = new ArrayList<Character>();
 		origin = null;
+	}
+	
+	/**
+	 * Clones this Action.
+	 *
+	 * @return A clone of this Action.
+	 */
+	public Action clone() {
+		Action a2 = (Action) super.clone();
+		a2.targetBuff = this.targetBuff.clone();
+		a2.originBuff = this.originBuff.clone();
+		a2.targets = this.targets.clone(); // targets contents shallow-copied
+		// origin shallow-copied
+		// name shallow-copied
+		return a2;
 	}
 	
 	/**

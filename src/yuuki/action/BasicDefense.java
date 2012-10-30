@@ -18,12 +18,28 @@ public class BasicDefense extends Action {
 				new DefenseBuff("defending", 1.5, turns));
 	}
 	
+	/**
+	 * Creates a clone of this BasicDefense.
+	 */
+	
+	/**
+	 * Applies the cost to the origin. The origin does not need to spend
+	 * anything to use this Action, so this method always returns true.
+	 *
+	 * @return True unconditionally.
+	 */
 	protected boolean applyCost() {
 		return true;
 	}
 	
+	/**
+	 * Has no effect.
+	 */
 	protected void applyEffect() {}
 	
+	/**
+	 * Applies the defense buff to the origin.
+	 */
 	protected void applyBuffs() {
 		origin.addBuff(originBuff);
 	}
