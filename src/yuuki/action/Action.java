@@ -79,6 +79,7 @@ public abstract class Action implements Cloneable {
 	 *
 	 * @return A clone of this Action.
 	 */
+	/*
 	public Action clone() {
 		Action a2 = (Action) super.clone();
 		a2.targetBuff = this.targetBuff.clone();
@@ -87,7 +88,7 @@ public abstract class Action implements Cloneable {
 		// origin shallow-copied
 		// name shallow-copied
 		return a2;
-	}
+	}*/
 	
 	/**
 	 * Applies this Action to targets. The cost is taken from the origin and

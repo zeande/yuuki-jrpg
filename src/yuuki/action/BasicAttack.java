@@ -23,9 +23,10 @@ public class BasicAttack extends Skill implements Cloneable {
 	 *
 	 * @return The clone.
 	 */
+	 /*
 	public BasicAttack clone() {
 		return (BasicAttack) super.clone();
-	}
+	}*/
 	
 	/**
 	 * Applies damage to the first target.

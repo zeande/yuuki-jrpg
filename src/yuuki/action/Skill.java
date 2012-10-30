@@ -22,10 +22,10 @@ public abstract class Skill extends Action implements Cloneable {
 	 * Creates a clone of this Skill.
 	 *
 	 * @return The clone.
-	 */
+	 *//*
 	public Skill clone() {
 		return (Skill) super.clone();
-	}
+	}*/
 	
 	/**
 	 * Attempts to apply the action by subtracting mana from the origin and
