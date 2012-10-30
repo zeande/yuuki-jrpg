@@ -8,7 +8,7 @@ package yuuki.buff;
 
 import yuuki.entity.Character;
 
-public abstract class Buff {
+public abstract class Buff implements Cloneable {
 
 	/**
 	 * The amount of effect that this buff applies. This could be a multiplier
@@ -48,6 +48,23 @@ public abstract class Buff {
 		this.effect = effect;
 		this.turnsLeft = turns;
 		this.active = false;
+	}
+	
+	/**
+	 * Creates a clone of this Buff.
+	 *
+	 * @return The clone.
+	 */
+	public Buff clone() {
+		Buff b = null;
+		try {
+			b = (Buff) super.clone();
+		} catch(CloneNotSupportedException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		// no deep-clone required
+		return b;
 	}
 	
 	/**

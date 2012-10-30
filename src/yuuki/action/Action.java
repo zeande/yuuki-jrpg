@@ -79,16 +79,23 @@ public abstract class Action implements Cloneable {
 	 *
 	 * @return A clone of this Action.
 	 */
-	/*
+	@SuppressWarnings("unchecked")
 	public Action clone() {
-		Action a2 = (Action) super.clone();
+		Action a2 = null;
+		try {
+			a2 = (Action) super.clone();
+		} catch(CloneNotSupportedException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 		a2.targetBuff = this.targetBuff.clone();
 		a2.originBuff = this.originBuff.clone();
-		a2.targets = this.targets.clone(); // targets contents shallow-copied
+		// targets contents shallow-copied
+		a2.targets = (ArrayList<Character>) this.targets.clone();
 		// origin shallow-copied
 		// name shallow-copied
 		return a2;
-	}*/
+	}
 	
 	/**
 	 * Applies this Action to targets. The cost is taken from the origin and

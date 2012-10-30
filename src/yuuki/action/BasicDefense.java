@@ -6,7 +6,7 @@ package yuuki.action;
 
 import yuuki.buff.DefenseBuff;
 
-public class BasicDefense extends Action {
+public class BasicDefense extends Action implements Cloneable {
 
 	/**
 	 * Creates a new BasicDefense.
@@ -20,7 +20,12 @@ public class BasicDefense extends Action {
 	
 	/**
 	 * Creates a clone of this BasicDefense.
+	 *
+	 * @return The clone.
 	 */
+	public BasicDefense clone() {
+		return (BasicDefense) super.clone();
+	}
 	
 	/**
 	 * Applies the cost to the origin. The origin does not need to spend

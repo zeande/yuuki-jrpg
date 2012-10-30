@@ -6,7 +6,7 @@ package yuuki.buff;
 
 import yuuki.entity.Character;
 
-public class DefenseBuff extends PassiveBuff {
+public class DefenseBuff extends PassiveBuff implements Cloneable {
 
 	/**
 	 * Creates a new Buff for a Character.
@@ -18,6 +18,15 @@ public class DefenseBuff extends PassiveBuff {
 	 */
 	public DefenseBuff(String name, double effect, int turns) {
 		super(name, effect, turns);
+	}
+	
+	/**
+	 * Creates a clone of this DefenseBuff.
+	 *
+	 * @return The clone.
+	 */
+	public DefenseBuff clone() {
+		return (DefenseBuff) super.clone();
 	}
 	
 	/**
