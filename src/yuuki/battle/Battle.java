@@ -271,9 +271,10 @@ public class Battle {
 	 */
 	private void setNextPlayer() {
 		currentFighter++;
-		if (currentFighter > turnOrder.size()) {
+		if (currentFighter >= turnOrder.size()) {
 			currentFighter = 0;
 		}
+		System.out.println("CURRENT FIGHTER: " + currentFighter);
 	}
 
 	/**
@@ -327,7 +328,7 @@ public class Battle {
 		int turnId = turnOrder.indexOf(f);
 		turnOrder.remove(turnId);
 		if (currentFighter > turnId) {
-			currentFighter++;
+			currentFighter--;
 		}
 		fighters.get(team).remove(id);
 		reassignIds(team, id);

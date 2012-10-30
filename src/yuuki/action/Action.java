@@ -7,12 +7,16 @@ package yuuki.action;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 import yuuki.entity.Character;
 import yuuki.buff.Buff;
 
 public abstract class Action implements Cloneable {
+
+	/**
+	 * The teams that were affected by this Action.
+	 */
+	private HashSet<Integer> affectedTeams;
 
 	/**
 	 * The Buff that is applied to the target.
@@ -72,6 +76,7 @@ public abstract class Action implements Cloneable {
 		this.originBuff = originBuff;
 		targets = new ArrayList<Character>();
 		origin = null;
+		affectedTeams = new HashSet<Integer>();
 	}
 	
 	/**
@@ -194,6 +199,7 @@ public abstract class Action implements Cloneable {
 	 * @param t The fighter to add to the target list.
 	 */
 	public void addTarget(Character t) {
+		affectedTeams.add(t.getTeamId());
 		targets.add(t);
 	}
 	
@@ -215,13 +221,9 @@ public abstract class Action implements Cloneable {
 	 * which will be empty if no targets have been set.
 	 */
 	public int[] getAffectedTeams() {
-		Set<Integer> affected = new HashSet<Integer>();
-		for (Character c: targets) {
-			affected.add(c.getTeamId());
-		}
-		int[] teams = new int[affected.size()];
+		int[] teams = new int[affectedTeams.size()];
 		int k = 0;
-		for (Integer i: affected) {
+		for (Integer i: affectedTeams) {
 			teams[k++] = i.intValue();
 		}
 		return teams;
