@@ -67,6 +67,11 @@ public class Battle {
 	private int currentFighter;
 	
 	/**
+	 * The fighters that are to be removed.
+	 */
+	private ArrayList<Character> removedFighters;
+	
+	/**
 	 * The Characters arranged in the order that they take their turns.
 	 */
 	private ArrayList<Character> turnOrder;
@@ -79,6 +84,7 @@ public class Battle {
 	 * the Characters on that team.
 	 */
 	public Battle(Character[][] participants) {
+		removedFighters = new ArrayList<Character>();
 		assignToFighters(participants);
 		orderFighters();
 		currentFighter = 0;
@@ -140,6 +146,7 @@ public class Battle {
 				break;
 
 			case ENDING_TURN:
+				emptyRemovedFighters();
 				checkTeamStatus();
 				state = State.CHECKING_VICTORY;
 				break;
@@ -174,6 +181,15 @@ public class Battle {
 	 */
 	public ArrayList<Character> getFighters(int team) {
 		return fighters.get(team);
+	}
+	
+	/**
+	 * Gets the removed fighters.
+	 *
+	 * @return The fighters removed during the last advancement.
+	 */
+	public ArrayList<Character> getRemovedFighters() {
+		return removedFighters;
 	}
 	
 	/**
@@ -333,7 +349,17 @@ public class Battle {
 		}
 		fighters.get(team).remove(id);
 		reassignIds(team, id);
-		f.stopFighting();
+		removedFighters.add(f);
+	}
+	
+	/**
+	 * Empties the removed fighters array.
+	 */
+	private void emptyRemovedFighters() {
+		for (int i = 0; i < removedFighters.size(); i++) {
+			f.stopFighting();
+		}
+		removedFighters.empty();
 	}
 	
 	/**

@@ -1,18 +1,39 @@
 /**
- * A very simple interface that only uses stdin and stdout.
+ * A very simple interface that only uses simple streams for input and output.
+ * Note that this class will not throw exceptions; if a stream operation
+ * throws an exception, it is simply caught and the stack trace is printed.
  */
 
 package yuuki.ui;
 
-import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 
 import yuuki.entity.Character;
 import yuuki.buff.Buff;
 import yuuki.action.Action;
 
-public class ConsoleInterface implements Interactable {
+public class StreamInterface implements Interactable {
+
+	/**
+	 * The stream that is the source of input.
+	 */
+	private InputStream input;
+	
+	/**
+	 * The stream that is the destination of normal output.
+	 */
+	private OutputStream output;
+	
+	/**
+	 * The stream that is the destination of error output.
+	 */
+	private OutputStream error;
 
 	/**
 	 * Reads from stdin.
@@ -20,10 +41,30 @@ public class ConsoleInterface implements Interactable {
 	private BufferedReader stdin;
 	
 	/**
-	 * Creates a new ConsoleInterface.
+	 * Writes to stdout.
 	 */
-	public ConsoleInterface() {
-		stdinReader = null;
+	private BufferedWriter stdout;
+	 
+	/**
+	 * Writes to stderr.
+	 */
+	private BufferedWriter stderr;
+	
+	/**
+	 * Creates a new StreamInterface.
+	 *
+	 * @param input The stream to use as input.
+	 * @param output The stream to use for normal output.
+	 * @param error The stream to use for error output.
+	 */
+	public StreamInterface(InputStream input, OutputStream output,
+							OutputStream error) {
+		this.input = input;
+		this.output = output;
+		this.error = error;
+		stdin = null;
+		stdout = null;
+		stderr = null;
 	}
 	
 	/**
@@ -31,7 +72,9 @@ public class ConsoleInterface implements Interactable {
 	 */
 	@Override
 	public void initialize() {
-		stdin = new BufferedReader(new InputStreamReader(System.in));
+		stdin = new BufferedReader(new InputStreamReader(input));
+		stdout = new BufferedWriter(new OutputStreamWriter(output));
+		stderr = new BufferedWriter(new OutputStreamWriter(output));
 	}
 	
 	/**
@@ -41,6 +84,8 @@ public class ConsoleInterface implements Interactable {
 	public void destroy() {
 		try {
 			stdin.close();
+			stdout.close();
+			stderr.close();
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -248,7 +293,6 @@ public class ConsoleInterface implements Interactable {
 	public void switchToOverworldScreen() {
 		println("Here, you would see the overworld.");
 		println("Right now, there is nothing.");
-		println("Skipping to battle...");
 		pause();
 	}
 	
@@ -583,7 +627,11 @@ public class ConsoleInterface implements Interactable {
 	 * @param message The message to print.
 	 */
 	private void print(String message) {
-		System.out.print(message);
+		try {
+			stdout.write(message);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -592,14 +640,20 @@ public class ConsoleInterface implements Interactable {
 	 * @param message The message to print.
 	 */
 	private void println(String message) {
-		System.out.println(message);
+		try {
+			stdout.write(message);
+			stdout.newLine();
+			stdout.flush();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Prints a line end to stdout.
 	 */
 	private void println() {
-		println("\n");
+		println("");
 	}
 	
 	/**
@@ -619,7 +673,12 @@ public class ConsoleInterface implements Interactable {
 	 * @param message The message to print.
 	 */
 	private void warn(String message) {
-		System.err.println(message);
+		try {
+			stderr.write(message);
+			stderr.flush();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
