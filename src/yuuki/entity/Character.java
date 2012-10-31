@@ -10,7 +10,7 @@ import java.util.Iterator;
 import yuuki.action.Action;
 import yuuki.buff.Buff;
 
-public class Character {
+public abstract class Character {
 
 	/**
 	 * The multiplier used in calculating required experience.
@@ -394,20 +394,11 @@ public class Character {
 	 *
 	 * @param fighters The states of the other players.
 	 *
-	 * @return The move that this Character wishes to perform.
+	 * @return The move that this Character wishes to perform if it can decide
+	 * immediately; otherwise, null if this Character requires input to make a
+	 * decidion.
 	 */
-	public Action getNextAction(ArrayList<ArrayList<Character>> fighters) {
-		// TODO: Make intelligent choices based on the battle state
-		int choice = (int) Math.floor(Math.random() * moves.length);
-		Action m = moves[choice].clone();
-		m.clearTargets();
-		int teamId = (int) Math.floor(Math.random() * (fighters.size() - 1));
-		teamId += (teamId >= getTeamId()) ? 1 : 0;
-		ArrayList<Character> team = fighters.get(teamId);
-		int fighterId = (int) Math.floor(Math.random() * team.size());
-		m.addTarget(team.get(fighterId));
-		return m;
-	}
+	public abstract Action getNextAction(ArrayList<ArrayList<Character>> fighters);
 	
 	/**
 	 * Gets the moves that this Character knows.

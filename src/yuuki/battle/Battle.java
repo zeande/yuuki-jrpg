@@ -119,7 +119,9 @@ public class Battle {
 
 			case GETTING_ACTION:
 				lastAction = getCurrentFighter().getNextAction(fighters);
-				state = State.APPLYING_ACTION;
+				if (lastAction != null) {
+					state = State.APPLYING_ACTION;
+				}
 				break;
 
 			case APPLYING_ACTION:

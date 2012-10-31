@@ -103,4 +103,25 @@ public class NonPlayerCharacter extends Character {
 		}
 		levelUp(hp, mp, str, def, agt, acc, mag, luck);
 	}
+	
+	/**
+	 * Decides what move to do next based on the states of other players in the
+	 * battle.
+	 *
+	 * @param fighters The states of the other players.
+	 *
+	 * @return The move that this Character wishes to perform.
+	 */
+	public Action getNextAction(ArrayList<ArrayList<Character>> fighters) {
+		// TODO: Make intelligent choices based on the battle state
+		int choice = (int) Math.floor(Math.random() * moves.length);
+		Action m = moves[choice].clone();
+		m.clearTargets();
+		int teamId = (int) Math.floor(Math.random() * (fighters.size() - 1));
+		teamId += (teamId >= getTeamId()) ? 1 : 0;
+		ArrayList<Character> team = fighters.get(teamId);
+		int fighterId = (int) Math.floor(Math.random() * team.size());
+		m.addTarget(team.get(fighterId));
+		return m;
+	}
 }
