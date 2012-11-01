@@ -35,7 +35,7 @@ public class YuukiEngine implements Runnable {
 		OutputStream out = System.out;
 		OutputStream error = System.err;
 		YuukiEngine gameEngine = new YuukiEngine(in, out, error);
-		Thread gameThread = new Thread(gameEngine);
+		Thread gameThread = new Thread(gameEngine, "GameEngine");
 		gameThread.start();
 	}
 	
