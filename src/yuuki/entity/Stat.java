@@ -4,7 +4,7 @@
 
 package yuuki.entity;
 
-public class Stat {
+public class Stat implements Cloneable {
 
 	/**
 	 * The base value for calculating this Stat's effective value.
@@ -22,16 +22,37 @@ public class Stat {
 	private double modifier;
 	
 	/**
+	 * The name of this stat.
+	 */
+	private String name;
+	
+	/**
 	 * Allocates a new Stat.
 	 *
-	 * @param Character The Character that this Stat is coupled with.
+	 * @param name The name of this Stat.
 	 * @param base The base value of the Stat.
 	 * @param gain The amount this Stat gains every level.
 	 */
-	public Stat(int base, int gain) {
+	public Stat(String name, int base, int gain) {
+		this.name = name;
 		this.base = base;
 		this.gain = gain;
 		this.modifier = 1.0;
+	}
+	
+	/**
+	 * Creates a clone of this Stat.
+	 *
+	 * @return The clone.
+	 */
+	public Stat clone() {
+		Stat clone = null;
+		try {
+			clone = (Stat) super.clone();
+		} catch(CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return clone;
 	}
 	
 	/**
@@ -104,5 +125,14 @@ public class Stat {
 	 */
 	public int getLevelGain() {
 		return gain;
+	}
+	
+	/**
+	 * Gets the name of this stat.
+	 *
+	 * @return The name.
+	 */
+	public String getName() {
+		return name;
 	}
 }
