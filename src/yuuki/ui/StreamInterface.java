@@ -51,6 +51,23 @@ public class StreamInterface implements Interactable {
 	private BufferedWriter stderr;
 	
 	/**
+	 * A screen this interface could be on.
+	 */
+	private enum Screen {
+		INTRO,
+		OPTIONS,
+		BATTLE,
+		OVERWORLD,
+		PAUSE,
+		ENDING;
+	}
+	
+	/**
+	 * The screen that this interface is on.
+	 */
+	private Screen screen;
+	
+	/**
 	 * Creates a new StreamInterface.
 	 *
 	 * @param input The stream to use as input.
@@ -96,6 +113,7 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void switchToIntroScreen() {
+		screen = Screen.INTRO;
 		println("+-------------------------------------+");
 		println("|                Yuuki                |");
 		println("|                                     |");
@@ -111,6 +129,7 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void switchToOptionsScreen() {
+		screen = Screen.OPTIONS;
 		String input = null;
 		boolean inOptions = true;
 		while (inOptions) {
@@ -129,8 +148,43 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void switchToBattleScreen(Character[][] fighters) {
+		screen = Screen.BATTLE;
 		showBattleIntro(fighters);
 		showTeams(fighters);
+	}
+	
+	/**
+	 * Displays the overworld screen.
+	 */
+	@Override
+	public void switchToOverworldScreen() {
+		screen = Screen.OVERWORLD;
+		println("Here, you would see the overworld.");
+		println("Right now, there is nothing.");
+		pause();
+	}
+	
+	/**
+	 * Displays the pause screen.
+	 */
+	@Override
+	public void switchToPauseScreen() {
+		screen = Screen.PAUSE;
+		println("Paused the game.");
+		pause();
+		println("Unpaused the game.");
+	}
+	
+	/**
+	 * Displays the ending screen.
+	 */
+	@Override
+	public void switchToEndingScreen() {
+		screen = Screen.ENDING;
+		println("The end.");
+		println();
+		println("Thanks for playing!");
+		pause();
 	}
 	
 	/**
@@ -140,6 +194,9 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void showStatUpdate(Character fighter) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		showStats(fighter);
 	}
 	
@@ -152,6 +209,9 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void showDamage(Character fighter, Stat stat, int damage) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		String msg = fighter.getName() + " took " + damage;
 		msg += " damage to " + stat.getName();
 		println(msg);
@@ -167,6 +227,9 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void showDamage(Character fighter, Stat stat, double damage) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		String msg = fighter.getName() + " took " + damage;
 		msg += " damage to " + stat.getName();
 		println(msg);
@@ -182,6 +245,9 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void showRecovery(Character fighter, Stat stat, double amount) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		String msg = fighter.getName() + " recovered " + amount;
 		msg += stat.getName();
 		println(msg);
@@ -197,6 +263,9 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void showRecovery(Character fighter, Stat stat, int amount) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		String msg = fighter.getName() + " recovered " + amount;
 		msg += stat.getName();
 		println(msg);
@@ -210,6 +279,9 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public void showActionPreperation(Action action) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		String name = action.getOrigin().getName();
 		Character[] targets = action.getTargets();
 		print(name + " is getting ready to use " + action.getName());
@@ -234,6 +306,9 @@ public class StreamInterface implements Interactable {
 	 * @param action The move used.
 	 */
 	public void showActionUse(Action action) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		String name = action.getOrigin().getName();
 		println(name + " did it!");
 		pause();
@@ -245,6 +320,9 @@ public class StreamInterface implements Interactable {
 	 * @param action The move used.
 	 */
 	public void showActionFailure(Action action) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		String name = action.getOrigin().getName();
 		println(name + " couldn't pull it off.");
 		pause();
@@ -256,6 +334,9 @@ public class StreamInterface implements Interactable {
 	 * @param buff The buff to show.
 	 */
 	public void showBuffActivation(Buff buff) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		Character t = buff.getTarget();
 		println(t.getName() + " is now " + buff.getName());
 		pause();
@@ -267,6 +348,9 @@ public class StreamInterface implements Interactable {
 	 * @param buff The buff to show.
 	 */
 	public void showBuffApplication(Buff buff) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		Character t = buff.getTarget();
 		bName = buff.getName();
 		println(t.getName() + " is feeling the effects of the " + bName);
@@ -279,6 +363,9 @@ public class StreamInterface implements Interactable {
 	 * @param buff The buff to show.
 	 */
 	public void showBuffDeactivation(Buff buff) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		Character t = buff.getTarget();
 		println(t.getName() + " is no longer " + buff.getName());
 		pause();
@@ -290,6 +377,9 @@ public class StreamInterface implements Interactable {
 	 * @param fighter The character to show.
 	 */
 	public void showCharacterRemoval(Character fighter) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		println(fighter.getName() + " is no longer in the battle.");
 		pause();
 	}
@@ -300,6 +390,9 @@ public class StreamInterface implements Interactable {
 	 * @param fighters The characters to show as victorious.
 	 */
 	public void showCharacterVictory(Character[] fighters) {
+		if (screen != Screen.BATTLE) {
+			return;
+		}
 		print("VICTORY!");
 		for (int i = 0; i < fighters.length; i++) {
 			print(" " + fighters[i]);
@@ -313,37 +406,6 @@ public class StreamInterface implements Interactable {
 			}
 		}
 		println(" are victorious!");
-		pause();
-	}
-	
-	/**
-	 * Displays the overworld screen.
-	 */
-	@Override
-	public void switchToOverworldScreen() {
-		println("Here, you would see the overworld.");
-		println("Right now, there is nothing.");
-		pause();
-	}
-	
-	/**
-	 * Displays the pause screen.
-	 */
-	@Override
-	public void switchToPauseScreen() {
-		println("Paused the game.");
-		pause();
-		println("Unpaused the game.");
-	}
-	
-	/**
-	 * Displays the ending screen.
-	 */
-	@Override
-	public void switchToEndingScreen() {
-		println("The end.");
-		println();
-		println("Thanks for playing!");
 		pause();
 	}
 	
@@ -578,6 +640,20 @@ public class StreamInterface implements Interactable {
 	@Override
 	public int getChoice(String[] options) {
 		return getChoice("", options);
+	}
+	
+	/**
+	 * Gets a confirmation from the user.
+	 *
+	 * @param prompt The prompt to show the user.
+	 * @param yes The text for the true answer.
+	 * @param no The text for the false answer.
+	 *
+	 * @return True if the user chose the yes text; otherwise false.
+	 */
+	public boolean confirm(String prompt, String yes, String no) {
+		String[] options = {yes, no};
+		return (getChoice(prompt, options) == 0)
 	}
 	
 	/**

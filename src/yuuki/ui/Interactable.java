@@ -267,6 +267,17 @@ public interface Interactable {
 	public int getChoice(String[] options);
 	
 	/**
+	 * Gets a confirmation from the user.
+	 *
+	 * @param prompt The prompt to show the user.
+	 * @param yes The text for the true answer.
+	 * @param no The text for the false answer.
+	 *
+	 * @return True if the user chose the yes text; otherwise false.
+	 */
+	public boolean confirm(String prompt, String yes, String no);
+	
+	/**
 	 * Plays a sound from an audio file.
 	 *
 	 * @param path The file name of the sound.

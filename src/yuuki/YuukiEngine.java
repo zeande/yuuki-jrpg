@@ -19,11 +19,6 @@ public class YuukiEngine implements Runnable {
 	private Interactable ui;
 	
 	/**
-	 * The battle engine of the currently running battle.
-	 */
-	private Battle battleEngine;
-	
-	/**
 	 * Program execution hook. Creates a new thread in which to execute the
 	 * game engine in and then starts the thread.
 	 *
@@ -47,63 +42,89 @@ public class YuukiEngine implements Runnable {
 	 */
 	public YuukiEngine(InputStream in, OutputStream out, OutputStreamm error) {
 		ui = new StreamInterface(in, out, error);
-		battleEngine = null;
 	}
 	
 	/**
 	 * Runs the engine.
 	 */
 	public void run() {
+		boolean stillFighting = true;
 		ui.initialize();
 		ui.switchToIntroScreen();
 		ui.switchToOverworldScreen();
-		battle(createJack(), createJill());
+		while (stillFighting) {
+			battleOneOnOne(createJack(), createJill());
+			stillFighting = ui.confirm("Battle again?", "Yes", "No");
+		}
+		ui.switchToEndingScreen();
+		ui.destroy();
 	}
 	
 	/**
-	 * Starts a battle between two characters.
+	 * Starts a battle between two characters. Switches to the battle screen,
+	 * runs the battle, then switches to the overwold screen.
 	 *
 	 * @param f1 The first fighter.
 	 * @param f2 The second fighter.
 	 *
 	 * @return The winner of the battle.
 	 */
-	private void battle(Character f1, Character f2) {
+	private Character battleOneOnOne(Character f1, Character f2) {
 		Character[] t1 = {f1};
 		Character[] t2 = {f2};
 		Character[][] fighters = new Character[2][1];
 		fighters[0][0] = t1;
 		fighters[1][0] = t2;
-		ui.display(null, "Oh dear, is that a random monster?");
-		battleEngine = new Battle(fighters);
+		ui.display(null, "Oh no! Random monsters!");
+		Battle b = new Battle(fighters);
+		showBattle(fighters, b);
+		return battle.getFighters(0).get(0);
+	}
+	
+	/**
+	 * Switches to the battle screen, runs through a battle, then switches to
+	 * the overworld screen.
+	 *
+	 * @param fighters The characters in the battle.
+	 * @param battle The battle to show.
+	 */
+	private void showBattle(Character[][] fighters, Battle b) {
 		ui.switchToBattleScreen(fighters);
-		while (battleEngine.advance()) {
-			Action a = battleEngine.getLastAction();
-			Character c = battleEngine.getCurrentFighter();
-			ArrayList<Buff> activeBuffs = c.getBuffs();
-			switch (battleEngine.getLastState()) {
+		runBattle(b);
+		ui.switchToOverworldScreen();
+	}
+	
+	/**
+	 * Runs a battle to completion. If the UI is switched to the battle screen,
+	 * it is displayed there; otherwise it is not displayed at all.
+	 *
+	 * @param battle The battle to run
+	 */
+	private void runBattle(Battle battle) {
+		while (battle.advance()) {
+			switch (battle.getLastState()) {
 				case STARTING_TURN:
-					outputTurnStart();
+					outputTurnStart(battle);
 					break;
 					
 				case GETTING_ACTION:
-					outputActionGet();
+					outputActionGet(battle);
 					break;
 					
 				case APPLYING_ACTION:
-					outputActionApplication();
+					outputActionApplication(battle);
 					break;
 					
 				case APPLYING_BUFFS:
-					outputBuffApplication();
+					outputBuffApplication(battle);
 					break;
 					
 				case CHECKING_DEATH:
-					outputDeathCheck();
+					outputDeathCheck(battle);
 					break;
 					
 				case ENDING_TURN:
-					outputTeamDeathCheck();
+					outputTeamDeathCheck(battle);
 					break;
 					
 				case CHECKING_VICTORY:
@@ -111,15 +132,13 @@ public class YuukiEngine implements Runnable {
 					break;
 					
 				case LOOTING:
-					outputLoot();
+					outputLoot(battle);
 					break;
 			}
-			if (battleEngine.getState() == Battle.State.ENDING) {
-				outputVictory();
+			if (battle.getState() == Battle.State.ENDING) {
+				outputVictory(battle);
 			}
 		}
-		Character winner = battleEngine.getFighters(0).get(0);
-		return winner;
 	}
 	
 	/**
@@ -130,14 +149,14 @@ public class YuukiEngine implements Runnable {
 	private NonPlayerCharacter createJack() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
-		hp = new VariableStat(0, 1);
-		mp = new VariableStat(10, 3);
-		str = new Stat(5, 1);
-		def = new Stat(5, 1);
-		agi = new Stat(5, 1);
-		acc = new Stat(5, 1);
-		mag = new Stat(5, 1);
-		luk = new Stat(5, 1);
+		hp = new VariableStat("health", 0, 1);
+		mp = new VariableStat("mana", 10, 3);
+		str = new Stat("strength", 5, 1);
+		def = new Stat("defense", 5, 1);
+		agi = new Stat("agility", 5, 1);
+		acc = new Stat("accuracy", 5, 1);
+		mag = new Stat("magic", 5, 1);
+		luk = new Stat("luck", 5, 1);
 		Action[] moves = new Action[2];
 		moves[0] = new BasicAttack(1.0);
 		moves[1] = new BasicDefense(10);
@@ -157,14 +176,14 @@ public class YuukiEngine implements Runnable {
 	private NonPlayerCharacter createJill() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
-		hp = new VariableStat(0, 1);
-		mp = new VariableStat(10, 3);
-		str = new Stat(5, 1);
-		def = new Stat(5, 1);
-		agi = new Stat(5, 1);
-		acc = new Stat(5, 1);
-		mag = new Stat(5, 1);
-		luk = new Stat(5, 1);
+		hp = new VariableStat("health", 0, 1);
+		mp = new VariableStat("mana", 10, 3);
+		str = new Stat("strength", 5, 1);
+		def = new Stat("defense", 5, 1);
+		agi = new Stat("agility", 5, 1);
+		acc = new Stat("accuracy", 5, 1);
+		mag = new Stat("magic", 5, 1);
+		luk = new Stat("luck", 5, 1);
 		Action[] moves = new Action[2];
 		moves[0] = new BasicAttack(1.0);
 		moves[1] = new BasicDefense(3);
@@ -177,12 +196,14 @@ public class YuukiEngine implements Runnable {
 	}
 	
 	/**
-	 * Outputs the results of the current battle's turn start phase to the user
+	 * Outputs the results of a battle's turn start phase to the user
 	 * interface.
+	 *
+	 * @param battle The battle to output the state of.
 	 */
-	private void outputTurnStart() {
-		Character c = battleEngine.getCurrentFighter();
-		int recoveredMana = battleEngine.getRecoveredMana();
+	private void outputTurnStart(Battle battle) {
+		Character c = battle.getCurrentFighter();
+		int recoveredMana = battle.getRecoveredMana();
 		ui.display(c, "It looks like I'm up next.");
 		ArrayList<Buff> expiredBuffs = c.getExpiredBuffs();
 		for (Buff expired: expiredBuffs) {
@@ -192,20 +213,24 @@ public class YuukiEngine implements Runnable {
 	}
 	
 	/**
-	 * Outputs the results of the current battle's action get phase to the user
+	 * Outputs the results of a battle's action get phase to the user
 	 * interface.
+	 *
+	 * @param battle The battle to output the state of.
 	 */
-	private void outputActionGet() {
-		Action a = battleEngine.getLastAction();
+	private void outputActionGet(Battle battle) {
+		Action a = battle.getLastAction();
 		ui.showActionPreperation(a);
 	}
 	
 	/**
-	 * Outputs the results of the current battle's action application phase to
-	 * the user interface.
+	 * Outputs the results of a battle's action application phase to the user
+	 * interface.
+	 *
+	 * @param battle The battle to output the state of.
 	 */
-	private void outputActionApplication() {
-		Action a = battleEngine.getLastAction();
+	private void outputActionApplication(Battle battle) {
+		Action a = battle.getLastAction();
 		if (a.wasSuccessful()) {
 			Character o = a.getOrigin();
 			ui.showDamage(o, o.getMP(), (int)a.getCost());
@@ -230,11 +255,13 @@ public class YuukiEngine implements Runnable {
 	}
 	
 	/**
-	 * Outputs the results of the current battle's buff application phase to
-	 * the interface.
+	 * Outputs the results of a battle's buff application phase to the user
+	 * interface.
+	 *
+	 * @param battle The battle to output the state of.
 	 */
-	private void outputBuffApplication() {
-		Character currentFighter = battleEngine.getCurrentFighter();
+	private void outputBuffApplication(Battle battle) {
+		Character currentFighter = battle.getCurrentFighter();
 		ArrayList<Buff> buffs = currentFighter.getBuffs();
 		for (Buff b: activeBuffs) {
 			ui.showBuffApplication(b);
@@ -242,31 +269,39 @@ public class YuukiEngine implements Runnable {
 	}
 	
 	/**
-	 * Outputs the results of the current battle's death check phase to the
-	 * user interface.
+	 * Outputs the results of a battle's death check phase to the user
+	 * interface.
+	 *
+	 * @param battle The battle to output the state of.
 	 */
-	private void outputDeathCheck() {
-		ArrayList<Character> removed = battleEngine.getRemovedFighters();
+	private void outputDeathCheck(Battle battle) {
+		ArrayList<Character> removed = battle.getRemovedFighters();
 		for (Character c: removed) {
 			ui.showCharacterRemoval(c);
 		}
 	}
 	
 	/**
-	 * Outputs the results of the current battle's team death check phase to
-	 * the user interface.
+	 * Outputs the results of a battle's team death check phase to the user
+	 * interface.
+	 *
+	 * @param battle The battle to output the state of.
 	 */
-	private void outputTeamDeathCheck() {}
+	private void outputTeamDeathCheck(Battle battle) {}
 	
 	/**
-	 * Outputs the results of the current battle's loot calculation phase to
-	 * the user interface.
+	 * Outputs the results of a battle's loot calculation phase to the user
+	 * interface.
+	 *
+	 * @param battle The battle to output the state of.
 	 */
-	private void outputLoot() {}
+	private void outputLoot(Battle battle) {}
 	
 	/**
-	 * Outputs the results of the current battle's victory check phase to the
-	 * user interface.
+	 * Outputs the results of a battle's victory check phase to the user
+	 * interface.
+	 *
+	 * @param battle The battle to output the state of.
 	 */
-	private void outputVictory() {}
+	private void outputVictory(Battle battle) {}
 }
