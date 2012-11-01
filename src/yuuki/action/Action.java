@@ -293,6 +293,24 @@ public abstract class Action implements Cloneable {
 	}
 	
 	/**
+	 * Gets the origin buff.
+	 *
+	 * @return The origin buff.
+	 */
+	public Buff getOriginBuff() {
+		return originBuff;
+	}
+	 
+	/**
+	 * Gets the target buff.
+	 *
+	 * @return the target buff.
+	 */
+	public Buff getTargetBuff() {
+		return targetBuff;
+	}
+	
+	/**
 	 * Applies any applicable Buffs to either the targets, origin, or both.
 	 */
 	protected abstract void applyBuffs();

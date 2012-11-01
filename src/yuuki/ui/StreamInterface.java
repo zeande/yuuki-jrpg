@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import yuuki.entity.Character;
 import yuuki.entity.Stat;
+import yuuki.entity.VariableStat;
 import yuuki.buff.Buff;
 import yuuki.action.Action;
 
@@ -353,7 +354,7 @@ public class StreamInterface implements Interactable {
 			return;
 		}
 		Character t = buff.getTarget();
-		bName = buff.getName();
+		String bName = buff.getName();
 		println(t.getName() + " is feeling the effects of the " + bName);
 		pause();
 	}
@@ -397,11 +398,11 @@ public class StreamInterface implements Interactable {
 		print("VICTORY!");
 		for (int i = 0; i < fighters.length; i++) {
 			print(" " + fighters[i]);
-			if (i + 1 < targets.length) {
-				if (targets.length > 2) {
+			if (i + 1 < fighters.length) {
+				if (fighters.length > 2) {
 					print(",");
 				}
-				if (i + 1 + 1 == targets.length) {
+				if (i + 1 + 1 == fighters.length) {
 					print(" and");
 				}
 			}
@@ -552,7 +553,7 @@ public class StreamInterface implements Interactable {
 			input = getString(prompt);
 			inputIsGood = true;
 			try {
-				doubleInput = Double.parseInt(input);
+				doubleInput = Double.parseDouble(input);
 			} catch(NumberFormatException e) {
 				warn("You must enter a real number!");
 				inputIsGood = false;
@@ -628,6 +629,7 @@ public class StreamInterface implements Interactable {
 		}
 		builtPrompt += prompt;
 		choice = getInt(builtPrompt, 0, options.length - 1);
+		return choice;
 	}
 	
 	/**

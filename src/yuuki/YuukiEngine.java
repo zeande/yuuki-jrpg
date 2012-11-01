@@ -7,9 +7,15 @@ package yuuki;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import yuuki.ui.Interactable;
+import yuuki.ui.StreamInterface;
 import yuuki.battle.Battle;
+import yuuki.action.*;
+import yuuki.buff.*;
+import yuuki.entity.Character;
+import yuuki.entity.*;
 
 public class YuukiEngine implements Runnable {
 
@@ -40,7 +46,7 @@ public class YuukiEngine implements Runnable {
 	 * @param out The output stream.
 	 * @param error The error stream.
 	 */
-	public YuukiEngine(InputStream in, OutputStream out, OutputStreamm error) {
+	public YuukiEngine(InputStream in, OutputStream out, OutputStream error) {
 		ui = new StreamInterface(in, out, error);
 	}
 	
@@ -73,12 +79,13 @@ public class YuukiEngine implements Runnable {
 		Character[] t1 = {f1};
 		Character[] t2 = {f2};
 		Character[][] fighters = new Character[2][1];
-		fighters[0][0] = t1;
-		fighters[1][0] = t2;
+		fighters[0] = t1;
+		fighters[1] = t2;
 		ui.display(null, "Oh no! Random monsters!");
 		Battle b = new Battle(fighters);
 		showBattle(fighters, b);
-		return battle.getFighters(0).get(0);
+		Character winner = b.getFighters(0).get(0);
+		return winner;
 	}
 	
 	/**
@@ -203,7 +210,7 @@ public class YuukiEngine implements Runnable {
 	 */
 	private void outputTurnStart(Battle battle) {
 		Character c = battle.getCurrentFighter();
-		int recoveredMana = battle.getRecoveredMana();
+		int recoveredMana = battle.getRegeneratedMana();
 		ui.display(c, "It looks like I'm up next.");
 		ArrayList<Buff> expiredBuffs = c.getExpiredBuffs();
 		for (Buff expired: expiredBuffs) {
@@ -237,7 +244,7 @@ public class YuukiEngine implements Runnable {
 			ui.showActionUse(a);
 			int[] effects = a.getActualEffects();
 			Character[] targets = a.getTargets();
-			for (i = 0; i < effects.length; i++) {
+			for (int i = 0; i < effects.length; i++) {
 				Character t = targets[i];
 				int damage = effects[i];
 				ui.showDamage(t, a.getEffectStat(), damage);
@@ -262,7 +269,7 @@ public class YuukiEngine implements Runnable {
 	private void outputBuffApplication(Battle battle) {
 		Character currentFighter = battle.getCurrentFighter();
 		ArrayList<Buff> buffs = currentFighter.getBuffs();
-		for (Buff b: activeBuffs) {
+		for (Buff b: buffs) {
 			ui.showBuffApplication(b);
 		}
 	}
