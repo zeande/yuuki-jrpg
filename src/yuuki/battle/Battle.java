@@ -75,6 +75,11 @@ public class Battle {
 	 * The Characters arranged in the order that they take their turns.
 	 */
 	private ArrayList<Character> turnOrder;
+	
+	/**
+	 * Amount of mana last regenerated.
+	 */
+	private int regeneratedMana;
 
 	/**
 	 * Begins a new battle with the given participants.
@@ -124,6 +129,7 @@ public class Battle {
 				break;
 
 			case GETTING_ACTION:
+				getCurrentFighter().emptyExpiredBuffs();
 				lastAction = getCurrentFighter().getNextAction(fighters);
 				if (lastAction != null) {
 					state = State.APPLYING_ACTION;
@@ -170,6 +176,15 @@ public class Battle {
 				break;
 		}
 		return moreCallsNeeded;
+	}
+	
+	/**
+	 * Gets the amount of mana last regenerated.
+	 *
+	 * @param The amount of mana.
+	 */
+	public int getRegeneratedMana() {
+		return regeneratedMana;
 	}
 	
 	/**
@@ -245,9 +260,11 @@ public class Battle {
 	private void regenerateMana() {
 		Character c = getCurrentFighter();
 		VariableStat mana = c.getMP();
+		int oldMana = mana.getCurrent();
 		int manaMax = mana.getMax(c.getLevel());
 		int amount = (int) Math.floor(manaMax * MANA_GEN);
 		mana.gain(amount, c.getLevel());
+		regeneratedMana = mana.getCurrent() - oldMana;
 	}
 
 	/**

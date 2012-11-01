@@ -88,6 +88,11 @@ public abstract class Character {
 	private ArrayList<Buff> buffs;
 	
 	/**
+	 * The buffs that have just ended on this Character.
+	 */
+	private ArrayList<Buff> expiredBuffs;
+	
+	/**
 	 * The ID of this Character within its team during a battle.
 	 */
 	private int fighterId;
@@ -339,6 +344,15 @@ public abstract class Character {
 	}
 	
 	/**
+	 * Gets the expired buffs on this Character.
+	 *
+	 * @return The expired buffs.
+	 */
+	public ArrayList<Buff> getExpiredBuffs() {
+		return expiredBuffs;
+	}
+	
+	/**
 	 * Gets the fighter ID of this Character.
 	 *
 	 * @return The ID if this Character is in a Battle, otherwise -1.
@@ -375,8 +389,16 @@ public abstract class Character {
 			Buff b = it.next();
 			if (b.isExpired()) {
 				it.remove();
+				expiredBuffs.add(b);
 			}
 		}
+	}
+	
+	/**
+	 * Clears the expired buffs list.
+	 */
+	public void emptyExpiredBuffs() {
+		expiredBuffs.empty();
 	}
 	
 	/**
@@ -418,7 +440,8 @@ public abstract class Character {
 	public void startFighting(int id, int team) {
 		fighterId = id;
 		teamId = team;
-		this.buffs = new ArrayList<Buff>();
+		buffs = new ArrayList<Buff>();
+		expiredBuffs = new ArrayList<Buff>();
 	}
 	
 	/**
@@ -427,7 +450,8 @@ public abstract class Character {
 	public void stopFighting() {
 		fighterId = -1;
 		teamId = -1;
-		this.buffs = null;
+		buffs = null;
+		expiredBuffs = null;
 	}
 	
 	/**
