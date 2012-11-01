@@ -233,15 +233,14 @@ public class YuukiEngine implements Runnable {
 		Action a = battle.getLastAction();
 		if (a.wasSuccessful()) {
 			Character o = a.getOrigin();
-			ui.showDamage(o, o.getMP(), (int)a.getCost());
+			ui.showDamage(o, a.getCostStat(), (int)a.getCost());
 			ui.showActionUse(a);
 			int[] effects = a.getActualEffects();
 			Character[] targets = a.getTargets();
 			for (i = 0; i < effects.length; i++) {
 				Character t = targets[i];
 				int damage = effects[i];
-				// assume it's damage to HP
-				ui.showDamage(t, t.getHP(), damage);
+				ui.showDamage(t, a.getEffectStat(), damage);
 			}
 			if (a.getOriginBuff() != null) {
 				ui.showBuffActivation(a.getOriginBuff());
