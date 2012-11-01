@@ -99,7 +99,7 @@ public class StreamInterface implements Interactable {
 		println("+-------------------------------------+");
 		println("|                Yuuki                |");
 		println("|                                     |");
-		println("|  By python'); DROP TABLE teams; --  |");
+		println("|  By Python'); DROP TABLE Teams;--   |");
 		println("+-------------------------------------+");
 		println();
 		pause();
