@@ -5,6 +5,7 @@
 package yuuki.action;
 
 import yuuki.buff.DefenseBuff;
+import yuuki.entity.Character;
 
 public class BasicDefense extends Action implements Cloneable {
 

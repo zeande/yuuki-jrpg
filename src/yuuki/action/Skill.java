@@ -5,6 +5,7 @@
 package yuuki.action;
 
 import yuuki.buff.Buff;
+import yuuki.entity.Character;
 
 public abstract class Skill extends Action implements Cloneable {
 
