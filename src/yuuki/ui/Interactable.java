@@ -51,20 +51,38 @@ public interface Interactable {
 	/**
 	 * Shows that damage occured to a character.
 	 *
-	 * @param damage The amount of damage
-	 * @param stat The affected stat
 	 * @param fighter The affected character.
+	 * @param stat The affected stat
+	 * @param damage The amount of damage
 	 */
 	public void showDamage(Character fighter, Stat stat, int damage);
 	
 	/**
 	 * Shows that damage occured to a character.
 	 *
-	 * @param damage The amount of damage
-	 * @param stat The affected stat
 	 * @param fighter The affected character.
+	 * @param stat The affected stat
+	 * @param damage The amount of damage
 	 */
 	public void showDamage(Character fighter, Stat stat, double damage);
+	
+	/**
+	 * Shows that recovery occured to a character.
+	 *
+	 * @param fighter The affected character.
+	 * @param stat The affected stat.
+	 * @param amount The amount of recovery.
+	 */
+	public void showRecovery(Character fighter, Stat stat, double amount);
+	
+	/**
+	 * Shows that recovery occured to a character.
+	 *
+	 * @param fighter The affected character.
+	 * @param stat The affected stat.
+	 * @param amount The amount of recovery.
+	 */
+	public void showRecovery(Character fighter, Stat stat, int amount);
 	
 	/**
 	 * Shows that a character is preparing to use an attack.
