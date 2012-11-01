@@ -23,6 +23,7 @@ public class BasicAttack extends Skill implements Cloneable {
 	 *
 	 * @return The clone.
 	 */
+	@Override
 	public BasicAttack clone() {
 		return (BasicAttack) super.clone();
 	}
@@ -30,6 +31,7 @@ public class BasicAttack extends Skill implements Cloneable {
 	/**
 	 * Applies damage to the first target.
 	 */
+	@Override
 	protected void applyEffect() {
 		Character target = targets.get(0);
 		int oStr = origin.getStrength().getEffective(origin.getLevel());
@@ -37,11 +39,22 @@ public class BasicAttack extends Skill implements Cloneable {
 		double mod = (oStr / tDef);
 		int totalDamage = (int) Math.round(effect + mod);
 		target.getHP().lose(totalDamage);
+		actualEffects[0] = totalDamage;
 	}
 	
 	/**
 	 * Has no effect.
 	 */
+	@Override
 	protected void applyBuffs() {}
+	
+	/**
+	 * Sets the effect stat from a character.
+	 *
+	 * @param c The character to set it from.
+	 */
+	protected void setEffectStat(Character c) {
+		effectStat = c.getHP().clone();
+	}
 
 }

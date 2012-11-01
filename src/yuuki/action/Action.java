@@ -1,6 +1,9 @@
 /**
  * A character's action during the fight. This gives information on what type
  * of effect it has and who its target is.
+ *
+ * Derived classes should set the actual effects, as well as the cost stat and
+ * the effect stat.
  */
 
 package yuuki.action;
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import yuuki.entity.Character;
+import yuuki.entity.Stat;
 import yuuki.buff.Buff;
 
 public abstract class Action implements Cloneable {
@@ -39,6 +43,11 @@ public abstract class Action implements Cloneable {
 	protected ArrayList<Character> targets;
 	
 	/**
+	 * The actual effects after application of this action.
+	 */
+	protected int[] actualEffects;
+	
+	/**
 	 * The amount of effect of this Action.
 	 */
 	protected double effect;
@@ -52,6 +61,16 @@ public abstract class Action implements Cloneable {
 	 * Whether the last application of this Action was successful.
 	 */
 	protected boolean successful;
+	
+	/**
+	 * The stat that this Action applies cost to.
+	 */
+	protected Stat costStat;
+	
+	/**
+	 * The stat that this Action applied the effect to.
+	 */
+	protected Stat effectStat;
 	
 	/**
 	 * The name of this Action; used for display purposes.
@@ -75,6 +94,7 @@ public abstract class Action implements Cloneable {
 		this.targetBuff = targetBuff;
 		this.originBuff = originBuff;
 		targets = new ArrayList<Character>();
+		actualAffects = new int[0];
 		origin = null;
 		affectedTeams = new HashSet<Integer>();
 	}
@@ -103,6 +123,10 @@ public abstract class Action implements Cloneable {
 		a2.targets = (ArrayList<Character>) this.targets.clone();
 		// origin shallow-copied
 		// name shallow-copied
+		a2.actualEffects = new int[this.actualEffects.length];
+		for (int i = 0; i < this.actualEffects.length; i++) {
+			a2.actualEffects[i] = this.actualEffects[i];
+		}
 		return a2;
 	}
 	
@@ -133,23 +157,6 @@ public abstract class Action implements Cloneable {
 		}
 		return successful;
 	}
-	
-	/**
-	 * Applies any applicable Buffs to either the targets, origin, or both.
-	 */
-	protected abstract void applyBuffs();
-	
-	/**
-	 * Applies the cost to the origin.
-	 *
-	 * @return True if the cost was successfully applied; otherwise, false.
-	 */
-	protected abstract boolean applyCost();
-	
-	/**
-	 * Applies the effects to the targets.
-	 */
-	protected abstract void applyEffect();
 	
 	/**
 	 * Gets the name of this Action.
@@ -185,6 +192,7 @@ public abstract class Action implements Cloneable {
 	 */
 	public void setOrigin(Character performer) {
 		origin = performer;
+		setCostAndEffectStats(performer);
 	}
 	
 	/**
@@ -205,6 +213,13 @@ public abstract class Action implements Cloneable {
 	public void addTarget(Character t) {
 		affectedTeams.add(t.getTeamId());
 		targets.add(t);
+		int[] newEffects = new int[actualEffects.length + 1];
+		for (int i = 0; i < actualEffects.length; i++) {
+			newEffects[i] = actualEffects[i];
+		}
+		newEffects[newEffects.length - 1] = 0;
+		actualEffects = newEffects;
+		setCostAndEffectStats(t);
 	}
 	
 	/**
@@ -247,6 +262,83 @@ public abstract class Action implements Cloneable {
 	 */
 	public void clearTargets() {
 		this.targets.clear();
+	}
+	
+	/**
+	 * Gets the actual damage caused by this Action, in the order of the
+	 * targets.
+	 *
+	 * @return The actual caused damages.
+	 */
+	public int[] getActualEffects() {
+		return actualEffects;
+	}
+	
+	/**
+	 * Gets the stat that is affected by the cost.
+	 *
+	 * @return The cost stat.
+	 */
+	public Stat getCostStat() {
+		return costStat;
+	}
+	
+	/**
+	 * Gets the stat that is affected by the effect.
+	 *
+	 * @return The effect stat.
+	 */
+	public Stat getEffectStat() {
+		return effectStat;
+	}
+	
+	/**
+	 * Applies any applicable Buffs to either the targets, origin, or both.
+	 */
+	protected abstract void applyBuffs();
+	
+	/**
+	 * Applies the cost to the origin.
+	 *
+	 * @return True if the cost was successfully applied; otherwise, false.
+	 */
+	protected abstract boolean applyCost();
+	
+	/**
+	 * Applies the effects to the targets. Overriding classes should set the
+	 * actual applied effects of each target in actualEffects.
+	 */
+	protected abstract void applyEffect();
+	
+	/**
+	 * Sets the cost stat. The stat is not actually directly used; it should be
+	 * cloned to ensure that it is not.
+	 *
+	 * @param c The character to get the stats from.
+	 */
+	protected abstract void setCostStat(Character c);
+	
+	/**
+	 * Sets the effect stat. The stat is not actually directly used; it should
+	 * be cloned to ensure that it is not.
+	 *
+	 * @param c The character to get the stats from.
+	 */
+	protected abstract void setEffectStat(Character c);
+	
+	/**
+	 * Sets the cost stats if they are not set and sets the effect stats if
+	 * they are not set.
+	 *
+	 * @param c The character to set the stats from.
+	 */
+	private void setCostAndEffectStats(Character c) {
+		if (costStat == null) {
+			setCostStat(c);
+		}
+		if (effectStat == null) {
+			setEffectStat(c);
+		}
 	}
 
 }

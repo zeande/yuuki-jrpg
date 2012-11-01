@@ -48,5 +48,17 @@ public class BasicDefense extends Action implements Cloneable {
 	protected void applyBuffs() {
 		origin.addBuff(originBuff);
 	}
+	
+	/**
+	 * Has no effect, as BasicDefense does not cost anything.
+	 */
+	@Override
+	protected void setCostStat(Character c) {}
+	
+	/**
+	 * Has no effect, as BasicDefense does not have any stat effects.
+	 */
+	@Override
+	protected void setEffectStat(Character c) {}
 
 }
