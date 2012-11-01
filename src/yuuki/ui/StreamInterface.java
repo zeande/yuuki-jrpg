@@ -151,7 +151,7 @@ public class StreamInterface implements Interactable {
 	 * @param damage The amount of damage
 	 */
 	@Override
-	public void showDamage(Character fighter, Stat stat,  int damage) {
+	public void showDamage(Character fighter, Stat stat, int damage) {
 		String msg = fighter.getName() + " took " + damage;
 		msg += " damage to " + stat.getName();
 		println(msg);
@@ -169,6 +169,36 @@ public class StreamInterface implements Interactable {
 	public void showDamage(Character fighter, Stat stat, double damage) {
 		String msg = fighter.getName() + " took " + damage;
 		msg += " damage to " + stat.getName();
+		println(msg);
+		pause();
+	}
+	
+	/**
+	 * Shows that recovery occured to a character.
+	 *
+	 * @param fighter The affected character.
+	 * @param stat The affected stat.
+	 * @param amount The amount of recovery.
+	 */
+	@Override
+	public void showRecovery(Character fighter, Stat stat, double amount) {
+		String msg = fighter.getName() + " recovered " + amount;
+		msg += stat.getName();
+		println(msg);
+		pause();
+	}
+	
+	/**
+	 * Shows that recovery occured to a character.
+	 *
+	 * @param fighter The affected character.
+	 * @param stat The affected stat.
+	 * @param amount The amount of recovery.
+	 */
+	@Override
+	public void showRecovery(Character fighter, Stat stat, int amount) {
+		String msg = fighter.getName() + " recovered " + amount;
+		msg += stat.getName();
 		println(msg);
 		pause();
 	}
