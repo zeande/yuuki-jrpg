@@ -47,12 +47,20 @@ public class YuukiEngine implements Runnable {
 		ui.initialize();
 		ui.switchToIntroScreen();
 		ui.switchToOverworldScreen();
-		battle();
+		battle(createJack(), createJill());
 	}
 	
-	private void battle() {
-		Character[] t1 = {createChar1()};
-		Character[] t2 = {createChar2()};
+	/**
+	 * Starts a battle between two characters.
+	 *
+	 * @param f1 The first fighter.
+	 * @param f2 The second fighter.
+	 *
+	 * @return The winner of the battle.
+	 */
+	private void battle(Character f1, Character f2) {
+		Character[] t1 = {f1};
+		Character[] t2 = {f2};
 		Character[][] fighters = new Character[2][1];
 		fighters[0][0] = t1;
 		fighters[1][0] = t2;
@@ -100,9 +108,16 @@ public class YuukiEngine implements Runnable {
 				outputVictory();
 			}
 		}
+		Character winner = battleEngine.getFighters(0).get(0);
+		return winner;
 	}
 	
-	private Character makeChar1() {
+	/**
+	 * Creates the NPC Jack.
+	 *
+	 * @return Jack, the NPC.
+	 */
+	private NonPlayerCharacter createJack() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
 		hp = new VariableStat(0, 1);
@@ -118,12 +133,18 @@ public class YuukiEngine implements Runnable {
 		moves[1] = new BasicDefense(10);
 		int lvl = 5;
 		int xpb = 5;
-		Character c = new NonPlayerCharacter("Jack", lvl, moves, hp, mp, str,
-											def, agi, acc, mag, luk, xpb);
+		NonPlayerCharacter c = null;
+		c = new NonPlayerCharacter("Jack", lvl, moves, hp, mp, str, def, agi,
+									acc, mag, luk, xpb);
 		return c;
 	}
 	
-	private Character makeChar2() {
+	/**
+	 * Creates the NPC Jill.
+	 *
+	 * @return Jill, the NPC.
+	 */
+	private NonPlayerCharacter createJill() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
 		hp = new VariableStat(0, 1);
@@ -139,11 +160,16 @@ public class YuukiEngine implements Runnable {
 		moves[1] = new BasicDefense(3);
 		int lvl = 5;
 		int xpb = 5;
-		Character c = new NonPlayerCharacter("Jill", lvl, moves, hp, mp, str,
-											def, agi, acc, mag, luk, xpb);
+		NonPlayerCharacter c = null;
+		c = new NonPlayerCharacter("Jill", lvl, moves, hp, mp, str, def, agi,
+									acc, mag, luk, xpb);
 		return c;
 	}
 	
+	/**
+	 * Outputs the results of the current battle's turn start phase to the user
+	 * interface.
+	 */
 	private void outputTurnStart() {
 		Character c = battleEngine.getCurrentFighter();
 		int recoveredMana = battleEngine.getRecoveredMana();
@@ -155,11 +181,19 @@ public class YuukiEngine implements Runnable {
 		ui.showRecovery(c, c.getMP(), recoveredMana);
 	}
 	
+	/**
+	 * Outputs the results of the current battle's action get phase to the user
+	 * interface.
+	 */
 	private void outputActionGet() {
 		Action a = battleEngine.getLastAction();
 		ui.showActionPreperation(a);
 	}
 	
+	/**
+	 * Outputs the results of the current battle's action application phase to
+	 * the user interface.
+	 */
 	private void outputActionApplication() {
 		Action a = battleEngine.getLastAction();
 		if (a.wasSuccessful()) {
@@ -185,6 +219,10 @@ public class YuukiEngine implements Runnable {
 		}
 	}
 	
+	/**
+	 * Outputs the results of the current battle's buff application phase to
+	 * the interface.
+	 */
 	private void outputBuffApplication() {
 		Character currentFighter = battleEngine.getCurrentFighter();
 		ArrayList<Buff> buffs = currentFighter.getBuffs();
@@ -193,6 +231,10 @@ public class YuukiEngine implements Runnable {
 		}
 	}
 	
+	/**
+	 * Outputs the results of the current battle's death check phase to the
+	 * user interface.
+	 */
 	private void outputDeathCheck() {
 		ArrayList<Character> removed = battleEngine.getRemovedFighters();
 		for (Character c: removed) {
@@ -200,9 +242,21 @@ public class YuukiEngine implements Runnable {
 		}
 	}
 	
+	/**
+	 * Outputs the results of the current battle's team death check phase to
+	 * the user interface.
+	 */
 	private void outputTeamDeathCheck() {}
 	
+	/**
+	 * Outputs the results of the current battle's loot calculation phase to
+	 * the user interface.
+	 */
 	private void outputLoot() {}
 	
+	/**
+	 * Outputs the results of the current battle's victory check phase to the
+	 * user interface.
+	 */
 	private void outputVictory() {}
 }
