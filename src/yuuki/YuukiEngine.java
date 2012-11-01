@@ -5,6 +5,9 @@
 
 package yuuki;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import yuuki.ui.Interactable;
 import yuuki.battle.Battle;
 
@@ -27,16 +30,23 @@ public class YuukiEngine implements Runnable {
 	 * @param args Command line arguments. Not used.
 	 */
 	public static void main(String[] args) {
-		YuukiEngine gameEngine = new YuukiEngine();
+		InputStream in = System.in;
+		OutputStream out = System.out;
+		OutputStream error = System.err;
+		YuukiEngine gameEngine = new YuukiEngine(in, out, error);
 		Thread gameThread = new Thread(gameEngine);
 		gameThread.start();
 	}
 	
 	/**
-	 * Creates a new YuukiEngine with a UI that uses only the console.
+	 * Creates a new YuukiEngine with a UI that uses only streams.
+	 *
+	 * @param in The input stream.
+	 * @param out The output stream.
+	 * @param error The error stream.
 	 */
-	public YuukiEngine() {
-		ui = new StreamInterface(System.in, System.out, System.err);
+	public YuukiEngine(InputStream in, OutputStream out, OutputStreamm error) {
+		ui = new StreamInterface(in, out, error);
 		battleEngine = null;
 	}
 	
