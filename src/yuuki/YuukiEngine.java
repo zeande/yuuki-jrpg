@@ -65,56 +65,39 @@ public class YuukiEngine implements Runnable {
 			ArrayList<Buff> activeBuffs = c.getBuffs();
 			switch (battleEngine.getLastState()) {
 				case STARTING_TURN:
-					ui.display(c, "It looks like I'm up next.");
+					outputTurnStart();
 					break;
 					
 				case GETTING_ACTION:
-					ui.showActionPreperation(a);
+					outputActionGet();
 					break;
 					
 				case APPLYING_ACTION:
-					if (a.wasSuccessful()) {
-						Character o = a.getOrigin();
-						ui.showDamage(o, o.getMP(), (int)a.getCost());
-						ui.showActionUse(a);
-						// show the damage done to all targets
-						// ui.showDamage() - for all targets
-						if (a.getOriginBuff() != null) {
-							ui.showBuffActivation(a.getOriginBuff());
-						}
-						if (a.getTargetBuff() != null) {
-							ui.showBuffActivation(a.getTargetBuff());
-						}
-					} else {
-						ui.showActionFailure(a);
-					}
+					outputActionApplication();
 					break;
 					
 				case APPLYING_BUFFS:
-					for (Buff b: activeBuffs) {
-						ui.showBuffApplication(b);
-					}
+					outputBuffApplication();
 					break;
 					
 				case CHECKING_DEATH:
-					ArrayList<Character> removed;
-					removed = battleEngine.getRemovedFighters();
-					for (Character gone: removed) {
-						ui.showCharacterRemoval(gone);
-					}
+					outputDeathCheck();
 					break;
 					
 				case ENDING_TURN:
+					outputTeamDeathCheck();
 					break;
 					
 				case CHECKING_VICTORY:
+					// not sure we care about this state
 					break;
 					
 				case LOOTING:
+					outputLoot();
 					break;
 			}
 			if (battleEngine.getState() == Battle.State.ENDING) {
-			
+				outputVictory();
 			}
 		}
 	}
@@ -160,4 +143,66 @@ public class YuukiEngine implements Runnable {
 											def, agi, acc, mag, luk, xpb);
 		return c;
 	}
+	
+	private void outputTurnStart() {
+		Character c = battleEngine.getCurrentFighter();
+		int recoveredMana = battleEngine.getRecoveredMana();
+		ui.display(c, "It looks like I'm up next.");
+		ArrayList<Buff> expiredBuffs = c.getExpiredBuffs();
+		for (Buff expired: expiredBuffs) {
+			ui.showBuffDeactivation(expired);
+		}
+		ui.showRecovery(c, c.getMP(), recoveredMana);
+	}
+	
+	private void outputActionGet() {
+		Action a = battleEngine.getLastAction();
+		ui.showActionPreperation(a);
+	}
+	
+	private void outputActionApplication() {
+		Action a = battleEngine.getLastAction();
+		if (a.wasSuccessful()) {
+			Character o = a.getOrigin();
+			ui.showDamage(o, o.getMP(), (int)a.getCost());
+			ui.showActionUse(a);
+			int[] effects = a.getActualEffects();
+			Character[] targets = a.getTargets();
+			for (i = 0; i < effects.length; i++) {
+				Character t = targets[i];
+				int damage = effects[i];
+				// assume it's damage to HP
+				ui.showDamage(t, t.getHP(), damage);
+			}
+			if (a.getOriginBuff() != null) {
+				ui.showBuffActivation(a.getOriginBuff());
+			}
+			if (a.getTargetBuff() != null) {
+				ui.showBuffActivation(a.getTargetBuff());
+			}
+		} else {
+			ui.showActionFailure(a);
+		}
+	}
+	
+	private void outputBuffApplication() {
+		Character currentFighter = battleEngine.getCurrentFighter();
+		ArrayList<Buff> buffs = currentFighter.getBuffs();
+		for (Buff b: activeBuffs) {
+			ui.showBuffApplication(b);
+		}
+	}
+	
+	private void outputDeathCheck() {
+		ArrayList<Character> removed = battleEngine.getRemovedFighters();
+		for (Character c: removed) {
+			ui.showCharacterRemoval(c);
+		}
+	}
+	
+	private void outputTeamDeathCheck() {}
+	
+	private void outputLoot() {}
+	
+	private void outputVictory() {}
 }
