@@ -5,7 +5,7 @@
 
 package yuuki.entity;
 
-public class VariableStat extends Stat {
+public class VariableStat extends Stat implements Cloneable {
 
 	/**
 	 * The current value of this Stat.
@@ -15,13 +15,22 @@ public class VariableStat extends Stat {
 	/**
 	 * Allocates a new VariableStat. The current value is immediately set to 0.
 	 *
-	 * @param character The Character this VariableStat is attached to.
+	 * @param name The name of this VariableStat.
 	 * @param base The base value of this VariableStat.
 	 * @param gain The amount this VariableStat gains every level.
 	 */
-	public VariableStat(int base, int gain) {
-		super(base, gain);
+	public VariableStat(String name, int base, int gain) {
+		super(name, base, gain);
 		currentValue = 0;
+	}
+	
+	/**
+	 * Creates a clone of this VariableStat.
+	 *
+	 * @return The clone.
+	 */
+	public VariableStat clone() {
+		return (VariableStat) super.clone();
 	}
 	
 	/**

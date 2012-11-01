@@ -41,4 +41,14 @@ public abstract class Skill extends Action implements Cloneable {
 		}
 	}
 	
+	/**
+	 * Sets the cost stat to a mana stat from a character.
+	 *
+	 * @param c The character to set the cost stat from.
+	 */
+	@Override
+	protected void setCostStat(Character c) {
+		costStat = c.getMP().clone();
+	}
+	
 }
