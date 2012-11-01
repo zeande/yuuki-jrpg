@@ -398,7 +398,7 @@ public abstract class Character {
 	 * Clears the expired buffs list.
 	 */
 	public void emptyExpiredBuffs() {
-		expiredBuffs.empty();
+		expiredBuffs.clear();
 	}
 	
 	/**

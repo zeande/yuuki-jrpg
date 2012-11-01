@@ -376,7 +376,7 @@ public class Battle {
 		for (int i = 0; i < removedFighters.size(); i++) {
 			f.stopFighting();
 		}
-		removedFighters.empty();
+		removedFighters.clear();
 	}
 	
 	/**

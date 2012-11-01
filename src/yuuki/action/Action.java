@@ -94,7 +94,7 @@ public abstract class Action implements Cloneable {
 		this.targetBuff = targetBuff;
 		this.originBuff = originBuff;
 		targets = new ArrayList<Character>();
-		actualAffects = new int[0];
+		actualEffects = new int[0];
 		origin = null;
 		affectedTeams = new HashSet<Integer>();
 	}
