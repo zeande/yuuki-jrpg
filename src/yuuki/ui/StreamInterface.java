@@ -15,6 +15,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 import yuuki.entity.Character;
+import yuuki.entity.Stat;
 import yuuki.buff.Buff;
 import yuuki.action.Action;
 
@@ -134,8 +135,8 @@ public class StreamInterface implements Interactable {
 		boolean inOptions = true;
 		while (inOptions) {
 			String[] choices = {"Back to main menu"};
-			int input = getChoice("Enter option", choices);
-			if (input == 0) {
+			int opt = getChoice("Enter option", choices);
+			if (opt == 0) {
 				inOptions = false;
 			}
 		}
@@ -580,7 +581,7 @@ public class StreamInterface implements Interactable {
 	 * @return A number in the given range.
 	 */
 	@Override
-	public int getDouble(String prompt, double min, double max) {
+	public double getDouble(String prompt, double min, double max) {
 		double input = 0.0;
 		boolean inputIsGood = false;
 		while (!inputIsGood) {
@@ -653,7 +654,7 @@ public class StreamInterface implements Interactable {
 	 */
 	public boolean confirm(String prompt, String yes, String no) {
 		String[] options = {yes, no};
-		return (getChoice(prompt, options) == 0)
+		return (getChoice(prompt, options) == 0);
 	}
 	
 	/**
@@ -661,7 +662,7 @@ public class StreamInterface implements Interactable {
 	 *
 	 * @param f The character to show.
 	 */
-	private void showStatus(Character f) {
+	private void showStats(Character f) {
 		print(f.getName() + " (");
 		print("Team " + f.getTeamId());
 		println(", Fighter " + f.getFighterId() + ")");
@@ -692,12 +693,12 @@ public class StreamInterface implements Interactable {
 	 *
 	 * @param fighters The fighting characters.
 	 */
-	private void showBattleScreen(Character[][] fighters) {
+	private void showBattleIntro(Character[][] fighters) {
 		String vsMsg = "";
 		for (int i = 0; i < fighters.length; i++) {
 			vsMsg += "Team " + fighters[i][0].getName();
 			if (i + 1 < fighters.length) {
-				vsMsg += " vs. "
+				vsMsg += " vs. ";
 			}
 		}
 		vsMsg += "!";

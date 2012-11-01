@@ -170,14 +170,14 @@ public class BattleTest {
 	private Character makeChar1() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
-		hp = new VariableStat(0, 1);
-		mp = new VariableStat(10, 3);
-		str = new Stat(5, 1);
-		def = new Stat(5, 1);
-		agi = new Stat(5, 1);
-		acc = new Stat(5, 1);
-		mag = new Stat(5, 1);
-		luk = new Stat(5, 1);
+		hp = new VariableStat("health", 0, 1);
+		mp = new VariableStat("mana", 10, 3);
+		str = new Stat("strength", 5, 1);
+		def = new Stat("defense", 5, 1);
+		agi = new Stat("agility", 5, 1);
+		acc = new Stat("accuracy", 5, 1);
+		mag = new Stat("magic", 5, 1);
+		luk = new Stat("luck", 5, 1);
 		Action[] moves = new Action[2];
 		moves[0] = new BasicAttack(1.0);
 		moves[1] = new BasicDefense(10);
@@ -191,14 +191,14 @@ public class BattleTest {
 	private Character makeChar2() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
-		hp = new VariableStat(0, 1);
-		mp = new VariableStat(10, 3);
-		str = new Stat(5, 1);
-		def = new Stat(5, 1);
-		agi = new Stat(5, 1);
-		acc = new Stat(5, 1);
-		mag = new Stat(5, 1);
-		luk = new Stat(5, 1);
+		hp = new VariableStat("health", 0, 1);
+		mp = new VariableStat("mana", 10, 3);
+		str = new Stat("strength", 5, 1);
+		def = new Stat("defense", 5, 1);
+		agi = new Stat("agility", 5, 1);
+		acc = new Stat("accuracy", 5, 1);
+		mag = new Stat("magic", 5, 1);
+		luk = new Stat("luck", 5, 1);
 		Action[] moves = new Action[2];
 		moves[0] = new BasicAttack(1.0);
 		moves[1] = new BasicDefense(3);

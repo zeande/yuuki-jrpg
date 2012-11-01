@@ -5,6 +5,8 @@
 
 package yuuki.entity;
 
+import java.util.ArrayList;
+
 import yuuki.action.Action;
 
 public class NonPlayerCharacter extends Character {

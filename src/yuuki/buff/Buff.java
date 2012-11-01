@@ -75,6 +75,15 @@ public abstract class Buff implements Cloneable {
 	}
 	
 	/**
+	 * Gets the target.
+	 *
+	 * @return The target.
+	 */
+	public Character getTarget() {
+		return this.target;
+	}
+	
+	/**
 	 * Applies this buff's effect to its target Character. The effects are
 	 * applied by calling applyEffects(). If this is the first time this buff
 	 * is being applied, applyActivationEffects() is also called. If this is

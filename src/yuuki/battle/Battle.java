@@ -374,6 +374,7 @@ public class Battle {
 	 */
 	private void emptyRemovedFighters() {
 		for (int i = 0; i < removedFighters.size(); i++) {
+			Character f = removedFighters.get(i);
 			f.stopFighting();
 		}
 		removedFighters.clear();

@@ -5,6 +5,7 @@
 package yuuki.ui;
 
 import yuuki.entity.Character;
+import yuuki.entity.Stat;
 import yuuki.buff.Buff;
 import yuuki.action.Action;
 

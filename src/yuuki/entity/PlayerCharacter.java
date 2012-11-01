@@ -2,6 +2,10 @@
  * A Character that can be controlled by the interface.
  */
 
+package yuuki.entity;
+
+import java.util.ArrayList;
+
 import yuuki.action.Action;
 import yuuki.util.ObjectMessenger;
 

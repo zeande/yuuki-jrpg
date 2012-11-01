@@ -3,6 +3,8 @@
  * it.
  */
 
+package yuuki.util;
+
 public class ObjectMessenger<T> {
 
 	/**
