@@ -18,6 +18,8 @@
 	<property name="BUFF" value="yuuki/buff" />
 	<property name="ACTION" value="yuuki/action" />
 	<property name="ENTITY" value="yuuki/entity" />
+	<property name="UI" value="yuuki/ui" />
+	<property name="UTIL" value="yuuki/util" />
 	
 	<!-- other properties -->
 	<property name="warnings" value="all" />
@@ -29,9 +31,16 @@
 	
 	<!-- PUBLIC TARGETS -->
 	
+	<target name="test-main" depends="debug,main">
+		<antcall target="-test">
+			<param name="TEST_CLASS" value="yuuki.YuukiEngine" />
+		</antcall>
+	</target>
+	
 	<target name="test-battle" depends="debug,battle">
-		<java classname="yuuki.battle.BattleTest" classpath="${BUILD_ROOT}" fork="true" errorproperty="RUN_ERR" />
-		<echo message="${RUN_ERR}" />
+		<antcall target="-test">
+			<param name="TEST_CLASS" value="yuuki.battle.BattleTest" />
+		</antcall>
 	</target>
 	
 	<target name="debug">
@@ -42,11 +51,30 @@
 		<delete dir="${DIST_ROOT}" />
 	</target>
 	
-	<target name="all" depends="gui,battle"></target>
+	<target name="all" depends="main,gui"></target>
 	
 	<target name="gui">
 		<antcall target="-build">
 			<param name="PACKAGE" value="${GUI}" />
+		</antcall>
+	</target>
+	
+	<target name="main" depends="battle,ui,util">
+		<antcall target="-build">
+			<param name="PACKAGE" value="yuuki" />
+			<param name="NAME" value="YuukiEngine" />
+		</antcall>
+	</target>
+	
+	<target name="util">
+		<antcall target="-build">
+			<param name="PACKAGE" value="${UTIL}" />
+		</antcall>
+	</target>
+	
+	<target name="ui" depends="buff,action,entity">
+		<antcall target="-build">
+			<param name="PACKAGE" value="${UI}" />
 		</antcall>
 	</target>
 	
@@ -114,8 +142,8 @@
 	
 	<!-- PRIVATE TARGETS -->
 	
-	<!-- requires one param: -->
 	<!-- PACKAGE - The path of the package to build -->
+	<!-- NAME - The name of the source file. Leave blank for all in package -->
 	<target name="-build">
 		<mkdir dir="${BUILD_ROOT}" />
 		<condition property="debug.on" value="on" else="off">
@@ -124,11 +152,20 @@
 		<condition property="debug.level" value="${DEBUG_TYPE}">
 			<isset property="DEBUG_TYPE" />
 		</condition>
+		<condition property="source.name" value="${NAME}" else="*">
+			<isset property="NAME" />
+		</condition>
 		<javac includeantruntime="false" srcdir="${SOURCE_ROOT}" destdir="${BUILD_ROOT}" debug="${debug.on}" debuglevel="${debug.level}">
 			<compilerarg value="-Werror" />
 			<compilerarg value="-Xlint:${warning_count}" />
-			<include name="${PACKAGE}/*.java" />
+			<include name="${PACKAGE}/${source.name}.java" />
 		</javac>
+	</target>
+	
+	<!-- TEST_CLASS - The class to test -->
+	<target name="-test">
+		<java classname="${TEST_CLASS}" classpath="${BUILD_ROOT}" fork="true" errorproperty="RUN_ERR" />
+		<echo message="${RUN_ERR}" />
 	</target>
 	
 	<!-- Requires two params: -->
