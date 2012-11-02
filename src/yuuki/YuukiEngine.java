@@ -216,7 +216,10 @@ public class YuukiEngine implements Runnable {
 		for (Buff expired: expiredBuffs) {
 			ui.showBuffDeactivation(expired);
 		}
-		ui.showRecovery(c, c.getMP(), recoveredMana);
+		if (recoveredMana != 0) {
+			ui.showRecovery(c, c.getMP(), recoveredMana);
+		}
+		ui.showStatUpdate(c);
 	}
 	
 	/**
@@ -239,15 +242,12 @@ public class YuukiEngine implements Runnable {
 	private void outputActionApplication(Battle battle) {
 		Action a = battle.getLastAction();
 		if (a.wasSuccessful()) {
-			Character o = a.getOrigin();
-			ui.showDamage(o, a.getCostStat(), (int)a.getCost());
+			if (a.getCostStat() != null) {
+				outputActionCost(a);
+			}
 			ui.showActionUse(a);
-			int[] effects = a.getActualEffects();
-			Character[] targets = a.getTargets();
-			for (int i = 0; i < effects.length; i++) {
-				Character t = targets[i];
-				int damage = effects[i];
-				ui.showDamage(t, a.getEffectStat(), damage);
+			if (a.getEffectStat() != null) {
+				outputActionEffects(a);
 			}
 			if (a.getOriginBuff() != null) {
 				ui.showBuffActivation(a.getOriginBuff());
@@ -257,6 +257,32 @@ public class YuukiEngine implements Runnable {
 			}
 		} else {
 			ui.showActionFailure(a);
+		}
+	}
+	
+	/**
+	 * Outputs the results of an action cost to the user interface.
+	 *
+	 * @param action The Action to output.
+	 */
+	private void outputActionCost(Action a) {
+		ui.showDamage(a.getOrigin(), a.getCostStat(), (int)a.getCost());
+		ui.showStatUpdate(a.getOrigin());
+	}
+	
+	/**
+	 * Outputs the effects of an action to the user interface.
+	 *
+	 * @param a The Action to output.
+	 */
+	private void outputActionEffects(Action a) {
+		int[] effects = a.getActualEffects();
+		Character[] targets = a.getTargets();
+		for (int i = 0; i < effects.length; i++) {
+			Character t = targets[i];
+			int damage = effects[i];
+			ui.showDamage(t, a.getEffectStat(), damage);
+			ui.showStatUpdate(t);
 		}
 	}
 	
@@ -271,6 +297,7 @@ public class YuukiEngine implements Runnable {
 		ArrayList<Buff> buffs = currentFighter.getBuffs();
 		for (Buff b: buffs) {
 			ui.showBuffApplication(b);
+			ui.showStatUpdate(currentFighter);
 		}
 	}
 	

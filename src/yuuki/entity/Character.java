@@ -144,9 +144,6 @@ public abstract class Character {
 		}
 		hp.restore(level);
 		mp.restore(level);
-		for (int i = 0; i < moves.length; i++) {
-			moves[i].setOrigin(this);
-		}
 		this.name = name;
 		this.level = level;
 		this.moves = moves;
@@ -161,6 +158,9 @@ public abstract class Character {
 		this.xp = Character.getRequiredXP(level);
 		this.fighterId = -1;
 		this.teamId = -1;
+		for (int i = 0; i < moves.length; i++) {
+			moves[i].setOrigin(this);
+		}
 	}
 	
 	/**

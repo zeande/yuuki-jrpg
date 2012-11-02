@@ -251,7 +251,7 @@ public class StreamInterface implements Interactable {
 			return;
 		}
 		String msg = fighter.getName() + " recovered " + amount;
-		msg += stat.getName();
+		msg += " " + stat.getName();
 		println(msg);
 		pause();
 	}
@@ -269,7 +269,7 @@ public class StreamInterface implements Interactable {
 			return;
 		}
 		String msg = fighter.getName() + " recovered " + amount;
-		msg += stat.getName();
+		msg += " " + stat.getName();
 		println(msg);
 		pause();
 	}
@@ -287,18 +287,21 @@ public class StreamInterface implements Interactable {
 		String name = action.getOrigin().getName();
 		Character[] targets = action.getTargets();
 		print(name + " is getting ready to use " + action.getName());
-		print(" on");
-		for (int i = 0; i < targets.length; i++) {
-			print(" " + targets[i]);
-			if (i + 1 < targets.length) {
-				if (targets.length > 2) {
-					print(",");
-				}
-				if (i + 1 + 1 == targets.length) {
-					print(" and");
+		if (targets.length > 0) {
+			print(" on");
+			for (int i = 0; i < targets.length; i++) {
+				print(" " + targets[i].getName());
+				if (i + 1 < targets.length) {
+					if (targets.length > 2) {
+						print(",");
+					}
+					if (i + 1 + 1 == targets.length) {
+						print(" and");
+					}
 				}
 			}
 		}
+		println();
 		pause();
 	}
 	

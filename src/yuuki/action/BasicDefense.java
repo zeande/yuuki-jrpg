@@ -51,6 +51,12 @@ public class BasicDefense extends Action implements Cloneable {
 	}
 	
 	/**
+	 * Has no effect, as adding a target makes no sense.
+	 */
+	@Override
+	public void addTarget(Character t) {}
+	
+	/**
 	 * Has no effect, as BasicDefense does not cost anything.
 	 */
 	@Override
