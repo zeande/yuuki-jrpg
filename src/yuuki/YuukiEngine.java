@@ -164,9 +164,7 @@ public class YuukiEngine implements Runnable {
 		acc = new Stat("accuracy", 5, 1);
 		mag = new Stat("magic", 5, 1);
 		luk = new Stat("luck", 5, 1);
-		Action[] moves = new Action[2];
-		moves[0] = new BasicAttack(1.0);
-		moves[1] = new BasicDefense(10);
+		Action[] moves = createBasicMoveSet();
 		int lvl = 5;
 		int xpb = 5;
 		NonPlayerCharacter c = null;
@@ -191,15 +189,24 @@ public class YuukiEngine implements Runnable {
 		acc = new Stat("accuracy", 5, 1);
 		mag = new Stat("magic", 5, 1);
 		luk = new Stat("luck", 5, 1);
-		Action[] moves = new Action[2];
-		moves[0] = new BasicAttack(1.0);
-		moves[1] = new BasicDefense(3);
+		Action[] moves = createBasicMoveSet();
 		int lvl = 5;
 		int xpb = 5;
 		NonPlayerCharacter c = null;
 		c = new NonPlayerCharacter("Jill", lvl, moves, hp, mp, str, def, agi,
 									acc, mag, luk, xpb);
 		return c;
+	}
+	
+	/**
+	 * Creates the basic move set.
+	 *
+	 * @return The basic move set.
+	 */
+	private Action[] createBasicMoveSet() {
+		Action[] moves = new Action[2];
+		moves[0] = new BasicAttack(1.0);
+		moves[1] = new BasicDefense(1);
 	}
 	
 	/**
