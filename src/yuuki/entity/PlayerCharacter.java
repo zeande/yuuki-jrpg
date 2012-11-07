@@ -7,14 +7,14 @@ package yuuki.entity;
 import java.util.ArrayList;
 
 import yuuki.action.Action;
-import yuuki.util.ObjectMessenger;
+import yuuki.ui.Interactable;
 
 public class PlayerCharacter extends Character {
 
 	/**
-	 * A reference from which this Character can get its Action from.
+	 * A reference to the user interface for this PC to get its moves from.
 	 */
-	private ObjectMessenger<Action> actionLink;
+	private Interactable ui;
 
 	/**
 	 * Allocates a new Character. Most stats are set manually, but experience
@@ -33,34 +33,39 @@ public class PlayerCharacter extends Character {
 	 * @param accuracy The Character's ability to hit.
 	 * @param magic The magical ability of the Character.
 	 * @param luck The ability of the Character to get a critical hit.
-	 * @param actionLink An ActionMessenger that serves as move input.
+	 * @param ui The interface that this Character should get input from.
 	 */
 	public PlayerCharacter(String name, int level, Action[] moves,
 					VariableStat hp, VariableStat mp, Stat strength,
 					Stat defense, Stat agility, Stat accuracy, Stat magic,
-					Stat luck, ObjectMessenger<Action> actionLink) {
+					Stat luck, Interactable ui) {
 		super(name, level, moves, hp, mp, strength, defense, agility, accuracy,
 				magic, luck);
-		this.actionLink = actionLink;
+		this.ui = ui;
 	}
 	
 	/**
 	 * Decides what move to do next based on input from the interface.
 	 *
-	 * @param fighters The states of the other players. This is ignored.
+	 * @param fighters The states of the players, including this one.
 	 *
-	 * @return The move that was selected by the interface, otherwise null if
-	 * this PlayerCharacter is still waiting for one.
+	 * @return The move that was selected by the player.
 	 */
-	public Action getNextAction(ArrayList<ArrayList<Character>> fighters) {
-		Action a = null;
-		if (actionLink.optionReady()) {
-			a = actionLink.getOption().clone();
-			actionLink.resetOption();
-		} else {
-			actionLink.setChoices(moves);
-		}
-		return a;
+	protected Action selectAction(ArrayList<ArrayList<Character>> fighters) {
+		int index = ui.selectAction(moves);
+		return moves[index].clone();
+	}
+	
+	/**
+	 * Selects the target of an action based on the other players.
+	 *
+	 * @param fighters The states of the other players.
+	 *
+	 * @return The target.
+	 */
+	protected Character selectTarget(
+				ArrayList<ArrayList<Character>> fighters) {
+		return ui.selectTarget(fighters);
 	}
 
 }

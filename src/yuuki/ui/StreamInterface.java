@@ -13,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import yuuki.entity.Character;
 import yuuki.entity.Stat;
@@ -285,17 +286,17 @@ public class StreamInterface implements Interactable {
 			return;
 		}
 		String name = action.getOrigin().getName();
-		Character[] targets = action.getTargets();
+		ArrayList<Character> targets = action.getTargets();
 		print(name + " is getting ready to use " + action.getName());
-		if (targets.length > 0) {
+		if (targets.size() > 0) {
 			print(" on");
-			for (int i = 0; i < targets.length; i++) {
-				print(" " + targets[i].getName());
-				if (i + 1 < targets.length) {
-					if (targets.length > 2) {
+			for (int i = 0; i < targets.size(); i++) {
+				print(" " + targets.get(i).getName());
+				if (i + 1 < targets.size()) {
+					if (targets.size() > 2) {
 						print(",");
 					}
-					if (i + 1 + 1 == targets.length) {
+					if (i + 1 + 1 == targets.size()) {
 						print(" and");
 					}
 				}
@@ -447,13 +448,17 @@ public class StreamInterface implements Interactable {
 	 */
 	@Override
 	public String getString(String prompt) {
-		print(prompt + ": ");
 		String input = null;
 		while (input == null) {
+			print(prompt + ": ");
+			flush();
 			try {
 				input = stdin.readLine();
 			} catch(IOException e) {
 				e.printStackTrace();
+			}
+			if (input.equals("")) {
+				input = null;
 			}
 		}
 		return input;
@@ -623,15 +628,15 @@ public class StreamInterface implements Interactable {
 	@Override
 	public int getChoice(String prompt, String[] options) {
 		int choice = 0;
-		String builtPrompt = "";
+		String builtPrompt = "OPTION:\n";
 		for (int i = 0; i < options.length; i++) {
-			builtPrompt += i;
+			builtPrompt += (i + 1);
 			builtPrompt += " - ";
 			builtPrompt += options[i];
 			builtPrompt += '\n';
 		}
 		builtPrompt += prompt;
-		choice = getInt(builtPrompt, 0, options.length - 1);
+		choice = getInt(builtPrompt, 1, options.length) - 1;
 		return choice;
 	}
 	
@@ -660,6 +665,44 @@ public class StreamInterface implements Interactable {
 	public boolean confirm(String prompt, String yes, String no) {
 		String[] options = {yes, no};
 		return (getChoice(prompt, options) == 0);
+	}
+	
+	/**
+	 * Gets the action that a player wishes to do.
+	 *
+	 * @param moves The moves from which the player may select.
+	 *
+	 * @return The index of the selected Action.
+	 */
+	public int selectAction(Action[] moves) {
+		String[] moveNames = new String[moves.length];
+		for (int i = 0; i < moves.length; i++) {
+			moveNames[i] = moves[i].getName();
+		}
+		return getChoice("Select a move", moveNames);
+	}
+	
+	/**
+	 * Gets the target of a move.
+	 *
+	 * @param fighters The characters to select from.
+	 *
+	 * @return The selected target.
+	 */
+	public Character selectTarget(ArrayList<ArrayList<Character>> fighters) {
+		ArrayList<String> charNames = new ArrayList<String>();
+		ArrayList<Character> chars = new ArrayList<Character>();
+		for (int i = 0; i < fighters.size(); i++) {
+			ArrayList<Character> team = fighters.get(i);
+			for (int j = 0; j < team.size(); j++) {
+				Character c = team.get(j);
+				chars.add(c);
+				charNames.add(c.getName() + " on team " + i);
+			}
+		}
+		String[] charNamesArr = charNames.toArray(new String[0]);
+		int index = getChoice("Select a target", charNamesArr);
+		return chars.get(index);
 	}
 	
 	/**
@@ -747,6 +790,17 @@ public class StreamInterface implements Interactable {
 	}
 	
 	/**
+	 * Flushes stdout.
+	 */
+	private void flush() {
+		try {
+			stdout.flush();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Prints a message to stdout and ends the line.
 	 *
 	 * @param message The message to print.
@@ -772,6 +826,7 @@ public class StreamInterface implements Interactable {
 	 * Pauses the action until the user presses the enter key.
 	 */
 	private void pause() {
+		println("(press enter to continue)");
 		try {
 			stdin.readLine();
 		} catch(IOException e) {
@@ -787,6 +842,7 @@ public class StreamInterface implements Interactable {
 	private void warn(String message) {
 		try {
 			stderr.write(message);
+			stderr.newLine();
 			stderr.flush();
 		} catch(IOException e) {
 			e.printStackTrace();

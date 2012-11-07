@@ -51,6 +51,17 @@ public class BasicDefense extends Action implements Cloneable {
 	}
 	
 	/**
+	 * Sets the performer of this Action. This also sets the target.
+	 *
+	 * @param performer The Character performing the action.
+	 */
+	@Override
+	public void setOrigin(Character performer) {
+		super.setOrigin(performer);
+		super.addTarget(performer);
+	}
+	
+	/**
 	 * Has no effect, as adding a target makes no sense.
 	 */
 	@Override

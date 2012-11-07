@@ -228,8 +228,7 @@ public abstract class Action implements Cloneable {
 	 * @return An array containing the targets, which will be empty if no
 	 * targets have been set.
 	 */
-	public Character[] getTargets() {
-		Character[] targets = this.targets.toArray(new Character[0]);
+	public ArrayList<Character> getTargets() {
 		return targets;
 	}
 	

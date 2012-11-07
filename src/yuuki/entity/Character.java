@@ -416,11 +416,37 @@ public abstract class Character {
 	 *
 	 * @param fighters The states of the other players.
 	 *
-	 * @return The move that this Character wishes to perform if it can decide
-	 * immediately; otherwise, null if this Character requires input to make a
-	 * decidion.
+	 * @return The move that this Character wishes to perform.
 	 */
-	public abstract Action getNextAction(ArrayList<ArrayList<Character>> fighters);
+	public Action getNextAction(
+				ArrayList<ArrayList<Character>> fighters) {
+		Action m = selectAction(fighters);
+		if (m.getTargets().isEmpty()) {
+			m.addTarget(selectTarget(fighters));
+		}
+		return m;
+	}
+	
+	/**
+	 * Selects the Action to do based on the other players. The action's
+	 * target is not set.
+	 *
+	 * @param fighters The states of the other players.
+	 *
+	 * @return The selected Action without a target.
+	 */
+	protected abstract Action selectAction(
+				ArrayList<ArrayList<Character>> fighters);
+	
+	/**
+	 * Selects the target of an action based on the other players.
+	 *
+	 * @param fighters The states of the other players.
+	 *
+	 * @return The target.
+	 */
+	protected abstract Character selectTarget(
+				ArrayList<ArrayList<Character>> fighters);
 	
 	/**
 	 * Gets the moves that this Character knows.

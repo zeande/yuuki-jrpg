@@ -4,6 +4,8 @@
 
 package yuuki.ui;
 
+import java.util.ArrayList;
+
 import yuuki.entity.Character;
 import yuuki.entity.Stat;
 import yuuki.buff.Buff;
@@ -277,6 +279,24 @@ public interface Interactable {
 	 * @return True if the user chose the yes text; otherwise false.
 	 */
 	public boolean confirm(String prompt, String yes, String no);
+	
+	/**
+	 * Gets the action that a player wishes to do.
+	 *
+	 * @param moves The moves from which the player may select.
+	 *
+	 * @return The index of the selected Action.
+	 */
+	public int selectAction(Action[] moves);
+	
+	/**
+	 * Gets the target of a move.
+	 *
+	 * @param fighters The characters to select from.
+	 *
+	 * @return The selected target.
+	 */
+	public Character selectTarget(ArrayList<ArrayList<Character>> fighters);
 	
 	/**
 	 * Plays a sound from an audio file.

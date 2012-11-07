@@ -131,9 +131,7 @@ public class Battle {
 			case GETTING_ACTION:
 				getCurrentFighter().emptyExpiredBuffs();
 				lastAction = getCurrentFighter().getNextAction(fighters);
-				if (lastAction != null) {
-					state = State.APPLYING_ACTION;
-				}
+				state = State.APPLYING_ACTION;
 				break;
 
 			case APPLYING_ACTION:
@@ -271,7 +269,7 @@ public class Battle {
 	 * Removes the targeted fighter if he is now dead.
 	 */
 	private void checkDeath() {
-		Character[] targets = lastAction.getTargets();
+		ArrayList<Character> targets = lastAction.getTargets();
 		for (Character c: targets) {
 			if (!c.isAlive()) {
 				removeFighter(c);

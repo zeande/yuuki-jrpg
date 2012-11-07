@@ -25,6 +25,11 @@ public class YuukiEngine implements Runnable {
 	private Interactable ui;
 	
 	/**
+	 * The player character.
+	 */
+	private PlayerCharacter player;
+	
+	/**
 	 * Program execution hook. Creates a new thread in which to execute the
 	 * game engine in and then starts the thread.
 	 *
@@ -57,9 +62,10 @@ public class YuukiEngine implements Runnable {
 		boolean stillFighting = true;
 		ui.initialize();
 		ui.switchToIntroScreen();
+		createPlayer(10);
 		ui.switchToOverworldScreen();
 		while (stillFighting) {
-			battleOneOnOne(createJack(), createJill());
+			battleOneOnOne(player, createJill());
 			stillFighting = ui.confirm("Battle again?", "Yes", "No");
 		}
 		ui.switchToEndingScreen();
@@ -149,6 +155,134 @@ public class YuukiEngine implements Runnable {
 	}
 	
 	/**
+	 * Creates the player character.
+	 *
+	 * @param level The level of the player.
+	 */
+	private void createPlayer(int level) {
+		String name = ui.getString("Enter player name");
+		VariableStat hp = createHealthStat(0, 1);
+		VariableStat mp = createManaStat(0, 1);
+		Stat str = createStrengthStat(5, 1);
+		Stat def = createDefenseStat(5, 1);
+		Stat agi = createAgilityStat(5, 1);
+		Stat acc = createAccuracyStat(5, 1);
+		Stat mag = createMagicStat(5, 1);
+		Stat luk = createLuckStat(5, 1);
+		Action moves[] = createPlayerMoveSet();
+		this.player = new PlayerCharacter(name, level, moves, hp, mp, str, def,
+											agi, acc, mag, luk, ui);
+	}
+	
+	/**
+	 * Creates the move set for the player.
+	 *
+	 * @return The move set.
+	 */
+	private Action[] createPlayerMoveSet() {
+		Action[] moves = new Action[2];
+		moves[0] = new BasicAttack(3.0);
+		moves[1] = new BasicDefense(1);
+		return moves;
+	}
+	
+	/**
+	 * Creates the health stat.
+	 *
+	 * @param base The base value.
+	 * @param gain The gain per level.
+	 *
+	 * @return The new stat.
+	 */
+	private VariableStat createHealthStat(int base, int gain) {
+		return new VariableStat("health", base, gain);
+	}
+	
+	/**
+	 * Creates the mana stat.
+	 *
+	 * @param base The base value.
+	 * @param gain The gain per level.
+	 *
+	 * @return The new stat.
+	 */
+	private VariableStat createManaStat(int base, int gain) {
+		return new VariableStat("mana", base, gain);
+	}
+	
+	/**
+	 * Creates the strength stat.
+	 *
+	 * @param base The base value.
+	 * @param gain The gain per level.
+	 *
+	 * @return The new stat.
+	 */
+	private Stat createStrengthStat(int base, int gain) {
+		return new VariableStat("strength", base, gain);
+	}
+	
+	/**
+	 * Creates the defense stat.
+	 *
+	 * @param base The base value.
+	 * @param gain The gain per level.
+	 *
+	 * @return The new stat.
+	 */
+	private Stat createDefenseStat(int base, int gain) {
+		return new VariableStat("defense", base, gain);
+	}
+	
+	/**
+	 * Creates the agility stat.
+	 *
+	 * @param base The base value.
+	 * @param gain The gain per level.
+	 *
+	 * @return The new stat.
+	 */
+	private Stat createAgilityStat(int base, int gain) {
+		return new VariableStat("agility", base, gain);
+	}
+	
+	/**
+	 * Creates the accuracy stat.
+	 *
+	 * @param base The base value.
+	 * @param gain The gain per level.
+	 *
+	 * @return The new stat.
+	 */
+	private Stat createAccuracyStat(int base, int gain) {
+		return new VariableStat("accuracy", base, gain);
+	}
+	
+	/**
+	 * Creates the magic stat.
+	 *
+	 * @param base The base value.
+	 * @param gain The gain per level.
+	 *
+	 * @return The new stat.
+	 */
+	private Stat createMagicStat(int base, int gain) {
+		return new VariableStat("magic", base, gain);
+	}
+	
+	/**
+	 * Creates the luck stat.
+	 *
+	 * @param base The base value.
+	 * @param gain The gain per level.
+	 *
+	 * @return The new stat.
+	 */
+	private Stat createLuckStat(int base, int gain) {
+		return new VariableStat("luck", base, gain);
+	}
+	
+	/**
 	 * Creates the NPC Jack.
 	 *
 	 * @return Jack, the NPC.
@@ -156,14 +290,14 @@ public class YuukiEngine implements Runnable {
 	private NonPlayerCharacter createJack() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
-		hp = new VariableStat("health", 0, 1);
-		mp = new VariableStat("mana", 10, 3);
-		str = new Stat("strength", 5, 1);
-		def = new Stat("defense", 5, 1);
-		agi = new Stat("agility", 5, 1);
-		acc = new Stat("accuracy", 5, 1);
-		mag = new Stat("magic", 5, 1);
-		luk = new Stat("luck", 5, 1);
+		hp = createHealthStat(0, 1);
+		mp = createManaStat(10, 3);
+		str = createStrengthStat(5, 1);
+		def = createDefenseStat(5, 1);
+		agi = createAgilityStat(5, 1);
+		acc = createAccuracyStat(5, 1);
+		mag = createMagicStat(5, 1);
+		luk = createLuckStat(5, 1);
 		Action[] moves = createBasicMoveSet();
 		int lvl = 5;
 		int xpb = 5;
@@ -181,14 +315,14 @@ public class YuukiEngine implements Runnable {
 	private NonPlayerCharacter createJill() {
 		VariableStat hp, mp;
 		Stat str, def, agi, acc, mag, luk;
-		hp = new VariableStat("health", 0, 1);
-		mp = new VariableStat("mana", 10, 3);
-		str = new Stat("strength", 5, 1);
-		def = new Stat("defense", 5, 1);
-		agi = new Stat("agility", 5, 1);
-		acc = new Stat("accuracy", 5, 1);
-		mag = new Stat("magic", 5, 1);
-		luk = new Stat("luck", 5, 1);
+		hp = createHealthStat(0, 1);
+		mp = createManaStat(10, 3);
+		str = createStrengthStat(5, 1);
+		def = createDefenseStat(5, 1);
+		agi = createAgilityStat(5, 1);
+		acc = createAccuracyStat(5, 1);
+		mag = createMagicStat(5, 1);
+		luk = createLuckStat(5, 1);
 		Action[] moves = createBasicMoveSet();
 		int lvl = 5;
 		int xpb = 5;
@@ -207,6 +341,7 @@ public class YuukiEngine implements Runnable {
 		Action[] moves = new Action[2];
 		moves[0] = new BasicAttack(1.0);
 		moves[1] = new BasicDefense(1);
+		return moves;
 	}
 	
 	/**
@@ -284,9 +419,9 @@ public class YuukiEngine implements Runnable {
 	 */
 	private void outputActionEffects(Action a) {
 		int[] effects = a.getActualEffects();
-		Character[] targets = a.getTargets();
+		ArrayList<Character> targets = a.getTargets();
 		for (int i = 0; i < effects.length; i++) {
-			Character t = targets[i];
+			Character t = targets.get(i);
 			int damage = effects[i];
 			ui.showDamage(t, a.getEffectStat(), damage);
 			ui.showStatUpdate(t);

@@ -107,23 +107,32 @@ public class NonPlayerCharacter extends Character {
 	}
 	
 	/**
-	 * Decides what move to do next based on the states of other players in the
-	 * battle.
+	 * Selects the Action to do based on the other players. The action's
+	 * target is not set.
 	 *
 	 * @param fighters The states of the other players.
 	 *
-	 * @return The move that this Character wishes to perform.
+	 * @return The selected Action without a target.
 	 */
-	public Action getNextAction(ArrayList<ArrayList<Character>> fighters) {
+	protected Action selectAction(ArrayList<ArrayList<Character>> fighters) {
 		// TODO: Make intelligent choices based on the battle state
 		int choice = (int) Math.floor(Math.random() * moves.length);
-		Action m = moves[choice].clone();
-		m.clearTargets();
+		return moves[choice].clone();
+	}
+	
+	/**
+	 * Selects the target of an action based on the other players.
+	 *
+	 * @param fighters The states of the other players.
+	 *
+	 * @return The target.
+	 */
+	protected Character selectTarget(
+				ArrayList<ArrayList<Character>> fighters) {
 		int teamId = (int) Math.floor(Math.random() * (fighters.size() - 1));
 		teamId += (teamId >= getTeamId()) ? 1 : 0;
 		ArrayList<Character> team = fighters.get(teamId);
 		int fighterId = (int) Math.floor(Math.random() * team.size());
-		m.addTarget(team.get(fighterId));
-		return m;
+		return team.get(fighterId);
 	}
 }

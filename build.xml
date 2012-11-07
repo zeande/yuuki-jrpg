@@ -164,8 +164,8 @@
 	
 	<!-- TEST_CLASS - The class to test -->
 	<target name="-test">
-		<java classname="${TEST_CLASS}" classpath="${BUILD_ROOT}" fork="true" errorproperty="RUN_ERR" />
-		<echo message="${RUN_ERR}" />
+		<java classname="${TEST_CLASS}" classpath="${BUILD_ROOT}" fork="false" />
+		<!-- <echo message="${RUN_ERR}" /> -->
 	</target>
 	
 	<!-- Requires two params: -->
