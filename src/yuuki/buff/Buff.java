@@ -61,7 +61,6 @@ public abstract class Buff implements Cloneable {
 			b = (Buff) super.clone();
 		} catch(CloneNotSupportedException e) {
 			e.printStackTrace();
-			System.exit(1);
 		}
 		// no deep-clone required
 		return b;
@@ -96,9 +95,10 @@ public abstract class Buff implements Cloneable {
 	 * @return True if this Buff is active after being applied to the target.
 	 */
 	public boolean apply() {
-		checkActivation();
 		checkApplication();
 		checkDeactivation();
+		// check activation last or one-turn buffs are immediately disabled
+		checkActivation();
 		return isActive();
 	}
 	

@@ -147,6 +147,9 @@ public class YuukiEngine implements Runnable {
 				case LOOTING:
 					outputLoot(battle);
 					break;
+					
+				default:
+					break;
 			}
 			if (battle.getState() == Battle.State.ENDING) {
 				outputVictory(battle);

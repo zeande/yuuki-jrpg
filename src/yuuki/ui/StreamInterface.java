@@ -94,7 +94,7 @@ public class StreamInterface implements Interactable {
 	public void initialize() {
 		stdin = new BufferedReader(new InputStreamReader(input));
 		stdout = new BufferedWriter(new OutputStreamWriter(output));
-		stderr = new BufferedWriter(new OutputStreamWriter(output));
+		stderr = new BufferedWriter(new OutputStreamWriter(error));
 	}
 	
 	/**
@@ -133,7 +133,6 @@ public class StreamInterface implements Interactable {
 	@Override
 	public void switchToOptionsScreen() {
 		screen = Screen.OPTIONS;
-		String input = null;
 		boolean inOptions = true;
 		while (inOptions) {
 			String[] choices = {"Back to main menu"};
@@ -240,7 +239,7 @@ public class StreamInterface implements Interactable {
 	}
 	
 	/**
-	 * Shows that recovery occured to a character.
+	 * Shows that recovery occurred to a character.
 	 *
 	 * @param fighter The affected character.
 	 * @param stat The affected stat.
@@ -733,7 +732,27 @@ public class StreamInterface implements Interactable {
 		println("MAG: " + mag.getEffective(f.getLevel()));
 		println("LUK: " + luk.getEffective(f.getLevel()));
 		println();
+		if (f.getBuffs().size() > 0) {
+			showBuffs(f);
+		}
 		pause();
+	}
+	
+	/**
+	 * Shows the buffs currently on a character.
+	 * 
+	 * @param f The Character to show buffs for.
+	 */
+	private void showBuffs(Character f) {
+		ArrayList<Buff> buffs = f.getBuffs();
+		print("Buffs: ");
+		for (int i = 0; i < buffs.size(); i++) {
+			print(buffs.get(i).getName());
+			if (i + 1 < buffs.size()) {
+				print(", ");
+			}
+		}
+		println();
 	}
 	
 	/**

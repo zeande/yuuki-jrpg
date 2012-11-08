@@ -150,6 +150,7 @@ public abstract class Action implements Cloneable {
 	 * otherwise, false.
 	 */
 	public boolean apply() {
+		setAffectedTeams(); // only now can we be sure that the fighter id was set
 		successful = applyCost();
 		if (successful) {
 			applyEffect();
@@ -211,7 +212,6 @@ public abstract class Action implements Cloneable {
 	 * @param t The fighter to add to the target list.
 	 */
 	public void addTarget(Character t) {
-		affectedTeams.add(t.getTeamId());
 		targets.add(t);
 		int[] newEffects = new int[actualEffects.length + 1];
 		for (int i = 0; i < actualEffects.length; i++) {
@@ -355,6 +355,15 @@ public abstract class Action implements Cloneable {
 		}
 		if (effectStat == null) {
 			setEffectStat(c);
+		}
+	}
+	
+	/**
+	 * Sets the teams affected by this action.
+	 */
+	private void setAffectedTeams() {
+		for (Character t: targets) {
+			affectedTeams.add(t.getTeamId());
 		}
 	}
 

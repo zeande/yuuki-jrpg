@@ -158,6 +158,9 @@ public class BattleTest {
 				case LOOTING:
 					println("Did loot...");
 					break;
+				
+				default:
+					break;
 			}
 			if (battle.getState() == Battle.State.ENDING) {
 				pause("Battle is over.");

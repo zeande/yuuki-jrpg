@@ -4,8 +4,6 @@
 
 package yuuki.buff;
 
-import yuuki.entity.Character;
-
 public class DefenseBuff extends PassiveBuff implements Cloneable {
 
 	/**
