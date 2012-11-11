@@ -1,7 +1,7 @@
 /**
  * The battle engine for all fights in the Yuuki system. It is not
  * independently-driven. It must be explicitly instructed to advance its
- * execution. This allows it to be decoupled from any interfaces..
+ * execution. This allows it to be decoupled from any interfaces.
  *
  * @version 10/20/12
  */
