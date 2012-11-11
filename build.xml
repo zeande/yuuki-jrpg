@@ -13,7 +13,7 @@
 	
 	<property name="BUILD_ROOT" value="${DIST_ROOT}/bin" />
 	<property name="DOC_ROOT" value="${DIST_ROOT}/doc" />
-	<property name="GUI" value="yuuki/gui" />
+	<property name="GUI" value="yuuki/gui/UI" />
 	<property name="BATTLE" value="yuuki/battle" />
 	<property name="BUFF" value="yuuki/buff" />
 	<property name="ACTION" value="yuuki/action" />
@@ -30,6 +30,12 @@
 	
 	
 	<!-- PUBLIC TARGETS -->
+	
+	<target name="test-gui" depends="gui">
+		<antcall target="-test">
+			<param name="TEST_CLASS" value="yuuki.gui.UI.GUI" />
+		</antcall>
+	</target>
 	
 	<target name="test-main" depends="debug,main">
 		<antcall target="-test">
@@ -156,7 +162,7 @@
 			<isset property="NAME" />
 		</condition>
 		<javac includeantruntime="false" srcdir="${SOURCE_ROOT}" destdir="${BUILD_ROOT}" debug="${debug.on}" debuglevel="${debug.level}">
-			<compilerarg value="-Werror" />
+			<!-- <compilerarg value="-Werror" /> -->
 			<compilerarg value="-Xlint:${warning_count}" />
 			<include name="${PACKAGE}/${source.name}.java" />
 		</javac>
