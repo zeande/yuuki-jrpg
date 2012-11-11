@@ -15,7 +15,7 @@ public interface Interactable {
 
 	/**
 	 * Sets up the interface. This is the first method that should be called,
-	 * and implementers can use it to create any neccessary supporting classes
+	 * and implementers can use it to create any necessary supporting classes
 	 * for the interface.
 	 */
 	public void initialize();

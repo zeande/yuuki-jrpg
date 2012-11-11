@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.UI;
+package yuuki.gui.UI;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -59,7 +59,7 @@ boolean blnSound = true;
         getContentPane().add(txtPlayerName);
         txtPlayerName.setBounds(79, 123, 648, 210);
 
-        lblBtnMainMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/PlayerNameMainMenu.png"))); // NOI18N
+        lblBtnMainMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameMainMenu.png"))); // NOI18N
         lblBtnMainMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBtnMainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -81,7 +81,7 @@ boolean blnSound = true;
         getContentPane().add(lblBtnMainMenu);
         lblBtnMainMenu.setBounds(10, 460, 170, 100);
 
-        lblBtnBeginGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/PlayerNameBeginGame.png"))); // NOI18N
+        lblBtnBeginGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameBeginGame.png"))); // NOI18N
         lblBtnBeginGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBtnBeginGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -103,7 +103,7 @@ boolean blnSound = true;
         getContentPane().add(lblBtnBeginGame);
         lblBtnBeginGame.setBounds(620, 460, 170, 100);
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UI/CaveWall.png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/CaveWall.png"))); // NOI18N
         getContentPane().add(lblBackground);
         lblBackground.setBounds(0, 0, 800, 600);
 
