@@ -17,7 +17,7 @@ public class NonPlayerCharacter extends Character {
 	protected static final int DEATH_XP_BASE = 2;
 
 	/**
-	 * Used to calculate expereince given on death.
+	 * Used to calculate experience given on death.
 	 */
 	private int xpBase;
 

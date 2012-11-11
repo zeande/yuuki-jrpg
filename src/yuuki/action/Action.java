@@ -10,7 +10,6 @@ package yuuki.action;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-
 import yuuki.entity.Character;
 import yuuki.entity.Stat;
 import yuuki.buff.Buff;
@@ -233,7 +232,7 @@ public abstract class Action implements Cloneable {
 	}
 	
 	/**
-	 * Gets the targeted fighters' team' IDs.
+	 * Gets the targeted fighters' team's IDs.
 	 *
 	 * @return An array containing the teams with Characters who are targets,
 	 * which will be empty if no targets have been set.

@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  *
  * @author Caleb Smith
+ * @version 10/11/12
  */
 public class Flee extends Action {
     

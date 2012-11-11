@@ -8,7 +8,6 @@ package yuuki;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
 import yuuki.ui.Interactable;
 import yuuki.ui.StreamInterface;
 import yuuki.battle.Battle;
@@ -74,7 +73,7 @@ public class YuukiEngine implements Runnable {
 	
 	/**
 	 * Starts a battle between two characters. Switches to the battle screen,
-	 * runs the battle, then switches to the overwold screen.
+	 * runs the battle, then switches to the overworld screen.
 	 *
 	 * @param f1 The first fighter.
 	 * @param f2 The second fighter.

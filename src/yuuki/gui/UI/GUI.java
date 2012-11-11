@@ -6,7 +6,8 @@ package yuuki.gui.UI;
 
 /**
  *
- * @author Caleb
+ * @author Caleb Smtith
+ * @version 10/11/12
  */
 public class GUI {
 

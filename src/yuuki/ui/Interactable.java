@@ -30,8 +30,13 @@ public interface Interactable {
 	/**
 	 * Shows the intro screen.
 	 */
+	public void switchToPlayerNameScreen();
+        
+        /**
+         * Shows the Player Name screen.
+         */
 	public void switchToIntroScreen();
-	
+        
 	/**
 	 * Shows the options screen.
 	 */
@@ -52,7 +57,7 @@ public interface Interactable {
 	public void showStatUpdate(Character fighter);
 	
 	/**
-	 * Shows that damage occured to a character.
+	 * Shows that damage occurred to a character.
 	 *
 	 * @param fighter The affected character.
 	 * @param stat The affected stat
@@ -61,7 +66,7 @@ public interface Interactable {
 	public void showDamage(Character fighter, Stat stat, int damage);
 	
 	/**
-	 * Shows that damage occured to a character.
+	 * Shows that damage occurred to a character.
 	 *
 	 * @param fighter The affected character.
 	 * @param stat The affected stat
@@ -70,7 +75,7 @@ public interface Interactable {
 	public void showDamage(Character fighter, Stat stat, double damage);
 	
 	/**
-	 * Shows that recovery occured to a character.
+	 * Shows that recovery occurred to a character.
 	 *
 	 * @param fighter The affected character.
 	 * @param stat The affected stat.
@@ -79,7 +84,7 @@ public interface Interactable {
 	public void showRecovery(Character fighter, Stat stat, double amount);
 	
 	/**
-	 * Shows that recovery occured to a character.
+	 * Shows that recovery occurred to a character.
 	 *
 	 * @param fighter The affected character.
 	 * @param stat The affected stat.

@@ -6,7 +6,6 @@ package yuuki.entity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import yuuki.action.Action;
 import yuuki.buff.Buff;
 
@@ -471,7 +470,7 @@ public abstract class Character {
 	}
 	
 	/**
-	 * Resets the propterties needed for fighting to their default values.
+	 * Resets the properties needed for fighting to their default values.
 	 */
 	public void stopFighting() {
 		fighterId = -1;

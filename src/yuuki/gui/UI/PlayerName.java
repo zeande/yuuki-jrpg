@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * This JFrame accepts text input from lable's text property.
+ * It offer's navigation back to the main menu, and into the game.
  */
 package yuuki.gui.UI;
 
@@ -14,18 +14,17 @@ import sun.audio.AudioStream;
 /**
  *
  * @author Caleb Smith
+ * @version 10/11/12
  */
 public class PlayerName extends javax.swing.JFrame {
-boolean blnSound = true;
+    boolean blnSound = true;
     /**
      * Creates new form PlayerName
      */
     public PlayerName() {
         initComponents();
         txtPlayerName.setSelectionStart(0);
-        txtPlayerName.setSelectionEnd(11);
-        
-        
+        txtPlayerName.setSelectionEnd(11); 
     }
     
     /**
@@ -140,7 +139,7 @@ boolean blnSound = true;
     }//GEN-LAST:event_lblBtnMainMenuExited
 
     private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
-        // TODO add your handling code here:
+        // Handles lblBtnMainMenuClicked click event.
         if(blnSound == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -163,12 +162,12 @@ boolean blnSound = true;
     }//GEN-LAST:event_lblBtnMainMenuClicked
 
     private void lblBtnMainMenuPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuPressed
-        // TODO add your handling code here:
+        // Handles lblBtnMainMenuPressed Mouse Click Down Event.
         lblBtnMainMenu.setBounds(12, 462, 170, 100);
     }//GEN-LAST:event_lblBtnMainMenuPressed
 
     private void lblBtnMainMenuReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuReleased
-        // TODO add your handling code here:
+        // Handles lblBtnMainMenuPressed Mouse Click Up Event.
         lblBtnMainMenu.setBounds(10, 460, 170, 100);
     }//GEN-LAST:event_lblBtnMainMenuReleased
 
@@ -229,6 +228,7 @@ boolean blnSound = true;
             {
                 System.out.println("Audio play New Game Entered went wrong.");
             }
+            
         }
     }//GEN-LAST:event_lblBtnBeginGameClicked
 

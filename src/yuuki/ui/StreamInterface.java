@@ -62,7 +62,8 @@ public class StreamInterface implements Interactable {
 		BATTLE,
 		OVERWORLD,
 		PAUSE,
-		ENDING;
+		ENDING,
+                PLAYERNAME;
 	}
 	
 	/**
@@ -110,6 +111,15 @@ public class StreamInterface implements Interactable {
 			e.printStackTrace();
 		}
 	}
+        
+        /**
+         * Shows the PlayerName Screen.
+         */
+        @Override
+        public void switchToPlayerNameScreen() {
+            screen = Screen.PLAYERNAME;
+            println("Please Enter Your Name:");
+        }
 	
 	/**
 	 * Shows the intro message and displays the main menu.
@@ -221,7 +231,7 @@ public class StreamInterface implements Interactable {
 	}
 	
 	/**
-	 * Shows that damage occured to a character.
+	 * Shows that damage occurred to a character.
 	 *
 	 * @param fighter The affected character.
 	 * @param stat The affected stat

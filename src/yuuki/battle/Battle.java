@@ -7,9 +7,7 @@
  */
 
 package yuuki.battle;
-
 import java.util.ArrayList;
-
 import yuuki.action.Action;
 import yuuki.entity.Character;
 import yuuki.entity.*;
