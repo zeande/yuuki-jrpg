@@ -19,7 +19,6 @@
 	<property name="ACTION" value="yuuki/action" />
 	<property name="ENTITY" value="yuuki/entity" />
 	<property name="UI" value="yuuki/ui" />
-	<property name="UTIL" value="yuuki/util" />
 	
 	<!-- other properties -->
 	<property name="warnings" value="all" />
@@ -65,16 +64,10 @@
 		</antcall>
 	</target>
 	
-	<target name="main" depends="battle,ui,util">
+	<target name="main" depends="battle,ui">
 		<antcall target="-build">
 			<param name="PACKAGE" value="yuuki" />
 			<param name="NAME" value="YuukiEngine" />
-		</antcall>
-	</target>
-	
-	<target name="util">
-		<antcall target="-build">
-			<param name="PACKAGE" value="${UTIL}" />
 		</antcall>
 	</target>
 	
