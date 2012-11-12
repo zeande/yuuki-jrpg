@@ -10,6 +10,7 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import yuuki.action.Action;
 import yuuki.buff.Buff;
+import yuuki.entity.Character;
 import yuuki.entity.Stat;
 
 /*
@@ -42,7 +43,6 @@ public class GraphicalEngine implements Interactable {
         currentForm.setVisible(false);
         currentForm = playerNameGui;
         playerNameGui.setVisible(true);
-        
     }
     
     public void switchToIntroScreen()
@@ -51,6 +51,7 @@ public class GraphicalEngine implements Interactable {
         currentForm = mainTitleGui;
         mainTitleGui.setVisible(true);
     }
+    
     public void switchToOptionsScreen()
     {
         currentForm.setVisible(false);
@@ -130,7 +131,7 @@ public class GraphicalEngine implements Interactable {
         String string = "";
       if(prompt.equals("Enter player name"));
       {
-          string = "test";
+          string = "<Hardcoded Responce> @ GraphicalEngine method getString(string)";
       }
       return string;
     }
@@ -201,8 +202,10 @@ public class GraphicalEngine implements Interactable {
     }
     public yuuki.entity.Character selectTarget(ArrayList<ArrayList<yuuki.entity.Character>> fighters)
     {
-        
+        yuuki.entity.Character target = fighters.get(0).get(0);
+        return target;
     }
+    
     public void playSound(String path)
     {
         AudioPlayer BGMPlayer = AudioPlayer.player;

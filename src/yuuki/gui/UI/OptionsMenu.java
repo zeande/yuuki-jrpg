@@ -53,11 +53,11 @@ boolean effectsOffChecked = false;
         setMaximizedBounds(new java.awt.Rectangle(2147483647, 2147483647, 2147483647, 2147483647));
         getContentPane().setLayout(null);
 
-        lblOptionsText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsText.png"))); // NOI18N
+        lblOptionsText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsText.png"))); // NOI18N
         getContentPane().add(lblOptionsText);
         lblOptionsText.setBounds(10, 0, 580, 200);
 
-        lblBtnApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsBtnApply.png"))); // NOI18N
+        lblBtnApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApply.png"))); // NOI18N
         lblBtnApply.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBtnApply.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -79,7 +79,7 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblBtnApply);
         lblBtnApply.setBounds(10, 510, 171, 76);
 
-        lblMusicRadialSelectOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsRadialSelectOff.png"))); // NOI18N
+        lblMusicRadialSelectOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png"))); // NOI18N
         lblMusicRadialSelectOff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblMusicRadialSelectOff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -95,7 +95,7 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblMusicRadialSelectOff);
         lblMusicRadialSelectOff.setBounds(720, 90, 30, 30);
 
-        lblEffectsRadialSelectOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsRadialSelectOff.png"))); // NOI18N
+        lblEffectsRadialSelectOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png"))); // NOI18N
         lblEffectsRadialSelectOff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblEffectsRadialSelectOff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -111,11 +111,11 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblEffectsRadialSelectOff);
         lblEffectsRadialSelectOff.setBounds(721, 160, 30, 30);
 
-        lblText2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsText2.png"))); // NOI18N
+        lblText2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsText2.png"))); // NOI18N
         getContentPane().add(lblText2);
         lblText2.setBounds(640, 80, 70, 110);
 
-        lblMusicRadialSelectOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsRadialSelectOn.png"))); // NOI18N
+        lblMusicRadialSelectOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png"))); // NOI18N
         lblMusicRadialSelectOn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblMusicRadialSelectOn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -147,7 +147,7 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblEffectsRadialSelectOn);
         lblEffectsRadialSelectOn.setBounds(603, 160, 30, 30);
 
-        lblOptionsBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsBackground.png"))); // NOI18N
+        lblOptionsBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBackground.png"))); // NOI18N
         getContentPane().add(lblOptionsBackground);
         lblOptionsBackground.setBounds(0, 0, 800, 600);
 

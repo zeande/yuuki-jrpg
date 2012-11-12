@@ -37,11 +37,11 @@ PlayerName pn = new PlayerName();
         setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
-        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/Title.png"))); // NOI18N
+        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Title.png"))); // NOI18N
         getContentPane().add(lblTitle);
         lblTitle.setBounds(560, 20, 220, 90);
 
-        lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/New Game.png"))); // NOI18N
+        lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/New Game.png"))); // NOI18N
         lblNewGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblNewGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -63,7 +63,7 @@ PlayerName pn = new PlayerName();
         getContentPane().add(lblNewGame);
         lblNewGame.setBounds(590, 120, 180, 30);
 
-        lblLoadGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/Load Game.png"))); // NOI18N
+        lblLoadGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Load Game.png"))); // NOI18N
         lblLoadGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblLoadGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -85,7 +85,7 @@ PlayerName pn = new PlayerName();
         getContentPane().add(lblLoadGame);
         lblLoadGame.setBounds(586, 160, 190, 40);
 
-        lblOptions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/Options.png"))); // NOI18N
+        lblOptions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Options.png"))); // NOI18N
         lblOptions.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblOptions.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -107,7 +107,7 @@ PlayerName pn = new PlayerName();
         getContentPane().add(lblOptions);
         lblOptions.setBounds(607, 205, 140, 40);
 
-        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/Exit.png"))); // NOI18N
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Exit.png"))); // NOI18N
         lblExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -129,7 +129,7 @@ PlayerName pn = new PlayerName();
         getContentPane().add(lblExit);
         lblExit.setBounds(640, 248, 80, 40);
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/titleBackground.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/titleBackground.jpg"))); // NOI18N
         getContentPane().add(lblBackground);
         lblBackground.setBounds(0, 0, 800, 600);
 
