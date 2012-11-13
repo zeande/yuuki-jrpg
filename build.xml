@@ -163,7 +163,7 @@
 	
 	<!-- TEST_CLASS - The class to test -->
 	<target name="-test">
-		<java classname="${TEST_CLASS}" classpath="${BUILD_ROOT}" fork="false" />
+         <java classname="${TEST_CLASS}" classpath="${BUILD_ROOT}" fork="false" />
 		<!-- <echo message="${RUN_ERR}" /> -->
 	</target>
 	
