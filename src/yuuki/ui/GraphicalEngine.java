@@ -28,6 +28,7 @@ public class GraphicalEngine implements Interactable {
     private MainTitle mainTitleGui = new MainTitle();
     private OptionsMenu optionsMenuGui = new OptionsMenu();
     private PlayerName playerNameGui = new PlayerName();
+    private BattleScreen battleScreen = new BattleScreen();
     
     public void initialize()
     {
@@ -36,6 +37,13 @@ public class GraphicalEngine implements Interactable {
     public void destroy()
     {
         
+    }
+    
+    public void switchToSpecifiedScreen(JFrame showingForm)
+    {
+        currentForm.setVisible(false);
+        currentForm = showingForm;
+        currentForm.setVisible(true);
     }
     
     public void switchToPlayerNameScreen()
@@ -60,7 +68,9 @@ public class GraphicalEngine implements Interactable {
     }
     public void switchToBattleScreen(yuuki.entity.Character[][] fighters)
     {
-        
+        currentForm.setVisible(false);
+        currentForm = battleScreen;
+        battleScreen.setVisible(true);
     }
     public void showStatUpdate(yuuki.entity.Character fighter)
     {
@@ -126,13 +136,49 @@ public class GraphicalEngine implements Interactable {
     {
         
     }
+    /**
+     * Is used to return a string from the user.
+     * - Can check to see if required string is the Player Name or Not.
+     * - Returns the desired String.
+     * 
+     * @param prompt
+     * @return userName
+     */
     public String getString(String prompt)
     {
         String string = "";
-      if(prompt.equals("Enter player name"));
-      {
-          string = "<Hardcoded Responce> @ GraphicalEngine method getString(string)";
-      }
+        //"Enter player name" hardcoded. sounce @ YuukiEngine - createPlayer(int)
+        if(prompt.equals("Enter player name"))
+        {
+            JFrame showingForm = null;
+            showingForm = currentForm;
+            String userName = "";
+            switchToPlayerNameScreen();
+            boolean playGame = playerNameGui.getPlayStatus();
+            /**
+             * While the Start Game button (lblBtnBeginGame) has not been clicked, wait.
+             * Once Start Game button (lblBtnBeginGame) has been clicked:
+             * - get the Player Name the user Entered
+             * - return the Player Name
+             */
+            while(!playGame)
+            {
+                playGame = playerNameGui.getPlayStatus();
+                try
+                {
+                    Thread.sleep(10);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("GraphicalEngine.getString(String) couldn't sleep.");
+                }
+            }
+            userName = playerNameGui.getUsersName();
+            switchToSpecifiedScreen(showingForm);
+            return userName;
+            
+        }
+       
       return string;
     }
     public String getString()

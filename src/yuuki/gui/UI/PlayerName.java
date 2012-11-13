@@ -17,7 +17,18 @@ import sun.audio.AudioStream;
  * @version 10/11/12
  */
 public class PlayerName extends javax.swing.JFrame {
+    boolean blnStartGame = false;
     boolean blnSound = true;
+    String usersName = "Player 1";
+    
+    public String getUsersName()
+    {
+        return usersName;
+    }
+    public boolean getPlayStatus()
+    {
+        return blnStartGame;
+    }
     /**
      * Creates new form PlayerName
      */
@@ -211,6 +222,8 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnBeginGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameClicked
         // Handles lblBtnBeginGame on Click.
+        blnStartGame = true;
+        usersName = txtPlayerName.getText();
         if(blnSound == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
