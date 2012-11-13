@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package yuuki.gui.UI;
 
 import java.io.FileInputStream;
@@ -14,6 +10,7 @@ import sun.audio.AudioStream;
 /**
  *
  * @author Caleb Smtih
+ * @version 11/13/12
  */
 public class OptionsMenu extends javax.swing.JFrame {
 boolean musicOnChecked = true;
@@ -26,7 +23,6 @@ boolean effectsOffChecked = false;
      */
     public OptionsMenu() {
         initComponents();
-        
     }
 
     /**
@@ -157,7 +153,7 @@ boolean effectsOffChecked = false;
 
     private void lblBtnApplyEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyEntered
         // On Mouseover changes lblBtnApply's Icon.
-        lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsBtnApplyFocused.png")));
+        lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApplyFocused.png")));
         if(effectsOffChecked == false)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -165,7 +161,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onHover.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -180,7 +176,7 @@ boolean effectsOffChecked = false;
 
     private void lblBtnApplyExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyExited
         // On Mouseover off changes lblBtnApply's Icon.
-        lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsBtnApply.png")));
+        lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApply.png")));
     }//GEN-LAST:event_lblBtnApplyExited
 
     private void lblBtnApplyPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyPressed
@@ -197,11 +193,11 @@ boolean effectsOffChecked = false;
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
         if(musicOnChecked == true)
         {
-            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOnHover.png")));
+            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
         else
         {
-            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOffHover.png")));
+            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }
         if(effectsOffChecked == false)
         {
@@ -210,7 +206,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onHover.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -227,11 +223,11 @@ boolean effectsOffChecked = false;
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
         if(musicOnChecked == true)
         {
-            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
         else
         {
-            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
+            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
     }//GEN-LAST:event_musicOnExited
 
@@ -239,11 +235,11 @@ boolean effectsOffChecked = false;
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
         if(effectsOnChecked == true)
         {
-            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOnHover.png")));
+            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
         else
         {
-            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOffHover.png")));
+            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }        
         if(effectsOffChecked == false)
         {
@@ -252,7 +248,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onHover.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -269,11 +265,11 @@ boolean effectsOffChecked = false;
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
         if(effectsOnChecked == true)
         {
-            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
         else
         {
-            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
+            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
     }//GEN-LAST:event_effectsOnExited
 
@@ -281,11 +277,11 @@ boolean effectsOffChecked = false;
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
         if(musicOffChecked == true)
         {
-            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOnHover.png")));
+            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
         else
         {
-            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOffHover.png")));
+            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }
         if(effectsOffChecked == false)
         {
@@ -294,7 +290,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onHover.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -311,11 +307,11 @@ boolean effectsOffChecked = false;
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
         if(effectsOffChecked == true)
         {
-            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOnHover.png")));
+            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
         else
         {
-            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOffHover.png")));
+            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }
         if(effectsOffChecked == false)
         {
@@ -324,7 +320,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onHover.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -341,11 +337,11 @@ boolean effectsOffChecked = false;
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
         if(musicOffChecked == true)
         {
-            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
         else
         {
-            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
+            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
         
     }//GEN-LAST:event_musicOffExited
@@ -354,11 +350,11 @@ boolean effectsOffChecked = false;
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
         if(effectsOffChecked == true)
         {
-            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
         else
         {
-            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
+            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
     }//GEN-LAST:event_effectsOffExited
 
@@ -368,15 +364,15 @@ boolean effectsOffChecked = false;
         {
         musicOnChecked = false;
         musicOffChecked = true;
-        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
-        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
+        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
         else
         {
         musicOnChecked = true;
         musicOffChecked = false;
-        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
-        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
+        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
+        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
         if(effectsOffChecked == false)
         {
@@ -385,7 +381,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -404,15 +400,15 @@ boolean effectsOffChecked = false;
         {
         musicOnChecked = true;
         musicOffChecked = false;
-        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
-        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
+        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
+        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
         else
         {
         musicOnChecked = false;
         musicOffChecked = true;
-        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
-        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
+        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
         if(effectsOffChecked == false)
         {
@@ -421,7 +417,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -440,15 +436,15 @@ boolean effectsOffChecked = false;
         {
         effectsOnChecked = false;
         effectsOffChecked = true;
-        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
-        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
+        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
         else
         {
         effectsOnChecked = true;
         effectsOffChecked = false;
-        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
-        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
+        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
+        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
         if(effectsOffChecked == false)
         {
@@ -457,7 +453,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -477,15 +473,15 @@ boolean effectsOffChecked = false;
         {
         effectsOnChecked = true;
         effectsOffChecked = false;
-        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
-        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
+        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
+        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
         else
         {
         effectsOnChecked = false;
         effectsOffChecked = true;
-        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOff.png")));
-        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("OptionsRadialSelectOn.png")));
+        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
+        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
         if(effectsOffChecked == false)
         {
@@ -494,7 +490,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);
@@ -516,7 +512,7 @@ boolean effectsOffChecked = false;
             AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
+            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
             BGMData = BGM.getData();
             AudioDataStream loop = null;
             loop = new AudioDataStream(BGMData);

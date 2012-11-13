@@ -26,14 +26,34 @@ public class BattleScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        lblBattleScreenMenuButton = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lblBattleScreenBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(150, 130, 520, 250);
+        lblBattleScreenMenuButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBattleScreenMenuButton.setText("Menu");
+        getContentPane().add(lblBattleScreenMenuButton);
+        lblBattleScreenMenuButton.setBounds(680, 10, 110, 50);
+
+        jLabel2.setText("Monster");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(600, 120, 50, 60);
+
+        jLabel1.setText("Player Character");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(310, 140, 90, 50);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.add(lblBattleScreenBackground);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 440, 800, 160);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -73,6 +93,10 @@ public class BattleScreen extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBattleScreenBackground;
+    private javax.swing.JLabel lblBattleScreenMenuButton;
     // End of variables declaration//GEN-END:variables
 }

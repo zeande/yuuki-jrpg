@@ -1,7 +1,3 @@
-/*
- * This JFrame accepts text input from lable's text property.
- * It offer's navigation back to the main menu, and into the game.
- */
 package yuuki.gui.UI;
 
 import java.io.FileInputStream;
@@ -18,8 +14,14 @@ import sun.audio.AudioStream;
  */
 public class PlayerName extends javax.swing.JFrame {
     boolean blnStartGame = false;
+    boolean blnToMenu = false;
     boolean blnSound = true;
     String usersName = "Player 1";
+    
+    public boolean getMenuStatus()
+    {
+        return blnToMenu;
+    }
     
     public String getUsersName()
     {
@@ -151,6 +153,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
         // Handles lblBtnMainMenuClicked click event.
+        blnToMenu = true;
         if(blnSound == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;

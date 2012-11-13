@@ -8,6 +8,18 @@ import java.io.*;
 public class MainTitle extends javax.swing.JFrame {
 OptionsMenu om = new OptionsMenu();
 PlayerName pn = new PlayerName();
+boolean blnNewGame = false;
+boolean blnOptionsMenu = false;
+
+public boolean getOptionsMenu()
+{
+    return blnOptionsMenu;
+}
+
+public boolean getNewGame()
+{
+    return blnNewGame;
+}
     
     /**
      * Creates new form MainTitle
@@ -324,6 +336,8 @@ PlayerName pn = new PlayerName();
     }//GEN-LAST:event_ExitClicked
 
     private void OptionsClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsClicked
+        //Handles wehn lblOptionsClicked is clicked.
+        blnOptionsMenu = true;
         if(om.effectsOffChecked == false)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -348,6 +362,7 @@ PlayerName pn = new PlayerName();
 
     private void lblNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewGameClicked
         // Handles when lblNewgame is Clicked.
+        blnNewGame = true;
         if(om.effectsOffChecked == true)
         {
             pn.blnSound = false;

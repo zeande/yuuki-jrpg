@@ -30,9 +30,9 @@
 	
 	<!-- PUBLIC TARGETS -->
 	
-	<target name="test-gui" depends="gui">
+	<target name="test-OptionsMenu" depends="gui">
 		<antcall target="-test">
-			<param name="TEST_CLASS" value="yuuki.gui.UI.GUI" />
+			<param name="TEST_CLASS" value="yuuki.gui.UI.OptionsMenu" />
 		</antcall>
 	</target>
 	

@@ -13,22 +13,18 @@ import yuuki.buff.Buff;
 import yuuki.entity.Character;
 import yuuki.entity.Stat;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author Caleb Smith
- * @version 10/11/12
+ * @version 10/13/12
  */
 public class GraphicalEngine implements Interactable {
+    //Construct nessecary objects.
     private JFrame currentForm = null;
-    private MainTitle mainTitleGui = new MainTitle();
-    private OptionsMenu optionsMenuGui = new OptionsMenu();
-    private PlayerName playerNameGui = new PlayerName();
-    private BattleScreen battleScreen = new BattleScreen();
+    public MainTitle mainTitleGui = new MainTitle();
+    public OptionsMenu optionsMenuGui = new OptionsMenu();
+    public PlayerName playerNameGui = new PlayerName();
+    public BattleScreen battleScreen = new BattleScreen();
     
     public void initialize()
     {
