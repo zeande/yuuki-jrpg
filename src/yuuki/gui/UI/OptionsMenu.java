@@ -131,7 +131,7 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblMusicRadialSelectOn);
         lblMusicRadialSelectOn.setBounds(600, 90, 30, 30);
 
-        lblEffectsRadialSelectOn.setIcon(new javax.swing.ImageIcon("C:\\Users\\Caleb\\Documents\\NDSU\\2012 Semester 1\\CSCI 161\\Projects\\Group Project\\Gui\\OptionsRadialSelectOn.png")); // NOI18N
+        lblEffectsRadialSelectOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png"))); // NOI18N
         lblEffectsRadialSelectOn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblEffectsRadialSelectOn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

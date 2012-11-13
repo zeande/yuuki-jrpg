@@ -142,7 +142,7 @@
     <Component class="javax.swing.JLabel" name="lblEffectsRadialSelectOn">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Caleb\Documents\NDSU\2012 Semester 1\CSCI 161\Projects\Group Project\Gui\OptionsRadialSelectOn.png"/>
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>

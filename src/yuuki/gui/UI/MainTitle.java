@@ -139,7 +139,7 @@ PlayerName pn = new PlayerName();
 
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
         // On Mouseover changes lblNewGame's Icon.
-        lblNewGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("New Game Hi.png")));
+        lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("New Game Hi.png")));
         if(om.effectsOffChecked == false)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
