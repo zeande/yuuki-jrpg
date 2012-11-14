@@ -17,6 +17,24 @@ boolean musicOnChecked = true;
 boolean musicOffChecked = false;
 boolean effectsOnChecked = true;
 boolean effectsOffChecked = false;
+boolean btnApply = false;
+public boolean soundMusic = true;
+public boolean soundEffects = true;
+
+public boolean getSoundMusic()
+{
+    return soundMusic;
+}
+
+public boolean getSoundEffects()
+{
+    return soundEffects;
+}
+
+public boolean getBtnApply()
+{
+    return btnApply;
+}
 
     /**
      * Creates new form OptionsMenu
@@ -48,12 +66,9 @@ boolean effectsOffChecked = false;
         setLocationByPlatform(true);
         setMaximizedBounds(new java.awt.Rectangle(2147483647, 2147483647, 2147483647, 2147483647));
         getContentPane().setLayout(null);
-
-        lblOptionsText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsText.png"))); // NOI18N
         getContentPane().add(lblOptionsText);
         lblOptionsText.setBounds(10, 0, 580, 200);
 
-        lblBtnApply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApply.png"))); // NOI18N
         lblBtnApply.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBtnApply.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -75,7 +90,6 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblBtnApply);
         lblBtnApply.setBounds(10, 510, 171, 76);
 
-        lblMusicRadialSelectOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png"))); // NOI18N
         lblMusicRadialSelectOff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblMusicRadialSelectOff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -91,7 +105,6 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblMusicRadialSelectOff);
         lblMusicRadialSelectOff.setBounds(720, 90, 30, 30);
 
-        lblEffectsRadialSelectOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png"))); // NOI18N
         lblEffectsRadialSelectOff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblEffectsRadialSelectOff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -106,12 +119,9 @@ boolean effectsOffChecked = false;
         });
         getContentPane().add(lblEffectsRadialSelectOff);
         lblEffectsRadialSelectOff.setBounds(721, 160, 30, 30);
-
-        lblText2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsText2.png"))); // NOI18N
         getContentPane().add(lblText2);
         lblText2.setBounds(640, 80, 70, 110);
 
-        lblMusicRadialSelectOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png"))); // NOI18N
         lblMusicRadialSelectOn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblMusicRadialSelectOn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -127,7 +137,6 @@ boolean effectsOffChecked = false;
         getContentPane().add(lblMusicRadialSelectOn);
         lblMusicRadialSelectOn.setBounds(600, 90, 30, 30);
 
-        lblEffectsRadialSelectOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png"))); // NOI18N
         lblEffectsRadialSelectOn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblEffectsRadialSelectOn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -142,8 +151,6 @@ boolean effectsOffChecked = false;
         });
         getContentPane().add(lblEffectsRadialSelectOn);
         lblEffectsRadialSelectOn.setBounds(603, 160, 30, 30);
-
-        lblOptionsBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBackground.png"))); // NOI18N
         getContentPane().add(lblOptionsBackground);
         lblOptionsBackground.setBounds(0, 0, 800, 600);
 
@@ -152,9 +159,11 @@ boolean effectsOffChecked = false;
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBtnApplyEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyEntered
-        // On Mouseover changes lblBtnApply's Icon.
+        //On Mouseover changes lblBtnApply's Icon.
+        
         lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApplyFocused.png")));
-        if(effectsOffChecked == false)
+        
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -176,7 +185,7 @@ boolean effectsOffChecked = false;
 
     private void lblBtnApplyExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyExited
         // On Mouseover off changes lblBtnApply's Icon.
-        lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApply.png")));
+        //lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApply.png")));
     }//GEN-LAST:event_lblBtnApplyExited
 
     private void lblBtnApplyPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyPressed
@@ -199,7 +208,7 @@ boolean effectsOffChecked = false;
         {
             lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }
-        if(effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -241,7 +250,7 @@ boolean effectsOffChecked = false;
         {
             lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }        
-        if(effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -283,7 +292,7 @@ boolean effectsOffChecked = false;
         {
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }
-        if(effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -313,7 +322,7 @@ boolean effectsOffChecked = false;
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }
-        if(effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -374,7 +383,7 @@ boolean effectsOffChecked = false;
         lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
-        if(effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -410,7 +419,7 @@ boolean effectsOffChecked = false;
         lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
-        if(effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -446,7 +455,7 @@ boolean effectsOffChecked = false;
         lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
-        if(effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -467,7 +476,7 @@ boolean effectsOffChecked = false;
     }//GEN-LAST:event_effectsOnClicked
 
     private void effectsOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffClicked
-        // // Invert checked properties, and change lbl Icons.
+        // Invert checked properties, and change lbl Icons.
         
         if(effectsOffChecked == true)
         {
@@ -483,7 +492,7 @@ boolean effectsOffChecked = false;
         lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
-        if(effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -505,7 +514,8 @@ boolean effectsOffChecked = false;
 
     private void btnApplyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApplyClicked
         // Handles btnApply clicked event.
-        if(effectsOffChecked == false)
+        btnApply = true;
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -523,7 +533,6 @@ boolean effectsOffChecked = false;
                 System.out.println("Audio play New Game Entered went wrong.");
             }
         }
-        setVisible(false);
     }//GEN-LAST:event_btnApplyClicked
 
     /**
@@ -566,8 +575,8 @@ boolean effectsOffChecked = false;
     private javax.swing.JLabel lblEffectsRadialSelectOn;
     private javax.swing.JLabel lblMusicRadialSelectOff;
     private javax.swing.JLabel lblMusicRadialSelectOn;
-    private javax.swing.JLabel lblOptionsBackground;
-    private javax.swing.JLabel lblOptionsText;
+    public javax.swing.JLabel lblOptionsBackground;
+    public javax.swing.JLabel lblOptionsText;
     private javax.swing.JLabel lblText2;
     // End of variables declaration//GEN-END:variables
 }

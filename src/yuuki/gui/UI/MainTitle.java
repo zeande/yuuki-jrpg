@@ -10,6 +10,9 @@ OptionsMenu om = new OptionsMenu();
 PlayerName pn = new PlayerName();
 boolean blnNewGame = false;
 boolean blnOptionsMenu = false;
+boolean blnExit = false;
+public boolean soundMusic = true;
+public boolean soundEffects = true;
 
 public boolean getOptionsMenu()
 {
@@ -19,6 +22,11 @@ public boolean getOptionsMenu()
 public boolean getNewGame()
 {
     return blnNewGame;
+}
+
+public boolean getExit()
+{
+    return blnExit;
 }
     
     /**
@@ -152,7 +160,7 @@ public boolean getNewGame()
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
         // On Mouseover changes lblNewGame's Icon.
         lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("New Game Hi.png")));
-        if(om.effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -190,7 +198,7 @@ public boolean getNewGame()
     private void LoadGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameEntered
         // On Mouseover changes lblLoadGame's Icon.
         lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("Load Game Hi.png")));
-        if(om.effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -228,7 +236,7 @@ public boolean getNewGame()
     private void OptionsEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsEntered
         // On Mouseover change lblOptions's Icon.
         lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("Options Hi.png")));
-        if(om.effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -266,7 +274,7 @@ public boolean getNewGame()
     private void ExitEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitEntered
         // On Mouseover change lblExit's Icon.
         lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("Exit Hi.png")));
-        if(om.effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -303,8 +311,8 @@ public boolean getNewGame()
 
     private void ExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitClicked
         // Close the Program.
-       
-        if(om.effectsOffChecked == false)
+        blnExit = true;
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -330,15 +338,13 @@ public boolean getNewGame()
             {
                 System.out.println("Couldn't Sleep.");
             }
-        }
-        System.exit(0);
-       
+        }       
     }//GEN-LAST:event_ExitClicked
 
     private void OptionsClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsClicked
         //Handles wehn lblOptionsClicked is clicked.
         blnOptionsMenu = true;
-        if(om.effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -363,15 +369,7 @@ public boolean getNewGame()
     private void lblNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewGameClicked
         // Handles when lblNewgame is Clicked.
         blnNewGame = true;
-        if(om.effectsOffChecked == true)
-        {
-            pn.blnSound = false;
-        }
-        else
-        {
-            pn.blnSound = true;
-        }
-        if(om.effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -395,7 +393,7 @@ public boolean getNewGame()
 
     private void lblLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoadGameClicked
         // Handles when lblLoadGame is clicked.
-        if(om.effectsOffChecked == false)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;

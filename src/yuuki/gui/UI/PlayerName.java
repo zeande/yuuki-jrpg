@@ -15,7 +15,8 @@ import sun.audio.AudioStream;
 public class PlayerName extends javax.swing.JFrame {
     boolean blnStartGame = false;
     boolean blnToMenu = false;
-    boolean blnSound = true;
+    boolean soundMusic = true;
+    boolean soundEffects = true;
     String usersName = "Player 1";
     
     public boolean getMenuStatus()
@@ -126,7 +127,7 @@ public class PlayerName extends javax.swing.JFrame {
     private void lblBtnMainMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuEntered
         // Handles lblBtnMainMenu on Mouseover.
         lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameMainMenuHi.png")));
-        if(blnSound == true)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -154,7 +155,7 @@ public class PlayerName extends javax.swing.JFrame {
     private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
         // Handles lblBtnMainMenuClicked click event.
         blnToMenu = true;
-        if(blnSound == true)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -188,7 +189,7 @@ public class PlayerName extends javax.swing.JFrame {
     private void lblBtnBeginGame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGame
         // Handles lblBtnMainMenu on Mouseover.
         lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameBeginGameHi.png")));
-        if(blnSound == true)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
@@ -227,7 +228,7 @@ public class PlayerName extends javax.swing.JFrame {
         // Handles lblBtnBeginGame on Click.
         blnStartGame = true;
         usersName = txtPlayerName.getText();
-        if(blnSound == true)
+        if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
