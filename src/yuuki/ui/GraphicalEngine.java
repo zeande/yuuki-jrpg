@@ -34,33 +34,47 @@ public class GraphicalEngine implements Interactable {
     {
         
     }
-    
     public void switchToSpecifiedScreen(JFrame showingForm)
     {
         currentForm.setVisible(false);
         currentForm = showingForm;
         currentForm.setVisible(true);
     }
-    
     public void switchToPlayerNameScreen()
     {
         currentForm.setVisible(false);
         currentForm = playerNameGui;
         playerNameGui.setVisible(true);
     }
-    
+    public void switchToPlayerNameScreen(boolean soundEffects, boolean soundMusic)
+    {
+        currentForm.setVisible(false);
+        currentForm = playerNameGui;
+        playerNameGui.setVisible(true);
+    }
     public void switchToIntroScreen()
     {
         currentForm.setVisible(false);
         currentForm = mainTitleGui;
         mainTitleGui.setVisible(true);
     }
-    
+    public void switchToIntroScreen(boolean soundEffects, boolean soundMusic)
+    {
+        currentForm.setVisible(false);
+        currentForm = mainTitleGui;
+        mainTitleGui.setVisible(true);
+    }
     public void switchToOptionsScreen()
     {
         currentForm.setVisible(false);
         currentForm = optionsMenuGui;
         optionsMenuGui.setVisible(true);        
+    }
+    public void switchToOptionsScreen(boolean soundEffects, boolean soundMusic)
+    {
+        currentForm.setVisible(false);
+        currentForm = optionsMenuGui;
+        optionsMenuGui.setVisible(true);
     }
     public void switchToBattleScreen(yuuki.entity.Character[][] fighters)
     {

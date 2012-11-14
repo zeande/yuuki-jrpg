@@ -13,25 +13,33 @@ package yuuki.ui;
 public class GraphicalEngineTest {
     //Initiate GraphicalEngine.
     GraphicalEngine ge = new GraphicalEngine();
+        static boolean blnSoundMusic = true;
+        static boolean blnSoundEffects = true;
+        
     //Main Method.
     public static void main(String[] args) {
         GraphicalEngineTest get = new GraphicalEngineTest();
-        get.run();
+
+        get.run(blnSoundMusic, blnSoundEffects);
     }
     /**
      * Displays the Intro Screen
      * Waits until user navigates to another menu.
      */
-    public void run()
+    public void run(boolean soundMusic, boolean soundEffects)
     {
         ge.switchToIntroScreen();
+        ge.mainTitleGui.soundEffects = soundEffects;
+        ge.mainTitleGui.soundMusic = soundMusic;
         boolean blnNewGame = false;
         boolean blnOptionsMenu = false;
+        boolean blnExit = false;
         blnNewGame = ge.mainTitleGui.getNewGame();
         blnOptionsMenu = ge.mainTitleGui.getOptionsMenu();
-        
-        while(!blnNewGame && !blnOptionsMenu)
+
+        do
         {
+            blnExit = ge.mainTitleGui.getExit();
             blnNewGame = ge.mainTitleGui.getNewGame();
             blnOptionsMenu = ge.mainTitleGui.getOptionsMenu();
             try
@@ -42,27 +50,32 @@ public class GraphicalEngineTest {
                 {
                     System.out.println("GraphicalEngineTest.run couldn't sleep.");
                 }
-        }
+        }while(!blnNewGame && !blnOptionsMenu);
         
         if(blnNewGame == true)
             {
                 ge.switchToPlayerNameScreen();
-                newGame();
+                newGame(blnSoundMusic, blnSoundEffects);
             }
             else if(blnOptionsMenu == true)
             {
                 ge.switchToOptionsScreen();
+                optionsMenu(blnSoundMusic, blnSoundEffects);
+            }
+            else if(blnExit = true)
+            {
+                exit();
             }
     }
     
-    public void newGame()
+    public void newGame(boolean soundMusic, boolean soundEffects)
     {
         boolean blnStartGame = false;
         boolean blnToMenu = false;
         blnStartGame = ge.playerNameGui.getPlayStatus();
         blnToMenu = ge.playerNameGui.getMenuStatus();
         
-        while(!blnStartGame && !blnToMenu)
+        do
         {
             blnStartGame = ge.playerNameGui.getPlayStatus();
             blnToMenu = ge.playerNameGui.getMenuStatus();
@@ -74,7 +87,7 @@ public class GraphicalEngineTest {
                 {
                     System.out.println("GraphicalEngineTest.newGame couldn't sleep.");
                 }
-        }
+        }while(!blnStartGame && !blnToMenu);
         
         if(blnStartGame = true)
         {
@@ -85,9 +98,34 @@ public class GraphicalEngineTest {
         }
         else if(blnToMenu = true)
         {
-            run();
+            run(blnSoundMusic, blnSoundEffects);
         }
     }
    
+    public void optionsMenu(boolean soundMusic, boolean soundEffects)
+    {
+        boolean blnApply = false;
+        ge.optionsMenuGui.soundMusic = soundMusic;
+        ge.optionsMenuGui.soundEffects = soundEffects;
+        do
+        {
+           blnApply = ge.optionsMenuGui.getBtnApply();
+           blnSoundMusic = ge.optionsMenuGui.getSoundMusic();
+           blnSoundEffects = ge.optionsMenuGui.getSoundEffects();
+           try
+                {
+                    Thread.sleep(10);
+                }
+            catch(Exception e)
+                {
+                    System.out.println("GraphicalEngineTest.optionsMenu couldn't sleep.");
+                }
+        }while(!blnApply);
+        run(blnSoundMusic, blnSoundEffects);
+    }
     
+    public void exit()
+    {
+        System.exit(0);
+    }
 }

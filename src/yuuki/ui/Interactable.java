@@ -33,15 +33,39 @@ public interface Interactable {
 	public void switchToPlayerNameScreen();
         
         /**
+	 * Shows the intro screen.
+         * 
+         * @param soundMusic If music should play.
+         * @param soundEffects If effects should play.
+	 */
+	public void switchToPlayerNameScreen(boolean soundMusic, boolean soundEffects);
+        
+        /**
          * Shows the Player Name screen.
          */
 	public void switchToIntroScreen();
         
+        /**
+         * Shows the Player Name screen.
+         */
+	public void switchToIntroScreen(boolean soundMusic, boolean soundEffects);
+        
 	/**
 	 * Shows the options screen.
+         * 
+         * @param soundMusic If music should play.
+         * @param soundEffects If effects should play.
 	 */
 	public void switchToOptionsScreen();
 	
+        /**
+	 * Shows the options screen.
+         * 
+         * @param soundMusic If music should play.
+         * @param soundEffects If effects should play.
+	 */
+	public void switchToOptionsScreen(boolean soundMusic, boolean soundEffects);
+        
 	/**
 	 * Shows the battle screen.
 	 *
