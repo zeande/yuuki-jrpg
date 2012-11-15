@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.JOptionPane;
-
 import yuuki.action.Action;
 import yuuki.buff.Buff;
 import yuuki.entity.Character;

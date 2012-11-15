@@ -6,11 +6,7 @@
 
 	<!-- dir definitions -->
 	<property name="SOURCE_ROOT" value="src" />
-	
-	<condition property="DIST_ROOT" value="${DIST_ROOT}" else="../dist">
-		<isset property="DIST_ROOT" />
-	</condition>
-	
+	<property name="DIST_ROOT" value="../dist"/>
 	<property name="BUILD_ROOT" value="${DIST_ROOT}/bin" />
 	<property name="DOC_ROOT" value="${DIST_ROOT}/doc" />
 	<property name="GUI" value="yuuki/gui/UI" />
@@ -68,6 +64,12 @@
 		<antcall target="-build">
 			<param name="PACKAGE" value="${GUI}" />
 		</antcall>
+                <copydir src="${SOURCE_ROOT}/${GUI}/OptionsMenuGuiAssets" dest="${BUILD_ROOT}/${GUI}/OptionsMenuGuiAssets"/>
+                <copydir src="${SOURCE_ROOT}/${GUI}/BattleScreenAssets" dest="${BUILD_ROOT}/${GUI}/BattleScreenAssets"/>
+                <copydir src="${SOURCE_ROOT}/${GUI}/GuiSoundAssets" dest="${BUILD_ROOT}/${GUI}/GuiSoundAssets"/>
+                <copydir src="${SOURCE_ROOT}/${GUI}/MainTitleGuiAssets" dest="${BUILD_ROOT}/${GUI}/MainTitleGuiAssets"/>
+                <copydir src="${SOURCE_ROOT}/${GUI}/PlayerNameGuiAssets" dest="${BUILD_ROOT}/${GUI}/PlayerNameGuiAssets"/>
+                
 	</target>
 	
 	<target name="main" depends="battle,ui">

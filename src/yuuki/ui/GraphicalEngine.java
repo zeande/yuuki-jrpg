@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import yuuki.gui.UI.*;
+import yuuki.gui.UI.BattleScreen;
 import javax.swing.JFrame;
 import sun.audio.AudioData;
 import sun.audio.AudioDataStream;

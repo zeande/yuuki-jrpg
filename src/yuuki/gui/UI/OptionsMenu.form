@@ -34,6 +34,11 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblOptionsText">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsText.png"/>
+        </Property>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -45,6 +50,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblBtnApply">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApply.png"/>
+        </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
@@ -64,6 +72,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblMusicRadialSelectOff">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png"/>
+        </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
@@ -81,6 +92,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblEffectsRadialSelectOff">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png"/>
+        </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
@@ -97,6 +111,11 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="lblText2">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsText2.png"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="640" y="80" width="70" height="110"/>
@@ -105,6 +124,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblMusicRadialSelectOn">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png"/>
+        </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
@@ -122,6 +144,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblEffectsRadialSelectOn">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png"/>
+        </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
@@ -138,6 +163,11 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="lblOptionsBackground">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBackground.png"/>
+        </Property>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="OptionsMenu_lblOptionsBackground"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
