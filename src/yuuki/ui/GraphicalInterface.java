@@ -1,10 +1,15 @@
 package yuuki.ui;
 
+import java.awt.BorderLayout;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.OverlayLayout;
 import javax.swing.SwingUtilities;
 import javax.swing.JOptionPane;
 import yuuki.action.Action;
@@ -15,7 +20,7 @@ import yuuki.entity.Stat;
 /**
  * A user interface that uses the Swing framework.
  */
-public class GraphicalInterface implements Interactable {
+public class GraphicalInterface implements Interactable, IntroScreenListener {
 	
 	/**
 	 * The message box for the game.
@@ -34,7 +39,7 @@ public class GraphicalInterface implements Interactable {
 	/**
 	 * The intro screen.
 	 */
-	private JPanel introScreen;
+	private IntroScreen introScreen;
 	
 	/**
 	 * The options screen.
@@ -85,6 +90,7 @@ public class GraphicalInterface implements Interactable {
 	
 	@Override
 	public void switchToIntroScreen() {
+		introScreen.addListener(this);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				switchWindow(introScreen);
@@ -148,7 +154,6 @@ public class GraphicalInterface implements Interactable {
 			public Character fighter;
 			public void run() {
 //				battleScreen.showStatUpdate(fighter);
-				messageBox.display(fighter, "HP: ");
 			}
 		}
 		Runner r = new Runner();
@@ -180,7 +185,7 @@ public class GraphicalInterface implements Interactable {
 			public Stat stat;
 			public double damage;
 			public void run() {
-				battleScreen.showDamage(fighter, stat, damage);
+//				battleScreen.showDamage(fighter, stat, damage);
 			}
 		}
 		Runner r = new Runner();
@@ -197,7 +202,7 @@ public class GraphicalInterface implements Interactable {
 			public Stat stat;
 			public int amount;
 			public void run() {
-				battleScreen.showRecovery(fighter, stat, amount);
+//				battleScreen.showRecovery(fighter, stat, amount);
 			}
 		}
 		Runner r = new Runner();
@@ -214,7 +219,7 @@ public class GraphicalInterface implements Interactable {
 			public Stat stat;
 			public double amount;
 			public void run() {
-				battleScreen.showRecovery(fighter, stat, amount);
+//				battleScreen.showRecovery(fighter, stat, amount);
 			}
 		}
 		Runner r = new Runner();
@@ -229,7 +234,7 @@ public class GraphicalInterface implements Interactable {
 		class Runner implements Runnable {
 			public Action action;
 			public void run() {
-				battleScreen.showActionPreparation(action);
+//				battleScreen.showActionPreparation(action);
 			}
 		}
 		Runner r = new Runner();
@@ -242,7 +247,7 @@ public class GraphicalInterface implements Interactable {
 		class Runner implements Runnable {
 			public Action action;
 			public void run() {
-				battleScreen.showActionFailure(action);
+//				battleScreen.showActionFailure(action);
 			}
 		}
 		Runner r = new Runner();
@@ -255,7 +260,7 @@ public class GraphicalInterface implements Interactable {
 		class Runner implements Runnable {
 			public Action action;
 			public void run() {
-				battleScreen.showActionUse(action);
+//				battleScreen.showActionUse(action);
 			}
 		}
 		Runner r = new Runner();
@@ -268,7 +273,7 @@ public class GraphicalInterface implements Interactable {
 		class Runner implements Runnable {
 			public Buff buff;
 			public void run() {
-				battleScreen.showBuffActivation(buff);
+//				battleScreen.showBuffActivation(buff);
 			}
 		}
 		Runner r = new Runner();
@@ -281,7 +286,7 @@ public class GraphicalInterface implements Interactable {
 		class Runner implements Runnable {
 			public Buff buff;
 			public void run() {
-				battleScreen.showBuffApplication(buff);
+//				battleScreen.showBuffApplication(buff);
 			}
 		}
 		Runner r = new Runner();
@@ -294,7 +299,7 @@ public class GraphicalInterface implements Interactable {
 		class Runner implements Runnable {
 			public Buff buff;
 			public void run() {
-				battleScreen.showBuffDeactivation(buff);
+//				battleScreen.showBuffDeactivation(buff);
 			}
 		}
 		Runner r = new Runner();
@@ -307,7 +312,7 @@ public class GraphicalInterface implements Interactable {
 		class Runner implements Runnable {
 			public Character c;
 			public void run() {
-				battleScreen.showCharacterRemoval(c);
+//				battleScreen.showCharacterRemoval(c);
 			}
 		}
 		Runner r = new Runner();
@@ -320,7 +325,7 @@ public class GraphicalInterface implements Interactable {
 		class Runner implements Runnable {
 			public Character[] cs;
 			public void run() {
-				battleScreen.showCharacterVictory(cs);
+//				battleScreen.showCharacterVictory(cs);
 			}
 		}
 		Runner r = new Runner();
@@ -557,7 +562,7 @@ public class GraphicalInterface implements Interactable {
 	 * Creates the intro screen.
 	 */
 	private void createIntroScreen() {
-		introScreen = new JPanel();
+		introScreen = new IntroScreen();
 	}
 	
 	/**
@@ -593,6 +598,55 @@ public class GraphicalInterface implements Interactable {
 	 */
 	private void createEndingScreen() {
 		endingScreen = new JPanel();
+	}
+
+	@Override
+	public void newGameClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loadGameClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void optionsClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exitClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void switchToPlayerNameScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void switchToPlayerNameScreen(boolean soundMusic,
+			boolean soundEffects) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void switchToIntroScreen(boolean soundMusic, boolean soundEffects) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void switchToOptionsScreen(boolean soundMusic, boolean soundEffects) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
