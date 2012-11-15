@@ -13,7 +13,7 @@ import java.net.URL;
 /**
  *
  * @author Caleb Smtih
- * @version 11/13/12
+ * @version 11/15/12
  */
 public class OptionsMenu extends javax.swing.JFrame {
 boolean musicOnChecked = true;
@@ -176,16 +176,15 @@ public boolean getBtnApply()
         //On Mouseover changes lblBtnApply's Icon.    
         lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApplyFocused.png")));
         if(soundEffects == true)
-        {
+        {           
             AudioPlayer BGMPlayer = AudioPlayer.player;
             AudioStream BGM;
             AudioData BGMData;
             try
-            {
+            {     
             BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
             BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
+            AudioDataStream loop = new AudioDataStream(BGMData);
             BGMPlayer.start(loop);
             }
             catch(IOException error)
