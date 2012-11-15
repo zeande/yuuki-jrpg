@@ -30,7 +30,13 @@
 	
 	<!-- PUBLIC TARGETS -->
 	
-	<target name="test-OptionsMenu" depends="gui">
+	<target name="test-GraphicsEngine" depends="ui">
+		<antcall target="-test">
+			<param name="TEST_CLASS" value="yuuki.ui.GraphicalEngineTest" />
+		</antcall>
+	</target>
+        
+        <target name="test-OptionsMenu" depends="gui">
 		<antcall target="-test">
 			<param name="TEST_CLASS" value="yuuki.gui.UI.OptionsMenu" />
 		</antcall>

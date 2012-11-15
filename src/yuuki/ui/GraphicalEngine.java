@@ -34,10 +34,10 @@ public class GraphicalEngine implements Interactable {
     {
         
     }
-    public void switchToSpecifiedScreen(JFrame showingForm)
+    public void switchToSpecifiedScreen(JFrame specifiedForm)
     {
         currentForm.setVisible(false);
-        currentForm = showingForm;
+        currentForm = specifiedForm;
         currentForm.setVisible(true);
     }
     public void switchToPlayerNameScreen()
