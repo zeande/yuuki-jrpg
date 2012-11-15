@@ -74,14 +74,14 @@ public class BattleTest {
 	private void showStatus(Character f) {
 		println(f.getName() + " (" + f.getTeamId() + ":" + f.getFighterId() + ")");
 		println("---------------");
-		VariableStat hp = f.getHP();
-		VariableStat mp = f.getMP();
-		Stat str = f.getStrength();
-		Stat def = f.getDefense();
-		Stat agt = f.getAgility();
-		Stat acc = f.getAccuracy();
-		Stat mag = f.getMagic();
-		Stat luk = f.getLuck();
+		VariableStat hp = f.getHPStat();
+		VariableStat mp = f.getMPStat();
+		Stat str = f.getStrengthStat();
+		Stat def = f.getDefenseStat();
+		Stat agt = f.getAgilityStat();
+		Stat acc = f.getAccuracyStat();
+		Stat mag = f.getMagicStat();
+		Stat luk = f.getLuckStat();
 		println("HP: " + hp.getCurrent() + "/" + hp.getMax(f.getLevel()));
 		println("MP: " + mp.getCurrent() + "/" + mp.getMax(f.getLevel()));
 		println("---------------");

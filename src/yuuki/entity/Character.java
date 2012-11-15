@@ -257,8 +257,86 @@ public abstract class Character {
 	 *
 	 * @return The HP stat.
 	 */
-	public VariableStat getHP() {
+	public VariableStat getHPStat() {
 		return hp;
+	}
+	
+	/**
+	 * Gets the max HP of this Character.
+	 * 
+	 * @return The max HP.
+	 */
+	public int getMaxHP() {
+		return hp.getMax(level);
+	}
+	
+	/**
+	 * Gets the current HP of this Character.
+	 * 
+	 * @return The current HP.
+	 */
+	public int getHP() {
+		return hp.getCurrent();
+	}
+	
+	/**
+	 * Causes the HP to decrease by the specified amount.
+	 * 
+	 * @param amount The amount to decrease by.
+	 * 
+	 * @return The actual amount that HP decreased by.
+	 */
+	public int loseHP(int amount) {
+		int old = hp.getCurrent();
+		hp.lose(amount);
+		int actual = old - hp.getCurrent();
+		return actual;
+	}
+	
+	/**
+	 * Causes the HP increase by the specified amount.
+	 * 
+	 * @param amount the amount to increase by.
+	 * 
+	 * @return The actual amount that HP increased by.
+	 */
+	public int gainHP(int amount) {
+		int old = hp.getCurrent();
+		hp.gain(amount, level);
+		int actual = hp.getCurrent() - old;
+		return actual;
+	}
+	
+	/**
+	 * Immediately sets HP to 0.
+	 */
+	public void drainHP() {
+		hp.drain();
+	}
+	
+	/**
+	 * Immediately sets HP to max.
+	 */
+	public void restoreHP() {
+		hp.restore(level);
+	}
+	
+	/**
+	 * Sets a modifier on HP.
+	 * 
+	 * @param mod The amount of the modifier to add.
+	 */
+	public void addHPMod(double mod) {
+		hp.addModifier(mod, level);
+	}
+	
+	/**
+	 * Removes a modifier from HP.
+	 * 
+	 * @param mod The amount of the modifier to remove.
+	 */
+	public void removeHPMod(double mod) {
+		hp.removeModifier(mod, level);
 	}
 
 	/**
@@ -266,8 +344,86 @@ public abstract class Character {
 	 *
 	 * @return The MP stat.
 	 */
-	public VariableStat getMP() {
+	public VariableStat getMPStat() {
 		return mp;
+	}
+	
+	/**
+	 * Gets the max MP of this Character.
+	 * 
+	 * @return The max MP.
+	 */
+	public int getMaxMP() {
+		return mp.getMax(level);
+	}
+	
+	/**
+	 * Gets the amount of MP for this character.
+	 * 
+	 * @return The current amount of MP.
+	 */
+	public int getMP() {
+		return mp.getEffective(level);
+	}
+	
+	/**
+	 * Causes the MP to decrease by the specified amount.
+	 * 
+	 * @param amount The amount to decrease by.
+	 * 
+	 * @return The actual amount that MP decreased by.
+	 */
+	public int loseMP(int amount) {
+		int old = mp.getCurrent();
+		mp.lose(amount);
+		int actual = old - mp.getCurrent();
+		return actual;
+	}
+	
+	/**
+	 * Causes the MP increase by the specified amount.
+	 * 
+	 * @param amount the amount to increase by.
+	 * 
+	 * @return The actual amount that MP increased by.
+	 */
+	public int gainMP(int amount) {
+		int old = mp.getCurrent();
+		mp.gain(amount, level);
+		int actual = mp.getCurrent() - old;
+		return actual;
+	}
+	
+	/**
+	 * Immediately sets MP to 0.
+	 */
+	public void drainMP() {
+		mp.drain();
+	}
+	
+	/**
+	 * Immediately sets MP to max.
+	 */
+	public void restoreMP() {
+		mp.restore(level);
+	}
+	
+	/**
+	 * Sets a modifier on MP.
+	 * 
+	 * @param mod The amount of the modifier to add.
+	 */
+	public void addMPMod(double mod) {
+		mp.addModifier(mod, level);
+	}
+	
+	/**
+	 * Removes a modifier from MP.
+	 * 
+	 * @param mod The amount of the modifier to remove.
+	 */
+	public void removeMPMod(double mod) {
+		mp.removeModifier(mod, level);
 	}
 	
 	/**
@@ -284,8 +440,35 @@ public abstract class Character {
 	 *
 	 * @return The strength Stat.
 	 */
-	public Stat getStrength() {
+	public Stat getStrengthStat() {
 		return strength;
+	}
+	
+	/**
+	 * Gets the current effective strength of this Character.
+	 * 
+	 * @return The effective value of the stat.
+	 */
+	public int getStrength() {
+		return strength.getEffective(level);
+	}
+	
+	/**
+	 * Adds a modifier to the strength stat.
+	 * 
+	 * @param mod The amount of modifier to add.
+	 */
+	public void addStrengthMod(double mod) {
+		strength.addModifier(mod);
+	}
+	
+	/**
+	 * Removes a modifier from the strength stat.
+	 * 
+	 * @param mod The amount of modifier to remove.
+	 */
+	public void removeStrengthMod(double mod) {
+		strength.removeModifier(mod);
 	}
 
 	/**
@@ -293,8 +476,35 @@ public abstract class Character {
 	 *
 	 * @return The defense Stat.
 	 */
-	public Stat getDefense() {
+	public Stat getDefenseStat() {
 		return defense;
+	}
+	
+	/**
+	 * Gets the current effective defense of this Character.
+	 * 
+	 * @return The effective value of the stat.
+	 */
+	public int getDefense() {
+		return defense.getEffective(level);
+	}
+	
+	/**
+	 * Adds a modifier to the defense stat.
+	 * 
+	 * @param mod The amount of modifier to add.
+	 */
+	public void addDefenseMod(double mod) {
+		defense.addModifier(mod);
+	}
+	
+	/**
+	 * Removes a modifier from the defense stat.
+	 * 
+	 * @param mod The amount of modifier to remove.
+	 */
+	public void removeDefenseMod(double mod) {
+		defense.removeModifier(mod);
 	}
 
 	/**
@@ -302,8 +512,35 @@ public abstract class Character {
 	 *
 	 * @return The magic Stat.
 	 */
-	public Stat getMagic() {
+	public Stat getMagicStat() {
 		return magic;
+	}
+	
+	/**
+	 * Gets the current effective magic of this Character.
+	 * 
+	 * @return The effective value of the stat.
+	 */
+	public int getMagic() {
+		return magic.getEffective(level);
+	}
+	
+	/**
+	 * Adds a modifier to the magic stat.
+	 * 
+	 * @param mod The amount of modifier to add.
+	 */
+	public void addMagicMod(double mod) {
+		magic.addModifier(mod);
+	}
+	
+	/**
+	 * Removes a modifier from the magic stat.
+	 * 
+	 * @param mod The amount of modifier to remove.
+	 */
+	public void removeMagicMod(double mod) {
+		magic.removeModifier(mod);
 	}
 
 	/**
@@ -311,8 +548,35 @@ public abstract class Character {
 	 *
 	 * @return The agility Stat.
 	 */
-	public Stat getAgility() {
+	public Stat getAgilityStat() {
 		return agility;
+	}
+	
+	/**
+	 * Gets the current effective agility of this Character.
+	 * 
+	 * @return The effective value of the stat.
+	 */
+	public int getAgility() {
+		return agility.getEffective(level);
+	}
+	
+	/**
+	 * Adds a modifier to the agility stat.
+	 * 
+	 * @param mod The amount of modifier to add.
+	 */
+	public void addAgilityMod(double mod) {
+		agility.addModifier(mod);
+	}
+	
+	/**
+	 * Removes a modifier from the agility stat.
+	 * 
+	 * @param mod The amount of modifier to remove.
+	 */
+	public void removeAgilityMod(double mod) {
+		agility.removeModifier(mod);
 	}
 
 	/**
@@ -320,8 +584,35 @@ public abstract class Character {
 	 *
 	 * @return The accuracy Stat.
 	 */
-	public Stat getAccuracy() {
+	public Stat getAccuracyStat() {
 		return accuracy;
+	}
+	
+	/**
+	 * Gets the current effective accuracy of this Character.
+	 * 
+	 * @return The effective value of the stat.
+	 */
+	public int getAccuracy() {
+		return accuracy.getEffective(level);
+	}
+	
+	/**
+	 * Adds a modifier to the accuracy stat.
+	 * 
+	 * @param mod The amount of modifier to add.
+	 */
+	public void addAccuracyMod(double mod) {
+		accuracy.addModifier(mod);
+	}
+	
+	/**
+	 * Removes a modifier from the accuracy stat.
+	 * 
+	 * @param mod The amount of modifier to remove.
+	 */
+	public void removeAccuracyMod(double mod) {
+		accuracy.removeModifier(mod);
 	}
 
 	/**
@@ -329,8 +620,35 @@ public abstract class Character {
 	 *
 	 * @return The luck Stat.
 	 */
-	public Stat getLuck() {
+	public Stat getLuckStat() {
 		return luck;
+	}
+	
+	/**
+	 * Gets the current effective luck of this Character.
+	 * 
+	 * @return The effective value of the stat.
+	 */
+	public int getLuck() {
+		return luck.getEffective(level);
+	}
+	
+	/**
+	 * Adds a modifier to the luck stat.
+	 * 
+	 * @param mod The amount of modifier to add.
+	 */
+	public void addLuckMod(double mod) {
+		luck.addModifier(mod);
+	}
+	
+	/**
+	 * Removes a modifier from the luck stat.
+	 * 
+	 * @param mod The amount of modifier to remove.
+	 */
+	public void removeLuckMod(double mod) {
+		luck.removeModifier(mod);
 	}
 	
 	/**

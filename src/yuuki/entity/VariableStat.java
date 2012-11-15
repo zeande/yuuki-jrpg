@@ -41,7 +41,7 @@ public class VariableStat extends Stat implements Cloneable {
 	 * @param mod The amount of the modifier to add.
 	 * @param level The level of the Character that the stat is on.
 	 */
-	public void addModifier(int mod, int level) {
+	public void addModifier(double mod, int level) {
 		double percent = currentValue / getMax(level);
 		addModifier(mod);
 		currentValue = (int) Math.round(getMax(level) * percent);
@@ -56,7 +56,7 @@ public class VariableStat extends Stat implements Cloneable {
 	 * @param mod The amount of the modifier to add.
 	 * @param level The level of the Character that the stat is on.
 	 */
-	public void removeModifier(int mod, int level) {
+	public void removeModifier(double mod, int level) {
 		double percent = currentValue / getMax(level);
 		removeModifier(mod);
 		currentValue = (int) Math.round(getMax(level) * percent);

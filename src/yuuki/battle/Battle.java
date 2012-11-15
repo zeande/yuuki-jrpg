@@ -255,12 +255,11 @@ public class Battle {
 	 */
 	private void regenerateMana() {
 		Character c = getCurrentFighter();
-		VariableStat mana = c.getMP();
-		int oldMana = mana.getCurrent();
-		int manaMax = mana.getMax(c.getLevel());
+		int oldMana = c.getMP();
+		int manaMax = c.getMaxMP();
 		int amount = (int) Math.floor(manaMax * MANA_GEN);
-		mana.gain(amount, c.getLevel());
-		regeneratedMana = mana.getCurrent() - oldMana;
+		c.gainMP(amount);
+		regeneratedMana = c.getMP() - oldMana;
 	}
 
 	/**

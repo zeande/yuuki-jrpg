@@ -34,11 +34,11 @@ public class BasicAttack extends Skill implements Cloneable {
 	@Override
 	protected void applyEffect() {
 		Character target = targets.get(0);
-		int oStr = origin.getStrength().getEffective(origin.getLevel());
-		int tDef = target.getDefense().getEffective(target.getLevel());
+		int oStr = origin.getStrength();
+		int tDef = target.getDefense();
 		double mod = (oStr / tDef);
 		int totalDamage = (int) Math.round(effect + mod);
-		target.getHP().lose(totalDamage);
+		target.loseHP(totalDamage);
 		actualEffects[0] = totalDamage;
 	}
 	
@@ -54,7 +54,7 @@ public class BasicAttack extends Skill implements Cloneable {
 	 * @param c The character to set it from.
 	 */
 	protected void setEffectStat(Character c) {
-		effectStat = c.getHP().clone();
+		effectStat = c.getHPStat().clone();
 	}
 
 }

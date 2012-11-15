@@ -34,10 +34,10 @@ public abstract class Skill extends Action implements Cloneable {
 	 */
 	protected boolean applyCost() {
 		int manaCost = (int) cost;
-		if (origin.getMP().getCurrent() < manaCost) {
+		if (origin.getMP() < manaCost) {
 			return false;
 		} else {
-			origin.getMP().lose(manaCost);
+			origin.loseMP(manaCost);
 			return true;
 		}
 	}
@@ -49,7 +49,7 @@ public abstract class Skill extends Action implements Cloneable {
 	 */
 	@Override
 	protected void setCostStat(Character c) {
-		costStat = c.getMP().clone();
+		costStat = c.getMPStat().clone();
 	}
 	
 }

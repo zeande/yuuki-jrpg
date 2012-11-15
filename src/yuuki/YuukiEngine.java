@@ -361,7 +361,7 @@ public class YuukiEngine implements Runnable {
 			ui.showBuffDeactivation(expired);
 		}
 		if (recoveredMana != 0) {
-			ui.showRecovery(c, c.getMP(), recoveredMana);
+			ui.showRecovery(c, c.getMPStat(), recoveredMana);
 		}
 		ui.showStatUpdate(c);
 	}

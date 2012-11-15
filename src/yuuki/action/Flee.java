@@ -59,7 +59,7 @@ public class Flee extends Action {
         rand = new Random();  
       
         //Get Character agility level.
-        int agility = origin.getAgility().getEffective(origin.getLevel());
+        int agility = origin.getAgility();
         advantageLevel += (agility * 0.2);
         if(advantageLevel == 1)
         {

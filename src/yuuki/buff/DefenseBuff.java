@@ -31,14 +31,14 @@ public class DefenseBuff extends PassiveBuff implements Cloneable {
 	 * @inheritDoc
 	 */
 	protected void applyActivationEffect() {
-		target.getDefense().addModifier(effect);
+		target.addDefenseMod(effect);
 	}
 	
 	/**
 	 * @inheritDoc
 	 */
 	protected void applyDeactivationEffect() {
-		target.getDefense().removeModifier(effect);
+		target.removeDefenseMod(effect);
 	}
 
 }
