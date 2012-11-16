@@ -10,20 +10,23 @@ import sun.audio.AudioStream;
 /**
  *
  * @author Caleb Smith
- * @version 10/11/12
+ * @version 10/16/12
  */
 public class PlayerName extends javax.swing.JFrame {
-    boolean blnStartGame = false;
+    public boolean blnStartGame = false;
     boolean blnToMenu = false;
-    boolean soundMusic = true;
-    boolean soundEffects = true;
+    public boolean soundMusic = true;
+    public boolean soundEffects = true;
     String usersName = "Player 1";
     
     public boolean getMenuStatus()
     {
         return blnToMenu;
     }
-    
+    public void setMenuStatus(boolean menuStatus)
+    {
+        blnToMenu = menuStatus;
+    }
     public String getUsersName()
     {
         return usersName;
@@ -31,6 +34,10 @@ public class PlayerName extends javax.swing.JFrame {
     public boolean getPlayStatus()
     {
         return blnStartGame;
+    }
+    public void setPlayStatus(boolean playStatus)
+    {
+        blnStartGame = playStatus;
     }
     /**
      * Creates new form PlayerName
@@ -126,7 +133,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnMainMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuEntered
         // Handles lblBtnMainMenu on Mouseover.
-        lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameMainMenuHi.png")));
+        lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameGuiAssets/PlayerNameMainMenuHi.png")));
         if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -149,7 +156,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnMainMenuExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuExited
         // Handles lblBtnMainMenu on Mouseover off.
-        lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameMainMenu.png")));
+        lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameGuiAssets/PlayerNameMainMenu.png")));
     }//GEN-LAST:event_lblBtnMainMenuExited
 
     private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
@@ -173,7 +180,6 @@ public class PlayerName extends javax.swing.JFrame {
                 System.out.println("Audio play New Game Entered went wrong.");
             }
         }
-        setVisible(false);
     }//GEN-LAST:event_lblBtnMainMenuClicked
 
     private void lblBtnMainMenuPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuPressed
@@ -188,7 +194,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnBeginGame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGame
         // Handles lblBtnMainMenu on Mouseover.
-        lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameBeginGameHi.png")));
+        lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameGuiAssets/PlayerNameBeginGameHi.png")));
         if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -211,7 +217,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnBeginGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameExited
         // Handles lblBtnBeginGame on Mouseover off.
-        lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("PlayerNameBeginGame.png")));
+        lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameGuiAssets/PlayerNameBeginGame.png")));
     }//GEN-LAST:event_lblBtnBeginGameExited
 
     private void lblBtnBeginGamePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGamePressed

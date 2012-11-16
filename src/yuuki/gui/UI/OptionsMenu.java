@@ -13,14 +13,14 @@ import java.net.URL;
 /**
  *
  * @author Caleb Smtih
- * @version 11/15/12
+ * @version 11/16/12
  */
 public class OptionsMenu extends javax.swing.JFrame {
 boolean musicOnChecked = true;
 boolean musicOffChecked = false;
 boolean effectsOnChecked = true;
 boolean effectsOffChecked = false;
-boolean btnApply = false;
+public boolean btnApply = false;
 public boolean soundMusic = true;
 public boolean soundEffects = true;
 
@@ -37,6 +37,11 @@ public boolean getSoundEffects()
 public boolean getBtnApply()
 {
     return btnApply;
+}
+
+public void setBtnApply(boolean btnApplyStatus)
+{
+    btnApply = btnApplyStatus;
 }
 
     /**
@@ -196,7 +201,7 @@ public boolean getBtnApply()
 
     private void lblBtnApplyExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyExited
         // On Mouseover off changes lblBtnApply's Icon.
-        //lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApply.png")));
+        lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApply.png")));
     }//GEN-LAST:event_lblBtnApplyExited
 
     private void lblBtnApplyPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyPressed

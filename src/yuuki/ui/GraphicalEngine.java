@@ -17,7 +17,7 @@ import yuuki.entity.Stat;
 /**
  *
  * @author Caleb Smith
- * @version 10/13/12
+ * @version 10/16/12
  */
 public class GraphicalEngine implements Interactable {
     //Construct nessecary objects.
@@ -37,51 +37,115 @@ public class GraphicalEngine implements Interactable {
     }
     public void switchToSpecifiedScreen(JFrame specifiedForm)
     {
-        currentForm.setVisible(false);
+        if(currentForm == null)
+        {
         currentForm = specifiedForm;
         currentForm.setVisible(true);
+        }
+        else
+        {
+            currentForm.setVisible(false);
+            currentForm = specifiedForm;
+            currentForm.setVisible(true);
+        }
     }
     public void switchToPlayerNameScreen()
     {
-        currentForm.setVisible(false);
-        currentForm = playerNameGui;
-        playerNameGui.setVisible(true);
+        if(currentForm == null)
+        {
+            currentForm = playerNameGui;
+            currentForm.setVisible(true);
+        }
+        else
+        {
+            currentForm.setVisible(false);
+            currentForm = playerNameGui;
+            currentForm.setVisible(true);
+        }
     }
     public void switchToPlayerNameScreen(boolean soundEffects, boolean soundMusic)
     {
-        currentForm.setVisible(false);
-        currentForm = playerNameGui;
-        playerNameGui.setVisible(true);
+        if(currentForm == null)
+        {
+            currentForm = playerNameGui;
+            currentForm.setVisible(true);
+        }
+        else
+        {
+            currentForm.setVisible(false);
+            currentForm = playerNameGui;
+            currentForm.setVisible(true);
+        }        
     }
     public void switchToIntroScreen()
     {
-        currentForm.setVisible(false);
-        currentForm = mainTitleGui;
-        mainTitleGui.setVisible(true);
+        if(currentForm == null)
+        {
+            currentForm = mainTitleGui;
+            currentForm.setVisible(true);
+        }
+        else
+        {
+            currentForm.setVisible(false);
+            currentForm = mainTitleGui;
+            currentForm.setVisible(true);
+        }
     }
     public void switchToIntroScreen(boolean soundEffects, boolean soundMusic)
     {
-        currentForm.setVisible(false);
-        currentForm = mainTitleGui;
-        mainTitleGui.setVisible(true);
+       if(currentForm == null)
+        {
+            currentForm = mainTitleGui;
+            currentForm.setVisible(true);
+        }
+        else
+        {
+            currentForm.setVisible(false);
+            currentForm = mainTitleGui;
+            currentForm.setVisible(true);
+        }
     }
     public void switchToOptionsScreen()
     {
-        currentForm.setVisible(false);
-        currentForm = optionsMenuGui;
-        optionsMenuGui.setVisible(true);        
+        if(currentForm == null)
+        {
+            currentForm = optionsMenuGui;
+            currentForm.setVisible(true);
+        }
+        else
+        {
+            currentForm.setVisible(false);
+            currentForm = optionsMenuGui;
+            currentForm.setVisible(true);
+        }
     }
     public void switchToOptionsScreen(boolean soundEffects, boolean soundMusic)
     {
-        currentForm.setVisible(false);
-        currentForm = optionsMenuGui;
-        optionsMenuGui.setVisible(true);
+        if(currentForm == null)
+        {
+            currentForm = optionsMenuGui;
+            currentForm.setVisible(true);
+        }
+        else
+        {
+            currentForm.setVisible(false);
+            currentForm = optionsMenuGui;
+            currentForm.setVisible(true);
+        }
     }
     public void switchToBattleScreen(yuuki.entity.Character[][] fighters)
     {
-        currentForm.setVisible(false);
-        currentForm = battleScreen;
-        battleScreen.setVisible(true);
+        if(currentForm == null)
+        {
+            currentForm = battleScreen;
+            currentForm.setVisible(true);
+        }
+        else
+        {
+            currentForm.setVisible(false);
+            currentForm = battleScreen;
+            currentForm.setVisible(true);
+        }
     }
     public void showStatUpdate(yuuki.entity.Character fighter)
     {

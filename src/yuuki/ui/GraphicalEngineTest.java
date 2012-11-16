@@ -8,124 +8,118 @@ package yuuki.ui;
 /**
  *
  * @author Caleb Smtih
- * @version 11/13/12
+ * @version 11/16/12
  */
 public class GraphicalEngineTest {
     //Initiate GraphicalEngine.
     GraphicalEngine ge = new GraphicalEngine();
         static boolean blnSoundMusic = true;
         static boolean blnSoundEffects = true;
+        static String playerName = "";
+        static boolean mainTitleStatus = false;
+        static boolean optionsMenuStatus = false;
+        static boolean playerCreationStatus = false;
+        static boolean battleScreenStatus = false;
+        static boolean beginGameStatus = false;
+        static boolean exitStatus = false;
         
     //Main Method.
     public static void main(String[] args) {
         GraphicalEngineTest get = new GraphicalEngineTest();
-
-        get.run(blnSoundMusic, blnSoundEffects);
+        get.introScreen();
+        mainTitleStatus = true;
     }
-    /**
-     * Displays the Intro Screen
-     * Waits until user navigates to another menu.
-     */
-    public void run(boolean soundMusic, boolean soundEffects)
+    public void introScreen()
     {
         ge.switchToIntroScreen();
-        ge.mainTitleGui.soundEffects = soundEffects;
-        ge.mainTitleGui.soundMusic = soundMusic;
-        boolean blnNewGame = false;
-        boolean blnOptionsMenu = false;
-        boolean blnExit = false;
-        blnNewGame = ge.mainTitleGui.getNewGame();
-        blnOptionsMenu = ge.mainTitleGui.getOptionsMenu();
-
         do
         {
-            blnExit = ge.mainTitleGui.getExit();
-            blnNewGame = ge.mainTitleGui.getNewGame();
-            blnOptionsMenu = ge.mainTitleGui.getOptionsMenu();
+            playerCreationStatus = ge.mainTitleGui.getNewGame();
+            optionsMenuStatus = ge.mainTitleGui.getOptionsMenu();
+            exitStatus = ge.mainTitleGui.getExit();
             try
-                {
-                    Thread.sleep(10);
-                }
+            {
+                Thread.sleep(1);
+            }
             catch(Exception e)
-                {
-                    System.out.println("GraphicalEngineTest.run couldn't sleep.");
-                }
-        }while(!blnNewGame && !blnOptionsMenu);
-        
-        if(blnNewGame == true)
             {
-                ge.switchToPlayerNameScreen();
-                newGame(blnSoundMusic, blnSoundEffects);
+                System.out.println("Couldn't Sleep.");
             }
-            else if(blnOptionsMenu == true)
-            {
-                ge.switchToOptionsScreen();
-                optionsMenu(blnSoundMusic, blnSoundEffects);
-            }
-            else if(blnExit = true)
-            {
-                exit();
-            }
-    }
-    
-    public void newGame(boolean soundMusic, boolean soundEffects)
-    {
-        boolean blnStartGame = false;
-        boolean blnToMenu = false;
-        blnStartGame = ge.playerNameGui.getPlayStatus();
-        blnToMenu = ge.playerNameGui.getMenuStatus();
-        
-        do
+        }while(playerCreationStatus == false && optionsMenuStatus == false && exitStatus == false);
+        mainTitleStatus = false;
+        if(playerCreationStatus == true)
         {
-            blnStartGame = ge.playerNameGui.getPlayStatus();
-            blnToMenu = ge.playerNameGui.getMenuStatus();
-            try
-                {
-                    Thread.sleep(10);
-                }
-            catch(Exception e)
-                {
-                    System.out.println("GraphicalEngineTest.newGame couldn't sleep.");
-                }
-        }while(!blnStartGame && !blnToMenu);
-        
-        if(blnStartGame = true)
-        {
-            String userName = ge.getString("Enter player name");
-            System.out.println("The User's Name is:");
-            System.out.println(userName);
-            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.newGame() - No JFrame For Game Start.");
+            ge.mainTitleGui.setNewGame(false);
+            playerCreation();
         }
-        else if(blnToMenu = true)
+        else if(optionsMenuStatus == true)
         {
-            run(blnSoundMusic, blnSoundEffects);
+            ge.mainTitleGui.setOptionsMenu(false);
+            optionsMenu();
+        }
+        else if(exitStatus == true)
+        {
+            exitStatus = false;
+            exit();
         }
     }
-   
-    public void optionsMenu(boolean soundMusic, boolean soundEffects)
+    public void playerCreation()
     {
-        boolean blnApply = false;
-        ge.optionsMenuGui.soundMusic = soundMusic;
-        ge.optionsMenuGui.soundEffects = soundEffects;
+        ge.switchToPlayerNameScreen();
         do
         {
-           blnApply = ge.optionsMenuGui.getBtnApply();
-           blnSoundMusic = ge.optionsMenuGui.getSoundMusic();
-           blnSoundEffects = ge.optionsMenuGui.getSoundEffects();
-           try
-                {
-                    Thread.sleep(10);
-                }
+            mainTitleStatus = ge.playerNameGui.getMenuStatus();
+            beginGameStatus = ge.playerNameGui.getPlayStatus();
+            try
+            {
+                Thread.sleep(1);
+            }
             catch(Exception e)
-                {
-                    System.out.println("GraphicalEngineTest.optionsMenu couldn't sleep.");
-                }
-        }while(!blnApply);
-        run(blnSoundMusic, blnSoundEffects);
+            {
+                System.out.println("Couldn't Sleep.");
+            }
+        }while(mainTitleStatus == false && beginGameStatus == false);
+        playerCreationStatus = false;
+        if(mainTitleStatus == true)
+        {
+            ge.playerNameGui.setMenuStatus(false);
+            introScreen();
+        }
+        else if(beginGameStatus == true)
+        {
+            ge.playerNameGui.setPlayStatus(false);
+            playerName = ge.playerNameGui.getUsersName();
+            System.out.println("The Player's Name is:" + playerName);
+            System.out.println("<Hardcoded Responce> @ GraphicalEngineTest.playerCreation.");
+            System.out.println("Reason: No Start of Game JFrame.");
+        }
+        
+    }
+    public void optionsMenu()
+    {
+        ge.switchToOptionsScreen();
+        do
+        {
+            mainTitleStatus = ge.optionsMenuGui.getBtnApply();
+            try
+            {
+                Thread.sleep(1);
+            }
+            catch(Exception e)
+            {
+                System.out.println("Couldn't Sleep.");
+            }
+        }while(mainTitleStatus == false);
+        optionsMenuStatus = false;
+        ge.optionsMenuGui.setBtnApply(false);
+        ge.switchToIntroScreen();
+        introScreen();
+    }
+    {
+       
+    } public void exit()
+    {
+       System.exit(0);
     }
     
-    public void exit()
-    {
-        System.exit(0);
-    }
 }

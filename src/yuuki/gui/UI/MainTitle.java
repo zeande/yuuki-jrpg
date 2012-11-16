@@ -1,16 +1,17 @@
 package yuuki.gui.UI;
+
 import sun.audio.*;
 import java.io.*;
 /**
  *
  * @author Caleb Smith
+ * @version 11/16/12
  */
 public class MainTitle extends javax.swing.JFrame {
-OptionsMenu om = new OptionsMenu();
-PlayerName pn = new PlayerName();
-boolean blnNewGame = false;
-boolean blnOptionsMenu = false;
-boolean blnExit = false;
+public boolean blnNewGame = false;
+public boolean blnLoadGame = false;
+public boolean blnOptionsMenu = false;
+public boolean blnExit = false;
 public boolean soundMusic = true;
 public boolean soundEffects = true;
 
@@ -19,9 +20,19 @@ public boolean getOptionsMenu()
     return blnOptionsMenu;
 }
 
+public void setOptionsMenu(boolean optionsMenuStatus)
+{
+    blnOptionsMenu = optionsMenuStatus;
+}
+
 public boolean getNewGame()
 {
     return blnNewGame;
+}
+
+public void setNewGame(boolean newGameStatus)
+{
+    blnNewGame = newGameStatus;
 }
 
 public boolean getExit()
@@ -159,7 +170,7 @@ public boolean getExit()
 
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
         // On Mouseover changes lblNewGame's Icon.
-        lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("New Game Hi.png")));
+        lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/New Game Hi.png")));
         if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -182,7 +193,7 @@ public boolean getExit()
 
     private void NewGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameExited
         // On Mouseover off changes lblNewGame's Icon.
-        lblNewGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("New Game.png")));
+        lblNewGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/New Game.png")));
     }//GEN-LAST:event_NewGameExited
 
     private void NewGamePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGamePressed
@@ -197,7 +208,7 @@ public boolean getExit()
 
     private void LoadGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameEntered
         // On Mouseover changes lblLoadGame's Icon.
-        lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("Load Game Hi.png")));
+        lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Load Game Hi.png")));
         if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -220,7 +231,7 @@ public boolean getExit()
 
     private void LoadGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameExited
         // On Mouseover off changes lblLoadGames' Icon
-        lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("Load Game.png")));
+        lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Load Game.png")));
     }//GEN-LAST:event_LoadGameExited
 
     private void LoadGamePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGamePressed
@@ -235,7 +246,7 @@ public boolean getExit()
 
     private void OptionsEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsEntered
         // On Mouseover change lblOptions's Icon.
-        lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("Options Hi.png")));
+        lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Options Hi.png")));
         if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -258,7 +269,7 @@ public boolean getExit()
 
     private void OptionsExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsExited
         // On Mouseover off change lblOptions's Icon.
-        lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("Options.png")));
+        lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Options.png")));
     }//GEN-LAST:event_OptionsExited
 
     private void OptionsPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsPressed
@@ -273,7 +284,7 @@ public boolean getExit()
 
     private void ExitEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitEntered
         // On Mouseover change lblExit's Icon.
-        lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("Exit Hi.png")));
+        lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Exit Hi.png")));
         if(soundEffects == true)
         {
             AudioPlayer BGMPlayer = AudioPlayer.player;
@@ -296,7 +307,7 @@ public boolean getExit()
 
     private void ExitExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitExited
         // On Mouseover off change lblExit's Icon.
-        lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("Exit.png")));
+        lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Exit.png")));
     }//GEN-LAST:event_ExitExited
 
     private void ExitPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitPressed
@@ -361,9 +372,7 @@ public boolean getExit()
             {
                 System.out.println("Audio play New Game Entered went wrong.");
             }
-        }
-      om.setVisible(true);
-     
+        }     
     }//GEN-LAST:event_OptionsClicked
 
     private void lblNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewGameClicked
@@ -388,7 +397,6 @@ public boolean getExit()
             }
             
         }
-        pn.setVisible(true);
     }//GEN-LAST:event_lblNewGameClicked
 
     private void lblLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoadGameClicked

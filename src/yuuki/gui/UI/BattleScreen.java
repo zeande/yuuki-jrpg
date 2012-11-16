@@ -7,6 +7,7 @@ package yuuki.gui.UI;
 /**
  *
  * @author Caleb
+ * @version 11/16/12
  */
 public class BattleScreen extends javax.swing.JFrame {
 
