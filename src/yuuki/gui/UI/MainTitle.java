@@ -64,6 +64,7 @@ public boolean getExit()
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(16, 38, 800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
