@@ -1,10 +1,6 @@
-/**
- * A Simple Gui test.
- * Provides Gui Navigation.
- * Does Not Provide full Gameplay.
- */
 package yuuki.ui;
-
+import yuuki.entity.*;
+import yuuki.action.*;
 /**
  *
  * @author Caleb Smtih
@@ -13,6 +9,8 @@ package yuuki.ui;
 public class GraphicalEngineTest {
     //Initiate GraphicalEngine.
     GraphicalEngine ge = new GraphicalEngine();
+    private PlayerCharacter player = null;
+    
         static boolean blnSoundMusic = true;
         static boolean blnSoundEffects = true;
         static String playerName = "";
@@ -95,6 +93,19 @@ public class GraphicalEngineTest {
         {
             ge.playerNameGui.setPlayStatus(false);
             playerName = ge.playerNameGui.getUsersName();
+            Action[] playerMoves = new Action[3];
+            playerMoves[0] = new BasicAttack(8);
+            playerMoves[1] = new BasicDefense(4);
+            playerMoves[2] = new Flee();
+            VariableStat hp = new VariableStat("health", 100, 15);
+            VariableStat mp = new VariableStat("mana", 100, 15);
+            Stat str = new Stat("strength", 10, 1);
+            Stat def = new Stat("defence", 10, 1);
+            Stat agl = new Stat("agility", 10, 1);
+            Stat acc = new Stat("accuracy", 10, 1);
+            Stat mag = new Stat("magic", 10, 1);
+            Stat luk = new Stat("luck", 10, 1);
+            player = new PlayerCharacter(playerName, 1, playerMoves, hp, mp, str, def, agl, acc, mag, luk, ge);
             System.out.println("The Player's Name is:" + playerName);
             System.out.println("<Hardcoded Responce> @ GraphicalEngineTest.playerCreation.");
             battleScreen();
