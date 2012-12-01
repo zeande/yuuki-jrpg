@@ -11,6 +11,62 @@ package yuuki.gui.UI;
  */
 public class BattleScreen extends javax.swing.JFrame {
 
+    public boolean menuOptionClicked = false;
+    public boolean menuNewGameClicked = false;
+    public boolean menuLoadGameClicked = false;
+    public boolean menuSaveGameClicked = false;
+    public boolean menuExitClicked = false;
+    
+    public boolean getOptionClicked()
+    {
+        return menuOptionClicked;
+    }
+    public boolean getNewGameClicked()
+    {
+        return menuNewGameClicked;
+    }
+    public boolean getLoadGameClicked()
+    {
+        return menuLoadGameClicked;
+    }
+    public boolean getSaveGameClicked()
+    {
+        return menuSaveGameClicked;
+    }
+    public boolean getExitClicked()
+    {
+        return menuExitClicked;
+    }
+    public void setOptionClicked(boolean OptionClicked)
+    {
+        menuOptionClicked = OptionClicked;
+    }
+    public void setNewGameClicked(boolean NewGameClicked)
+    {
+        menuNewGameClicked = NewGameClicked;
+    }
+    public void setLoadGameClicked(boolean LoadGameClicked)
+    {
+        menuLoadGameClicked = LoadGameClicked;
+    }
+    public void setSaveGameClicked(boolean SaveGameClicked)
+    {
+        menuSaveGameClicked = SaveGameClicked;
+    }
+    public void setExitClicked(boolean ExitClicked)
+    {
+        menuExitClicked = ExitClicked;
+    }
+    public void resetMenu()
+    {
+        lblMenuDropDownBackground.setEnabled(false);
+        btnOptionsMenu.setEnabled(false);
+        btnNewGame.setEnabled(false);
+        btnLoadGame.setEnabled(false);
+        btnSaveGame.setEnabled(false);
+        btnExit.setEnabled(false);
+    }
+    
     /**
      * Creates new form BattleScreen
      */
@@ -27,37 +83,137 @@ public class BattleScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblBattleScreenMenuButton = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        lblBattleScreenBackground = new javax.swing.JLabel();
+        btnExit = new javax.swing.JLabel();
+        btnLoadGame = new javax.swing.JLabel();
+        btnSaveGame = new javax.swing.JLabel();
+        btnNewGame = new javax.swing.JLabel();
+        btnOptionsMenu = new javax.swing.JLabel();
+        btnMenu = new javax.swing.JLabel();
+        lblMenuDropDownBackground = new javax.swing.JLabel();
+        lblTextBox = new javax.swing.JLabel();
+        lblTextBoxBackground = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
-        lblBattleScreenMenuButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBattleScreenMenuButton.setText("Menu");
-        getContentPane().add(lblBattleScreenMenuButton);
-        lblBattleScreenMenuButton.setBounds(680, 10, 110, 50);
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownExit.png"))); // NOI18N
+        btnExit.setEnabled(false);
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitClicked(evt);
+            }
+        });
+        getContentPane().add(btnExit);
+        btnExit.setBounds(645, 263, 60, 30);
 
-        jLabel2.setText("Monster");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(600, 120, 50, 60);
+        btnLoadGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownLoadGame.png"))); // NOI18N
+        btnLoadGame.setEnabled(false);
+        btnLoadGame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoadGameClicked(evt);
+            }
+        });
+        getContentPane().add(btnLoadGame);
+        btnLoadGame.setBounds(596, 214, 160, 30);
 
-        jLabel1.setText("Player Character");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(310, 140, 90, 50);
+        btnSaveGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownSaveGame.png"))); // NOI18N
+        btnSaveGame.setEnabled(false);
+        btnSaveGame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveGameClicked(evt);
+            }
+        });
+        getContentPane().add(btnSaveGame);
+        btnSaveGame.setBounds(598, 174, 160, 30);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel1.add(lblBattleScreenBackground);
+        btnNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownNewGame.png"))); // NOI18N
+        btnNewGame.setEnabled(false);
+        btnNewGame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNewGameClicked(evt);
+            }
+        });
+        getContentPane().add(btnNewGame);
+        btnNewGame.setBounds(601, 127, 160, 30);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 440, 800, 160);
+        btnOptionsMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownOptions.png"))); // NOI18N
+        btnOptionsMenu.setEnabled(false);
+        btnOptionsMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOptionsMenuClicked(evt);
+            }
+        });
+        getContentPane().add(btnOptionsMenu);
+        btnOptionsMenu.setBounds(576, 72, 200, 50);
+
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuIcon.png"))); // NOI18N
+        btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuClicked(evt);
+            }
+        });
+        getContentPane().add(btnMenu);
+        btnMenu.setBounds(650, 10, 140, 60);
+
+        lblMenuDropDownBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownBackground.png"))); // NOI18N
+        lblMenuDropDownBackground.setEnabled(false);
+        lblMenuDropDownBackground.setFocusable(false);
+        getContentPane().add(lblMenuDropDownBackground);
+        lblMenuDropDownBackground.setBounds(550, 2, 250, 370);
+
+        lblTextBox.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
+        lblTextBox.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTextBox.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        getContentPane().add(lblTextBox);
+        lblTextBox.setBounds(0, 450, 800, 150);
+
+        lblTextBoxBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/TextBoxBackground.png"))); // NOI18N
+        getContentPane().add(lblTextBoxBackground);
+        lblTextBoxBackground.setBounds(0, 450, 800, 150);
+
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/The_Field_by_Joker841.jpg"))); // NOI18N
+        getContentPane().add(lblBackground);
+        lblBackground.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuClicked
+        // Handles when the Menu button is clicked.
+        lblMenuDropDownBackground.setEnabled(true);
+        btnOptionsMenu.setEnabled(true);
+        btnNewGame.setEnabled(true);
+        btnLoadGame.setEnabled(true);
+        btnSaveGame.setEnabled(true);
+        btnExit.setEnabled(true);
+    }//GEN-LAST:event_btnMenuClicked
+
+    private void btnOptionsMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOptionsMenuClicked
+        // Handles when the Option Button in the Drop Down Menu is Clicked.
+        menuOptionClicked = true;
+    }//GEN-LAST:event_btnOptionsMenuClicked
+
+    private void btnNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewGameClicked
+        // Handles when the New Game button in the Drop Down Menu is Clicked.
+        menuNewGameClicked = true;
+    }//GEN-LAST:event_btnNewGameClicked
+
+    private void btnSaveGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveGameClicked
+        // Handles when the Save Game Button in the Drop Down Menu is Clicked.
+        menuSaveGameClicked = true;
+    }//GEN-LAST:event_btnSaveGameClicked
+
+    private void btnLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadGameClicked
+        // Handles when the Load Game Button in the Drop Down Menu is Clicked.
+        menuLoadGameClicked = true;
+    }//GEN-LAST:event_btnLoadGameClicked
+
+    private void btnExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitClicked
+        // Handles when the Load Game Button in the Drop Down Menu is Clicked.
+        menuExitClicked = true;
+    }//GEN-LAST:event_btnExitClicked
 
     /**
      * @param args the command line arguments
@@ -94,10 +250,15 @@ public class BattleScreen extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblBattleScreenBackground;
-    private javax.swing.JLabel lblBattleScreenMenuButton;
+    private javax.swing.JLabel btnExit;
+    private javax.swing.JLabel btnLoadGame;
+    private javax.swing.JLabel btnMenu;
+    private javax.swing.JLabel btnNewGame;
+    private javax.swing.JLabel btnOptionsMenu;
+    private javax.swing.JLabel btnSaveGame;
+    private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblMenuDropDownBackground;
+    private javax.swing.JLabel lblTextBox;
+    private javax.swing.JLabel lblTextBoxBackground;
     // End of variables declaration//GEN-END:variables
 }
