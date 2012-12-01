@@ -54,8 +54,8 @@ public class MonsterFactory {
 			mvs[i] = md.attacks[i].clone();
 		}
 		NonPlayerCharacter m;
-		m = new NonPlayerCharacter(name, level, mvs, hp, mp, str, def, mag,
-									agl, acc, luk, md.xp);
+		m = new NonPlayerCharacter(name, level, mvs, hp, mp, str, def, agl,
+									acc, mag, luk, md.xp);
 		return m;
 	}
 	
