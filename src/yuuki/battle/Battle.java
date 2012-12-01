@@ -77,6 +77,11 @@ public class Battle {
 	 * Amount of mana last regenerated.
 	 */
 	private int regeneratedMana;
+	
+	/**
+	 * Whether the current fighter has fled.
+	 */
+	private boolean fled = false;
 
 	/**
 	 * Begins a new battle with the given participants.
@@ -137,7 +142,10 @@ public class Battle {
 				break;
 
 			case APPLYING_BUFFS:
-				getCurrentFighter().applyBuffs();
+				checkFlee();
+				if (!fled) {
+					getCurrentFighter().applyBuffs();
+				}
 				state = State.CHECKING_DEATH;
 				break;
 
@@ -248,6 +256,15 @@ public class Battle {
 	public int getTeamCount() {
 		return fighters.size();
 	}
+	
+	/**
+	 * Checks if the last move was a flee.
+	 * 
+	 * @return Whether it was a flee.
+	 */
+	public boolean fleeOccured() {
+		return fled;
+	}
 
 	/**
 	 * Regenerates the mana of the current Character.
@@ -259,6 +276,18 @@ public class Battle {
 		int amount = (int) Math.floor(manaMax * MANA_GEN);
 		c.gainMP(amount);
 		regeneratedMana = c.getMP() - oldMana;
+	}
+	
+	/**
+	 * Removes the origin fighter if he has fled.
+	 */
+	private void checkFlee() {
+		if (lastAction instanceof yuuki.action.Flee) {
+			if (lastAction.wasSuccessful()) {
+				fled = true;
+				removeFighter(lastAction.getOrigin());
+			}
+		}
 	}
 
 	/**
@@ -299,6 +328,7 @@ public class Battle {
 	 * Sets the current player to the player whose turn is next.
 	 */
 	private void setNextPlayer() {
+		fled = false;
 		currentFighter++;
 		if (currentFighter >= turnOrder.size()) {
 			currentFighter = 0;
