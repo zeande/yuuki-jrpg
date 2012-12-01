@@ -28,6 +28,7 @@ public class GraphicalEngineTest {
         GraphicalEngineTest get = new GraphicalEngineTest();
         get.introScreen();
         mainTitleStatus = true;
+        
     }
     public void introScreen()
     {
@@ -50,7 +51,7 @@ public class GraphicalEngineTest {
         if(playerCreationStatus == true)
         {
             ge.mainTitleGui.setNewGame(false);
-            playerCreation();
+            playerCreation();            
         }
         else if(optionsMenuStatus == true)
         {

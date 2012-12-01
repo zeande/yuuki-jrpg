@@ -1,5 +1,5 @@
 package yuuki.gui.UI;
-
+import yuuki.gui.UI.Audio;
 import sun.audio.*;
 import java.io.*;
 /**
@@ -8,6 +8,7 @@ import java.io.*;
  * @version 11/16/12
  */
 public class MainTitle extends javax.swing.JFrame {
+Audio audio = new Audio();
 public boolean blnNewGame = false;
 public boolean blnLoadGame = false;
 public boolean blnOptionsMenu = false;
@@ -174,20 +175,23 @@ public boolean getExit()
         lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/New Game Hi.png")));
         if(soundEffects == true)
         {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
             try
             {
-            BGM = new AudioStream(new FileInputStream("onHover.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
+                System.out.println(getClass().getResource("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
+                
             }
-            catch(IOException error)
+            catch(Exception e)
             {
-                System.out.println("Audio play New Game Entered went wrong.");
+                System.out.println("You totally failed at everything.");
+            }
+        
+            try
+            {
+            audio.playAudio(new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav")));
+            }
+            catch(Exception e)
+            {
+                System.out.println("Audio couldn't play @ MainTitle.NewGameEntered");        
             }
         }
     }//GEN-LAST:event_NewGameEntered
