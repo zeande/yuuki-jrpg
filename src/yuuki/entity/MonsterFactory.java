@@ -95,7 +95,7 @@ public class MonsterFactory {
 		if (validNames.size() == 0) {
 			throw new IllegalArgumentException("no valid names given");
 		}
-		String[] possibleNames = (String[]) validNames.toArray();
+		String[] possibleNames =  validNames.toArray(new String[0]);
 		int nameInd = (int) Math.floor(Math.random() * possibleNames.length);
 		int diff = levelMax - levelMin;
 		int level = levelMin + (int) Math.floor(Math.random() * diff);

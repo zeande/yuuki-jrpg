@@ -99,7 +99,6 @@ public class BattleScreen extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownExit.png"))); // NOI18N
-        btnExit.setEnabled(false);
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExitClicked(evt);
@@ -109,7 +108,6 @@ public class BattleScreen extends javax.swing.JFrame {
         btnExit.setBounds(645, 263, 60, 30);
 
         btnLoadGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownLoadGame.png"))); // NOI18N
-        btnLoadGame.setEnabled(false);
         btnLoadGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoadGameClicked(evt);
@@ -119,7 +117,6 @@ public class BattleScreen extends javax.swing.JFrame {
         btnLoadGame.setBounds(596, 214, 160, 30);
 
         btnSaveGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownSaveGame.png"))); // NOI18N
-        btnSaveGame.setEnabled(false);
         btnSaveGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSaveGameClicked(evt);
@@ -129,7 +126,6 @@ public class BattleScreen extends javax.swing.JFrame {
         btnSaveGame.setBounds(598, 174, 160, 30);
 
         btnNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownNewGame.png"))); // NOI18N
-        btnNewGame.setEnabled(false);
         btnNewGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnNewGameClicked(evt);
@@ -139,7 +135,6 @@ public class BattleScreen extends javax.swing.JFrame {
         btnNewGame.setBounds(601, 127, 160, 30);
 
         btnOptionsMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownOptions.png"))); // NOI18N
-        btnOptionsMenu.setEnabled(false);
         btnOptionsMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnOptionsMenuClicked(evt);
@@ -158,7 +153,6 @@ public class BattleScreen extends javax.swing.JFrame {
         btnMenu.setBounds(650, 10, 140, 60);
 
         lblMenuDropDownBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownBackground.png"))); // NOI18N
-        lblMenuDropDownBackground.setEnabled(false);
         lblMenuDropDownBackground.setFocusable(false);
         getContentPane().add(lblMenuDropDownBackground);
         lblMenuDropDownBackground.setBounds(550, 2, 250, 370);

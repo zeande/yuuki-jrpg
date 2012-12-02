@@ -1,6 +1,7 @@
 package yuuki.ui;
 import yuuki.entity.*;
 import yuuki.action.*;
+import yuuki.entity.Character;
 /**
  *
  * @author Caleb Smtih
@@ -10,7 +11,7 @@ public class GraphicalEngineTest {
     //Initiate GraphicalEngine.
     GraphicalEngine ge = new GraphicalEngine();
     private PlayerCharacter player = null;
-    
+    private MonsterFactory mf = new MonsterFactory();
         static boolean blnSoundMusic = true;
         static boolean blnSoundEffects = true;
         static String playerName = "";
@@ -141,61 +142,71 @@ public class GraphicalEngineTest {
     }
     public void battleScreen()
     {
+        Character [][] fighters = makeTeams();
         ge.switchToBattleScreen(fighters);
-        do
-        {
-            bsOptionsStatus = ge.battleScreen.getOptionClicked();
-            bsNewGameStatus = ge.battleScreen.getNewGameClicked();
-            bsLoadGameStatus = ge.battleScreen.getLoadGameClicked();
-            bsSaveGameStatus = ge.battleScreen.getSaveGameClicked();
-            bsExitStatus = ge.battleScreen.getExitClicked();
-            try
-            {
-                Thread.sleep(1);
-            }
-            catch(Exception e)
-            {
-                System.out.println("Couldn't sleep @ GraphicalEngineTest.battleScreen");
-            }
-        }while(bsOptionsStatus == false && bsNewGameStatus == false && bsLoadGameStatus == false && bsSaveGameStatus == false && bsExitStatus == false);
-        if(bsOptionsStatus == true)
-        {
-            bsOptionsStatus = false;
-            ge.battleScreen.setOptionClicked(false);
-            ge.battleScreen.resetMenu();
-            optionsMenu("BattleScreen");
-        }
-        else if(bsNewGameStatus == true)
-        {
-            bsNewGameStatus = false;
-            ge.battleScreen.setNewGameClicked(false);
-            ge.battleScreen.resetMenu();
-            introScreen();
-            playerName = "";
-        }
-        else if(bsLoadGameStatus == true)
-        {
-            bsLoadGameStatus = false;
-            ge.battleScreen.setLoadGameClicked(false);
-            ge.battleScreen.resetMenu();
-            System.out.println("<Hardcoded Responce @ GraphicalEngingTest.battleScreen> No Load Game Functionality");
-        }
-        else if(bsSaveGameStatus == true)
-        {
-            bsSaveGameStatus = false;
-            ge.battleScreen.setSaveGameClicked(false);
-            ge.battleScreen.resetMenu();
-            System.out.println("<Hardcoded Responce @ GraphicalEngingTest.battleScreen> No Save Game Functionality");
-        }
-        else if(bsExitStatus == true)
-        {
-            bsExitStatus = false;
-            ge.battleScreen.setExitClicked(false);
-            ge.battleScreen.resetMenu();
-            exit();
-        }
+        
+        
+        
+//        do
+//        {
+//            bsOptionsStatus = ge.battleScreen.getOptionClicked();
+//            bsNewGameStatus = ge.battleScreen.getNewGameClicked();
+//            bsLoadGameStatus = ge.battleScreen.getLoadGameClicked();
+//            bsSaveGameStatus = ge.battleScreen.getSaveGameClicked();
+//            bsExitStatus = ge.battleScreen.getExitClicked();
+//            try
+//            {
+//                Thread.sleep(1);
+//            }
+//            catch(Exception e)
+//            {
+//                System.out.println("Couldn't sleep @ GraphicalEngineTest.battleScreen");
+//            }
+//        }while(bsOptionsStatus == false && bsNewGameStatus == false && bsLoadGameStatus == false && bsSaveGameStatus == false && bsExitStatus == false);
+//        if(bsOptionsStatus == true)
+//        {
+//            bsOptionsStatus = false;
+//            ge.battleScreen.setOptionClicked(false);
+//            ge.battleScreen.resetMenu();
+//            optionsMenu("BattleScreen");
+//        }
+//        else if(bsNewGameStatus == true)
+//        {
+//            bsNewGameStatus = false;
+//            ge.battleScreen.setNewGameClicked(false);
+//            ge.battleScreen.resetMenu();
+//            introScreen();
+//            playerName = "";
+//        }
+//        else if(bsLoadGameStatus == true)
+//        {
+//            bsLoadGameStatus = false;
+//            ge.battleScreen.setLoadGameClicked(false);
+//            ge.battleScreen.resetMenu();
+//            System.out.println("<Hardcoded Responce @ GraphicalEngingTest.battleScreen> No Load Game Functionality");
+//        }
+//        else if(bsSaveGameStatus == true)
+//        {
+//            bsSaveGameStatus = false;
+//            ge.battleScreen.setSaveGameClicked(false);
+//            ge.battleScreen.resetMenu();
+//            System.out.println("<Hardcoded Responce @ GraphicalEngingTest.battleScreen> No Save Game Functionality");
+//        }
+//        else if(bsExitStatus == true)
+//        {
+//            bsExitStatus = false;
+//            ge.battleScreen.setExitClicked(false);
+//            ge.battleScreen.resetMenu();
+//            exit();
+//        }
     }
-       
+     public Character[][] makeTeams()
+     {
+         Character[][] fighters = new Character[2][];
+         fighters[0] = new Character[]{player};
+         fighters[1] = mf.createRandomTeam(1, 1, player.getLevel(), "slime");
+         return fighters;
+     }
      public void exit()
     {
        System.exit(0);
