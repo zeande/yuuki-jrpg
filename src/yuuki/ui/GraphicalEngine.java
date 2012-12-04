@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import yuuki.gui.UI.*;
 import yuuki.gui.UI.BattleScreen;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import sun.audio.AudioData;
 import sun.audio.AudioDataStream;
 import sun.audio.AudioPlayer;
@@ -13,6 +14,7 @@ import yuuki.action.Action;
 import yuuki.buff.Buff;
 import yuuki.entity.Character;
 import yuuki.entity.Stat;
+import yuuki.entity.VariableStat;
 
 /**
  *
@@ -139,18 +141,83 @@ public class GraphicalEngine implements Interactable {
         {
             currentForm = battleScreen;
             currentForm.setVisible(true);
+            battleScreen.resetMenu();
         }
         else
         {
             currentForm.setVisible(false);
             currentForm = battleScreen;
             currentForm.setVisible(true);
+            battleScreen.resetMenu();
         }
     }
     public void showStatUpdate(yuuki.entity.Character fighter)
     {
-        
+                showStats(fighter);
     }
+    private void showStats(Character f) {
+		print(f.getName() + " (");
+		print("Team " + f.getTeamId());
+		println(", Fighter " + f.getFighterId() + ")");
+		println("---------------");
+		VariableStat hp = f.getHPStat();
+		VariableStat mp = f.getMPStat();
+		Stat str = f.getStrengthStat();
+		Stat def = f.getDefenseStat();
+		Stat agt = f.getAgilityStat();
+		Stat acc = f.getAccuracyStat();
+		Stat mag = f.getMagicStat();
+		Stat luk = f.getLuckStat();
+		println("HP: " + hp.getCurrent() + "/" + hp.getMax(f.getLevel()));
+		println("MP: " + mp.getCurrent() + "/" + mp.getMax(f.getLevel()));
+                updateGuiHP(hp.getCurrent(), hp.getMax(f.getLevel()), f.getTeamId());
+		println("---------------");
+		println("STR: " + str.getEffective(f.getLevel()));
+		println("DEF: " + def.getEffective(f.getLevel()));
+		println("AGT: " + agt.getEffective(f.getLevel()));
+		println("ACC: " + acc.getEffective(f.getLevel()));
+		println("MAG: " + mag.getEffective(f.getLevel()));
+		println("LUK: " + luk.getEffective(f.getLevel()));
+		println("");
+		if (f.getBuffs().size() > 0) {
+			showBuffs(f);
+		}
+		pause();
+	}
+    public void updateGuiHP(int hp, int hpMax, int teamID)
+    {
+        if(teamID == 0)
+        {
+            battleScreen.setPlayerHP(hp, hpMax);
+        }
+        else
+        {
+            battleScreen.setMonsterHP(hp, hpMax);
+        }
+    }
+    public void print(String arg)
+    {
+        battleScreen.setText(arg);
+    }
+    public void println(String arg)
+    {
+        battleScreen.setTextln(arg);
+    }
+    private void showBuffs(Character f) {
+		ArrayList<Buff> buffs = f.getBuffs();
+		print("Buffs: ");
+		for (int i = 0; i < buffs.size(); i++) {
+			print(buffs.get(i).getName());
+			if (i + 1 < buffs.size()) {
+				print(", ");
+			}
+		}
+		println("");
+	}
+    private void pause() {
+		println("pause");
+		
+	}
     public void showDamage(yuuki.entity.Character fighter, Stat stat, int damage)
     {
         
@@ -318,13 +385,33 @@ public class GraphicalEngine implements Interactable {
     }
     public int selectAction(Action[] moves)
     {
-        int action = 0;
-        return action;
+        String[] moveNames = new String[moves.length];
+		for (int i = 0; i < moves.length; i++) {
+			moveNames[i] = moves[i].getName();
+		}
+        String move = (String) JOptionPane.showInputDialog(null, "Choose a move:", "test", JOptionPane.INFORMATION_MESSAGE, null, moveNames, moveNames[0]);
+        int index = 0;
+        for (int i = 0; i < moveNames.length; i++) {
+            if (moveNames[i].equals(move)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
     public yuuki.entity.Character selectTarget(ArrayList<ArrayList<yuuki.entity.Character>> fighters)
     {
-        yuuki.entity.Character target = fighters.get(0).get(0);
-        return target;
+		ArrayList<Character> chars = new ArrayList<Character>();
+		for (int i = 0; i < fighters.size(); i++) {
+			ArrayList<Character> team = fighters.get(i);
+			for (int j = 0; j < team.size(); j++) {
+				Character c = team.get(j);
+				chars.add(c);
+			}
+		}
+		Character[] charsArr = chars.toArray(new Character[0]);
+                
+		return (Character) JOptionPane.showInputDialog(null, "Select target", "test", JOptionPane.INFORMATION_MESSAGE, null, charsArr, charsArr[0]);
     }
     
     public void playSound(String path)

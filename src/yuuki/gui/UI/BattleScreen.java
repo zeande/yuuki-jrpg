@@ -6,17 +6,36 @@ package yuuki.gui.UI;
 
 /**
  *
- * @author Caleb
+ * @author Caleb Smith
  * @version 11/16/12
  */
 public class BattleScreen extends javax.swing.JFrame {
 
+    public boolean mainMenuClicked = false;
     public boolean menuOptionClicked = false;
     public boolean menuNewGameClicked = false;
     public boolean menuLoadGameClicked = false;
     public boolean menuSaveGameClicked = false;
     public boolean menuExitClicked = false;
     
+    public void setPlayerHP(int hp, int hpMax)
+    {
+        lblPlayerHP.setText(hp + "/" + hpMax);
+    }
+    public void setMonsterHP(int hp, int hpMax)
+    {
+        lblMonsterHP.setText(hp + "/" + hpMax);
+    }
+    public void setText(String textUpdate)
+    {
+        String currentText = txtAreaMessageBox.getText();
+        txtAreaMessageBox.setText(currentText + textUpdate);
+    }
+    public void setTextln(String textUpdate)
+    {
+        String currentText = txtAreaMessageBox.getText();
+        txtAreaMessageBox.setText(currentText + textUpdate + "\n");
+    }
     public boolean getOptionClicked()
     {
         return menuOptionClicked;
@@ -59,12 +78,12 @@ public class BattleScreen extends javax.swing.JFrame {
     }
     public void resetMenu()
     {
-        lblMenuDropDownBackground.setEnabled(false);
-        btnOptionsMenu.setEnabled(false);
-        btnNewGame.setEnabled(false);
-        btnLoadGame.setEnabled(false);
-        btnSaveGame.setEnabled(false);
-        btnExit.setEnabled(false);
+        lblMenuDropDownBackground.setVisible(false);
+        btnOptionsMenu.setVisible(false);
+        btnNewGame.setVisible(false);
+        btnLoadGame.setVisible(false);
+        btnSaveGame.setVisible(false);
+        btnExit.setVisible(false);
     }
     
     /**
@@ -83,20 +102,32 @@ public class BattleScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaMessageBox = new javax.swing.JTextArea();
         btnExit = new javax.swing.JLabel();
+        lblMonsterHP = new javax.swing.JLabel();
+        lblPlayerHP = new javax.swing.JLabel();
         btnLoadGame = new javax.swing.JLabel();
         btnSaveGame = new javax.swing.JLabel();
         btnNewGame = new javax.swing.JLabel();
         btnOptionsMenu = new javax.swing.JLabel();
         btnMenu = new javax.swing.JLabel();
         lblMenuDropDownBackground = new javax.swing.JLabel();
-        lblTextBox = new javax.swing.JLabel();
         lblTextBoxBackground = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
+
+        txtAreaMessageBox.setEditable(false);
+        txtAreaMessageBox.setColumns(20);
+        txtAreaMessageBox.setLineWrap(true);
+        txtAreaMessageBox.setRows(5);
+        jScrollPane1.setViewportView(txtAreaMessageBox);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 456, 800, 140);
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownExit.png"))); // NOI18N
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,6 +137,16 @@ public class BattleScreen extends javax.swing.JFrame {
         });
         getContentPane().add(btnExit);
         btnExit.setBounds(645, 263, 60, 30);
+
+        lblMonsterHP.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblMonsterHP.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(lblMonsterHP);
+        lblMonsterHP.setBounds(660, 400, 130, 50);
+
+        lblPlayerHP.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblPlayerHP.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(lblPlayerHP);
+        lblPlayerHP.setBounds(10, 390, 130, 50);
 
         btnLoadGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownLoadGame.png"))); // NOI18N
         btnLoadGame.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,12 +198,6 @@ public class BattleScreen extends javax.swing.JFrame {
         getContentPane().add(lblMenuDropDownBackground);
         lblMenuDropDownBackground.setBounds(550, 2, 250, 370);
 
-        lblTextBox.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
-        lblTextBox.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTextBox.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(lblTextBox);
-        lblTextBox.setBounds(0, 450, 800, 150);
-
         lblTextBoxBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/TextBoxBackground.png"))); // NOI18N
         getContentPane().add(lblTextBoxBackground);
         lblTextBoxBackground.setBounds(0, 450, 800, 150);
@@ -176,12 +211,25 @@ public class BattleScreen extends javax.swing.JFrame {
 
     private void btnMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuClicked
         // Handles when the Menu button is clicked.
-        lblMenuDropDownBackground.setEnabled(true);
-        btnOptionsMenu.setEnabled(true);
-        btnNewGame.setEnabled(true);
-        btnLoadGame.setEnabled(true);
-        btnSaveGame.setEnabled(true);
-        btnExit.setEnabled(true);
+        if(mainMenuClicked = false)
+        {
+            lblMenuDropDownBackground.setVisible(true);
+            btnOptionsMenu.setVisible(true);
+            btnNewGame.setVisible(true);
+            btnLoadGame.setVisible(true);
+            btnSaveGame.setVisible(true);
+            btnExit.setVisible(true);
+        }
+        else
+        {
+            lblMenuDropDownBackground.setVisible(false);
+            btnOptionsMenu.setVisible(false);
+            btnNewGame.setVisible(false);
+            btnLoadGame.setVisible(false);
+            btnSaveGame.setVisible(false);
+            btnExit.setVisible(false);
+        }
+        
     }//GEN-LAST:event_btnMenuClicked
 
     private void btnOptionsMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOptionsMenuClicked
@@ -250,9 +298,12 @@ public class BattleScreen extends javax.swing.JFrame {
     private javax.swing.JLabel btnNewGame;
     private javax.swing.JLabel btnOptionsMenu;
     private javax.swing.JLabel btnSaveGame;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblMenuDropDownBackground;
-    private javax.swing.JLabel lblTextBox;
+    private javax.swing.JLabel lblMonsterHP;
+    private javax.swing.JLabel lblPlayerHP;
     private javax.swing.JLabel lblTextBoxBackground;
+    private javax.swing.JTextArea txtAreaMessageBox;
     // End of variables declaration//GEN-END:variables
 }
