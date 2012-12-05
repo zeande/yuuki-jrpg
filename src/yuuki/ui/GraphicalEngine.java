@@ -432,24 +432,6 @@ public class GraphicalEngine implements Interactable {
 		return (Character) JOptionPane.showInputDialog(null, "Select target", "test", JOptionPane.INFORMATION_MESSAGE, null, charsArr, charsArr[0]);
     }
     
-    public void playSound(String path)
-    {
-        AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream(path));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-    }
     public void display(yuuki.entity.Character speaker, String message)
     {
         

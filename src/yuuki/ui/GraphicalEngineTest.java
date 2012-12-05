@@ -17,6 +17,7 @@ public class GraphicalEngineTest {
     private PlayerCharacter player = null;
     private MonsterFactory mf = new MonsterFactory();
     GraphicalEngine ge = new GraphicalEngine();
+    Character [][] fighters = null;
     
     public static void main(String[] args) {
         GraphicalEngineTest get = new GraphicalEngineTest();
@@ -45,18 +46,6 @@ public class GraphicalEngineTest {
         else if(input == "Exit")
         {
             exit();
-        }
-        else if(input == "Create New Game")
-        {
-            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.decideNextScreen>");
-            System.out.println("Reason: No Create New Game Functionality.");
-            introScreen();
-        }
-        else if(input == "Load Game")
-        {
-            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.decideNextScreen>");
-            System.out.println("Reason: No Load Game Functionality.");
-            introScreen();
         }
     }
     
@@ -91,20 +80,29 @@ public class GraphicalEngineTest {
     }
     public void battleScreen()
     {
-        Character [][] fighters = makeTeams();
+        if(fighters == null)
+        {
+            Character [][] fighters = makeTeams();
+        }
         ge.switchToBattleScreen(fighters);
         ge.battleScreenGui.beginSequence();
         String choice = ge.battleScreenGui.getNextAction();
         ge.battleScreenGui.setNextAction("");
+        battleScreenDecide(choice);
+        Battle b = new Battle(fighters);
+        runBattle(b);
+        Character winner = b.getFighters(0).get(0);
+    }
+    
+    public void battleScreenDecide(String choice)
+    {
         if(choice == "Menu")
         {
             battleScreenNav();
         }
         else if(choice == "Yes")
         {
-        Battle b = new Battle(fighters);
-        runBattle(b);
-        Character winner = b.getFighters(0).get(0);
+            System.out.println("Battle Sequence Starting.");
         }
         else
         {
@@ -118,21 +116,54 @@ public class GraphicalEngineTest {
         ge.battleScreenGui.Nav();
         String choice = ge.battleScreenGui.getNextAction();
         ge.battleScreenGui.setNextAction("");
+        battleScreenNavDecide(choice);
+        
+    }
+    public void battleScreenNavDecide(String choice)
+    {
+        String nextScreen = "";
         if(choice == "Menu")
         {
             battleScreenNav();
         }
-        else if (choice == "Options Menu")
+        else if(choice == "Option Menu")
         {
-            ge.switchToOptionsScreen();
-            
+           nextScreen = ge.switchToOptionsScreen();
+           battleScreenNavDecide(nextScreen);
         }
-        
+        else if(choice == "Main Menu")
+        {
+            ge.switchToBattleScreen(fighters);
+            ge.battleScreenGui.resetChoice();
+            battleScreenDecide("Menu");
+        }
+        else if(choice == "Create New Game")
+        {
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreenNavDecide");
+            System.out.println("Create New Game - Non-essential functionality, fix if enough time");
+            battleScreenNav();
+        }
+        else if(choice == "Load Game")
+        {
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreenNavDecide");
+            System.out.println("Load Game - Non-essential functionality, fix if enough time");
+            battleScreenNav();
+        }
+        else if(choice == "Save Game")
+        {
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreenNavDecide");
+            System.out.println("Save Game - Non-essential functionality, fix if enough time");
+            battleScreenNav();
+        }
+        else if(choice == "Exit")
+        {
+            decideNextScreen(choice);
+        }
     }
     
      public Character[][] makeTeams()
      {
-         Character[][] fighters = new Character[2][];
+         fighters = new Character[2][];
          fighters[0] = new Character[]{player};
          fighters[1] = mf.createRandomTeam(1, 1, player.getLevel(), "slime");
          return fighters;

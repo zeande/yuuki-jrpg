@@ -45,6 +45,11 @@ public class BattleScreen extends javax.swing.JFrame {
         showChoice();
     }
     
+    public void resumeSequence()
+    {
+        
+    }
+    
     public void showChoice()
     {
         lblChoiceBackground.setVisible(true);
@@ -119,6 +124,16 @@ public class BattleScreen extends javax.swing.JFrame {
         lblChoiceBackground.setVisible(false);
         lblBtnChoiceYes.setVisible(false);
         lblBtnChoiceNo.setVisible(false);
+    }
+    
+    public void resetChoice()
+    {
+        lblChoiceBackground.setVisible(true);
+        lblChoiceBackground.setEnabled(false);
+        lblBtnChoiceYes.setVisible(true);
+        lblBtnChoiceYes.setEnabled(false);
+        lblBtnChoiceNo.setVisible(true);
+        lblBtnChoiceNo.setEnabled(false);
     }
     
     /**
@@ -303,7 +318,7 @@ public class BattleScreen extends javax.swing.JFrame {
 
     private void btnNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewGameClicked
         // Handles when the New Game button in the Drop Down Menu is Clicked.
-         nextAction = "New Game";
+         nextAction = "Create New Game";
     }//GEN-LAST:event_btnNewGameClicked
 
     private void btnSaveGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveGameClicked

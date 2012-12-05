@@ -328,13 +328,6 @@ public interface Interactable {
 	public Character selectTarget(ArrayList<ArrayList<Character>> fighters);
 	
 	/**
-	 * Plays a sound from an audio file.
-	 *
-	 * @param path The file name of the sound.
-	 */
-	public void playSound(String path);
-	
-	/**
 	 * Displays a message to the user.
 	 *
 	 * @param speaker The person doing the talking. Null for none.
