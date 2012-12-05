@@ -70,6 +70,7 @@
                 <copydir src="${SOURCE_ROOT}/${GUI}/MainTitleGuiAssets" dest="${BUILD_ROOT}/${GUI}/MainTitleGuiAssets"/>
                 <copydir src="${SOURCE_ROOT}/${GUI}/PlayerNameGuiAssets" dest="${BUILD_ROOT}/${GUI}/PlayerNameGuiAssets"/>
                 
+                
 	</target>
 	
 	<target name="main" depends="battle,ui">

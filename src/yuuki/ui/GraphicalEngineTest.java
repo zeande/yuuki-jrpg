@@ -5,6 +5,8 @@ import yuuki.action.*;
 import yuuki.battle.Battle;
 import yuuki.buff.Buff;
 import yuuki.entity.Character;
+import java.awt.*;
+import yuuki.gui.UI.*;
 /**
  *
  * @author Caleb Smtih
@@ -12,90 +14,61 @@ import yuuki.entity.Character;
  */
 public class GraphicalEngineTest {
     //Initiate GraphicalEngine.
-    GraphicalEngine ge = new GraphicalEngine();
     private PlayerCharacter player = null;
     private MonsterFactory mf = new MonsterFactory();
-        static boolean blnSoundMusic = true;
-        static boolean blnSoundEffects = true;
-        static String playerName = "";
-        static boolean mainTitleStatus = false;
-        static boolean optionsMenuStatus = false;
-        static boolean playerCreationStatus = false;
-        static boolean battleScreenStatus = false;
-        static boolean beginGameStatus = false;
-        static boolean exitStatus = false;
-        static boolean bsOptionsStatus = false;
-        static boolean bsNewGameStatus = false;
-        static boolean bsLoadGameStatus = false;
-        static boolean bsSaveGameStatus = false;
-        static boolean bsExitStatus = false;
-        
-    public static void main(String [] args)
-    {
+    GraphicalEngine ge = new GraphicalEngine();
+    
+    public static void main(String[] args) {
         GraphicalEngineTest get = new GraphicalEngineTest();
-        get.introScreen();
+        get.decideNextScreen("Main Menu");
+        
     }
-    public void introScreen()
+    
+    public void decideNextScreen(String input)
     {
-        mainTitleStatus = true;
-        ge.switchToIntroScreen();
-        do
+        if(input == "New Game")
         {
-            playerCreationStatus = ge.mainTitleGui.getNewGame();
-            optionsMenuStatus = ge.mainTitleGui.getOptionsMenu();
-            exitStatus = ge.mainTitleGui.getExit();
-            try
-            {
-                Thread.sleep(1);
-            }
-            catch(Exception e)
-            {
-                System.out.println("Couldn't Sleep.");
-            }
-        }while(playerCreationStatus == false && optionsMenuStatus == false && exitStatus == false);
-        mainTitleStatus = false;
-        if(playerCreationStatus == true)
-        {
-            ge.mainTitleGui.setNewGame(false);
-            playerCreation();            
+            playerCreation();
         }
-        else if(optionsMenuStatus == true)
+        else if(input == "Options Menu")
         {
-            ge.mainTitleGui.setOptionsMenu(false);
-            optionsMenu("IntroScreen");
+            optionsMenu();
         }
-        else if(exitStatus == true)
+        else if(input == "Main Menu")
         {
-            exitStatus = false;
+            introScreen();
+        }
+        else if(input == "Battle Screen")
+        {
+            battleScreen();
+        }
+        else if(input == "Exit")
+        {
             exit();
         }
+        else if(input == "Create New Game")
+        {
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.decideNextScreen>");
+            System.out.println("Reason: No Create New Game Functionality.");
+            introScreen();
+        }
+        else if(input == "Load Game")
+        {
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.decideNextScreen>");
+            System.out.println("Reason: No Load Game Functionality.");
+            introScreen();
+        }
+    }
+    
+    public void introScreen()
+    {
+        String nextForm = ge.switchToIntroScreen();
+        decideNextScreen(nextForm);
     }
     public void playerCreation()
     {
-        ge.switchToPlayerNameScreen();
-        do
-        {
-            mainTitleStatus = ge.playerNameGui.getMenuStatus();
-            beginGameStatus = ge.playerNameGui.getPlayStatus();
-            try
-            {
-                Thread.sleep(1);
-            }
-            catch(Exception e)
-            {
-                System.out.println("Couldn't Sleep.");
-            }
-        }while(mainTitleStatus == false && beginGameStatus == false);
-        playerCreationStatus = false;
-        if(mainTitleStatus == true)
-        {
-            ge.playerNameGui.setMenuStatus(false);
-            introScreen();
-        }
-        else if(beginGameStatus == true)
-        {
-            ge.playerNameGui.setPlayStatus(false);
-            playerName = ge.playerNameGui.getUsersName();
+        String nextForm = ge.switchToPlayerNameScreen();
+            String playerName = ge.getString("Give me PlayerName!");
             Action[] playerMoves = new Action[3];
             playerMoves[0] = new BasicAttack(8);
             playerMoves[1] = new BasicDefense(4);
@@ -109,103 +82,27 @@ public class GraphicalEngineTest {
             Stat mag = new Stat("magic", 10, 1);
             Stat luk = new Stat("luck", 10, 1);
             player = new PlayerCharacter(playerName, 1, playerMoves, hp, mp, str, def, agl, acc, mag, luk, ge);
-            System.out.println("The Player's Name is:" + playerName);
-            System.out.println("<Hardcoded Responce> @ GraphicalEngineTest.playerCreation.");
-            battleScreen();
-        }
-        
+        decideNextScreen(nextForm);
     }
-    public void optionsMenu(String jFrame)
+    public void optionsMenu()
     {
-        ge.switchToOptionsScreen();
-        do
-        {
-            mainTitleStatus = ge.optionsMenuGui.getBtnApply();
-            try
-            {
-                Thread.sleep(1);
-            }
-            catch(Exception e)
-            {
-                System.out.println("Couldn't Sleep.");
-            }
-        }while(mainTitleStatus == false);
-        optionsMenuStatus = false;
-        ge.optionsMenuGui.setBtnApply(false);
-        if(jFrame == "IntroScreen")
-        {
-        ge.switchToIntroScreen();
-        }
-        else if(jFrame == "BattleScreen")
-        {
-            battleScreen();
-        }
-        introScreen();
+        String nextForm = ge.switchToOptionsScreen();
+        decideNextScreen(nextForm);
     }
     public void battleScreen()
     {
         Character [][] fighters = makeTeams();
         ge.switchToBattleScreen(fighters);
         Battle b = new Battle(fighters);
-        ge.battleScreen.setText("Before Battle Creation");
+        ge.battleScreenGui.setText("Before Battle Creation");
         runBattle(b);
         Character winner = b.getFighters(0).get(0);
     }
     
     public void battleScreenNav()
     {
-    do
-        {
-            bsOptionsStatus = ge.battleScreen.getOptionClicked();
-            bsNewGameStatus = ge.battleScreen.getNewGameClicked();
-            bsLoadGameStatus = ge.battleScreen.getLoadGameClicked();
-            bsSaveGameStatus = ge.battleScreen.getSaveGameClicked();
-            bsExitStatus = ge.battleScreen.getExitClicked();
-            try
-            {
-                Thread.sleep(1);
-            }
-            catch(Exception e)
-            {
-                System.out.println("Couldn't sleep @ GraphicalEngineTest.battleScreen");
-            }
-        }while(bsOptionsStatus == false && bsNewGameStatus == false && bsLoadGameStatus == false && bsSaveGameStatus == false && bsExitStatus == false);
-        if(bsOptionsStatus == true)
-        {
-            bsOptionsStatus = false;
-            ge.battleScreen.setOptionClicked(false);
-            ge.battleScreen.resetMenu();
-            optionsMenu("BattleScreen");
-        }
-        else if(bsNewGameStatus == true)
-        {
-            bsNewGameStatus = false;
-            ge.battleScreen.setNewGameClicked(false);
-            ge.battleScreen.resetMenu();
-            introScreen();
-            playerName = "";
-        }
-        else if(bsLoadGameStatus == true)
-        {
-            bsLoadGameStatus = false;
-            ge.battleScreen.setLoadGameClicked(false);
-            ge.battleScreen.resetMenu();
-            System.out.println("<Hardcoded Responce @ GraphicalEngingTest.battleScreen> No Load Game Functionality");
-        }
-        else if(bsSaveGameStatus == true)
-        {
-            bsSaveGameStatus = false;
-            ge.battleScreen.setSaveGameClicked(false);
-            ge.battleScreen.resetMenu();
-            System.out.println("<Hardcoded Responce @ GraphicalEngingTest.battleScreen> No Save Game Functionality");
-        }
-        else if(bsExitStatus == true)
-        {
-            bsExitStatus = false;
-            ge.battleScreen.setExitClicked(false);
-            ge.battleScreen.resetMenu();
-            exit();
-        }
+        Character [][] fighters = makeTeams();
+        ge.switchToBattleScreen(fighters);
     }
     
      public Character[][] makeTeams()

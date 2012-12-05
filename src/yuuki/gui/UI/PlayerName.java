@@ -13,31 +13,28 @@ import sun.audio.AudioStream;
  * @version 10/16/12
  */
 public class PlayerName extends javax.swing.JFrame {
-    public boolean blnStartGame = false;
-    boolean blnToMenu = false;
-    public boolean soundMusic = true;
-    public boolean soundEffects = true;
     String usersName = "Player 1";
+    String nextGuiForm = "";
     
-    public boolean getMenuStatus()
+    public String getNextForm(String nextForm)
+{
+    nextGuiForm = nextForm;
+    while(nextGuiForm == "next form querry")
     {
-        return blnToMenu;
+        try
+        {
+            Thread.sleep(1);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Couldn't sleep @ MainTitle.getNextForm");
+        }
     }
-    public void setMenuStatus(boolean menuStatus)
-    {
-        blnToMenu = menuStatus;
-    }
-    public String getUsersName()
+   return nextGuiForm; 
+}
+    public String getName()
     {
         return usersName;
-    }
-    public boolean getPlayStatus()
-    {
-        return blnStartGame;
-    }
-    public void setPlayStatus(boolean playStatus)
-    {
-        blnStartGame = playStatus;
     }
     /**
      * Creates new form PlayerName
@@ -134,24 +131,6 @@ public class PlayerName extends javax.swing.JFrame {
     private void lblBtnMainMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuEntered
         // Handles lblBtnMainMenu on Mouseover.
         lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameGuiAssets/PlayerNameMainMenuHi.png")));
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("onHover.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
     }//GEN-LAST:event_lblBtnMainMenuEntered
 
     private void lblBtnMainMenuExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuExited
@@ -161,25 +140,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
         // Handles lblBtnMainMenuClicked click event.
-        blnToMenu = true;
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
+        nextGuiForm = "Main Menu";
     }//GEN-LAST:event_lblBtnMainMenuClicked
 
     private void lblBtnMainMenuPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuPressed
@@ -195,24 +156,6 @@ public class PlayerName extends javax.swing.JFrame {
     private void lblBtnBeginGame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGame
         // Handles lblBtnMainMenu on Mouseover.
         lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameGuiAssets/PlayerNameBeginGameHi.png")));
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("onHover.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
     }//GEN-LAST:event_lblBtnBeginGame
 
     private void lblBtnBeginGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameExited
@@ -232,27 +175,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnBeginGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameClicked
         // Handles lblBtnBeginGame on Click.
-        blnStartGame = true;
-        usersName = txtPlayerName.getText();
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("onSelect.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-            
-        }
+        nextGuiForm = "Battle Screen";
     }//GEN-LAST:event_lblBtnBeginGameClicked
 
     /**

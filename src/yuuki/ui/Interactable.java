@@ -30,7 +30,7 @@ public interface Interactable {
 	/**
 	 * Shows the intro screen.
 	 */
-	public void switchToPlayerNameScreen();
+	public String switchToPlayerNameScreen();
         
         /**
 	 * Shows the intro screen.
@@ -43,7 +43,7 @@ public interface Interactable {
         /**
          * Shows the Player Name screen.
          */
-	public void switchToIntroScreen();
+	public String switchToIntroScreen();
         
         /**
          * Shows the Player Name screen.
@@ -56,7 +56,7 @@ public interface Interactable {
          * @param soundMusic If music should play.
          * @param soundEffects If effects should play.
 	 */
-	public void switchToOptionsScreen();
+	public String switchToOptionsScreen();
 	
         /**
 	 * Shows the options screen.

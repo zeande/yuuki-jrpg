@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package yuuki.gui.UI;
+import yuuki.ui.GraphicalEngineTest;
 
 /**
  *
@@ -192,6 +193,7 @@ public class BattleScreen extends javax.swing.JFrame {
         });
         getContentPane().add(btnMenu);
         btnMenu.setBounds(650, 10, 140, 60);
+        btnMenu.getAccessibleContext().setAccessibleDescription("");
 
         lblMenuDropDownBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownBackground.png"))); // NOI18N
         lblMenuDropDownBackground.setFocusable(false);
@@ -211,6 +213,7 @@ public class BattleScreen extends javax.swing.JFrame {
 
     private void btnMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuClicked
         // Handles when the Menu button is clicked.
+        
         if(mainMenuClicked = false)
         {
             lblMenuDropDownBackground.setVisible(true);

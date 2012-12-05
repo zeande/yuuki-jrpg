@@ -23,11 +23,18 @@ import yuuki.entity.VariableStat;
  */
 public class GraphicalEngine implements Interactable {
     //Construct nessecary objects.
+    MainTitle mainTitle = new MainTitle();
+    OptionsMenu optionsMenu = new OptionsMenu();
+    PlayerName playerName = new PlayerName();
+    BattleScreen battleScreenGui = new BattleScreen();
+    Audio audio = new Audio();
+    String NameOfPlayer = "";
+    
     private JFrame currentForm = null;
-    public MainTitle mainTitleGui = new MainTitle();
-    public OptionsMenu optionsMenuGui = new OptionsMenu();
-    public PlayerName playerNameGui = new PlayerName();
-    public BattleScreen battleScreen = new BattleScreen();
+//    public MainTitle mainTitleGui = new MainTitle();
+//    public OptionsMenu optionsMenuGui = new OptionsMenu();
+//    public PlayerName playerNameGui = new PlayerName();
+//    public BattleScreen battleScreen = new BattleScreen();
     
     public void initialize()
     {
@@ -51,87 +58,101 @@ public class GraphicalEngine implements Interactable {
             currentForm.setVisible(true);
         }
     }
-    public void switchToPlayerNameScreen()
+    public String switchToPlayerNameScreen()
     {
+        String nextForm = "";
         if(currentForm == null)
         {
-            currentForm = playerNameGui;
+            currentForm = playerName;
             currentForm.setVisible(true);
+            nextForm = playerName.getNextForm("next form querry");
+            NameOfPlayer = playerName.getName();
         }
         else
         {
             currentForm.setVisible(false);
-            currentForm = playerNameGui;
+            currentForm = playerName;
             currentForm.setVisible(true);
+            nextForm = playerName.getNextForm("next form querry");
+            NameOfPlayer = playerName.getName();
         }
+        return nextForm;
     }
     public void switchToPlayerNameScreen(boolean soundEffects, boolean soundMusic)
     {
         if(currentForm == null)
         {
-            currentForm = playerNameGui;
+            currentForm = playerName;
             currentForm.setVisible(true);
         }
         else
         {
             currentForm.setVisible(false);
-            currentForm = playerNameGui;
+            currentForm = playerName;
             currentForm.setVisible(true);
         }        
     }
-    public void switchToIntroScreen()
+    public String switchToIntroScreen()
     {
+        String nextForm = "";
         if(currentForm == null)
         {
-            currentForm = mainTitleGui;
+            currentForm = mainTitle;
             currentForm.setVisible(true);
+            nextForm = mainTitle.getNextForm("next form querry");
         }
         else
         {
             currentForm.setVisible(false);
-            currentForm = mainTitleGui;
+            currentForm = mainTitle;
             currentForm.setVisible(true);
+            nextForm = mainTitle.getNextForm("next form querry");
         }
+        return nextForm;
     }
     public void switchToIntroScreen(boolean soundEffects, boolean soundMusic)
     {
        if(currentForm == null)
         {
-            currentForm = mainTitleGui;
+            currentForm = mainTitle;
             currentForm.setVisible(true);
         }
         else
         {
             currentForm.setVisible(false);
-            currentForm = mainTitleGui;
+            currentForm = mainTitle;
             currentForm.setVisible(true);
         }
     }
-    public void switchToOptionsScreen()
+    public String switchToOptionsScreen()
     {
+        String nextForm = "";
         if(currentForm == null)
         {
-            currentForm = optionsMenuGui;
+            currentForm = optionsMenu;
             currentForm.setVisible(true);
+            nextForm = optionsMenu.getNextForm("next form querry");
         }
         else
         {
             currentForm.setVisible(false);
-            currentForm = optionsMenuGui;
+            currentForm = optionsMenu;
             currentForm.setVisible(true);
+            nextForm = optionsMenu.getNextForm("next form querry");
         }
+        return nextForm;
     }
     public void switchToOptionsScreen(boolean soundEffects, boolean soundMusic)
     {
         if(currentForm == null)
         {
-            currentForm = optionsMenuGui;
+            currentForm = optionsMenu;
             currentForm.setVisible(true);
         }
         else
         {
             currentForm.setVisible(false);
-            currentForm = optionsMenuGui;
+            currentForm = optionsMenu;
             currentForm.setVisible(true);
         }
     }
@@ -139,16 +160,16 @@ public class GraphicalEngine implements Interactable {
     {
         if(currentForm == null)
         {
-            currentForm = battleScreen;
+            currentForm = battleScreenGui;
             currentForm.setVisible(true);
-            battleScreen.resetMenu();
+            battleScreenGui.resetMenu();
         }
         else
         {
             currentForm.setVisible(false);
-            currentForm = battleScreen;
+            currentForm = battleScreenGui;
             currentForm.setVisible(true);
-            battleScreen.resetMenu();
+            battleScreenGui.resetMenu();
         }
     }
     public void showStatUpdate(yuuki.entity.Character fighter)
@@ -188,20 +209,20 @@ public class GraphicalEngine implements Interactable {
     {
         if(teamID == 0)
         {
-            battleScreen.setPlayerHP(hp, hpMax);
+            battleScreenGui.setPlayerHP(hp, hpMax);
         }
         else
         {
-            battleScreen.setMonsterHP(hp, hpMax);
+            battleScreenGui.setMonsterHP(hp, hpMax);
         }
     }
     public void print(String arg)
     {
-        battleScreen.setText(arg);
+        battleScreenGui.setText(arg);
     }
     public void println(String arg)
     {
-        battleScreen.setTextln(arg);
+        battleScreenGui.setTextln(arg);
     }
     private void showBuffs(Character f) {
 		ArrayList<Buff> buffs = f.getBuffs();
@@ -215,7 +236,7 @@ public class GraphicalEngine implements Interactable {
 		println("");
 	}
     private void pause() {
-		println("pause");
+		println("Press \"Enter\" to continue.");
 		
 	}
     public void showDamage(yuuki.entity.Character fighter, Stat stat, int damage)
@@ -289,39 +310,37 @@ public class GraphicalEngine implements Interactable {
     public String getString(String prompt)
     {
         String string = "";
-        //"Enter player name" hardcoded. sounce @ YuukiEngine - createPlayer(int)
-        if(prompt.equals("Enter player name"))
-        {
-            JFrame showingForm = null;
-            showingForm = currentForm;
-            String userName = "";
-            switchToPlayerNameScreen();
-            boolean playGame = playerNameGui.getPlayStatus();
-            /**
-             * While the Start Game button (lblBtnBeginGame) has not been clicked, wait.
-             * Once Start Game button (lblBtnBeginGame) has been clicked:
-             * - get the Player Name the user Entered
-             * - return the Player Name
-             */
-            while(!playGame)
-            {
-                playGame = playerNameGui.getPlayStatus();
-                try
-                {
-                    Thread.sleep(10);
-                }
-                catch(Exception e)
-                {
-                    System.out.println("GraphicalEngine.getString(String) couldn't sleep.");
-                }
-            }
-            userName = playerNameGui.getUsersName();
-            switchToSpecifiedScreen(showingForm);
-            return userName;
-            
-        }
+//        if(prompt.equals("Enter player name"))
+//        {
+//            JFrame showingForm = null;
+//            showingForm = currentForm;
+//            String userName = "";
+//            switchToPlayerNameScreen();
+//            boolean playGame = playerName.getPlayStatus();
+//            /**
+//             * While the Start Game button (lblBtnBeginGame) has not been clicked, wait.
+//             * Once Start Game button (lblBtnBeginGame) has been clicked:
+//             * - get the Player Name the user Entered
+//             * - return the Player Name
+//             */
+//            while(!playGame)
+//            {
+//                playGame = playerName.getPlayStatus();
+//                try
+//                {
+//                    Thread.sleep(10);
+//                }
+//                catch(Exception e)
+//                {
+//                    System.out.println("GraphicalEngine.getString(String) couldn't sleep.");
+//                }
+//            }
+//            userName = playerName.getUsersName();
+//            switchToSpecifiedScreen(showingForm);
+//            return userName;
+//        }
        
-      return string;
+      return NameOfPlayer;
     }
     public String getString()
     {

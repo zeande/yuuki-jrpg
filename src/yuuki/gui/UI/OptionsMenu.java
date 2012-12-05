@@ -16,32 +16,27 @@ import java.net.URL;
  * @version 11/16/12
  */
 public class OptionsMenu extends javax.swing.JFrame {
+    public String nextGuiForm = "";
 boolean musicOnChecked = true;
 boolean musicOffChecked = false;
 boolean effectsOnChecked = true;
 boolean effectsOffChecked = false;
-public boolean btnApply = false;
-public boolean soundMusic = true;
-public boolean soundEffects = true;
 
-public boolean getSoundMusic()
+    public String getNextForm(String nextForm)
 {
-    return soundMusic;
-}
-
-public boolean getSoundEffects()
-{
-    return soundEffects;
-}
-
-public boolean getBtnApply()
-{
-    return btnApply;
-}
-
-public void setBtnApply(boolean btnApplyStatus)
-{
-    btnApply = btnApplyStatus;
+    nextGuiForm = nextForm;
+    while(nextGuiForm == "next form querry")
+    {
+        try
+        {
+            Thread.sleep(1);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Couldn't sleep @ MainTitle.getNextForm");
+        }
+    }
+   return nextGuiForm; 
 }
 
     /**
@@ -180,23 +175,6 @@ public void setBtnApply(boolean btnApplyStatus)
     private void lblBtnApplyEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyEntered
         //On Mouseover changes lblBtnApply's Icon.    
         lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApplyFocused.png")));
-        if(soundEffects == true)
-        {           
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {     
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
     }//GEN-LAST:event_lblBtnApplyEntered
 
     private void lblBtnApplyExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyExited
@@ -220,27 +198,9 @@ public void setBtnApply(boolean btnApplyStatus)
         {
             lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
-        else
+        else if(musicOnChecked == false)
         {
             lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
-        }
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
         }
     }//GEN-LAST:event_musicOnEntered
 
@@ -250,7 +210,7 @@ public void setBtnApply(boolean btnApplyStatus)
         {
             lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
-        else
+        else if(musicOnChecked == false)
         {
             lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
@@ -262,27 +222,9 @@ public void setBtnApply(boolean btnApplyStatus)
         {
             lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
-        else
+        else if(effectsOnChecked == false)
         {
             lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
-        }        
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
         }
     }//GEN-LAST:event_effectsOnEntered
 
@@ -292,7 +234,7 @@ public void setBtnApply(boolean btnApplyStatus)
         {
             lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
-        else
+        else if(effectsOnChecked == false)
         {
             lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
@@ -304,57 +246,21 @@ public void setBtnApply(boolean btnApplyStatus)
         {
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
-        else
+        else if(musicOffChecked == false)
         {
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
-        }
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
         }
     }//GEN-LAST:event_musicOffEntered
 
     private void effectsOffEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffEntered
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
-        if(effectsOffChecked == true)
+        if(musicOffChecked == true)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
-        else
+        else if(musicOffChecked == false)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
-        }
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onHover.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
         }
     }//GEN-LAST:event_effectsOffEntered
 
@@ -364,20 +270,19 @@ public void setBtnApply(boolean btnApplyStatus)
         {
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
-        else
+        else if(musicOffChecked == false)
         {
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
-        
     }//GEN-LAST:event_musicOffExited
 
     private void effectsOffExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffExited
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
-        if(effectsOffChecked == true)
+        if(musicOffChecked == true)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
-        else
+        else if(musicOffChecked == false)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
@@ -385,170 +290,23 @@ public void setBtnApply(boolean btnApplyStatus)
 
     private void musicOnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOnClicked
         // Invert checked properties, and change lbl Icons.
-        if(musicOnChecked == true)
-        {
-        musicOnChecked = false;
-        musicOffChecked = true;
-        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
-        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
-        }
-        else
-        {
-        musicOnChecked = true;
-        musicOffChecked = false;
-        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
-        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
-        }
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
     }//GEN-LAST:event_musicOnClicked
 
     private void musicOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOffClicked
         // Invert checked properties, and change lbl Icons.
-        if(musicOffChecked == true)
-        {
-        musicOnChecked = true;
-        musicOffChecked = false;
-        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
-        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
-        }
-        else
-        {
-        musicOnChecked = false;
-        musicOffChecked = true;
-        lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
-        lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
-        }
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
     }//GEN-LAST:event_musicOffClicked
 
     private void effectsOnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOnClicked
         // Invert checked properties, and change lbl Icons.
-        if(effectsOnChecked == true)
-        {
-        effectsOnChecked = false;
-        effectsOffChecked = true;
-        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
-        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
-        }
-        else
-        {
-        effectsOnChecked = true;
-        effectsOffChecked = false;
-        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
-        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
-        }
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
     }//GEN-LAST:event_effectsOnClicked
 
     private void effectsOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffClicked
         // Invert checked properties, and change lbl Icons.
-        
-        if(effectsOffChecked == true)
-        {
-        effectsOnChecked = true;
-        effectsOffChecked = false;
-        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
-        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
-        }
-        else
-        {
-        effectsOnChecked = false;
-        effectsOffChecked = true;
-        lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
-        lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
-        }
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
     }//GEN-LAST:event_effectsOffClicked
 
     private void btnApplyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApplyClicked
         // Handles btnApply clicked event.
-        btnApply = true;
-        if(soundEffects == true)
-        {
-            AudioPlayer BGMPlayer = AudioPlayer.player;
-            AudioStream BGM;
-            AudioData BGMData;
-            try
-            {
-            BGM = new AudioStream(new FileInputStream("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav"));
-            BGMData = BGM.getData();
-            AudioDataStream loop = null;
-            loop = new AudioDataStream(BGMData);
-            BGMPlayer.start(loop);
-            }
-            catch(IOException error)
-            {
-                System.out.println("Audio play New Game Entered went wrong.");
-            }
-        }
+            nextGuiForm = "Main Menu";
     }//GEN-LAST:event_btnApplyClicked
 
     /**

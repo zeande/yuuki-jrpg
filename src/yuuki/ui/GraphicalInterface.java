@@ -89,22 +89,24 @@ public class GraphicalInterface implements Interactable, IntroScreenListener {
 	}
 	
 	@Override
-	public void switchToIntroScreen() {
+	public String switchToIntroScreen() {
 		introScreen.addListener(this);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				switchWindow(introScreen);
 			}
 		});
+                return "Override Corrections";
 	}
 	
 	@Override
-	public void switchToOptionsScreen() {
+	public String switchToOptionsScreen() {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				switchWindow(optionsScreen);
 			}
 		});
+                return "Override Corrections";
 	}
 	
 	@Override
@@ -625,9 +627,9 @@ public class GraphicalInterface implements Interactable, IntroScreenListener {
 	}
 
 	@Override
-	public void switchToPlayerNameScreen() {
+	public String switchToPlayerNameScreen() {
 		// TODO Auto-generated method stub
-		
+		return "Override Corrections";
 	}
 
 	@Override

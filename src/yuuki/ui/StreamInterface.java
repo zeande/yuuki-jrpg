@@ -116,9 +116,10 @@ public class StreamInterface implements Interactable {
          * Shows the PlayerName Screen.
          */
         @Override
-        public void switchToPlayerNameScreen() {
+        public String switchToPlayerNameScreen() {
             screen = Screen.PLAYERNAME;
             println("Please Enter Your Name:");
+            return "Override Corrections";
         }
 	/**
          * Shows the PlayerName Screen.
@@ -135,7 +136,7 @@ public class StreamInterface implements Interactable {
 	 * Shows the intro message and displays the main menu.
 	 */
 	@Override
-	public void switchToIntroScreen() {
+	public String switchToIntroScreen() {
 		screen = Screen.INTRO;
 		println("+-------------------------------------+");
 		println("|                Yuuki                |");
@@ -144,6 +145,7 @@ public class StreamInterface implements Interactable {
 		println("+-------------------------------------+");
 		println();
 		pause();
+                return "Override corrections";
 	}
 	/**
 	 * Shows the intro message and displays the main menu.
@@ -167,7 +169,7 @@ public class StreamInterface implements Interactable {
 	 * until he quits out of this screen.
 	 */
 	@Override
-	public void switchToOptionsScreen() {
+	public String switchToOptionsScreen() {
 		screen = Screen.OPTIONS;
 		boolean inOptions = true;
 		while (inOptions) {
@@ -177,6 +179,7 @@ public class StreamInterface implements Interactable {
 				inOptions = false;
 			}
 		}
+                return "Override Corrections";
 	}
         /**
 	 * Shows the options screen. The user is prompted to change options

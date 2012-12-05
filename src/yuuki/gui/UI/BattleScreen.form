@@ -160,6 +160,9 @@
           <Image iconType="3" name="/yuuki/gui/UI/BattleScreenAssets/MenuIcon.png"/>
         </Property>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnMenuClicked"/>
       </Events>
