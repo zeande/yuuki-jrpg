@@ -11,13 +11,8 @@ import yuuki.ui.GraphicalEngineTest;
  * @version 11/16/12
  */
 public class BattleScreen extends javax.swing.JFrame {
-
-    public boolean mainMenuClicked = false;
-    public boolean menuOptionClicked = false;
-    public boolean menuNewGameClicked = false;
-    public boolean menuLoadGameClicked = false;
-    public boolean menuSaveGameClicked = false;
-    public boolean menuExitClicked = false;
+    public int mainMenuClicked = 0;
+    public String nextAction = "";
     
     public void setPlayerHP(int hp, int hpMax)
     {
@@ -37,46 +32,82 @@ public class BattleScreen extends javax.swing.JFrame {
         String currentText = txtAreaMessageBox.getText();
         txtAreaMessageBox.setText(currentText + textUpdate + "\n");
     }
-    public boolean getOptionClicked()
+    
+    public void setNextAction(String update)
     {
-        return menuOptionClicked;
+        nextAction = update;
     }
-    public boolean getNewGameClicked()
+    
+    public void beginSequence()
     {
-        return menuNewGameClicked;
+        setTextln("A Slime has appeared!");
+        setTextln("Would you like to fight it?");
+        showChoice();
     }
-    public boolean getLoadGameClicked()
+    
+    public void showChoice()
     {
-        return menuLoadGameClicked;
+        lblChoiceBackground.setVisible(true);
+        lblBtnChoiceYes.setVisible(true);
+        lblBtnChoiceNo.setVisible(true);
     }
-    public boolean getSaveGameClicked()
+    
+    public String getNextAction()
     {
-        return menuSaveGameClicked;
+        while(nextAction == "")
+            {
+                 try
+                 {
+                     Thread.sleep(1);
+                 }
+                 catch(Exception e)
+                 {
+                     System.out.println("GraphicalEngineText.getNextAction couldn't sleep");
+                 }
+            }
+        return nextAction;
     }
-    public boolean getExitClicked()
+    
+    public String Nav()
     {
-        return menuExitClicked;
+        if(mainMenuClicked % 2 != 0)
+        {
+            lblMenuDropDownBackground.setVisible(true);
+            btnOptionsMenu.setVisible(true);
+            btnNewGame.setVisible(true);
+            btnLoadGame.setVisible(true);
+            btnSaveGame.setVisible(true);
+            btnExit.setVisible(true);
+            lblChoiceBackground.setEnabled(false);
+            lblBtnChoiceYes.setEnabled(false);
+            lblBtnChoiceNo.setEnabled(false);
+            
+        }
+        else
+        {
+            resetMenu();
+            lblChoiceBackground.setEnabled(true);
+            lblBtnChoiceYes.setEnabled(true);
+            lblBtnChoiceNo.setEnabled(true);
+            lblChoiceBackground.setVisible(true);
+            lblBtnChoiceYes.setVisible(true);
+            lblBtnChoiceNo.setVisible(true);
+        }
+        while(nextAction == "")
+        {
+            try
+            {
+                Thread.sleep(1);
+            }
+            catch(Exception e)
+            {
+                System.out.println("Couldn't sleep @ BattleScreen.Nav");
+            }
+        }
+        
+        return nextAction;
     }
-    public void setOptionClicked(boolean OptionClicked)
-    {
-        menuOptionClicked = OptionClicked;
-    }
-    public void setNewGameClicked(boolean NewGameClicked)
-    {
-        menuNewGameClicked = NewGameClicked;
-    }
-    public void setLoadGameClicked(boolean LoadGameClicked)
-    {
-        menuLoadGameClicked = LoadGameClicked;
-    }
-    public void setSaveGameClicked(boolean SaveGameClicked)
-    {
-        menuSaveGameClicked = SaveGameClicked;
-    }
-    public void setExitClicked(boolean ExitClicked)
-    {
-        menuExitClicked = ExitClicked;
-    }
+    
     public void resetMenu()
     {
         lblMenuDropDownBackground.setVisible(false);
@@ -85,6 +116,9 @@ public class BattleScreen extends javax.swing.JFrame {
         btnLoadGame.setVisible(false);
         btnSaveGame.setVisible(false);
         btnExit.setVisible(false);
+        lblChoiceBackground.setVisible(false);
+        lblBtnChoiceYes.setVisible(false);
+        lblBtnChoiceNo.setVisible(false);
     }
     
     /**
@@ -103,6 +137,13 @@ public class BattleScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblBtnChoiceYes = new javax.swing.JLabel();
+        lblBtnChoiceNo = new javax.swing.JLabel();
+        lblChoiceBackground = new javax.swing.JLabel();
+        lblBtnAttack = new javax.swing.JLabel();
+        lblBtnFlee = new javax.swing.JLabel();
+        lblBtnDefend = new javax.swing.JLabel();
+        lblTextBoxBackground = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaMessageBox = new javax.swing.JTextArea();
         btnExit = new javax.swing.JLabel();
@@ -114,12 +155,54 @@ public class BattleScreen extends javax.swing.JFrame {
         btnOptionsMenu = new javax.swing.JLabel();
         btnMenu = new javax.swing.JLabel();
         lblMenuDropDownBackground = new javax.swing.JLabel();
-        lblTextBoxBackground = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                FormLoad(evt);
+            }
+        });
         getContentPane().setLayout(null);
+
+        lblBtnChoiceYes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/ChoiceYes.png"))); // NOI18N
+        lblBtnChoiceYes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ChoiceYesClicked(evt);
+            }
+        });
+        getContentPane().add(lblBtnChoiceYes);
+        lblBtnChoiceYes.setBounds(660, 480, 116, 47);
+
+        lblBtnChoiceNo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/ChoiceNo.png"))); // NOI18N
+        lblBtnChoiceNo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ChoiceNoClicked(evt);
+            }
+        });
+        getContentPane().add(lblBtnChoiceNo);
+        lblBtnChoiceNo.setBounds(660, 530, 115, 46);
+
+        lblChoiceBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/YesNoBackground.png"))); // NOI18N
+        getContentPane().add(lblChoiceBackground);
+        lblChoiceBackground.setBounds(650, 460, 140, 132);
+
+        lblBtnAttack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/btnAttack.png"))); // NOI18N
+        getContentPane().add(lblBtnAttack);
+        lblBtnAttack.setBounds(50, 490, 190, 70);
+
+        lblBtnFlee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/btnFlee.png"))); // NOI18N
+        getContentPane().add(lblBtnFlee);
+        lblBtnFlee.setBounds(560, 490, 190, 70);
+
+        lblBtnDefend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/btnDefend.png"))); // NOI18N
+        getContentPane().add(lblBtnDefend);
+        lblBtnDefend.setBounds(310, 490, 190, 70);
+
+        lblTextBoxBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/TextBoxBackground.png"))); // NOI18N
+        getContentPane().add(lblTextBoxBackground);
+        lblTextBoxBackground.setBounds(0, 450, 800, 150);
 
         txtAreaMessageBox.setEditable(false);
         txtAreaMessageBox.setColumns(20);
@@ -200,10 +283,6 @@ public class BattleScreen extends javax.swing.JFrame {
         getContentPane().add(lblMenuDropDownBackground);
         lblMenuDropDownBackground.setBounds(550, 2, 250, 370);
 
-        lblTextBoxBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/TextBoxBackground.png"))); // NOI18N
-        getContentPane().add(lblTextBoxBackground);
-        lblTextBoxBackground.setBounds(0, 450, 800, 150);
-
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/The_Field_by_Joker841.jpg"))); // NOI18N
         getContentPane().add(lblBackground);
         lblBackground.setBounds(0, 0, 800, 600);
@@ -213,52 +292,58 @@ public class BattleScreen extends javax.swing.JFrame {
 
     private void btnMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuClicked
         // Handles when the Menu button is clicked.
-        
-        if(mainMenuClicked = false)
-        {
-            lblMenuDropDownBackground.setVisible(true);
-            btnOptionsMenu.setVisible(true);
-            btnNewGame.setVisible(true);
-            btnLoadGame.setVisible(true);
-            btnSaveGame.setVisible(true);
-            btnExit.setVisible(true);
-        }
-        else
-        {
-            lblMenuDropDownBackground.setVisible(false);
-            btnOptionsMenu.setVisible(false);
-            btnNewGame.setVisible(false);
-            btnLoadGame.setVisible(false);
-            btnSaveGame.setVisible(false);
-            btnExit.setVisible(false);
-        }
-        
+            nextAction = "Menu";
+            mainMenuClicked = mainMenuClicked + 1;
     }//GEN-LAST:event_btnMenuClicked
 
     private void btnOptionsMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOptionsMenuClicked
         // Handles when the Option Button in the Drop Down Menu is Clicked.
-        menuOptionClicked = true;
+        nextAction = "Option Menu";
     }//GEN-LAST:event_btnOptionsMenuClicked
 
     private void btnNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewGameClicked
         // Handles when the New Game button in the Drop Down Menu is Clicked.
-        menuNewGameClicked = true;
+         nextAction = "New Game";
     }//GEN-LAST:event_btnNewGameClicked
 
     private void btnSaveGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveGameClicked
         // Handles when the Save Game Button in the Drop Down Menu is Clicked.
-        menuSaveGameClicked = true;
+         nextAction = "Save Game";
     }//GEN-LAST:event_btnSaveGameClicked
 
     private void btnLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadGameClicked
         // Handles when the Load Game Button in the Drop Down Menu is Clicked.
-        menuLoadGameClicked = true;
+         nextAction = "Load Game";
     }//GEN-LAST:event_btnLoadGameClicked
 
     private void btnExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitClicked
         // Handles when the Load Game Button in the Drop Down Menu is Clicked.
-        menuExitClicked = true;
+         nextAction = "Exit";
     }//GEN-LAST:event_btnExitClicked
+
+    private void FormLoad(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FormLoad
+        // TODO add your handling code here:
+        lblMenuDropDownBackground.setVisible(false);
+        btnOptionsMenu.setVisible(false);
+        btnNewGame.setVisible(false);
+        btnLoadGame.setVisible(false);
+        btnSaveGame.setVisible(false);
+        btnExit.setVisible(false);
+        lblTextBoxBackground.setVisible(false);
+        lblBtnAttack.setVisible(false);
+        lblBtnDefend.setVisible(false);
+        lblBtnFlee.setVisible(false);
+    }//GEN-LAST:event_FormLoad
+
+    private void ChoiceYesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceYesClicked
+        // TODO add your handling code here:
+        nextAction = "Yes";
+    }//GEN-LAST:event_ChoiceYesClicked
+
+    private void ChoiceNoClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceNoClicked
+        // TODO add your handling code here:
+        nextAction = "No";
+    }//GEN-LAST:event_ChoiceNoClicked
 
     /**
      * @param args the command line arguments
@@ -303,6 +388,12 @@ public class BattleScreen extends javax.swing.JFrame {
     private javax.swing.JLabel btnSaveGame;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblBtnAttack;
+    private javax.swing.JLabel lblBtnChoiceNo;
+    private javax.swing.JLabel lblBtnChoiceYes;
+    private javax.swing.JLabel lblBtnDefend;
+    private javax.swing.JLabel lblBtnFlee;
+    private javax.swing.JLabel lblChoiceBackground;
     private javax.swing.JLabel lblMenuDropDownBackground;
     private javax.swing.JLabel lblMonsterHP;
     private javax.swing.JLabel lblPlayerHP;

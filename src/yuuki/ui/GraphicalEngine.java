@@ -27,7 +27,6 @@ public class GraphicalEngine implements Interactable {
     OptionsMenu optionsMenu = new OptionsMenu();
     PlayerName playerName = new PlayerName();
     BattleScreen battleScreenGui = new BattleScreen();
-    Audio audio = new Audio();
     String NameOfPlayer = "";
     
     private JFrame currentForm = null;

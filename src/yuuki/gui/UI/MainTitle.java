@@ -1,7 +1,8 @@
 package yuuki.gui.UI;
-import yuuki.gui.UI.Audio;
+
 import sun.audio.*;
 import java.io.*;
+import yuuki.gui.UI.*;
 /**
  *
  * @author Caleb Smith
@@ -9,6 +10,7 @@ import java.io.*;
  */
 public class MainTitle extends javax.swing.JFrame {
     public String nextGuiForm = "";
+    Audio audio = new Audio();
 
 public String getNextForm(String nextForm)
 {
@@ -159,6 +161,7 @@ public String getNextForm(String nextForm)
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
         // On Mouseover changes lblNewGame's Icon.
         lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/New Game Hi.png")));
+        audio.playSound();
     }//GEN-LAST:event_NewGameEntered
 
     private void NewGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameExited

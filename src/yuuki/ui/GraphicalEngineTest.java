@@ -93,16 +93,41 @@ public class GraphicalEngineTest {
     {
         Character [][] fighters = makeTeams();
         ge.switchToBattleScreen(fighters);
+        ge.battleScreenGui.beginSequence();
+        String choice = ge.battleScreenGui.getNextAction();
+        ge.battleScreenGui.setNextAction("");
+        if(choice == "Menu")
+        {
+            battleScreenNav();
+        }
+        else if(choice == "Yes")
+        {
         Battle b = new Battle(fighters);
-        ge.battleScreenGui.setText("Before Battle Creation");
         runBattle(b);
         Character winner = b.getFighters(0).get(0);
+        }
+        else
+        {
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreen");
+            System.out.println("Non-essential functionality, fix if enough time");
+        }
     }
     
     public void battleScreenNav()
     {
-        Character [][] fighters = makeTeams();
-        ge.switchToBattleScreen(fighters);
+        ge.battleScreenGui.Nav();
+        String choice = ge.battleScreenGui.getNextAction();
+        ge.battleScreenGui.setNextAction("");
+        if(choice == "Menu")
+        {
+            battleScreenNav();
+        }
+        else if (choice == "Options Menu")
+        {
+            ge.switchToOptionsScreen();
+            
+        }
+        
     }
     
      public Character[][] makeTeams()
