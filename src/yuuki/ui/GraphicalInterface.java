@@ -468,10 +468,6 @@ public class GraphicalInterface implements Interactable, IntroScreenListener {
 		SwingUtilities.invokeLater(runner);
 	}
 	
-	@Override
-	public void playSound(String path) {
-		
-	}
 	
 	@Override
 	public int selectAction(Action[] actions) {

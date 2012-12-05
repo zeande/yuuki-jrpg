@@ -408,6 +408,7 @@ public class GraphicalEngine implements Interactable {
 			moveNames[i] = moves[i].getName();
 		}
         String move = (String) JOptionPane.showInputDialog(null, "Choose a move:", "test", JOptionPane.INFORMATION_MESSAGE, null, moveNames, moveNames[0]);
+          
         int index = 0;
         for (int i = 0; i < moveNames.length; i++) {
             if (moveNames[i].equals(move)) {

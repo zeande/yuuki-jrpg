@@ -470,12 +470,7 @@ public class StreamInterface implements Interactable {
 		println(" are victorious!");
 		pause();
 	}
-	
-	/**
-	 * Has no effect.
-	 */
-	@Override
-	public void playSound(String path) {}
+
 	
 	/**
 	 * Displays the message that a Character says.

@@ -216,7 +216,7 @@ public class GraphicalEngineTest {
      private void outputTurnStart(Battle battle) {
 		Character c = battle.getCurrentFighter();
 		int recoveredMana = battle.getRegeneratedMana();
-		ge.display(c, "It looks like I'm up next.");
+		//ge.display(c, "It looks like I'm up next.");
 		ArrayList<Buff> expiredBuffs = c.getExpiredBuffs();
 		for (Buff expired: expiredBuffs) {
 			ge.showBuffDeactivation(expired);
