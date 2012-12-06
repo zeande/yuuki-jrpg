@@ -4,7 +4,8 @@ import sun.audio.*;
 import java.io.*;
 import yuuki.gui.UI.*;
 /**
- *
+ * Is the Opening Game Screen.
+ * Provides user with Options to get into the game.
  * @author Caleb Smith
  * @version 11/16/12
  */
@@ -22,6 +23,11 @@ public class MainTitle extends javax.swing.JFrame {
     {
         effectsON = input;
     }
+    /**
+     * Waits on the user to select what they want to do next.
+     * @param nextForm
+     * @return nextGuiForm
+     */
 public String getNextForm(String nextForm)
 {
     nextGuiForm = nextForm;
@@ -38,7 +44,6 @@ public String getNextForm(String nextForm)
     }
    return nextGuiForm; 
 }
-    
     /**
      * Creates new form MainTitle
      */
@@ -174,7 +179,7 @@ public String getNextForm(String nextForm)
     }// </editor-fold>//GEN-END:initComponents
 
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
-        // On Mouseover changes lblNewGame's Icon.
+        // On Mouseover changes lblNewGame's Icon, and plays approptiate sound.
         lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/New Game Hi.png")));
         if(effectsON)
         {
@@ -198,7 +203,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_NewGameReleased
 
     private void LoadGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameEntered
-        // On Mouseover changes lblLoadGame's Icon.
+        // On Mouseover changes lblLoadGame's Icon, and plays approptiate sound.
         lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Load Game Hi.png")));
         if(effectsON)
         {
@@ -207,7 +212,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_LoadGameEntered
 
     private void LoadGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameExited
-        // On Mouseover off changes lblLoadGames' Icon
+        // On Mouseover off changes lblLoadGames' Icon.
         lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Load Game.png")));
     }//GEN-LAST:event_LoadGameExited
 
@@ -222,7 +227,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_LoadGameReleased
 
     private void OptionsEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsEntered
-        // On Mouseover change lblOptions's Icon.
+        // On Mouseover change lblOptions's Icon, and plays approptiate sound.
         lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Options Hi.png")));
         if(effectsON)
         {
@@ -246,7 +251,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_OptionsReleased
 
     private void ExitEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitEntered
-        // On Mouseover change lblExit's Icon.
+        // On Mouseover change lblExit's Icon, and plays approptiate sound.
         lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Exit Hi.png")));
         if(effectsON)
         {
@@ -270,7 +275,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_ExitReleased
 
     private void ExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitClicked
-        // Close the Program.
+        // Close the Program, and plays approptiate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -279,7 +284,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_ExitClicked
 
     private void OptionsClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsClicked
-        //Handles wehn lblOptionsClicked is clicked.
+        //Handles wehn lblOptionsClicked is clicked, and plays approptiate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -288,7 +293,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_OptionsClicked
 
     private void lblNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewGameClicked
-        // Handles when lblNewgame is Clicked.
+        // Handles when lblNewgame is Clicked, and plays approptiate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -297,7 +302,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_lblNewGameClicked
 
     private void lblLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoadGameClicked
-        // Handles when lblLoadGame is clicked.
+        // Handles when lblLoadGame is clicked, and plays approptiate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -306,7 +311,7 @@ public String getNextForm(String nextForm)
     }//GEN-LAST:event_lblLoadGameClicked
 
     private void JFrameOpening(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_JFrameOpening
-        // TODO add your handling code here:
+        // Handles when the JFrame loads.
         audio.preload("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
         audio.preload("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
     }//GEN-LAST:event_JFrameOpening

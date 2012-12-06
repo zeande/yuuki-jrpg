@@ -1,16 +1,11 @@
 package yuuki.gui.UI;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import sun.audio.AudioData;
-import sun.audio.AudioDataStream;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-
 /**
- *
+ * Instantiates a new playerCharacter.
+ * Gets the new playerCharacter's name from user.
+ * Allows navigation back to Main Menu.
  * @author Caleb Smith
- * @version 10/16/12
+ * @version 12/06/12
  */
 public class PlayerName extends javax.swing.JFrame {
     String usersName = "Player 1";
@@ -27,6 +22,11 @@ public class PlayerName extends javax.swing.JFrame {
     {
         effectsON = input;
     }
+    /**
+     * Waits on user input.
+     * @param nextForm
+     * @return nextGuiForm
+     */
     public String getNextForm(String nextForm)
 {
     nextGuiForm = nextForm;
@@ -145,7 +145,7 @@ public class PlayerName extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBtnMainMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuEntered
-        // Handles lblBtnMainMenu on Mouseover.
+        // Handles lblBtnMainMenu on Mouseover, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -159,7 +159,7 @@ public class PlayerName extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnMainMenuExited
 
     private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
-        // Handles lblBtnMainMenuClicked click event.
+        // Handles lblBtnMainMenuClicked click event, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -178,7 +178,7 @@ public class PlayerName extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnMainMenuReleased
 
     private void lblBtnBeginGame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGame
-        // Handles lblBtnMainMenu on Mouseover.
+        // Handles lblBtnMainMenu on Mouseover, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -202,7 +202,7 @@ public class PlayerName extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnBeginGameReleased
 
     private void lblBtnBeginGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameClicked
-        // Handles lblBtnBeginGame on Click.
+        // Handles lblBtnBeginGame on Click, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -211,7 +211,7 @@ public class PlayerName extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBtnBeginGameClicked
 
     private void JFrameOpening(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_JFrameOpening
-        // TODO add your handling code here:
+        // Handles JFrameOpening.
         audio.preload("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
         audio.preload("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
     }//GEN-LAST:event_JFrameOpening

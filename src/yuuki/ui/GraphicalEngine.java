@@ -12,9 +12,11 @@ import yuuki.entity.Stat;
 import yuuki.entity.VariableStat;
 
 /**
- *
+ * Instantiates all JFrames.
+ * provides handling for GUI Navigation.
+ * Implements Interactable.
  * @author Caleb Smith
- * @version 10/16/12
+ * @version 12/06/12
  */
 public class GraphicalEngine implements Interactable {
     //Construct nessecary objects.
@@ -58,6 +60,11 @@ public class GraphicalEngine implements Interactable {
             currentForm.setVisible(true);
         }
     }
+    /**
+     * Switches to the PlayerName JFrame.
+     * 
+     * @return nextForm
+     */
     public String switchToPlayerNameScreen()
     {
         String nextForm = "";
@@ -78,6 +85,14 @@ public class GraphicalEngine implements Interactable {
         }
         return nextForm;
     }
+    /**
+     * Switches to the PlayerName JFrame.
+     * Provides PlayerName with current audio options.
+     * 
+     * @param soundMusic
+     * @param soundEffects
+     * @return nextForm
+     */
     public String switchToPlayerNameScreen(boolean soundMusic , boolean soundEffects)
     {
         String nextForm = "";
@@ -102,6 +117,11 @@ public class GraphicalEngine implements Interactable {
         }    
         return nextForm;
     }
+    /**
+     * Switches the the MainTitle JFrame.
+     * 
+     * @return nextForm
+     */
     public String switchToIntroScreen()
     {
         String nextForm = "";
@@ -120,6 +140,14 @@ public class GraphicalEngine implements Interactable {
         }
         return nextForm;
     }
+    /**
+     * Switches to the MainTitle JFrame.
+     * Provides it with current audio options.
+     * 
+     * @param soundMusic
+     * @param soundEffects
+     * @return nextForm
+     */
     public String switchToIntroScreen(boolean soundMusic, boolean soundEffects)
     {
         String nextForm = "";
@@ -142,6 +170,11 @@ public class GraphicalEngine implements Interactable {
         }
        return nextForm;
     }
+    /**
+     * Switches to OptionsMenu JFrame.
+     * 
+     * @return nextForm
+     */
     public String switchToOptionsScreen()
     {
         String nextForm = "";
@@ -160,6 +193,14 @@ public class GraphicalEngine implements Interactable {
         }
         return nextForm;
     }
+    /**
+     * Switch to OptionsScreen JFrame.
+     * Provide it with current audio options.
+     * 
+     * @param soundMusic
+     * @param soundEffects
+     * @return nextForm
+     */
     public String switchToOptionsScreen(boolean soundMusic, boolean soundEffects)
     {
         String nextForm = "";
@@ -179,6 +220,15 @@ public class GraphicalEngine implements Interactable {
         }
         return nextForm;
     }
+    /**
+     * Switch to BattleScreen JFrame.
+     * Provide it with current fighters Array.
+     * Provide it with current audio options.
+     * 
+     * @param fighters
+     * @param music
+     * @param effects 
+     */
     public void switchToBattleScreen(yuuki.entity.Character[][] fighters, boolean music, boolean effects)
     {
         if(currentForm == null)
@@ -199,10 +249,18 @@ public class GraphicalEngine implements Interactable {
             battleScreenGui.resetMenu();
         }
     }
+    /**
+     * Calls showStats method with current fighter.
+     * @param fighter 
+     */
     public void showStatUpdate(yuuki.entity.Character fighter)
     {
                 showStats(fighter);
     }
+    /**
+     * Print out character Stats.
+     * @param f 
+     */
     private void showStats(Character f) {
 		print(f.getName() + " (");
 		print("Team " + f.getTeamId());
@@ -232,6 +290,13 @@ public class GraphicalEngine implements Interactable {
 		}
 		pause();
 	}
+    /**
+     * Update GUI hp representation.
+     * 
+     * @param hp
+     * @param hpMax
+     * @param teamID 
+     */
     public void updateGuiHP(int hp, int hpMax, int teamID)
     {
         if(teamID == 0)
@@ -243,14 +308,26 @@ public class GraphicalEngine implements Interactable {
             battleScreenGui.setMonsterHP(hp, hpMax);
         }
     }
+    /**
+     * Print a String.
+     * @param arg 
+     */
     public void print(String arg)
     {
         battleScreenGui.setText(arg);
     }
+    /**
+     * Print a String followed by a new line.
+     * @param arg 
+     */
     public void println(String arg)
     {
         battleScreenGui.setTextln(arg);
     }
+    /**
+     * Print out character buffs.
+     * @param f 
+     */
     private void showBuffs(Character f) {
 		ArrayList<Buff> buffs = f.getBuffs();
 		print("Buffs: ");
@@ -429,6 +506,12 @@ public class GraphicalEngine implements Interactable {
         boolean confirm = false;
         return confirm;
     }
+    /**
+     * Get user input about what move to do next.
+     * 
+     * @param moves
+     * @return index
+     */
     public int selectAction(Action[] moves)
     {
         String[] moveNames = new String[moves.length];
@@ -446,6 +529,13 @@ public class GraphicalEngine implements Interactable {
         }
         return index;
     }
+    /**
+     * Selects Monster Character.
+     * Has functionality to prompt user to select Character.
+     * 
+     * @param fighters
+     * @return yuuki.entity.Character
+     */
     public yuuki.entity.Character selectTarget(ArrayList<ArrayList<yuuki.entity.Character>> fighters)
     {
 		ArrayList<Character> chars = new ArrayList<Character>();

@@ -1,19 +1,20 @@
 package yuuki.gui.UI;
 
 /**
- *
+ * Allows the user to change audio options.
+ * Audio options effect entire game.
  * @author Caleb Smtih
- * @version 11/16/12
+ * @version 12/06/12
  */
 public class OptionsMenu extends javax.swing.JFrame {
     public String nextGuiForm = "";
-boolean musicON = true;
-boolean effectsON = true;
-boolean musicOnChecked = true;
-boolean musicOffChecked = false;
-boolean effectsOnChecked = true;
-boolean effectsOffChecked = false;
-Audio audio = new Audio();
+    boolean musicON = true;
+    boolean effectsON = true;
+    boolean musicOnChecked = true;
+    boolean musicOffChecked = false;
+    boolean effectsOnChecked = true;
+    boolean effectsOffChecked = false;
+    Audio audio = new Audio();
 
 public boolean getMusic()
 {
@@ -23,6 +24,11 @@ public boolean getEffects()
 {
     return effectsON;
 }
+/**
+ * Waits on user to return to main menu.
+ * @param nextForm
+ * @return nextGuiForm
+ */
     public String getNextForm(String nextForm)
 {
     nextGuiForm = nextForm;
@@ -39,6 +45,11 @@ public boolean getEffects()
     }
    return nextGuiForm; 
 }
+    /**
+     * If the music option is on, it turns it off.
+     * If the music option is off, it turns it on.
+     * Changes icons appropriately.
+     */
     public void setMusic()
     {
         if(musicON == true)
@@ -58,6 +69,11 @@ public boolean getEffects()
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
     }
+    /**
+     * If the effects option is on, it turns it off.
+     * If the effects option is off, it turns it on.
+     * Changes icons appropriately.
+     */
     public void setEffects()
     {
         if(effectsON == true)
@@ -216,7 +232,7 @@ public boolean getEffects()
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBtnApplyEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyEntered
-        //On Mouseover changes lblBtnApply's Icon.   
+        //On Mouseover changes lblBtnApply's Icon, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -240,7 +256,7 @@ public boolean getEffects()
     }//GEN-LAST:event_lblBtnApplyReleased
 
     private void musicOnEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOnEntered
-        // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        // Code checks to see which state lblMusicRadialSelectOn is in, then performs the appropriate action, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -256,7 +272,7 @@ public boolean getEffects()
     }//GEN-LAST:event_musicOnEntered
 
     private void musicOnExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOnExited
-        // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        // Code checks to see which state lblMusicRadialSelectOn is in, then performs the appropriate action, and plays appropriate sound.
         if(musicOnChecked == true)
         {
             lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
@@ -268,7 +284,7 @@ public boolean getEffects()
     }//GEN-LAST:event_musicOnExited
 
     private void effectsOnEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOnEntered
-        // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        // Code checks to see which state lblEffectsRadialSelectOn is in, then performs the appropriate action, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -284,7 +300,7 @@ public boolean getEffects()
     }//GEN-LAST:event_effectsOnEntered
 
     private void effectsOnExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOnExited
-        // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        // Code checks to see which state lblEffectsRadialSelectOn is in, then performs the appropriate action, and plays appropriate sound.
         if(effectsOnChecked == true)
         {
             lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
@@ -296,7 +312,7 @@ public boolean getEffects()
     }//GEN-LAST:event_effectsOnExited
 
     private void musicOffEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOffEntered
-        // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        // Code checks to see which state lblMusicRadialSelectOff is in, then performs the appropriate action, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -312,7 +328,7 @@ public boolean getEffects()
     }//GEN-LAST:event_musicOffEntered
 
     private void effectsOffEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffEntered
-        // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        // Code checks to see which state lblEffectsRadialSelectOff is in, then performs the appropriate action, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -328,7 +344,7 @@ public boolean getEffects()
     }//GEN-LAST:event_effectsOffEntered
 
     private void musicOffExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOffExited
-        // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        // Code checks to see which state lblMusicRadialSelectOff is in, then performs the appropriate action.
         if(musicOffChecked == true)
         {
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
@@ -340,7 +356,7 @@ public boolean getEffects()
     }//GEN-LAST:event_musicOffExited
 
     private void effectsOffExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffExited
-        // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        // Code checks to see which state lblEffectsRadialSelectOff is in, and performs the appropriate action.
         if(effectsOffChecked == true)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
@@ -352,7 +368,7 @@ public boolean getEffects()
     }//GEN-LAST:event_effectsOffExited
 
     private void musicOnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOnClicked
-        // Invert checked properties, and change lbl Icons.
+        // Invert checked properties, and change lbl Icons, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -361,7 +377,7 @@ public boolean getEffects()
     }//GEN-LAST:event_musicOnClicked
 
     private void musicOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOffClicked
-        // Invert checked properties, and change lbl Icons.
+        // Invert checked properties, and change lbl Icons, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -370,7 +386,7 @@ public boolean getEffects()
     }//GEN-LAST:event_musicOffClicked
 
     private void effectsOnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOnClicked
-        // Invert checked properties, and change lbl Icons.
+        // Invert checked properties, and change lbl Icons, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -379,7 +395,7 @@ public boolean getEffects()
     }//GEN-LAST:event_effectsOnClicked
 
     private void effectsOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffClicked
-        // Invert checked properties, and change lbl Icons.
+        // Invert checked properties, and change lbl Icons, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -388,7 +404,7 @@ public boolean getEffects()
     }//GEN-LAST:event_effectsOffClicked
 
     private void btnApplyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApplyClicked
-        // Handles btnApply clicked event.
+        // Handles btnApply clicked event, and plays appropriate sound.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -397,7 +413,7 @@ public boolean getEffects()
     }//GEN-LAST:event_btnApplyClicked
 
     private void JFrameOpening(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_JFrameOpening
-        // TODO add your handling code here:
+        // Handles when JFrame Opens.
         audio.preload("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
         audio.preload("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
     }//GEN-LAST:event_JFrameOpening

@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package yuuki.gui.UI;
+
 import yuuki.ui.GraphicalEngineTest;
 
 /**
- *
+ *Provides Battle game play, and Navigation.
  * @author Caleb Smith
- * @version 11/16/12
+ * @version 12/06/12
  */
 public class BattleScreen extends javax.swing.JFrame {
     public int mainMenuClicked = 0;
@@ -25,24 +22,6 @@ public class BattleScreen extends javax.swing.JFrame {
     {
         effectsON = input;
     }
-    
-//    public String getNextForm(String nextForm)
-//    {
-//        nextGuiForm = nextForm;
-//        while(nextGuiForm == "next form querry")
-//        {
-//            try
-//            {
-//                Thread.sleep(1);
-//            }
-//            catch(Exception e)
-//            {
-//                System.out.println("Couldn't sleep @ MainTitle.getNextForm");
-//            }
-//        }
-//       return nextGuiForm; 
-//    }
-    
     public void setPlayerHP(int hp, int hpMax)
     {
         lblPlayerHP.setText(hp + "/" + hpMax);
@@ -61,20 +40,17 @@ public class BattleScreen extends javax.swing.JFrame {
         String currentText = txtAreaMessageBox.getText();
         txtAreaMessageBox.setText(currentText + textUpdate + "\n");
     }
-    
     public void beginSequence()
     {
         setTextln("A Slime has appeared!");
         showBattleOptions();
     }
-    
     public void showChoice()
     {
         lblChoiceBackground.setVisible(true);
         lblBtnChoiceYes.setVisible(true);
         lblBtnChoiceNo.setVisible(true);
     }
-    
     public void showBattleOptions()
     {
         lblTextBoxBackground.setVisible(true);
@@ -91,7 +67,11 @@ public class BattleScreen extends javax.swing.JFrame {
         lblBtnDefend.setEnabled(false);
         lblBtnFlee.setEnabled(false);
     }
-    
+    /**
+     * Wait for user input in the form of a button click.
+     * Returns user's button selection.
+     * @return String nextGuiForm
+     */
     public String Nav()
     {
         nextGuiForm = "";
@@ -123,7 +103,6 @@ public class BattleScreen extends javax.swing.JFrame {
         }
         return nextGuiForm;
     }
-    
     public void resetMenu()
     {
         lblMenuDropDownBackground.setVisible(false);
@@ -137,7 +116,6 @@ public class BattleScreen extends javax.swing.JFrame {
         lblBtnChoiceYes.setVisible(false);
         lblBtnChoiceNo.setVisible(false);
     }
-    
     public void resetChoice()
     {
         lblChoiceBackground.setVisible(true);
@@ -147,7 +125,6 @@ public class BattleScreen extends javax.swing.JFrame {
         lblBtnChoiceNo.setVisible(true);
         lblBtnChoiceNo.setEnabled(false);
     }
-    
     /**
      * Creates new form BattleScreen
      */
@@ -412,7 +389,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoadGameClicked
 
     private void btnExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitClicked
-        // Handles when the Load Game Button in the Drop Down Menu is Clicked.
+        // Handles when the Exit Game Button in the Drop Down Menu is Clicked.
          if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -421,7 +398,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitClicked
 
     private void FormLoad(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FormLoad
-        // TODO add your handling code here:
+        //Handles when the JFrame loads.
         audio.preload("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
         audio.preload("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
         lblMenuDropDownBackground.setVisible(false);
@@ -433,7 +410,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_FormLoad
 
     private void ChoiceYesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceYesClicked
-        // TODO add your handling code here:
+        // Handles when "Yes" in the choice menu is clicked.
         //nextAction = "Yes";
         if(effectsON)
         {
@@ -443,7 +420,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ChoiceYesClicked
 
     private void ChoiceNoClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceNoClicked
-        // TODO add your handling code here:
+        // Handles when "No" in the choice menu is clicked.
         ///nextAction = "No";
         if(effectsON)
         {
@@ -453,7 +430,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ChoiceNoClicked
 
     private void btnAttackClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAttackClicked
-        // TODO add your handling code here:
+        // Handles when "Attack" in the battle menu is clicked.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -462,7 +439,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAttackClicked
 
     private void btnDefendClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDefendClicked
-        // TODO add your handling code here:
+        // Handles when "Defend" in the battle menu is clicked.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -471,7 +448,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDefendClicked
 
     private void btnFleeClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFleeClicked
-        // TODO add your handling code here:
+        // Handles when "Flee" in the battle menu is clicked.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
@@ -480,7 +457,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFleeClicked
 
     private void MainMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MainMenuEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for MainMenu.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -488,7 +465,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_MainMenuEntered
 
     private void OptionsMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsMenuEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for OptionsMenu.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -496,7 +473,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_OptionsMenuEntered
 
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for NewGame.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -504,7 +481,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_NewGameEntered
 
     private void SaveGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveGameEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for SaveGame.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -512,7 +489,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_SaveGameEntered
 
     private void LoadGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for LoadGame.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -520,7 +497,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_LoadGameEntered
 
     private void ExitEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for Exit.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -528,7 +505,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitEntered
 
     private void AttackEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AttackEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for Attack.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -536,7 +513,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_AttackEntered
 
     private void DefendEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DefendEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for Defend.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -544,7 +521,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_DefendEntered
 
     private void FleeEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FleeEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for Flee.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -552,7 +529,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_FleeEntered
 
     private void ChoiceYesEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceYesEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for ChoiceYes.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
@@ -560,7 +537,7 @@ public class BattleScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ChoiceYesEntered
 
     private void ChoiceNoEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceNoEntered
-        // TODO add your handling code here:
+        // Handles the mouse over event for ChoiceNo.
         if(effectsON)
         {
             audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");

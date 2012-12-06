@@ -8,7 +8,9 @@ import yuuki.entity.Character;
 import java.awt.*;
 import yuuki.gui.UI.*;
 /**
- *
+ *Highest Level Class.
+ * Manages what to do next.
+ * 
  * @author Caleb Smtih
  * @version 11/16/12
  */
@@ -19,12 +21,18 @@ public class GraphicalEngineTest {
     GraphicalEngine ge = new GraphicalEngine();
     Character [][] fighters = null;
     Battle b = null;
-    
+    /**
+     * Main Method.
+     * @param args 
+     */
     public static void main(String[] args) {
         GraphicalEngineTest get = new GraphicalEngineTest();
         get.decideNextScreen("introScreen");
     }
-    
+    /**
+     * Decides what screen to switch too.
+     * @param input 
+     */
     public void decideNextScreen(String input)
     {
         if(input == "MainTitle.BtnNewGame")
@@ -114,12 +122,26 @@ public class GraphicalEngineTest {
             System.out.println("Unhandled formInput: \"" + input + "\" @ GraphicalEngineTest.decideNextScreen");
         }
     }
-    
+    /**
+     * Switches to introScreen.
+     * Provides it with current audio options.
+     * 
+     * @param music
+     * @param effects 
+     */
     public void introScreen(boolean music, boolean effects)
     {
         String nextForm = ge.switchToIntroScreen(music, effects);
         decideNextScreen(nextForm);
     }
+    /**
+     * Switches to playerCreation Screen.
+     * Instantiates new playerCharacter.
+     * Provides JFrame with current audio options.
+     * 
+     * @param music
+     * @param effects 
+     */
     public void playerCreation(boolean music, boolean effects)
     {
         String nextForm = ge.switchToPlayerNameScreen(music, effects);
@@ -140,16 +162,26 @@ public class GraphicalEngineTest {
             fighters = makeTeams();
         decideNextScreen(nextForm);
     }
+    /**
+     * Switches to optionsMenu.
+     */
     public void optionsMenu()
     {
         String nextForm = ge.switchToOptionsScreen();
         decideNextScreen(nextForm);
     }
+    /**
+     * ?
+     * @param choice 
+     */
     public void battleScreen(String choice)
     {
        ge.setNextMove(choice);
        
     }
+    /**
+     * Provides Navigation on the BattleScreen.
+     */
     public void battleScreenNav()
     {
         b = new Battle(fighters);
@@ -166,6 +198,10 @@ public class GraphicalEngineTest {
             choice = "";
         }
     }
+    /**
+     * Makes 2 teams, one with player on it, and one with Monsters.
+     * @return fighters 
+     */
      public Character[][] makeTeams()
      {
          fighters = new Character[2][];
@@ -173,7 +209,10 @@ public class GraphicalEngineTest {
          fighters[1] = mf.createRandomTeam(1, 1, player.getLevel(), "slime");
          return fighters;
      }
-     
+     /**
+      * Runs Battle.
+      * @param battle 
+      */
      private void runBattle(Battle battle) {
 		while (battle.advance()) {
 			switch (battle.getLastState()) {
@@ -217,7 +256,10 @@ public class GraphicalEngineTest {
 			}
                 }
      }
-     
+     /**
+      * Outputs the start of a battle's beginning phase to the user interface.
+      * @param battle 
+      */
      private void outputTurnStart(Battle battle) {
 		Character c = battle.getCurrentFighter();
 		int recoveredMana = battle.getRegeneratedMana();
