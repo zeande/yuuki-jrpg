@@ -78,9 +78,12 @@
           <Image iconType="3" name="/yuuki/gui/UI/BattleScreenAssets/btnAttack.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAttackClicked"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="490" width="190" height="70"/>
+          <AbsoluteConstraints x="20" y="510" width="190" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -90,9 +93,12 @@
           <Image iconType="3" name="/yuuki/gui/UI/BattleScreenAssets/btnFlee.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnFleeClicked"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="560" y="490" width="190" height="70"/>
+          <AbsoluteConstraints x="560" y="510" width="190" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -102,9 +108,12 @@
           <Image iconType="3" name="/yuuki/gui/UI/BattleScreenAssets/btnDefend.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDefendClicked"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="490" width="190" height="70"/>
+          <AbsoluteConstraints x="300" y="510" width="190" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -116,7 +125,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="450" width="800" height="150"/>
+          <AbsoluteConstraints x="0" y="490" width="800" height="110"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -126,7 +135,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="456" width="800" height="140"/>
+          <AbsoluteConstraints x="0" y="310" width="800" height="140"/>
         </Constraint>
       </Constraints>
 

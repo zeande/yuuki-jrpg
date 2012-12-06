@@ -898,11 +898,11 @@ public class StreamInterface implements Interactable {
 	 */
 	private void pause() {
 		println("(press enter to continue)");
-		try {
-			stdin.readLine();
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			stdin.readLine();
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	/**

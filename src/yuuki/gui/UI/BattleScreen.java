@@ -41,13 +41,7 @@ public class BattleScreen extends javax.swing.JFrame {
     public void beginSequence()
     {
         setTextln("A Slime has appeared!");
-        setTextln("Would you like to fight it?");
-        showChoice();
-    }
-    
-    public void resumeSequence()
-    {
-        
+        showBattleOptions();
     }
     
     public void showChoice()
@@ -57,6 +51,22 @@ public class BattleScreen extends javax.swing.JFrame {
         lblBtnChoiceNo.setVisible(true);
     }
     
+    public void showBattleOptions()
+    {
+        lblTextBoxBackground.setVisible(true);
+        lblBtnAttack.setVisible(true);
+        lblBtnDefend.setVisible(true);
+        lblBtnFlee.setVisible(true);
+        lblBtnAttack.setEnabled(true);
+        lblBtnDefend.setEnabled(true);
+        lblBtnFlee.setEnabled(true);
+    }
+    public void disableBattleOptions()
+    {
+        lblBtnAttack.setEnabled(false);
+        lblBtnDefend.setEnabled(false);
+        lblBtnFlee.setEnabled(false);
+    }
     public String getNextAction()
     {
         while(nextAction == "")
@@ -83,20 +93,13 @@ public class BattleScreen extends javax.swing.JFrame {
             btnLoadGame.setVisible(true);
             btnSaveGame.setVisible(true);
             btnExit.setVisible(true);
-            lblChoiceBackground.setEnabled(false);
-            lblBtnChoiceYes.setEnabled(false);
-            lblBtnChoiceNo.setEnabled(false);
+            disableBattleOptions();
             
         }
         else
         {
             resetMenu();
-            lblChoiceBackground.setEnabled(true);
-            lblBtnChoiceYes.setEnabled(true);
-            lblBtnChoiceNo.setEnabled(true);
-            lblChoiceBackground.setVisible(true);
-            lblBtnChoiceYes.setVisible(true);
-            lblBtnChoiceNo.setVisible(true);
+            showBattleOptions();
         }
         while(nextAction == "")
         {
@@ -204,20 +207,35 @@ public class BattleScreen extends javax.swing.JFrame {
         lblChoiceBackground.setBounds(650, 460, 140, 132);
 
         lblBtnAttack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/btnAttack.png"))); // NOI18N
+        lblBtnAttack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAttackClicked(evt);
+            }
+        });
         getContentPane().add(lblBtnAttack);
-        lblBtnAttack.setBounds(50, 490, 190, 70);
+        lblBtnAttack.setBounds(20, 510, 190, 70);
 
         lblBtnFlee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/btnFlee.png"))); // NOI18N
+        lblBtnFlee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFleeClicked(evt);
+            }
+        });
         getContentPane().add(lblBtnFlee);
-        lblBtnFlee.setBounds(560, 490, 190, 70);
+        lblBtnFlee.setBounds(560, 510, 190, 70);
 
         lblBtnDefend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/btnDefend.png"))); // NOI18N
+        lblBtnDefend.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDefendClicked(evt);
+            }
+        });
         getContentPane().add(lblBtnDefend);
-        lblBtnDefend.setBounds(310, 490, 190, 70);
+        lblBtnDefend.setBounds(300, 510, 190, 70);
 
         lblTextBoxBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/TextBoxBackground.png"))); // NOI18N
         getContentPane().add(lblTextBoxBackground);
-        lblTextBoxBackground.setBounds(0, 450, 800, 150);
+        lblTextBoxBackground.setBounds(0, 490, 800, 110);
 
         txtAreaMessageBox.setEditable(false);
         txtAreaMessageBox.setColumns(20);
@@ -226,7 +244,7 @@ public class BattleScreen extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtAreaMessageBox);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 456, 800, 140);
+        jScrollPane1.setBounds(0, 310, 800, 140);
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownExit.png"))); // NOI18N
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -344,10 +362,6 @@ public class BattleScreen extends javax.swing.JFrame {
         btnLoadGame.setVisible(false);
         btnSaveGame.setVisible(false);
         btnExit.setVisible(false);
-        lblTextBoxBackground.setVisible(false);
-        lblBtnAttack.setVisible(false);
-        lblBtnDefend.setVisible(false);
-        lblBtnFlee.setVisible(false);
     }//GEN-LAST:event_FormLoad
 
     private void ChoiceYesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceYesClicked
@@ -359,6 +373,21 @@ public class BattleScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         nextAction = "No";
     }//GEN-LAST:event_ChoiceNoClicked
+
+    private void btnAttackClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAttackClicked
+        // TODO add your handling code here:
+        nextAction = "Attack";
+    }//GEN-LAST:event_btnAttackClicked
+
+    private void btnDefendClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDefendClicked
+        // TODO add your handling code here:
+        nextAction = "Defend";
+    }//GEN-LAST:event_btnDefendClicked
+
+    private void btnFleeClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFleeClicked
+        // TODO add your handling code here:
+        nextAction = "Flee";
+    }//GEN-LAST:event_btnFleeClicked
 
     /**
      * @param args the command line arguments

@@ -18,6 +18,7 @@ public class GraphicalEngineTest {
     private MonsterFactory mf = new MonsterFactory();
     GraphicalEngine ge = new GraphicalEngine();
     Character [][] fighters = null;
+    Battle b = null;
     
     public static void main(String[] args) {
         GraphicalEngineTest get = new GraphicalEngineTest();
@@ -83,13 +84,17 @@ public class GraphicalEngineTest {
         if(fighters == null)
         {
             Character [][] fighters = makeTeams();
+            b = new Battle(fighters);
         }
         ge.switchToBattleScreen(fighters);
         ge.battleScreenGui.beginSequence();
         String choice = ge.battleScreenGui.getNextAction();
         ge.battleScreenGui.setNextAction("");
         battleScreenDecide(choice);
-        Battle b = new Battle(fighters);
+    }
+    
+    public void battle()
+    {
         runBattle(b);
         Character winner = b.getFighters(0).get(0);
     }
@@ -100,14 +105,22 @@ public class GraphicalEngineTest {
         {
             battleScreenNav();
         }
-        else if(choice == "Yes")
+        else if(choice == "Attack")
         {
-            System.out.println("Battle Sequence Starting.");
+            ge.println("You used \"Attack\".");
+            battle();
+        }
+        else if(choice == "Defend")
+        {
+            ge.println("You used \"Defend\".");
+            battle();
         }
         else
         {
             System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreen");
-            System.out.println("Non-essential functionality, fix if enough time");
+            System.out.println("Flee - Non-essential functionality, fix if enough time");
+            ge.println("You used \"Flee\".");
+            battle();
         }
     }
     
@@ -134,7 +147,7 @@ public class GraphicalEngineTest {
         else if(choice == "Main Menu")
         {
             ge.switchToBattleScreen(fighters);
-            ge.battleScreenGui.resetChoice();
+            ge.battleScreenGui.showBattleOptions();
             battleScreenDecide("Menu");
         }
         else if(choice == "Create New Game")

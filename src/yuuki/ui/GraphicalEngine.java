@@ -1,15 +1,10 @@
 package yuuki.ui;
-import java.io.FileInputStream;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import yuuki.gui.UI.*;
 import yuuki.gui.UI.BattleScreen;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import sun.audio.AudioData;
-import sun.audio.AudioDataStream;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
 import yuuki.action.Action;
 import yuuki.buff.Buff;
 import yuuki.entity.Character;
@@ -30,10 +25,6 @@ public class GraphicalEngine implements Interactable {
     String NameOfPlayer = "";
     
     private JFrame currentForm = null;
-//    public MainTitle mainTitleGui = new MainTitle();
-//    public OptionsMenu optionsMenuGui = new OptionsMenu();
-//    public PlayerName playerNameGui = new PlayerName();
-//    public BattleScreen battleScreen = new BattleScreen();
     
     public void initialize()
     {
@@ -235,7 +226,7 @@ public class GraphicalEngine implements Interactable {
 		println("");
 	}
     private void pause() {
-		println("Press \"Enter\" to continue.");
+		//println("Press \"Enter\" to continue.");
 		
 	}
     public void showDamage(yuuki.entity.Character fighter, Stat stat, int damage)
@@ -430,7 +421,8 @@ public class GraphicalEngine implements Interactable {
 		}
 		Character[] charsArr = chars.toArray(new Character[0]);
                 
-		return (Character) JOptionPane.showInputDialog(null, "Select target", "test", JOptionPane.INFORMATION_MESSAGE, null, charsArr, charsArr[0]);
+		return charsArr[1];
+                        //(Character) JOptionPane.showInputDialog(null, "Select target", "test", JOptionPane.INFORMATION_MESSAGE, null, charsArr, charsArr[0]);
     }
     
     public void display(yuuki.entity.Character speaker, String message)
