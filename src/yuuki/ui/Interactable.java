@@ -38,7 +38,7 @@ public interface Interactable {
          * @param soundMusic If music should play.
          * @param soundEffects If effects should play.
 	 */
-	public void switchToPlayerNameScreen(boolean soundMusic, boolean soundEffects);
+	public String switchToPlayerNameScreen(boolean soundMusic, boolean soundEffects);
         
         /**
          * Shows the Player Name screen.
@@ -48,7 +48,7 @@ public interface Interactable {
         /**
          * Shows the Player Name screen.
          */
-	public void switchToIntroScreen(boolean soundMusic, boolean soundEffects);
+	public String switchToIntroScreen(boolean soundMusic, boolean soundEffects);
         
 	/**
 	 * Shows the options screen.
@@ -64,14 +64,14 @@ public interface Interactable {
          * @param soundMusic If music should play.
          * @param soundEffects If effects should play.
 	 */
-	public void switchToOptionsScreen(boolean soundMusic, boolean soundEffects);
+	public String switchToOptionsScreen(boolean soundMusic, boolean soundEffects);
         
 	/**
 	 * Shows the battle screen.
 	 *
 	 * @param fighters The characters fighting.
 	 */
-	public void switchToBattleScreen(Character[][] fighters);
+	public void switchToBattleScreen(Character[][] fighters, boolean soundMusic, boolean soundEffect);
 	
 	/**
 	 * Updates the displayed stats of a character during a battle.

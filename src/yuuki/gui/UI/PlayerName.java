@@ -15,7 +15,18 @@ import sun.audio.AudioStream;
 public class PlayerName extends javax.swing.JFrame {
     String usersName = "Player 1";
     String nextGuiForm = "";
+    Audio audio = new Audio();
+    boolean musicON = true;
+    boolean effectsON = true;
     
+    public void setMusic(boolean input)
+    {
+        musicON = input;
+    }
+    public void setEffects(boolean input)
+    {
+        effectsON = input;
+    }
     public String getNextForm(String nextForm)
 {
     nextGuiForm = nextForm;
@@ -62,6 +73,11 @@ public class PlayerName extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(16, 38, 800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                JFrameOpening(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         txtPlayerName.setFont(new java.awt.Font("Segoe Print", 0, 76)); // NOI18N
@@ -130,6 +146,10 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnMainMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuEntered
         // Handles lblBtnMainMenu on Mouseover.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
         lblBtnMainMenu.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameGuiAssets/PlayerNameMainMenuHi.png")));
     }//GEN-LAST:event_lblBtnMainMenuEntered
 
@@ -140,6 +160,10 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
         // Handles lblBtnMainMenuClicked click event.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "introScreen";
     }//GEN-LAST:event_lblBtnMainMenuClicked
 
@@ -155,6 +179,10 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnBeginGame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGame
         // Handles lblBtnMainMenu on Mouseover.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
         lblBtnBeginGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/PlayerNameGuiAssets/PlayerNameBeginGameHi.png")));
     }//GEN-LAST:event_lblBtnBeginGame
 
@@ -175,8 +203,18 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnBeginGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameClicked
         // Handles lblBtnBeginGame on Click.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "PlayerName.btnBattleScreen";
     }//GEN-LAST:event_lblBtnBeginGameClicked
+
+    private void JFrameOpening(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_JFrameOpening
+        // TODO add your handling code here:
+        audio.preload("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        audio.preload("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+    }//GEN-LAST:event_JFrameOpening
 
     /**
      * @param args the command line arguments

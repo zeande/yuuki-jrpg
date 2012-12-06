@@ -110,7 +110,7 @@ public class GraphicalInterface implements Interactable, IntroScreenListener {
 	}
 	
 	@Override
-	public void switchToBattleScreen(Character[][] fighters) {
+	public void switchToBattleScreen(Character[][] fighters, boolean soundMusic, boolean soundEffects) {
 		class Runner implements Runnable {
 			public Character[][] fighters;
 			public void run() {
@@ -629,22 +629,24 @@ public class GraphicalInterface implements Interactable, IntroScreenListener {
 	}
 
 	@Override
-	public void switchToPlayerNameScreen(boolean soundMusic,
+	public String switchToPlayerNameScreen(boolean soundMusic,
 			boolean soundEffects) {
 		// TODO Auto-generated method stub
+            return "Override Corrections";
 		
 	}
 
 	@Override
-	public void switchToIntroScreen(boolean soundMusic, boolean soundEffects) {
+	public String switchToIntroScreen(boolean soundMusic, boolean soundEffects) {
 		// TODO Auto-generated method stub
+            return "Override Corrections";
 		
 	}
 
 	@Override
-	public void switchToOptionsScreen(boolean soundMusic, boolean soundEffects) {
+	public String switchToOptionsScreen(boolean soundMusic, boolean soundEffects) {
 		// TODO Auto-generated method stub
-		
+		return "Override Corrections";
 	}
 	
 }

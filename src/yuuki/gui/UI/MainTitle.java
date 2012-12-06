@@ -11,7 +11,17 @@ import yuuki.gui.UI.*;
 public class MainTitle extends javax.swing.JFrame {
     public String nextGuiForm = "";
     Audio audio = new Audio();
-
+    boolean musicON = true;
+    boolean effectsON = true;
+    
+    public void setMusic(boolean input)
+    {
+        musicON = input;
+    }
+    public  void setEffects(boolean input)
+    {
+        effectsON = input;
+    }
 public String getNextForm(String nextForm)
 {
     nextGuiForm = nextForm;
@@ -56,6 +66,11 @@ public String getNextForm(String nextForm)
         setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(16, 38, 800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                JFrameOpening(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Title.png"))); // NOI18N
@@ -161,7 +176,10 @@ public String getNextForm(String nextForm)
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
         // On Mouseover changes lblNewGame's Icon.
         lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/New Game Hi.png")));
-        //audio.playSound("onHover.wav");
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
     }//GEN-LAST:event_NewGameEntered
 
     private void NewGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameExited
@@ -182,6 +200,10 @@ public String getNextForm(String nextForm)
     private void LoadGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameEntered
         // On Mouseover changes lblLoadGame's Icon.
         lblLoadGame.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Load Game Hi.png")));
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
     }//GEN-LAST:event_LoadGameEntered
 
     private void LoadGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameExited
@@ -202,6 +224,10 @@ public String getNextForm(String nextForm)
     private void OptionsEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsEntered
         // On Mouseover change lblOptions's Icon.
         lblOptions.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Options Hi.png")));
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
     }//GEN-LAST:event_OptionsEntered
 
     private void OptionsExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsExited
@@ -222,6 +248,10 @@ public String getNextForm(String nextForm)
     private void ExitEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitEntered
         // On Mouseover change lblExit's Icon.
         lblExit.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/Exit Hi.png")));
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
     }//GEN-LAST:event_ExitEntered
 
     private void ExitExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitExited
@@ -241,23 +271,45 @@ public String getNextForm(String nextForm)
 
     private void ExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitClicked
         // Close the Program.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "Exit";
     }//GEN-LAST:event_ExitClicked
 
     private void OptionsClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsClicked
         //Handles wehn lblOptionsClicked is clicked.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "MainTitle.BtnOptionsMenu";
     }//GEN-LAST:event_OptionsClicked
 
     private void lblNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewGameClicked
         // Handles when lblNewgame is Clicked.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "MainTitle.BtnNewGame";
     }//GEN-LAST:event_lblNewGameClicked
 
     private void lblLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoadGameClicked
         // Handles when lblLoadGame is clicked.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "MainTitle.BtnLoadGame";
     }//GEN-LAST:event_lblLoadGameClicked
+
+    private void JFrameOpening(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_JFrameOpening
+        // TODO add your handling code here:
+        audio.preload("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        audio.preload("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+    }//GEN-LAST:event_JFrameOpening
 
     /**
      * @param args the command line arguments

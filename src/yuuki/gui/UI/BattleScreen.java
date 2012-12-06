@@ -13,6 +13,18 @@ import yuuki.ui.GraphicalEngineTest;
 public class BattleScreen extends javax.swing.JFrame {
     public int mainMenuClicked = 0;
     public String nextGuiForm = "";
+    Audio audio = new Audio();
+    boolean musicON = true;
+    boolean effectsON = true;
+    
+    public void setMusic(boolean input)
+    {
+        musicON = input;
+    }
+    public void setEffects(boolean input)
+    {
+        effectsON = input;
+    }
     
 //    public String getNextForm(String nextForm)
 //    {
@@ -186,6 +198,9 @@ public class BattleScreen extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ChoiceYesClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ChoiceYesEntered(evt);
+            }
         });
         getContentPane().add(lblBtnChoiceYes);
         lblBtnChoiceYes.setBounds(660, 480, 116, 47);
@@ -194,6 +209,9 @@ public class BattleScreen extends javax.swing.JFrame {
         lblBtnChoiceNo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ChoiceNoClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ChoiceNoEntered(evt);
             }
         });
         getContentPane().add(lblBtnChoiceNo);
@@ -208,6 +226,9 @@ public class BattleScreen extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAttackClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AttackEntered(evt);
+            }
         });
         getContentPane().add(lblBtnAttack);
         lblBtnAttack.setBounds(20, 510, 190, 70);
@@ -217,6 +238,9 @@ public class BattleScreen extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnFleeClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                FleeEntered(evt);
+            }
         });
         getContentPane().add(lblBtnFlee);
         lblBtnFlee.setBounds(560, 510, 190, 70);
@@ -225,6 +249,9 @@ public class BattleScreen extends javax.swing.JFrame {
         lblBtnDefend.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDefendClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DefendEntered(evt);
             }
         });
         getContentPane().add(lblBtnDefend);
@@ -241,12 +268,15 @@ public class BattleScreen extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtAreaMessageBox);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 310, 800, 140);
+        jScrollPane1.setBounds(0, 340, 800, 140);
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/BattleScreenAssets/MenuDropDownExit.png"))); // NOI18N
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExitClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ExitEntered(evt);
             }
         });
         getContentPane().add(btnExit);
@@ -267,6 +297,9 @@ public class BattleScreen extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoadGameClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LoadGameEntered(evt);
+            }
         });
         getContentPane().add(btnLoadGame);
         btnLoadGame.setBounds(596, 214, 160, 30);
@@ -275,6 +308,9 @@ public class BattleScreen extends javax.swing.JFrame {
         btnSaveGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSaveGameClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SaveGameEntered(evt);
             }
         });
         getContentPane().add(btnSaveGame);
@@ -285,6 +321,9 @@ public class BattleScreen extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnNewGameClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                NewGameEntered(evt);
+            }
         });
         getContentPane().add(btnNewGame);
         btnNewGame.setBounds(601, 127, 160, 30);
@@ -294,6 +333,9 @@ public class BattleScreen extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnOptionsMenuClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                OptionsMenuEntered(evt);
+            }
         });
         getContentPane().add(btnOptionsMenu);
         btnOptionsMenu.setBounds(576, 72, 200, 50);
@@ -302,6 +344,9 @@ public class BattleScreen extends javax.swing.JFrame {
         btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMenuClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MainMenuEntered(evt);
             }
         });
         getContentPane().add(btnMenu);
@@ -322,37 +367,63 @@ public class BattleScreen extends javax.swing.JFrame {
 
     private void btnMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuClicked
         // Handles when the Menu button is clicked.
-            nextGuiForm = "BattleScreen.btnMenu";
-            mainMenuClicked = mainMenuClicked + 1;
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
+        nextGuiForm = "BattleScreen.btnMenu";
+        mainMenuClicked = mainMenuClicked + 1;
     }//GEN-LAST:event_btnMenuClicked
 
     private void btnOptionsMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOptionsMenuClicked
         // Handles when the Option Button in the Drop Down Menu is Clicked.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "BattleScreen.btnOptionsMenu";
     }//GEN-LAST:event_btnOptionsMenuClicked
 
     private void btnNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewGameClicked
         // Handles when the New Game button in the Drop Down Menu is Clicked.
+         if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
          nextGuiForm = "BattleScreen.btnCreateNewGame";
     }//GEN-LAST:event_btnNewGameClicked
 
     private void btnSaveGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveGameClicked
         // Handles when the Save Game Button in the Drop Down Menu is Clicked.
+         if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
          nextGuiForm = "BattleScreen.btnSaveGame";
     }//GEN-LAST:event_btnSaveGameClicked
 
     private void btnLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadGameClicked
         // Handles when the Load Game Button in the Drop Down Menu is Clicked.
+         if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
          nextGuiForm = "BattleScreen.btnLoadGame";
     }//GEN-LAST:event_btnLoadGameClicked
 
     private void btnExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitClicked
         // Handles when the Load Game Button in the Drop Down Menu is Clicked.
+         if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
          nextGuiForm = "Exit";
     }//GEN-LAST:event_btnExitClicked
 
     private void FormLoad(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FormLoad
         // TODO add your handling code here:
+        audio.preload("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        audio.preload("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
         lblMenuDropDownBackground.setVisible(false);
         btnOptionsMenu.setVisible(false);
         btnNewGame.setVisible(false);
@@ -364,29 +435,137 @@ public class BattleScreen extends javax.swing.JFrame {
     private void ChoiceYesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceYesClicked
         // TODO add your handling code here:
         //nextAction = "Yes";
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         System.out.println("Add return options @ BattleScreen.ChoiceYesClicked");
     }//GEN-LAST:event_ChoiceYesClicked
 
     private void ChoiceNoClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceNoClicked
         // TODO add your handling code here:
         ///nextAction = "No";
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         System.out.println("Add return options @ BattleScreen.ChoiceYesClicked");
     }//GEN-LAST:event_ChoiceNoClicked
 
     private void btnAttackClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAttackClicked
         // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "Attack";
     }//GEN-LAST:event_btnAttackClicked
 
     private void btnDefendClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDefendClicked
         // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "Defend";
     }//GEN-LAST:event_btnDefendClicked
 
     private void btnFleeClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFleeClicked
         // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         nextGuiForm = "Flee";
     }//GEN-LAST:event_btnFleeClicked
+
+    private void MainMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MainMenuEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_MainMenuEntered
+
+    private void OptionsMenuEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsMenuEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_OptionsMenuEntered
+
+    private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_NewGameEntered
+
+    private void SaveGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveGameEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_SaveGameEntered
+
+    private void LoadGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoadGameEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_LoadGameEntered
+
+    private void ExitEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_ExitEntered
+
+    private void AttackEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AttackEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_AttackEntered
+
+    private void DefendEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DefendEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_DefendEntered
+
+    private void FleeEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FleeEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_FleeEntered
+
+    private void ChoiceYesEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceYesEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_ChoiceYesEntered
+
+    private void ChoiceNoEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceNoEntered
+        // TODO add your handling code here:
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
+    }//GEN-LAST:event_ChoiceNoEntered
 
     /**
      * @param args the command line arguments

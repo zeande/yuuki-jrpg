@@ -13,7 +13,16 @@ boolean musicOnChecked = true;
 boolean musicOffChecked = false;
 boolean effectsOnChecked = true;
 boolean effectsOffChecked = false;
+Audio audio = new Audio();
 
+public boolean getMusic()
+{
+    return musicON;
+}
+public boolean getEffects()
+{
+    return effectsON;
+}
     public String getNextForm(String nextForm)
 {
     nextGuiForm = nextForm;
@@ -97,6 +106,11 @@ boolean effectsOffChecked = false;
         setBounds(new java.awt.Rectangle(16, 38, 800, 600));
         setLocationByPlatform(true);
         setMaximizedBounds(new java.awt.Rectangle(2147483647, 2147483647, 2147483647, 2147483647));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                JFrameOpening(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         lblOptionsText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsText.png"))); // NOI18N
@@ -202,7 +216,11 @@ boolean effectsOffChecked = false;
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBtnApplyEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnApplyEntered
-        //On Mouseover changes lblBtnApply's Icon.    
+        //On Mouseover changes lblBtnApply's Icon.   
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
         lblBtnApply.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsBtnApplyFocused.png")));
     }//GEN-LAST:event_lblBtnApplyEntered
 
@@ -223,6 +241,10 @@ boolean effectsOffChecked = false;
 
     private void musicOnEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOnEntered
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
         if(musicOnChecked == true)
         {
             lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
@@ -247,6 +269,10 @@ boolean effectsOffChecked = false;
 
     private void effectsOnEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOnEntered
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
         if(effectsOnChecked == true)
         {
             lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
@@ -271,6 +297,10 @@ boolean effectsOffChecked = false;
 
     private void musicOffEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOffEntered
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
         if(musicOffChecked == true)
         {
             lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
@@ -283,6 +313,10 @@ boolean effectsOffChecked = false;
 
     private void effectsOffEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffEntered
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+        }
         if(effectsOffChecked == true)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
@@ -319,28 +353,54 @@ boolean effectsOffChecked = false;
 
     private void musicOnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOnClicked
         // Invert checked properties, and change lbl Icons.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         setMusic();
     }//GEN-LAST:event_musicOnClicked
 
     private void musicOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOffClicked
         // Invert checked properties, and change lbl Icons.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         setMusic();
     }//GEN-LAST:event_musicOffClicked
 
     private void effectsOnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOnClicked
         // Invert checked properties, and change lbl Icons.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         setEffects();
     }//GEN-LAST:event_effectsOnClicked
 
     private void effectsOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffClicked
         // Invert checked properties, and change lbl Icons.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
         setEffects();
     }//GEN-LAST:event_effectsOffClicked
 
     private void btnApplyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApplyClicked
         // Handles btnApply clicked event.
+        if(effectsON)
+        {
+            audio.playSound("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        }
             nextGuiForm = "introScreen";
     }//GEN-LAST:event_btnApplyClicked
+
+    private void JFrameOpening(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_JFrameOpening
+        // TODO add your handling code here:
+        audio.preload("/yuuki/gui/UI/GuiSoundAssets/onSelect.wav");
+        audio.preload("/yuuki/gui/UI/GuiSoundAssets/onHover.wav");
+    }//GEN-LAST:event_JFrameOpening
 
     /**
      * @param args the command line arguments

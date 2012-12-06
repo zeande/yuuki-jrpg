@@ -128,9 +128,10 @@ public class StreamInterface implements Interactable {
          * @param soundEffects Whether effects play or not.
          */
         @Override
-        public void switchToPlayerNameScreen(boolean soundMusic, boolean soundEffects) {
+        public String switchToPlayerNameScreen(boolean soundMusic, boolean soundEffects) {
             screen = Screen.PLAYERNAME;
             println("Please Enter Your Name:");
+            return "Override Corrections";
         }
 	/**
 	 * Shows the intro message and displays the main menu.
@@ -154,7 +155,7 @@ public class StreamInterface implements Interactable {
          * @param soundEffects Whether effects play or not.
 	 */
 	@Override
-	public void switchToIntroScreen(boolean soundEffects, boolean soundMusic) {
+	public String switchToIntroScreen(boolean soundEffects, boolean soundMusic) {
 		screen = Screen.INTRO;
 		println("+-------------------------------------+");
 		println("|                Yuuki                |");
@@ -163,6 +164,7 @@ public class StreamInterface implements Interactable {
 		println("+-------------------------------------+");
 		println();
 		pause();
+                return "Override Corrections";
 	}
 	/**
 	 * Shows the options screen. The user is prompted to change options
@@ -189,7 +191,7 @@ public class StreamInterface implements Interactable {
          * @param soundEffects Whether effects play or not.
 	 */
 	@Override
-        public void switchToOptionsScreen(boolean soundMusic, boolean soundEffects) {
+        public String switchToOptionsScreen(boolean soundMusic, boolean soundEffects) {
             screen = Screen.OPTIONS;
             boolean inOptions = true;
             while (inOptions) {
@@ -199,6 +201,7 @@ public class StreamInterface implements Interactable {
                     inOptions = false;
                 }
             }
+            return "Override Corrections";
         }
 	/**
 	 * Displays the battle scene.
@@ -206,7 +209,7 @@ public class StreamInterface implements Interactable {
 	 * @param fighters The characters who are fighting.
 	 */
 	@Override
-	public void switchToBattleScreen(Character[][] fighters) {
+	public void switchToBattleScreen(Character[][] fighters, boolean soundMusic, boolean soundEffects) {
 		screen = Screen.BATTLE;
 		showBattleIntro(fighters);
 		showTeams(fighters);

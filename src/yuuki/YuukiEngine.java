@@ -101,7 +101,8 @@ public class YuukiEngine implements Runnable {
 	 * @param battle The battle to show.
 	 */
 	private void showBattle(Character[][] fighters, Battle b) {
-		ui.switchToBattleScreen(fighters);
+                boolean overrideCorrections = true;
+		ui.switchToBattleScreen(fighters, overrideCorrections, overrideCorrections);
 		runBattle(b);
 		ui.switchToOverworldScreen();
 	}

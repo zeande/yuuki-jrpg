@@ -30,7 +30,7 @@ public class GraphicalEngineTest {
         if(input == "MainTitle.BtnNewGame")
         {
             input = "";
-            playerCreation();
+            playerCreation(ge.optionsMenu.getMusic(), ge.optionsMenu.getEffects());
         }
         if(input == "MainTitle.BtnLoadGame")
         {
@@ -52,12 +52,12 @@ public class GraphicalEngineTest {
         else if(input == "introScreen")
         {
             input = "";
-            introScreen();
+            introScreen(ge.optionsMenu.getMusic(), ge.optionsMenu.getEffects());
         }
         else if(input == "PlayerName.btnBattleScreen")
         {
             input = "";
-            ge.switchToBattleScreen(fighters);
+            ge.switchToBattleScreen(fighters, ge.optionsMenu.getMusic(), ge.optionsMenu.getEffects());
             battleScreenNav();
         }
         else if(input == "BattleScreen.btnMenu")
@@ -68,7 +68,7 @@ public class GraphicalEngineTest {
         else if(input == "BattleScreen.btnOptionsMenu")
         {
             input = "";
-            String nextForm = ge.switchToOptionsScreen();
+            String nextForm = ge.switchToOptionsScreen(ge.optionsMenu.getMusic(), ge.optionsMenu.getMusic());
             while(nextForm == "")
             {
                 try
@@ -80,7 +80,7 @@ public class GraphicalEngineTest {
                     System.out.println(e);
                 }
             }
-            ge.switchToBattleScreen(fighters);
+            ge.switchToBattleScreen(fighters, ge.optionsMenu.getMusic(), ge.optionsMenu.getEffects());
             battleScreenNav();
         }
         else if(input == "BattleScreen.btnCreateNewGame")
@@ -115,14 +115,14 @@ public class GraphicalEngineTest {
         }
     }
     
-    public void introScreen()
+    public void introScreen(boolean music, boolean effects)
     {
-        String nextForm = ge.switchToIntroScreen();
+        String nextForm = ge.switchToIntroScreen(music, effects);
         decideNextScreen(nextForm);
     }
-    public void playerCreation()
+    public void playerCreation(boolean music, boolean effects)
     {
-        String nextForm = ge.switchToPlayerNameScreen();
+        String nextForm = ge.switchToPlayerNameScreen(music, effects);
             String playerName = ge.getString("Give me PlayerName!");
             Action[] playerMoves = new Action[3];
             playerMoves[0] = new BasicAttack(8);

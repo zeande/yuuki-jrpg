@@ -30,6 +30,12 @@ public class GraphicalEngine implements Interactable {
     {
         nextMove = input;
     }
+//    public String waitUser()
+//    {
+//        
+//        
+//        
+//    }
     public void initialize()
     {
         
@@ -72,19 +78,29 @@ public class GraphicalEngine implements Interactable {
         }
         return nextForm;
     }
-    public void switchToPlayerNameScreen(boolean soundEffects, boolean soundMusic)
+    public String switchToPlayerNameScreen(boolean soundMusic , boolean soundEffects)
     {
+        String nextForm = "";
         if(currentForm == null)
         {
             currentForm = playerName;
+            playerName.setMusic(soundMusic);
+            playerName.setEffects(soundEffects);
             currentForm.setVisible(true);
+            nextForm = playerName.getNextForm("next form querry");
+            NameOfPlayer = playerName.getName();
         }
         else
         {
             currentForm.setVisible(false);
             currentForm = playerName;
+            playerName.setMusic(soundMusic);
+            playerName.setEffects(soundEffects);
             currentForm.setVisible(true);
-        }        
+            nextForm = playerName.getNextForm("next form querry");
+            NameOfPlayer = playerName.getName();
+        }    
+        return nextForm;
     }
     public String switchToIntroScreen()
     {
@@ -104,19 +120,27 @@ public class GraphicalEngine implements Interactable {
         }
         return nextForm;
     }
-    public void switchToIntroScreen(boolean soundEffects, boolean soundMusic)
+    public String switchToIntroScreen(boolean soundMusic, boolean soundEffects)
     {
+        String nextForm = "";
        if(currentForm == null)
         {
             currentForm = mainTitle;
+            mainTitle.setMusic(soundMusic);
+            mainTitle.setEffects(soundEffects);
             currentForm.setVisible(true);
+            nextForm = mainTitle.getNextForm("next form querry");
         }
         else
         {
             currentForm.setVisible(false);
             currentForm = mainTitle;
+            mainTitle.setMusic(soundMusic);
+            mainTitle.setEffects(soundEffects);
             currentForm.setVisible(true);
+            nextForm = mainTitle.getNextForm("next form querry");
         }
+       return nextForm;
     }
     public String switchToOptionsScreen()
     {
@@ -136,26 +160,33 @@ public class GraphicalEngine implements Interactable {
         }
         return nextForm;
     }
-    public void switchToOptionsScreen(boolean soundEffects, boolean soundMusic)
+    public String switchToOptionsScreen(boolean soundMusic, boolean soundEffects)
     {
+        String nextForm = "";
         if(currentForm == null)
         {
             currentForm = optionsMenu;
+            optionsMenu.setMusic();
             currentForm.setVisible(true);
+            nextForm = optionsMenu.getNextForm("next form querry");
         }
         else
         {
             currentForm.setVisible(false);
             currentForm = optionsMenu;
             currentForm.setVisible(true);
+            nextForm = optionsMenu.getNextForm("next form querry");
         }
+        return nextForm;
     }
-    public void switchToBattleScreen(yuuki.entity.Character[][] fighters)
+    public void switchToBattleScreen(yuuki.entity.Character[][] fighters, boolean music, boolean effects)
     {
         if(currentForm == null)
         {
             currentForm = battleScreenGui;
             currentForm.setVisible(true);
+            battleScreenGui.setMusic(music);
+            battleScreenGui.setEffects(effects);
             battleScreenGui.resetMenu();
         }
         else
@@ -163,6 +194,8 @@ public class GraphicalEngine implements Interactable {
             currentForm.setVisible(false);
             currentForm = battleScreenGui;
             currentForm.setVisible(true);
+            battleScreenGui.setMusic(music);
+            battleScreenGui.setEffects(effects);
             battleScreenGui.resetMenu();
         }
     }
@@ -402,8 +435,7 @@ public class GraphicalEngine implements Interactable {
 		for (int i = 0; i < moves.length; i++) {
 			moveNames[i] = moves[i].getName();
 		}
-        String move = nextMove;
-//                (String) JOptionPane.showInputDialog(null, "Choose a move:", "test", JOptionPane.INFORMATION_MESSAGE, null, moveNames, moveNames[0]);
+        String move = (String) JOptionPane.showInputDialog(null, "Choose a move:", "test", JOptionPane.INFORMATION_MESSAGE, null, moveNames, moveNames[0]);
           setNextMove("");
         int index = 0;
         for (int i = 0; i < moveNames.length; i++) {
