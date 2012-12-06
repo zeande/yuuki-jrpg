@@ -23,9 +23,13 @@ public class GraphicalEngine implements Interactable {
     PlayerName playerName = new PlayerName();
     BattleScreen battleScreenGui = new BattleScreen();
     String NameOfPlayer = "";
-    
+    public String nextMove = "";
     private JFrame currentForm = null;
     
+    public void setNextMove(String input)
+    {
+        nextMove = input;
+    }
     public void initialize()
     {
         
@@ -398,8 +402,9 @@ public class GraphicalEngine implements Interactable {
 		for (int i = 0; i < moves.length; i++) {
 			moveNames[i] = moves[i].getName();
 		}
-        String move = (String) JOptionPane.showInputDialog(null, "Choose a move:", "test", JOptionPane.INFORMATION_MESSAGE, null, moveNames, moveNames[0]);
-          
+        String move = nextMove;
+//                (String) JOptionPane.showInputDialog(null, "Choose a move:", "test", JOptionPane.INFORMATION_MESSAGE, null, moveNames, moveNames[0]);
+          setNextMove("");
         int index = 0;
         for (int i = 0; i < moveNames.length; i++) {
             if (moveNames[i].equals(move)) {

@@ -12,7 +12,24 @@ import yuuki.ui.GraphicalEngineTest;
  */
 public class BattleScreen extends javax.swing.JFrame {
     public int mainMenuClicked = 0;
-    public String nextAction = "";
+    public String nextGuiForm = "";
+    
+//    public String getNextForm(String nextForm)
+//    {
+//        nextGuiForm = nextForm;
+//        while(nextGuiForm == "next form querry")
+//        {
+//            try
+//            {
+//                Thread.sleep(1);
+//            }
+//            catch(Exception e)
+//            {
+//                System.out.println("Couldn't sleep @ MainTitle.getNextForm");
+//            }
+//        }
+//       return nextGuiForm; 
+//    }
     
     public void setPlayerHP(int hp, int hpMax)
     {
@@ -31,11 +48,6 @@ public class BattleScreen extends javax.swing.JFrame {
     {
         String currentText = txtAreaMessageBox.getText();
         txtAreaMessageBox.setText(currentText + textUpdate + "\n");
-    }
-    
-    public void setNextAction(String update)
-    {
-        nextAction = update;
     }
     
     public void beginSequence()
@@ -67,24 +79,10 @@ public class BattleScreen extends javax.swing.JFrame {
         lblBtnDefend.setEnabled(false);
         lblBtnFlee.setEnabled(false);
     }
-    public String getNextAction()
-    {
-        while(nextAction == "")
-            {
-                 try
-                 {
-                     Thread.sleep(1);
-                 }
-                 catch(Exception e)
-                 {
-                     System.out.println("GraphicalEngineText.getNextAction couldn't sleep");
-                 }
-            }
-        return nextAction;
-    }
     
     public String Nav()
     {
+        nextGuiForm = "";
         if(mainMenuClicked % 2 != 0)
         {
             lblMenuDropDownBackground.setVisible(true);
@@ -94,14 +92,13 @@ public class BattleScreen extends javax.swing.JFrame {
             btnSaveGame.setVisible(true);
             btnExit.setVisible(true);
             disableBattleOptions();
-            
         }
         else
         {
             resetMenu();
             showBattleOptions();
         }
-        while(nextAction == "")
+        while(nextGuiForm == "")
         {
             try
             {
@@ -109,11 +106,10 @@ public class BattleScreen extends javax.swing.JFrame {
             }
             catch(Exception e)
             {
-                System.out.println("Couldn't sleep @ BattleScreen.Nav");
+                System.out.println(e);
             }
         }
-        
-        return nextAction;
+        return nextGuiForm;
     }
     
     public void resetMenu()
@@ -124,6 +120,7 @@ public class BattleScreen extends javax.swing.JFrame {
         btnLoadGame.setVisible(false);
         btnSaveGame.setVisible(false);
         btnExit.setVisible(false);
+        
         lblChoiceBackground.setVisible(false);
         lblBtnChoiceYes.setVisible(false);
         lblBtnChoiceNo.setVisible(false);
@@ -325,33 +322,33 @@ public class BattleScreen extends javax.swing.JFrame {
 
     private void btnMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuClicked
         // Handles when the Menu button is clicked.
-            nextAction = "Menu";
+            nextGuiForm = "BattleScreen.btnMenu";
             mainMenuClicked = mainMenuClicked + 1;
     }//GEN-LAST:event_btnMenuClicked
 
     private void btnOptionsMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOptionsMenuClicked
         // Handles when the Option Button in the Drop Down Menu is Clicked.
-        nextAction = "Option Menu";
+        nextGuiForm = "BattleScreen.btnOptionsMenu";
     }//GEN-LAST:event_btnOptionsMenuClicked
 
     private void btnNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewGameClicked
         // Handles when the New Game button in the Drop Down Menu is Clicked.
-         nextAction = "Create New Game";
+         nextGuiForm = "BattleScreen.btnCreateNewGame";
     }//GEN-LAST:event_btnNewGameClicked
 
     private void btnSaveGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveGameClicked
         // Handles when the Save Game Button in the Drop Down Menu is Clicked.
-         nextAction = "Save Game";
+         nextGuiForm = "BattleScreen.btnSaveGame";
     }//GEN-LAST:event_btnSaveGameClicked
 
     private void btnLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadGameClicked
         // Handles when the Load Game Button in the Drop Down Menu is Clicked.
-         nextAction = "Load Game";
+         nextGuiForm = "BattleScreen.btnLoadGame";
     }//GEN-LAST:event_btnLoadGameClicked
 
     private void btnExitClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitClicked
         // Handles when the Load Game Button in the Drop Down Menu is Clicked.
-         nextAction = "Exit";
+         nextGuiForm = "Exit";
     }//GEN-LAST:event_btnExitClicked
 
     private void FormLoad(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FormLoad
@@ -366,27 +363,29 @@ public class BattleScreen extends javax.swing.JFrame {
 
     private void ChoiceYesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceYesClicked
         // TODO add your handling code here:
-        nextAction = "Yes";
+        //nextAction = "Yes";
+        System.out.println("Add return options @ BattleScreen.ChoiceYesClicked");
     }//GEN-LAST:event_ChoiceYesClicked
 
     private void ChoiceNoClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChoiceNoClicked
         // TODO add your handling code here:
-        nextAction = "No";
+        ///nextAction = "No";
+        System.out.println("Add return options @ BattleScreen.ChoiceYesClicked");
     }//GEN-LAST:event_ChoiceNoClicked
 
     private void btnAttackClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAttackClicked
         // TODO add your handling code here:
-        nextAction = "Attack";
+        nextGuiForm = "Attack";
     }//GEN-LAST:event_btnAttackClicked
 
     private void btnDefendClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDefendClicked
         // TODO add your handling code here:
-        nextAction = "Defend";
+        nextGuiForm = "Defend";
     }//GEN-LAST:event_btnDefendClicked
 
     private void btnFleeClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFleeClicked
         // TODO add your handling code here:
-        nextAction = "Flee";
+        nextGuiForm = "Flee";
     }//GEN-LAST:event_btnFleeClicked
 
     /**

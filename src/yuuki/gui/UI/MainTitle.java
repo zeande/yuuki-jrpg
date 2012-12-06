@@ -161,7 +161,7 @@ public String getNextForm(String nextForm)
     private void NewGameEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameEntered
         // On Mouseover changes lblNewGame's Icon.
         lblNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/MainTitleGuiAssets/New Game Hi.png")));
-        audio.playSound();
+        //audio.playSound("onHover.wav");
     }//GEN-LAST:event_NewGameEntered
 
     private void NewGameExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewGameExited
@@ -246,17 +246,17 @@ public String getNextForm(String nextForm)
 
     private void OptionsClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsClicked
         //Handles wehn lblOptionsClicked is clicked.
-        nextGuiForm = "Options Menu";
+        nextGuiForm = "MainTitle.BtnOptionsMenu";
     }//GEN-LAST:event_OptionsClicked
 
     private void lblNewGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewGameClicked
         // Handles when lblNewgame is Clicked.
-        nextGuiForm = "New Game";
+        nextGuiForm = "MainTitle.BtnNewGame";
     }//GEN-LAST:event_lblNewGameClicked
 
     private void lblLoadGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoadGameClicked
         // Handles when lblLoadGame is clicked.
-        nextGuiForm = "Load Game";
+        nextGuiForm = "MainTitle.BtnLoadGame";
     }//GEN-LAST:event_lblLoadGameClicked
 
     /**

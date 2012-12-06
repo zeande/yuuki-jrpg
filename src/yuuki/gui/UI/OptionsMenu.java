@@ -1,15 +1,5 @@
 package yuuki.gui.UI;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import sun.audio.AudioData;
-import sun.audio.AudioDataStream;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import javax.swing.ImageIcon;
-import javax.swing.*;
-import java.net.URL;
-
 /**
  *
  * @author Caleb Smtih
@@ -17,6 +7,8 @@ import java.net.URL;
  */
 public class OptionsMenu extends javax.swing.JFrame {
     public String nextGuiForm = "";
+boolean musicON = true;
+boolean effectsON = true;
 boolean musicOnChecked = true;
 boolean musicOffChecked = false;
 boolean effectsOnChecked = true;
@@ -38,7 +30,44 @@ boolean effectsOffChecked = false;
     }
    return nextGuiForm; 
 }
-
+    public void setMusic()
+    {
+        if(musicON == true)
+        {
+            musicON = false;
+            musicOnChecked = false;
+            musicOffChecked = true;
+            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
+            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
+        }
+        else
+        {
+            musicON = true;
+            musicOnChecked = true;
+            musicOffChecked = false;
+            lblMusicRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
+            lblMusicRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
+        }
+    }
+    public void setEffects()
+    {
+        if(effectsON == true)
+        {
+            effectsON = false;
+            effectsOnChecked = false;
+            effectsOffChecked = true;
+            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
+            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
+        }
+        else
+        {
+            effectsON = true;
+            effectsOnChecked = true;
+            effectsOffChecked = false;
+            lblEffectsRadialSelectOn.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
+            lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
+        }
+    }
     /**
      * Creates new form OptionsMenu
      */
@@ -254,11 +283,11 @@ boolean effectsOffChecked = false;
 
     private void effectsOffEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffEntered
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
-        if(musicOffChecked == true)
+        if(effectsOffChecked == true)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOnHover.png")));
         }
-        else if(musicOffChecked == false)
+        else if(effectsOffChecked == false)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOffHover.png")));
         }
@@ -278,11 +307,11 @@ boolean effectsOffChecked = false;
 
     private void effectsOffExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffExited
         // Code checks to see which state lblMusicRadialSelectOn is in, and performs the appropriate action.
-        if(musicOffChecked == true)
+        if(effectsOffChecked == true)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOn.png")));
         }
-        else if(musicOffChecked == false)
+        else if(effectsOffChecked == false)
         {
             lblEffectsRadialSelectOff.setIcon( new javax.swing.ImageIcon(getClass().getResource("/yuuki/gui/UI/OptionsMenuGuiAssets/OptionsRadialSelectOff.png")));
         }
@@ -290,23 +319,27 @@ boolean effectsOffChecked = false;
 
     private void musicOnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOnClicked
         // Invert checked properties, and change lbl Icons.
+        setMusic();
     }//GEN-LAST:event_musicOnClicked
 
     private void musicOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_musicOffClicked
         // Invert checked properties, and change lbl Icons.
+        setMusic();
     }//GEN-LAST:event_musicOffClicked
 
     private void effectsOnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOnClicked
         // Invert checked properties, and change lbl Icons.
+        setEffects();
     }//GEN-LAST:event_effectsOnClicked
 
     private void effectsOffClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_effectsOffClicked
         // Invert checked properties, and change lbl Icons.
+        setEffects();
     }//GEN-LAST:event_effectsOffClicked
 
     private void btnApplyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApplyClicked
         // Handles btnApply clicked event.
-            nextGuiForm = "Main Menu";
+            nextGuiForm = "introScreen";
     }//GEN-LAST:event_btnApplyClicked
 
     /**

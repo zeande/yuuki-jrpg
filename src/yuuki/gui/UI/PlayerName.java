@@ -140,7 +140,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnMainMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuClicked
         // Handles lblBtnMainMenuClicked click event.
-        nextGuiForm = "Main Menu";
+        nextGuiForm = "introScreen";
     }//GEN-LAST:event_lblBtnMainMenuClicked
 
     private void lblBtnMainMenuPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnMainMenuPressed
@@ -175,7 +175,7 @@ public class PlayerName extends javax.swing.JFrame {
 
     private void lblBtnBeginGameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnBeginGameClicked
         // Handles lblBtnBeginGame on Click.
-        nextGuiForm = "Battle Screen";
+        nextGuiForm = "PlayerName.btnBattleScreen";
     }//GEN-LAST:event_lblBtnBeginGameClicked
 
     /**

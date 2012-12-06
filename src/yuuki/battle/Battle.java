@@ -48,7 +48,7 @@ public class Battle {
 	/**
 	 * The last Action that a Character selected.
 	 */
-	private Action lastAction;
+	public Action lastAction;
 
 	/**
 	 * The currently active fighters. The first array is the list of teams and

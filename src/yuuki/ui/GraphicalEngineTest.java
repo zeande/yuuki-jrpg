@@ -22,31 +22,96 @@ public class GraphicalEngineTest {
     
     public static void main(String[] args) {
         GraphicalEngineTest get = new GraphicalEngineTest();
-        get.decideNextScreen("Main Menu");
-        
+        get.decideNextScreen("introScreen");
     }
     
     public void decideNextScreen(String input)
     {
-        if(input == "New Game")
+        if(input == "MainTitle.BtnNewGame")
         {
+            input = "";
             playerCreation();
         }
-        else if(input == "Options Menu")
+        if(input == "MainTitle.BtnLoadGame")
         {
+            input = "";
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.decideNextScreen>");
+            System.out.println("Load Game - No Functionality Yet.");
+            decideNextScreen("introScreen");
+        }
+        else if(input == "MainTitle.BtnOptionsMenu")
+        {
+            input = "";
             optionsMenu();
-        }
-        else if(input == "Main Menu")
-        {
-            introScreen();
-        }
-        else if(input == "Battle Screen")
-        {
-            battleScreen();
         }
         else if(input == "Exit")
         {
+            input = "";
             exit();
+        }
+        else if(input == "introScreen")
+        {
+            input = "";
+            introScreen();
+        }
+        else if(input == "PlayerName.btnBattleScreen")
+        {
+            input = "";
+            ge.switchToBattleScreen(fighters);
+            battleScreenNav();
+        }
+        else if(input == "BattleScreen.btnMenu")
+        {
+            input = "";
+            battleScreenNav();
+        }
+        else if(input == "BattleScreen.btnOptionsMenu")
+        {
+            input = "";
+            String nextForm = ge.switchToOptionsScreen();
+            while(nextForm == "")
+            {
+                try
+                {
+                    Thread.sleep(1);
+                }
+                catch(Exception e)
+                {
+                    System.out.println(e);
+                }
+            }
+            ge.switchToBattleScreen(fighters);
+            battleScreenNav();
+        }
+        else if(input == "BattleScreen.btnCreateNewGame")
+        {
+            input = "";
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.decideNextScreen>");
+            System.out.println("New Game - No Functionality Yet.");
+            battleScreenNav();
+        }
+        else if(input == "BattleScreen.btnSaveGame")
+        {
+            input = "";
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.decideNextScreen>");
+            System.out.println("Save Game - No Functionality Yet.");
+            battleScreenNav();
+        }
+        else if(input == "BattleScreen.btnLoadGame")
+        {
+            input = "";
+            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.decideNextScreen>");
+            System.out.println("Load Game - No Functionality Yet.");
+            battleScreenNav();
+        }
+        else if(input == "choice")
+        {
+            System.out.println("ahhhahaha!");
+        }
+        else
+        {
+            input = "";
+            System.out.println("Unhandled formInput: \"" + input + "\" @ GraphicalEngineTest.decideNextScreen");
         }
     }
     
@@ -72,6 +137,7 @@ public class GraphicalEngineTest {
             Stat mag = new Stat("magic", 10, 1);
             Stat luk = new Stat("luck", 10, 1);
             player = new PlayerCharacter(playerName, 1, playerMoves, hp, mp, str, def, agl, acc, mag, luk, ge);
+            fighters = makeTeams();
         decideNextScreen(nextForm);
     }
     public void optionsMenu()
@@ -79,101 +145,27 @@ public class GraphicalEngineTest {
         String nextForm = ge.switchToOptionsScreen();
         decideNextScreen(nextForm);
     }
-    public void battleScreen()
+    public void battleScreen(String choice)
     {
-        if(fighters == null)
-        {
-            Character [][] fighters = makeTeams();
-            b = new Battle(fighters);
-        }
-        ge.switchToBattleScreen(fighters);
-        ge.battleScreenGui.beginSequence();
-        String choice = ge.battleScreenGui.getNextAction();
-        ge.battleScreenGui.setNextAction("");
-        battleScreenDecide(choice);
+       ge.setNextMove(choice);
+       
     }
-    
-    public void battle()
-    {
-        runBattle(b);
-        Character winner = b.getFighters(0).get(0);
-    }
-    
-    public void battleScreenDecide(String choice)
-    {
-        if(choice == "Menu")
-        {
-            battleScreenNav();
-        }
-        else if(choice == "Attack")
-        {
-            ge.println("You used \"Attack\".");
-            battle();
-        }
-        else if(choice == "Defend")
-        {
-            ge.println("You used \"Defend\".");
-            battle();
-        }
-        else
-        {
-            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreen");
-            System.out.println("Flee - Non-essential functionality, fix if enough time");
-            ge.println("You used \"Flee\".");
-            battle();
-        }
-    }
-    
     public void battleScreenNav()
     {
-        ge.battleScreenGui.Nav();
-        String choice = ge.battleScreenGui.getNextAction();
-        ge.battleScreenGui.setNextAction("");
-        battleScreenNavDecide(choice);
-        
-    }
-    public void battleScreenNavDecide(String choice)
-    {
-        String nextScreen = "";
-        if(choice == "Menu")
-        {
-            battleScreenNav();
-        }
-        else if(choice == "Option Menu")
-        {
-           nextScreen = ge.switchToOptionsScreen();
-           battleScreenNavDecide(nextScreen);
-        }
-        else if(choice == "Main Menu")
-        {
-            ge.switchToBattleScreen(fighters);
-            ge.battleScreenGui.showBattleOptions();
-            battleScreenDecide("Menu");
-        }
-        else if(choice == "Create New Game")
-        {
-            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreenNavDecide");
-            System.out.println("Create New Game - Non-essential functionality, fix if enough time");
-            battleScreenNav();
-        }
-        else if(choice == "Load Game")
-        {
-            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreenNavDecide");
-            System.out.println("Load Game - Non-essential functionality, fix if enough time");
-            battleScreenNav();
-        }
-        else if(choice == "Save Game")
-        {
-            System.out.println("<Hardcoded Responce @ GraphicalEngineTest.battleScreenNavDecide");
-            System.out.println("Save Game - Non-essential functionality, fix if enough time");
-            battleScreenNav();
-        }
-        else if(choice == "Exit")
+        b = new Battle(fighters);
+        runBattle(b);
+        String choice = ge.battleScreenGui.Nav();
+        if(choice == "BattleScreen.btnMenu" || choice == "BattleScreen.btnOptionsMenu" || choice == "BattleScreen.btnCreateNewGame" || choice == "BattleScreen.btnSaveGame" || choice == "BattleScreen.btnLoadGame" || choice == "Exit")
         {
             decideNextScreen(choice);
+            choice = "";
+        }
+        else if(choice == "Attack" || choice == "Defend" || choice == "Flee")
+        {
+            battleScreen(choice);
+            choice = "";
         }
     }
-    
      public Character[][] makeTeams()
      {
          fighters = new Character[2][];
