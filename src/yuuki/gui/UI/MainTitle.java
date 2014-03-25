@@ -31,7 +31,7 @@ public class MainTitle extends javax.swing.JFrame {
 public String getNextForm(String nextForm)
 {
     nextGuiForm = nextForm;
-    while(nextGuiForm == "next form querry")
+    while(nextGuiForm == "next form query")
     {
         try
         {
